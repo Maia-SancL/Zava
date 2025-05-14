@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+nav{
+  background-color: var(--secundario-200);
+  border-radius: 0rem 0rem 1.25rem 1.25rem;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9375rem 2.0625rem 0.9375rem 1.625rem;
+}
+
+.barra-buscar{
+  display: flex;
+  width: 28.5rem;
+  height: 2.5rem;
+  padding: 0rem 1.25rem;
+  align-items: center;
+  gap: 0.3125rem;
+  border-radius: 1.25rem;
+  background-color: var(--secundario-50);
+}
+
+.barra-buscar input{
+  border: none;
+  outline: none;
+  background: none;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.barra-buscar input,input::placeholder{
+  font-family: 'Nunito';
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primario-500);
+}
+
+.nav-lista-btns{
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-icono{
+  color: var(--primario-500);
+}
+
+.cont-btns{
+  display: flex;
+  gap:1.25rem;
+}
+
+.cont-btns .btns{
+  cursor: pointer;
+}
+
+.btn-agregar-icono{
+  color: var(--secundario-50);
+}
+
+.btn-agregar-receta{
+  cursor: pointer;
+  display: flex;
+  padding: 0.3125rem 1.25rem;
+  align-items: center;
+  gap: 0.3125rem;
+  border-radius: 0.625rem;
+  border: 0;
+  background-color: var(--primario-500);
+  color: var(--secundario-50);
+  font-family: Nunito;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 600;
+}
