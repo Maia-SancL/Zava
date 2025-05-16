@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: Nunito;
 }
 
 body {
@@ -87,4 +88,40 @@ nav{
   font-size: 0.875rem;
   font-style: normal;
   font-weight: 600;
+}
+
+.iniciar-sesion, .registrarse{
+  border-style: none;
+  display: flex;
+  padding: 0.5rem 0.625rem;
+  align-items: center;
+  gap: 0.3125rem;
+  border-radius: 0.625rem;
+  font-family: "Nunito";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.iniciar-sesion{
+  background-color: var(--primario-500);
+  font:var(--primaro-500);
+  border: solid 2px var(--primario-500);
+  color: var(--secundario-200);
+}
+
+.registrarse{
+  background-color: var(--secundario-200);
+  border: solid 2px var(--primario-500);
+  color: var(--primario-500);
+}
+
+.icon-registrarse{
+  color: var(--primario-500);
+
+}
+
+.icon-iniciar-sesion{
+  color: var(--secundario-200);
 }
