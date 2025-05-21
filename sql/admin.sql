@@ -1,0 +1,2 @@
+INSERT INTO Usuarios (nombre, apellido, nickname, correo, telefono, contrasenia, rol, foto) VALUES
+('Masha', 'Sánchez', 'MASHARRRDA', 'sanchezmaialen6@gmail.com', '2262634225', '1234', '1', 'perfil.png');
