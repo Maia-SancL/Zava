@@ -352,13 +352,14 @@ header h2{
   row-gap: 2rem;
   justify-content: space-between;
   align-items: flex-start;
-  align-content: flex-start;
   padding-right: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
 }
 
 .restaurante{
   display: flex;
-  width: 19.5rem;
+  width: 30rem;
   height: auto;
   flex-direction: column;
   cursor: pointer;
@@ -496,6 +497,28 @@ header h2{
 
 .restaurante .icon{
   color: var(--primario-500);
+}
+
+.cont-btn-restaurantes{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cont-btn-restaurantes .btn-ver-restaurantes{
+   all: unset;
+    width: auto;
+    background-color: var(--primario-500);
+    border-radius: 1.25rem;
+    display: flex;
+    padding: 0.625rem 2.1875rem;
+    justify-content: center;
+    align-items: center;
+    color: var(--secundario-50);
+    font-family: Nunito;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 
