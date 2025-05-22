@@ -171,9 +171,14 @@ body {
 
 
 main{
-    height: 100%;
+    height: auto;
     background-color:var(--secundario-50);
     margin-left: 16rem;
+    padding-right: 1rem;
+}
+
+svg{
+  flex-shrink: 0; /* Evita que el SVG se reduzca */
 }
 
 .select-none{
@@ -297,20 +302,30 @@ header h2{
   row-gap: 1rem;
   gap: 0.5rem;
   margin-top: 2rem;
-  margin-right: 1rem;
 }
 
 .tarjeta-receta{
   width: 15rem;
   height: 11rem;
-  overflow: hidden;
+  overflow: hidden; /*Todo lo que se salga de la caja se oculta*/
   border-radius: 1rem;
 }
 
 .tarjeta-receta img{
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit:cover;
+}
+
+.tarjeta-receta .overlay{
+   position: absolute;
+   border-radius: 1rem;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.40); /* Negro con 40% de opacidad */
+    pointer-events: none; /* Para que no bloquee clics */
 }
 
 .btn-receta{
@@ -318,6 +333,7 @@ header h2{
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .cont-btns-recetas p{
@@ -327,4 +343,161 @@ header h2{
   font-size: 1.25rem;
   font-weight: 600;
 }
+
+/* SECCION RESTAURANTE */
+
+.cont-restaurantes-grupo{
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding-right: 1rem;
+}
+
+.restaurante{
+  display: flex;
+  width: 19.5rem;
+  height: auto;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: var(--secundario-100);
+  border-radius: 1rem;
+}
+
+.restaurante-imagen{
+  height: 15.625rem;
+  width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.restaurante-imagen img{
+  height: 100%;
+  width: 100%;
+  object-fit:cover;
+}
+
+.restaurante .descripcion{
+  display: flex;
+  padding: 0.3125rem 0.625rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.cont-des-superior{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.nombre-restaurante{
+  width: 100%;
+}
+
+.nombre-restaurante h4{
+  color: var(--negro-700);
+  font-family: Quicksand;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: -webkit-box; /* Necesario para usar line-clamp */
+  -webkit-line-clamp: 2;       /* Numero de lineas maximo */
+  line-clamp: 2;         /* Futuro soporte estandar */
+  -webkit-box-orient: vertical; /* Define la direccion del flujo: vertical */
+  overflow: hidden;
+  text-overflow: ellipsis; /*Agrega (...) al final de las palabras si no entran en el visor*/
+  word-break: break-word; /* Permite que las palabras largas se dividan para evitar que se desborden */
+}
+
+.cont-tipo-estrellas .tipo-cocina{
+  padding: 0.25rem 0.625rem;
+  max-width: 70%;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1rem;
+  background: var(--secundario-300);
+}
+
+.tipo-cocina p{
+  color: var(--negro-700);
+  font-family: Nunito;
+  font-size: 0.7rem;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cont-tipo-estrellas{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cont-tipo-estrellas .cont-estrellas{
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.calificacion p{
+  color:  var(--negros-700);
+  font-family: Montserrat;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.cont-des-inferior{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.cont-ubicacion-hora{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+  
+}
+
+.ubicacion,.horarios{
+  display: flex;
+  align-items: center;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.ubicacion .direccion{
+  display: -webkit-box; /* Necesario para usar line-clamp */
+  -webkit-line-clamp: 2;       /* Numero de lineas maximo */
+  line-clamp: 2;         /* Futuro soporte estandar */
+  -webkit-box-orient: vertical; /* Define la direccion del flujo: vertical */
+  overflow: hidden;
+  text-overflow: ellipsis; /*Agrega (...) al final de las palabras si no entran en el visor*/
+  word-break: break-word; /* Permite que las palabras largas se dividan para evitar que se desborden */
+
+}
+
+.ubicacion p,
+.direccion p{
+  color: var(--negro-700);
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.restaurante .icon{
+  color: var(--primario-500);
+}
+
+
+
 
