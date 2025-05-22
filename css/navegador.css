@@ -90,6 +90,103 @@ nav{
   font-weight: 600;
 }
 
+.user-dropdown{
+  position: relative;
+  display: inline-block;
+}
+
+.user-dropdown-content{
+  list-style: none;
+  display: none;
+  position: absolute;
+  right: -7.2rem;              
+  background-color: var(--secundario-50);
+  border-radius: 1rem;
+  max-width: 16rem;
+  padding: 0.5rem;
+  z-index: 10;
+  padding-bottom: 2rem;
+  
+}
+
+.user-dropdown:hover .user-dropdown-content{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.user-info{
+  max-width: 14rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .2rem;
+  padding: 0.625rem;
+  border-bottom: 2px solid var(--primario-500);
+}
+
+.cont-user-img{
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.cont-user-img img{
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
+}
+
+.user-name{
+  color: var(--primario-500);
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 700;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;           /* Máximo 2 líneas */
+  line-clamp: 2; 
+  -webkit-box-orient: vertical;    /* Dirección vertical */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;          /* Romper palabras largas si es necesario */
+  max-width: 100%;  
+  text-align: center;     
+}
+
+.user-username{
+  display: block; 
+  color: var(--negros-700);
+  font-family: Nunito;
+  font-size: 0.9rem;
+  font-weight: 300;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;          /* Romper palabras largas si es necesario */
+  max-width: 90%;  
+  text-align: center;
+  white-space: nowrap;           /* Mantiene todo en una sola línea */
+}
+
+.btn-dropdown{
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 1rem;
+  padding-left: 0.5rem;
+} 
+
+.profile-btn, .logout-btn{
+  all: unset;
+  color: var(--Negros-700);
+  font-family: Nunito;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+
+
+
 .iniciar-sesion, .registrarse{
   border-style: none;
   display: flex;
