@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primario-500);
+}
+
+main{
+    height: 100%;
+    background-color:#F2E9DD;
+    margin-left: 40rem;
+    border-radius: 1.25rem 0rem 0rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 5rem;
+}
+
+.imagen-principal{
+    width: auto;
+    height: 11rem;
+    overflow: hidden; /*Oculta cualquier contenido que se salga del área visible del div*/
+}
+
+.img-iniciar-sesion{
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /*Define cómo se ajusta la imagen dentro de su contenedor*/
+}
+
+.cont-formulario-iniciar-sesion{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+.form-iniciar-seison{
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-iniciar-sesion{
+    color: var(--primario-500);
+    font-family: Quicksand;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.form-iniciar-seison{
+    padding: 0 0.9rem;
+    gap: 1rem;
+}
+
+.cont-input{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.lbl-iniciar-sesion{
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color:var(--primario-500);
+}
+
+.input-iniciar-sesion{
+    all: unset;
+    height: 1.5rem;
+    border-radius: 0.625rem;
+    background: var(--secundario-50);
+    font-family: "Nunito";
+    font-family: 1rem;
+    color: var(--primario-500);
+    padding: 0.2rem 0.9rem;
+}
+
+.cont-formulario-iniciar-sesion a{
+    color: var(--primario-500);
+    font-family: Montserrat;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.btn-iniciar-sesion{
+    all: unset;
+    width: 30%;
+    background-color: var(--primario-500);
+    border-radius: 1.25rem;
+    display: flex;
+    padding: 0.625rem 1.25rem;
+    justify-content: center;
+    align-items: center;
+    color: var(--secundario-50);
+    font-family: Nunito;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+}

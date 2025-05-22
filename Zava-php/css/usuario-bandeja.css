@@ -1,0 +1,66 @@
+.user-dropdown {
+    position: relative;
+}
+
+.user-dropdown-content {
+    position: fixed; 
+    right: 2rem;     
+    top: 4.5rem;     
+    background: #fff8ee;
+    border: 1px solid #d1bfa3;
+    border-radius: 8px;
+    min-width: 200px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    padding: 1rem;
+    z-index: 9999;   /* Sobre todo */
+    display: none;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.user-avatar {
+    border: 2px solid #a33;
+}
+
+.user-name {
+    font-weight: bold;
+    color: #a33;
+}
+
+.profile-btn {
+    display: block;
+    text-align: center;
+    background: #f5f5f5;
+    color: #a33;
+    text-decoration: none;
+    border: 1px solid #d1bfa3;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-btn:hover {
+    background: #eaeaea;
+    color: #a33;
+}
+
+.logout-btn {
+    background: #a33;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.logout-btn:hover {
+    background: #c44;
+}

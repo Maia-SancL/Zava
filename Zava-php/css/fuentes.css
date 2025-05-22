@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'TANNimbus';
+  src: url('tipografias/tipografias/Quicksand/Quicksand-VariableFont_wght.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('tipografias/tipografias/Quicksand/Quicksand-VariableFont_wght.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('tipografias/tipografias/Nunito/Nunito-VariableFont_wght.ttf') format('truetype'); 
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('tipografias/tipografias/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
