@@ -4,6 +4,12 @@
 -->
 
 <?php
+    session_start();
+    // Verifica si el usuario ha iniciado sesión
+    if (!isset($_SESSION['id'])) {
+        header("Location: login.php");
+        exit;
+    }
     include_once('conexion.php');
     $id = $_POST['id'];
     $query = "SELECT * FROM recetas WHERE id = $id";
@@ -25,7 +31,7 @@
     $ingredientes = $receta['ingredientes'];
     $ingredientes = explode(",", $ingredientes);
     $pasos = $receta['pasos'];
-    $pasos = explode(",", $ingredientes);
+    $pasos = explode(".", $ingredientes);
     $tiempo = $receta['tiempo'];
     // $imagenes = ???
 ?>
@@ -37,15 +43,21 @@
     
     // tags de la receta
     echo "<div class='tags-receta'>".$tiempo."</div>";
-    if ($receta['tipo de dieta'] != ""){
+
+    if ($receta['tipo de dieta'] != "Sin especificar"){
+        // si la receta tiene tipo de dieta especificado, lo mostramos
         $tipo_de_dieta = $receta['tipo_de_dieta'];
         echo "<div class='tags-receta'>".$tipo_de_dieta."</div>";
     }
-    if ($receta['tipo de comida'] != ""){
+    
+    if ($receta['tipo de comida'] != "Sin especificar"){
+        // si la receta tiene tipo de comida especificado, lo mostramos
         $tipo_de_comida = $receta['tipo_de_comida'];
         echo "<div class='tags-receta'>".$tipo_de_comida."</div>";
     }
-    if ($receta['porciones'] != ""){
+
+    if ($receta['porciones'] != "Sin especificar"){
+        // si la receta tiene porciones especificadas, las mostramos
         $porciones = $receta['porciones'];
         echo "<div class='tags-receta'>".$porciones."</div>";
     }
