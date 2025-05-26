@@ -182,66 +182,58 @@ svg{
 }
 
 .select-none{
-    user-select: none;
+  user-select: none;
 }
 
 header{
-    height: auto;
-    width: auto;
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  height: auto;
+  width: auto;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .cont-titulo{
-    width: 40%;
-    position: relative;  /* para que el logo se posicione respecto al contenedor */
-    padding-top: 3.5rem;
+  width: auto;
+  height: 10em;
+  overflow: hidden;
+}
 
+.cont-titulo img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .cont-img-logo{
-    display: flex;
-    width: 7rem;
-    height: 7rem;
-    transform: rotate(35deg);
-    overflow: hidden;
-    position: absolute;   /* posicionamiento absoluto dentro de cont-titulo */
-    top: 0;               /* Arriba */
-    right: 0;  
+  display: flex;
+  justify-content: end;
+  width: auto;
+  height: 7rem;
+  overflow: hidden;
+  /* position: absolute;   Posicionamiento absoluto dentro de cont-titulo */
+  /* top: 0;               Arriba */
+  /* right: 0;   */
+  background-color: purple;
 }
 
-.img-logo{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.titulo-principal{
-    width: auto;
-    color: var(--primario-500);
-    text-align: center;
-    font-family: "Tan-Nimbus";
-    font-size: 6rem;
-    font-weight: 400;
-}
 
 header h2{
-    width: auto;
-    color: var(--primario-500);
-    text-align: center;
-    font-family: Quicksand;
-    font-size: 1.5625rem;
-    font-weight: 300;
-    align-self: stretch;
+  width: auto;
+  color: var(--primario-500);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 1.5625rem;
+  font-weight: 300;
+  align-self: stretch;
 }
 
 .barra-buscar-index{
-    margin-top: 2.8rem;;
+  margin-top: 2.8rem;;
   display: flex;
-  width: 42rem;
+  width: 70%;
   height: 2.5rem;
   padding: 0rem 1.25rem;
   align-items: center;
@@ -343,6 +335,135 @@ header h2{
   font-size: 1.25rem;
   font-weight: 600;
 }
+
+/*SECCION PRODUCTOS*/
+
+.cont-productos-ofertas{
+  width: 100%;
+  background-color: red;
+  display: flex;
+  width: 100%;
+  height: 48.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+
+.cont-ofertas{
+  background-color: var(--primario-500);
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.25rem;
+  cursor: pointer;
+}
+
+.cont-ofertas h2{
+  color: var(--secundario-50);
+  font-family: Quicksand;
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.cont-productos{
+  width: 100%;
+  height: auto;
+  background-color: yellow;
+  display: grid;
+  grid-template-rows: repeat (2, 1fr);
+  gap: 1rem;
+}
+
+.productos{
+  height: 18rem;
+  background-color: purple;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+}
+
+/* .productos.inferior{
+  background-color: aqua;
+  flex-direction: row-reverse;
+  grid-template-columns: 2fr 1fr; 
+} */
+
+/* .productos.inferior .producto-izquierda {
+  grid-column: 2;
+}
+.productos.inferior .productos-derecha {
+  grid-column: 1;
+}*/
+
+.producto-izquierda{
+  background-color: var(--secundario-200);
+  border-radius: 1.25rem;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+} 
+
+.productos-derecha{
+  height: 100%;
+  background-color: black;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-template-rows: repeat(2,1fr);
+  gap: 1rem;
+}
+
+.producto{
+  border-radius: 1.25rem;
+  background-color: bisque;
+}
+
+.semicirculo-cont{
+  width: 100%;
+  height: 70%;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+}
+
+.semicirculo{
+  color: var(--secundario-400);
+  position: absolute;
+}
+
+.cont-productos p{
+  color: var(--primario-500);
+  font-family: Nunito;
+  font-size: 1.85rem;
+  font-weight: 800;
+  margin: 1rem 2rem 5rem 1rem;
+}
+
+.producto-izquierda .cont-img{
+  width: 70%;
+  height: 70%;
+  margin-right:1rem;
+  overflow: hidden;
+  display: flex;
+  position: absolute;
+  bottom: -1rem;
+  right: 0;
+
+}
+
+.producto-izquierda .cont-img img{
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
+  display: block;
+  z-index: 10;
+}
+
+
+
+
+
 
 /* SECCION RESTAURANTE */
 
@@ -506,20 +627,24 @@ header h2{
 }
 
 .cont-btn-restaurantes .btn-ver-restaurantes{
-   all: unset;
-    width: auto;
-    background-color: var(--primario-500);
-    border-radius: 1.25rem;
-    display: flex;
-    padding: 0.625rem 2.1875rem;
-    justify-content: center;
-    align-items: center;
-    color: var(--secundario-50);
-    font-family: Nunito;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
+  all: unset;
+  width: auto;
+  background-color: var(--primario-500);
+  border-radius: 1.25rem;
+  display: flex;
+  padding: 0.625rem 2.1875rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--secundario-50);
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
 }
+
+
+
+
 
 
 
