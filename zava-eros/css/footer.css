@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Nunito;
+  }
+
+section {
+    background-color: var(--primario-500);
+    border-radius: 1.25rem 1.25rem 0rem 0rem;
+    height: auto;
+    gap: 2rem;
+    width: 93rem;
+  }
+
+body{
+    background-color:#F2E9DD;
+    margin: 0;
+    padding: 0;
+}
+
+.cont-dividido{
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+    color: #F2E9DD;
+}
+
+.cont-media, .cont-nav{
+  margin-top: 2.2%;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+.cont-logo{
+  margin-top: 0.4%;
+  margin-left: 1%;
+}
+
+.cont-logo, p{
+  margin-right: 2%;
+  white-space: nowrap;
+}
+
+h3, h2{
+  margin-bottom: 3%;
+}
+
+.info-logo, .info-media, .info-nav{
+  margin-left: 1%;
+}
+.img-logo{
+  object-fit: contain; /*Define cómo se ajusta la imagen dentro de su contenedor*/
+  display: flex;
+  height: 16%;
+  width: 16%;
+  padding-top: 0px ;
+}
+h2{
+  margin-top: 5%;
+  font-family: Quicksand;
+}
+
+.img-media{
+  width: 17%;
+  height: 17%;
+  object-fit: contain; /*Define cómo se ajusta la imagen dentro de su contenedor*/
+  display: flex;
+}
+
+.info-logo{
+  display: flex;
+  flex-direction: row;
+  padding: 0%;
+}
+
+.info-media{
+  display: flex;
+  flex-direction: row;
+  gap: 1%;
+}
+
+.info-nav{
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+}
+
+.cont-copy{
+  margin-top: 2%;
+  padding-bottom: 2%;
+  margin-left: 2%;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 15px;
+  line-height: 15px;
+  color: gray;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
