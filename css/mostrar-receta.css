@@ -1,0 +1,350 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+  color: var(--negro-700);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+main{
+    height: auto;
+    background-color:var(--fondo-50);
+    margin-left: 16rem;
+    padding-right: 1rem;
+    overflow: hidden;
+}
+
+.icon{
+    color: var(--primario-500);
+}
+/* IMAGENES */
+
+.cont-imagenes-receta{
+    display: flex;
+    width: 100%;
+    height: 29rem;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.cont-img-izquierda{
+    width: 60%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 1.25rem;
+}
+
+.cont-img-izquierda img,
+.cont-img-derecha .cont-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.cont-img-derecha{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+
+.cont-img-derecha .cont-img{
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    border-radius: 1.25rem
+}
+
+/* TITULO */
+
+.cont-titulo-receta{
+    width: 100%;
+    height: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;         /* Futuro soporte estandar */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    margin-bottom: 1rem
+}
+
+.cont-imagenes-receta h1{
+    font-family: Quicksand;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+/*TAGS*/
+
+.cont-tags-favorito{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.cont-tags-favorito .cont-tags,
+.cont-tags-favorito .cont-fav-compartir{
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.cont-tags .tag{
+    display: flex;
+    padding: 0.25rem 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3125rem;
+    border-radius: 1.25rem;
+    background: var(--secundario-100);
+
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+.cont-fav-compartir{
+    cursor: pointer;
+}
+
+.cont-fav-compartir button{
+    all: unset;
+}
+
+/*CONT-INFO*/
+
+.info-princiapl{
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+/*INFO USER*/
+
+.info-user{
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3125rem;
+}
+
+.info-user .cont-img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.info-user .cont-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-user .info{
+    width: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.3125rem;
+}
+
+.fullname-username{
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.fullname-username .fullname{
+    max-width:20rem;
+    overflow: hidden;
+    word-break: break-word;
+    white-space: nowrap; /*Evita el salto de linea*/
+    text-overflow: ellipsis;
+
+    font-family: Nunito;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.fullname-username .username{
+    max-width:15rem;
+    overflow: hidden;
+    word-break: break-word;
+    white-space: nowrap; /*Evita el salto de linea*/
+    text-overflow: ellipsis;
+
+    color: var(--negros-400);
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+.info .fecha{
+    font-family: Montserrat;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/*DESCRIPCION*/
+
+.cont-descripcion{
+    max-width: 55%;
+}
+
+.cont-descripcion .descripcion{
+    font-family: Nunito;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+/*INGREDIENTES Y PASOS*/
+.cont-ingredientes-pasos{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+}
+
+.cont-ingredientes-pasos .subtitulo,
+.cont-comentarios .subtitulo{
+    display: flex;
+    padding-bottom: 0.3125rem;
+    align-items: center;
+    gap: 0.3125rem;
+    border-bottom: 1px solid var(--primario-500);
+}
+
+.cont-ingredientes-pasos .subtitulo h4,
+.cont-comentarios .subtitulo h4{
+    color: var(--primario-500);
+    font-family: Quicksand;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.cont-ingredientes,
+.cont-pasos{
+    background-color: var(--secundario-50);
+    padding: 1.25rem;
+    border-radius: 1.25rem;
+    position: relative;
+}
+
+.cont-ingredientes{
+    width: 35%;
+}
+
+.cont-pasos{
+    width: 65%;
+}
+
+.cont-ingredientes-pasos ol,
+.cont-ingredientes-pasos ul {
+    padding: 1.25rem;
+    font-family: Nunito;
+    font-size: 1rem;
+    font-weight: 300;
+    overflow-wrap: break-word; /* Fuerza corte de palabras largas */
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.cont-pasos li,
+.cont-ingredientes li{
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+/*COMENTARIO*/
+/* .comentario-user{
+    background-color: purple;
+} */
+.cont-comentarios{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.cont-comentario{
+    display: flex;
+    padding-left: 2.8125rem;
+    align-items: center;
+    width: 100%;
+}
+
+.cont-comentario .comentario{
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.cont-agregar-comentario{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.agregar-comentario{
+  display: flex;
+  width: 100%;
+  height: 2.5rem;
+  padding: 0rem 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1.25rem;
+  background-color: var(--secundario-50);
+}
+
+.agregar-comentario input{
+  border: none;
+  outline: none;
+  background: none;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.agregar-comentario input,input::placeholder{
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--negro-700);
+}
+
+.agregar-comentario button{
+    all:unset;
+    cursor:pointer;
+}
+
+.cont-agregar-comentario .cont-img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.cont-agregar-comentario .cont-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+

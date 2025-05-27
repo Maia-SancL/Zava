@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/resultados-recetas.css">
+    <link rel="stylesheet" href="../css/colores.css">
+    <link rel="stylesheet" href="../css/fuentes.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <section class="section-filtros">
+            <form method="post" id="filtros-recetas">
+                <select name="tipo" class="filtro">
+                    <option value="">Tipo</option>
+                    <option value="Desayuno" <?= $filtro_tipo=='Desayuno'?'selected':'' ?>Desayuno</option>
+                    <option value="Almuerzo" <?= $filtro_tipo=='Almuerzo'?'selected':'' ?>Almuerzo</option>
+                    <option value="Merienda" <?= $filtro_tipo=='Merienda'?'selected':'' ?>Merienda</option>
+                    <option value="Cena" <?= $filtro_tipo=='Cena'?'selected':'' ?>Cena</option>
+                </select>
+                <select name="dieta" class="filtro">
+                    <option value="">Tipo de dieta</option>
+                    <option value="Vegetariana" <?= $filtro_dieta=='Vegetariana'?'selected':'' ?>Vegetariana</option>
+                    <option value="Vegana" <?= $filtro_dieta=='Vegana'?'selected':'' ?>Vegana</option> 
+                    <option value="Todas" <?= $filtro_dieta=='Todas'?'selected':'' ?>Todas</option>
+                </select>
+                <input class=filtro type="number" name="tiempo" id="tiempo" value="<?= $filtro_tiempo ?>" min="0" max="300" step="5" placeholder="Tiempo (min)" />
+                <button type="submit" class="btn-filtar">Filtrar</button>
+            </form>
+        </section>
+
+        <section class="resultado-busqueda">
+            <div class="cont-lbl-resultado">
+                <h3>Resultados por AAAAAAAAAAAAAAAAAA</h3>
+            </div>
+            <div class="cont-resultados-select">
+                <span class="lbl-resultados">100+ resultados encontrados</span>
+                <form method="post" id="filtros-recetas">
+                    <select name="orden" class="filtro">
+                        <option value="algabetico" <?= $orden=='alfabetico'?'selected':'' ?>A-Z</option>
+                        <option value="alfabetico" <?= $orden=='alfabetico'?'selected':'' ?>Z-A</option>
+                        <option value="tiempo" <?= $orden=='tiempo'?'selected':'' ?>Menor tiempo</option>
+                    </select>
+                </form>
+            </div>
+        </section>
+
+        <section class="section-recetas">
+            <article class="receta-especifica">
+                <div class="cont-img">
+                    <img src="../css/recursos/Almuerzo.jpg" alt="Imagen receta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
+                </div>
+                <div class="info-receta">
+                    <div class="cont-lbl-titulo">
+                        <h3>Fideos con crema</h3>
+                    </div>
+        
+                    <div class="cont-tags">
+                        <div class="cont-tiempo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path class="icon-tiempo" fill="currentColor" d="M11.5 3a9.5 9.5 0 0 1 9.5 9.5a9.5 9.5 0 0 1-9.5 9.5A9.5 9.5 0 0 1 2 12.5A9.5 9.5 0 0 1 11.5 3m0 1A8.5 8.5 0 0 0 3 12.5a8.5 8.5 0 0 0 8.5 8.5a8.5 8.5 0 0 0 8.5-8.5A8.5 8.5 0 0 0 11.5 4M11 7h1v5.42l4.7 2.71l-.5.87l-5.2-3z"/></svg>
+                            <div class="tiempo">
+                                <p>45min</p>
+                            </div>
+                        </div>
+                        <div class="tags-especificos">
+                            <div class="tag tipo">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12q0-2.025.838-3.937T5.163 4.7T8.7 2.5t4.5-.45q.375.05.575.313t.225.712q.05 1.6 1.188 2.738T17.9 7q.525.025.8.3t.3.85q.05 1.05.638 1.725t1.637 1.025q.35.125.538.363t.187.587q.05 2.075-.725 3.925t-2.125 3.238t-3.2 2.187T12 22m-1.5-12q.625 0 1.063-.437T12 8.5t-.437-1.062T10.5 7t-1.062.438T9 8.5t.438 1.063T10.5 10m-2 5q.625 0 1.063-.437T10 13.5t-.437-1.062T8.5 12t-1.062.438T7 13.5t.438 1.063T8.5 15m6.5 1q.425 0 .713-.288T16 15t-.288-.712T15 14t-.712.288T14 15t.288.713T15 16"/></svg>
+                                <span class="lbl-tipo">Merienda</span>
+                            </div>
+
+                            <div class="tag vegana">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path class="icon" fill="currentColor" d="M2 18.43c1.51 1.36 11.64-4.67 13.14-7.21c.72-1.22-.13-3.01-1.52-4.44C15.2 5.73 16.59 9 17.91 8.31c.6-.32.99-1.31.7-1.92c-.52-1.08-2.25-1.08-3.42-1.21c.83-.2 2.82-1.05 2.86-2.25c.04-.92-1.13-1.97-2.05-1.86c-1.21.14-1.65 1.88-2.06 3c-.05-.71-.2-2.27-.98-2.95c-1.04-.91-2.29-.05-2.32 1.05c-.04 1.33 2.82 2.07 1.92 3.67C11.04 4.67 9.25 4.03 8.1 4.7c-.49.31-1.05.91-1.63 1.69c.89.94 2.12 2.07 3.09 2.72c.2.14.26.42.11.62c-.14.21-.42.26-.62.12c-.99-.67-2.2-1.78-3.1-2.71c-.45.67-.91 1.43-1.34 2.23c.85.86 1.93 1.83 2.79 2.41c.2.14.25.42.11.62c-.14.21-.42.26-.63.12c-.85-.58-1.86-1.48-2.71-2.32C2.4 13.69 1.1 17.63 2 18.43"/></svg>
+                                <span>Vegana</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+              <article class="receta-especifica">
+                <div class="cont-img">
+                    <img src="../css/recursos/Almuerzo.jpg" alt="Imagen receta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
+                </div>
+                <div class="info-receta">
+                    <div class="cont-lbl-titulo">
+                        <h3>Fideos con crema</h3>
+                    </div>
+        
+                    <div class="cont-tags">
+                        <div class="cont-tiempo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path class="icon-tiempo" fill="currentColor" d="M11.5 3a9.5 9.5 0 0 1 9.5 9.5a9.5 9.5 0 0 1-9.5 9.5A9.5 9.5 0 0 1 2 12.5A9.5 9.5 0 0 1 11.5 3m0 1A8.5 8.5 0 0 0 3 12.5a8.5 8.5 0 0 0 8.5 8.5a8.5 8.5 0 0 0 8.5-8.5A8.5 8.5 0 0 0 11.5 4M11 7h1v5.42l4.7 2.71l-.5.87l-5.2-3z"/></svg>
+                            <div class="tiempo">
+                                <p>45min</p>
+                            </div>
+                        </div>
+                        <div class="tags-especificos">
+                            <div class="tag tipo">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12q0-2.025.838-3.937T5.163 4.7T8.7 2.5t4.5-.45q.375.05.575.313t.225.712q.05 1.6 1.188 2.738T17.9 7q.525.025.8.3t.3.85q.05 1.05.638 1.725t1.637 1.025q.35.125.538.363t.187.587q.05 2.075-.725 3.925t-2.125 3.238t-3.2 2.187T12 22m-1.5-12q.625 0 1.063-.437T12 8.5t-.437-1.062T10.5 7t-1.062.438T9 8.5t.438 1.063T10.5 10m-2 5q.625 0 1.063-.437T10 13.5t-.437-1.062T8.5 12t-1.062.438T7 13.5t.438 1.063T8.5 15m6.5 1q.425 0 .713-.288T16 15t-.288-.712T15 14t-.712.288T14 15t.288.713T15 16"/></svg>
+                                <span class="lbl-tipo">Merienda</span>
+                            </div>
+
+                            <div class="tag vegana">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path class="icon" fill="currentColor" d="M2 18.43c1.51 1.36 11.64-4.67 13.14-7.21c.72-1.22-.13-3.01-1.52-4.44C15.2 5.73 16.59 9 17.91 8.31c.6-.32.99-1.31.7-1.92c-.52-1.08-2.25-1.08-3.42-1.21c.83-.2 2.82-1.05 2.86-2.25c.04-.92-1.13-1.97-2.05-1.86c-1.21.14-1.65 1.88-2.06 3c-.05-.71-.2-2.27-.98-2.95c-1.04-.91-2.29-.05-2.32 1.05c-.04 1.33 2.82 2.07 1.92 3.67C11.04 4.67 9.25 4.03 8.1 4.7c-.49.31-1.05.91-1.63 1.69c.89.94 2.12 2.07 3.09 2.72c.2.14.26.42.11.62c-.14.21-.42.26-.62.12c-.99-.67-2.2-1.78-3.1-2.71c-.45.67-.91 1.43-1.34 2.23c.85.86 1.93 1.83 2.79 2.41c.2.14.25.42.11.62c-.14.21-.42.26-.63.12c-.85-.58-1.86-1.48-2.71-2.32C2.4 13.69 1.1 17.63 2 18.43"/></svg>
+                                <span>Vegana</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+              <article class="receta-especifica">
+                <div class="cont-img">
+                    <img src="../css/recursos/Almuerzo.jpg" alt="Imagen receta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
+                </div>
+                <div class="info-receta">
+                    <div class="cont-lbl-titulo">
+                        <h3>Fideos con crema</h3>
+                    </div>
+        
+                    <div class="cont-tags">
+                        <div class="cont-tiempo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path class="icon-tiempo" fill="currentColor" d="M11.5 3a9.5 9.5 0 0 1 9.5 9.5a9.5 9.5 0 0 1-9.5 9.5A9.5 9.5 0 0 1 2 12.5A9.5 9.5 0 0 1 11.5 3m0 1A8.5 8.5 0 0 0 3 12.5a8.5 8.5 0 0 0 8.5 8.5a8.5 8.5 0 0 0 8.5-8.5A8.5 8.5 0 0 0 11.5 4M11 7h1v5.42l4.7 2.71l-.5.87l-5.2-3z"/></svg>
+                            <div class="tiempo">
+                                <p>45min</p>
+                            </div>
+                        </div>
+                        <div class="tags-especificos">
+                            <div class="tag tipo">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12q0-2.025.838-3.937T5.163 4.7T8.7 2.5t4.5-.45q.375.05.575.313t.225.712q.05 1.6 1.188 2.738T17.9 7q.525.025.8.3t.3.85q.05 1.05.638 1.725t1.637 1.025q.35.125.538.363t.187.587q.05 2.075-.725 3.925t-2.125 3.238t-3.2 2.187T12 22m-1.5-12q.625 0 1.063-.437T12 8.5t-.437-1.062T10.5 7t-1.062.438T9 8.5t.438 1.063T10.5 10m-2 5q.625 0 1.063-.437T10 13.5t-.437-1.062T8.5 12t-1.062.438T7 13.5t.438 1.063T8.5 15m6.5 1q.425 0 .713-.288T16 15t-.288-.712T15 14t-.712.288T14 15t.288.713T15 16"/></svg>
+                                <span class="lbl-tipo">Merienda</span>
+                            </div>
+
+                            <div class="tag vegana">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path class="icon" fill="currentColor" d="M2 18.43c1.51 1.36 11.64-4.67 13.14-7.21c.72-1.22-.13-3.01-1.52-4.44C15.2 5.73 16.59 9 17.91 8.31c.6-.32.99-1.31.7-1.92c-.52-1.08-2.25-1.08-3.42-1.21c.83-.2 2.82-1.05 2.86-2.25c.04-.92-1.13-1.97-2.05-1.86c-1.21.14-1.65 1.88-2.06 3c-.05-.71-.2-2.27-.98-2.95c-1.04-.91-2.29-.05-2.32 1.05c-.04 1.33 2.82 2.07 1.92 3.67C11.04 4.67 9.25 4.03 8.1 4.7c-.49.31-1.05.91-1.63 1.69c.89.94 2.12 2.07 3.09 2.72c.2.14.26.42.11.62c-.14.21-.42.26-.62.12c-.99-.67-2.2-1.78-3.1-2.71c-.45.67-.91 1.43-1.34 2.23c.85.86 1.93 1.83 2.79 2.41c.2.14.25.42.11.62c-.14.21-.42.26-.63.12c-.85-.58-1.86-1.48-2.71-2.32C2.4 13.69 1.1 17.63 2 18.43"/></svg>
+                                <span>Vegana</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+              <article class="receta-especifica">
+                <div class="cont-img">
+                    <img src="../css/recursos/Almuerzo.jpg" alt="Imagen receta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
+                </div>
+                <div class="info-receta">
+                    <div class="cont-lbl-titulo">
+                        <h3>Fideos con crema</h3>
+                    </div>
+        
+                    <div class="cont-tags">
+                        <div class="cont-tiempo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path class="icon-tiempo" fill="currentColor" d="M11.5 3a9.5 9.5 0 0 1 9.5 9.5a9.5 9.5 0 0 1-9.5 9.5A9.5 9.5 0 0 1 2 12.5A9.5 9.5 0 0 1 11.5 3m0 1A8.5 8.5 0 0 0 3 12.5a8.5 8.5 0 0 0 8.5 8.5a8.5 8.5 0 0 0 8.5-8.5A8.5 8.5 0 0 0 11.5 4M11 7h1v5.42l4.7 2.71l-.5.87l-5.2-3z"/></svg>
+                            <div class="tiempo">
+                                <p>45min</p>
+                            </div>
+                        </div>
+                        <div class="tags-especificos">
+                            <div class="tag tipo">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12q0-2.025.838-3.937T5.163 4.7T8.7 2.5t4.5-.45q.375.05.575.313t.225.712q.05 1.6 1.188 2.738T17.9 7q.525.025.8.3t.3.85q.05 1.05.638 1.725t1.637 1.025q.35.125.538.363t.187.587q.05 2.075-.725 3.925t-2.125 3.238t-3.2 2.187T12 22m-1.5-12q.625 0 1.063-.437T12 8.5t-.437-1.062T10.5 7t-1.062.438T9 8.5t.438 1.063T10.5 10m-2 5q.625 0 1.063-.437T10 13.5t-.437-1.062T8.5 12t-1.062.438T7 13.5t.438 1.063T8.5 15m6.5 1q.425 0 .713-.288T16 15t-.288-.712T15 14t-.712.288T14 15t.288.713T15 16"/></svg>
+                                <span class="lbl-tipo">Merienda</span>
+                            </div>
+
+                            <div class="tag vegana">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path class="icon" fill="currentColor" d="M2 18.43c1.51 1.36 11.64-4.67 13.14-7.21c.72-1.22-.13-3.01-1.52-4.44C15.2 5.73 16.59 9 17.91 8.31c.6-.32.99-1.31.7-1.92c-.52-1.08-2.25-1.08-3.42-1.21c.83-.2 2.82-1.05 2.86-2.25c.04-.92-1.13-1.97-2.05-1.86c-1.21.14-1.65 1.88-2.06 3c-.05-.71-.2-2.27-.98-2.95c-1.04-.91-2.29-.05-2.32 1.05c-.04 1.33 2.82 2.07 1.92 3.67C11.04 4.67 9.25 4.03 8.1 4.7c-.49.31-1.05.91-1.63 1.69c.89.94 2.12 2.07 3.09 2.72c.2.14.26.42.11.62c-.14.21-.42.26-.62.12c-.99-.67-2.2-1.78-3.1-2.71c-.45.67-.91 1.43-1.34 2.23c.85.86 1.93 1.83 2.79 2.41c.2.14.25.42.11.62c-.14.21-.42.26-.63.12c-.85-.58-1.86-1.48-2.71-2.32C2.4 13.69 1.1 17.63 2 18.43"/></svg>
+                                <span>Vegana</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="receta-especifica">
+                <div class="cont-img">
+                    <img src="../css/recursos/Almuerzo.jpg" alt="Imagen receta">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
+                </div>
+                <div class="info-receta">
+                    <div class="cont-lbl-titulo">
+                        <h3>Fideos con crema</h3>
+                    </div>
+        
+                    <div class="cont-tags">
+                        <div class="cont-tiempo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path class="icon-tiempo" fill="currentColor" d="M11.5 3a9.5 9.5 0 0 1 9.5 9.5a9.5 9.5 0 0 1-9.5 9.5A9.5 9.5 0 0 1 2 12.5A9.5 9.5 0 0 1 11.5 3m0 1A8.5 8.5 0 0 0 3 12.5a8.5 8.5 0 0 0 8.5 8.5a8.5 8.5 0 0 0 8.5-8.5A8.5 8.5 0 0 0 11.5 4M11 7h1v5.42l4.7 2.71l-.5.87l-5.2-3z"/></svg>
+                            <div class="tiempo">
+                                <p>45min</p>
+                            </div>
+                        </div>
+                        <div class="tags-especificos">
+                            <div class="tag tipo">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12q0-2.025.838-3.937T5.163 4.7T8.7 2.5t4.5-.45q.375.05.575.313t.225.712q.05 1.6 1.188 2.738T17.9 7q.525.025.8.3t.3.85q.05 1.05.638 1.725t1.637 1.025q.35.125.538.363t.187.587q.05 2.075-.725 3.925t-2.125 3.238t-3.2 2.187T12 22m-1.5-12q.625 0 1.063-.437T12 8.5t-.437-1.062T10.5 7t-1.062.438T9 8.5t.438 1.063T10.5 10m-2 5q.625 0 1.063-.437T10 13.5t-.437-1.062T8.5 12t-1.062.438T7 13.5t.438 1.063T8.5 15m6.5 1q.425 0 .713-.288T16 15t-.288-.712T15 14t-.712.288T14 15t.288.713T15 16"/></svg>
+                                <span class="lbl-tipo">Merienda</span>
+                            </div>
+
+                            <div class="tag vegana">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path class="icon" fill="currentColor" d="M2 18.43c1.51 1.36 11.64-4.67 13.14-7.21c.72-1.22-.13-3.01-1.52-4.44C15.2 5.73 16.59 9 17.91 8.31c.6-.32.99-1.31.7-1.92c-.52-1.08-2.25-1.08-3.42-1.21c.83-.2 2.82-1.05 2.86-2.25c.04-.92-1.13-1.97-2.05-1.86c-1.21.14-1.65 1.88-2.06 3c-.05-.71-.2-2.27-.98-2.95c-1.04-.91-2.29-.05-2.32 1.05c-.04 1.33 2.82 2.07 1.92 3.67C11.04 4.67 9.25 4.03 8.1 4.7c-.49.31-1.05.91-1.63 1.69c.89.94 2.12 2.07 3.09 2.72c.2.14.26.42.11.62c-.14.21-.42.26-.62.12c-.99-.67-2.2-1.78-3.1-2.71c-.45.67-.91 1.43-1.34 2.23c.85.86 1.93 1.83 2.79 2.41c.2.14.25.42.11.62c-.14.21-.42.26-.63.12c-.85-.58-1.86-1.48-2.71-2.32C2.4 13.69 1.1 17.63 2 18.43"/></svg>
+                                <span>Vegana</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+    
+</body>
+</html>
