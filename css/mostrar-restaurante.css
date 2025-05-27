@@ -20,7 +20,9 @@ main{
     overflow: hidden;
 }
 
-
+svg{
+    flex-shrink: 0;
+}
 
 .icon{
     color: var(--primario-500);
@@ -67,10 +69,17 @@ main{
     border-radius: 1.25rem
 }
 
-/* TITULO */
+/* TITULO Y ESTRELLAS */
+.section-titulo-estrellas{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.125rem;
+}
 
 .cont-titulo-restaurante{
-    width: 100%;
+    width: auto;
+    max-width: 70%;
     height: auto;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -78,11 +87,178 @@ main{
     -webkit-box-orient: vertical;
     overflow: hidden;
     word-break: break-word;
-    margin-bottom: 1rem
 }
 
-.cont-imagenes-restaurante h1{
+.cont-titulo-restaurante h1{
     font-family: Quicksand;
     font-size: 1.75rem;
     font-weight: 700;
+}
+
+.cont-calificacion{
+    display: flex;
+    gap: 0.625rem;
+    align-items: center;
+}
+
+.cont-calificacion .estrellas{
+    display: flex;
+    gap: 0.2rem;
+}
+
+.cont-calificacion .calificacion{
+    display: flex;
+    white-space: nowrap;
+}
+
+.calificacion span{
+    font-family: Nunito;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+/*CONTACTO*/
+
+.section-informacion{
+    width: auto;
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    margin-bottom: 2rem;
+}
+
+.section-informacion .cont-info{
+    width: auto;
+    max-width: 100%;
+    display: flex;
+    align-items: start;
+    gap: 0.3125rem;
+}
+
+
+.cont-info .cont-lbl:not(.contacto){
+    width: auto;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;         /* Futuro soporte estandar */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+
+}
+
+.cont-info .cont-lbl span{
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.cont-lbl.contacto ul{
+    width:auto;
+    max-width: 60%;
+    padding-left: 0.8rem;
+   text-overflow: ellipsis;
+}
+
+.cont-lbl.contacto ul li{
+    width: auto;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+/*DESCRIPCION Y USUARIO*/
+
+.section-user-descripcion{
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    margin-bottom: 4rem;
+}
+
+.info-user{
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3125rem;
+}
+
+.info-user .cont-img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.info-user .cont-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nfo-user .info{
+    width: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.3125rem;
+}
+
+.fullname-username{
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.fullname-username .fullname{
+    max-width:20rem;
+    overflow: hidden;
+    word-break: break-word;
+    white-space: nowrap; /*Evita el salto de linea*/
+    text-overflow: ellipsis;
+
+    font-family: Nunito;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.fullname-username .username{
+    max-width:15rem;
+    overflow: hidden;
+    word-break: break-word;
+    white-space: nowrap; /*Evita el salto de linea*/
+    text-overflow: ellipsis;
+
+    color: var(--negros-400);
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+.info .fecha{
+    font-family: Montserrat;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/*DESCRIPCION*/
+
+.cont-descripcion{
+    max-width: 100%;
+}
+
+.cont-descripcion .descripcion{
+    font-family: Nunito;
+    font-size: 1rem;
+    font-weight: 300;
 }
