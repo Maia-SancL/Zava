@@ -1,0 +1,100 @@
+:root {
+    /* === Primarios === */
+
+    --fondo--50: #FDFDFD;
+    
+    --primario-50: #ec9393;
+    --primario-100: #e25d5d;
+    --primario-200: #d92727;
+    --primario-300: #a31d1d;
+    --primario-400: #821717;
+    --primario-500: #621111;
+    --primario-600: #410c0c;
+  
+    /* === Secundarios === */
+    --secundario-50: #fbf7f1; 
+    --secundario-100: #f9f3ea;
+    --secundario-200: #f2e8d6; 
+    --secundario-300: #ecdcc1;
+    --secundario-400: #e5d0ad;
+    --secundario-500: #dfc498;
+    --secundario-600: #d2ad6f;
+  
+    /* === Secundarios 2 === */
+    --secundario2-50: #db9090;
+    --secundario2-100: #ca5959;
+    --secundario2-200: #a43535;
+    --secundario2-300: #6d2323;
+    --secundario2-400: #571c1c;
+    --secundario2-500: #411515;
+    --secundario2-600: #2c0e0e;
+  
+    /* === Secundarios 3 === */
+    --secundario3-50: #fefcf0;
+    --secundario3-100: #fefbeb;
+    --secundario3-200: #fefae6;
+    --secundario3-300: #fef9e1;
+    --secundario3-400: #fbe684;
+    --secundario3-500: #f8d428;
+    --secundario3-600: #b99b06;
+  
+    /* === Negros === */
+    --negro-50: #dddddd;
+    --negro-100: #bbbbbb;
+    --negro-200: #9a9a9a;
+    --negro-300: #787878;
+    --negro-400: #565656;
+    --negro-500: #343434;
+    --negro-600: #2a2a2a;
+    --negro-700: #1f1f1f;
+    --negro-800: #151515;
+    --negro-900: #0c0c0c;
+  
+    /* === Blancos === */
+    --blanco-50: #ffffff;
+    --blanco-100: #f4f4f4;
+    --blanco-200: #e9e9e9;
+    --blanco-300: #dedede;
+    --blanco-400: #d3d3d3;
+    --blanco-500: #c8c8c8;
+    --blanco-600: #afafaf;
+    --blanco-700: #969696;
+    --blanco-800: #7d7d7d;
+    --blanco-900: #646464;
+  
+    /* === Éxito === */
+    --exito-50: #e6f8d3;
+    --exito-100: #CDF2A7;
+    --exito-200: #B4EB7C;
+    --exito-300: #9AE550;
+    --exito-400: #81DE24;
+    --exito-500: #68B51B;
+    --exito-600: #579717;
+    --exito-700: #457912;
+    --exito-800: #345B0D;
+    --exito-900: #233C09;
+  
+    /* === Advertencia === */
+    --advertencia-50: #FEFADE;
+    --advertencia-100: #FEF4BD;
+    --advertencia-200: #f9efdc;
+    --advertencia-300: #f6e9d1;
+    --advertencia-400: #f4e3c5;
+    --advertencia-500: #FBDE38;
+    --advertencia-600: #FAD606;
+    --advertencia-700: #C9AB04;
+    --advertencia-800: #968103;
+    --advertencia-900: #645602;
+  
+    /* === Error === */
+    --error-50: #F9DBDB;
+    --error-100: #F4B7B7;
+    --error-200: #EE9393;
+    --error-300: #E86F6F;
+    --error-400: #E34B4B;
+    --error-500: #DD2727;
+    --error-600: #BB1D1D;
+    --error-700: #961818;
+    --error-800: #701212;
+    --error-900: #4B0C0C;
+  }

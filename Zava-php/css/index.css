@@ -1,0 +1,502 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+  color: var(--negros-700, #1F1F1F);
+}
+
+body {
+
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--fondo-50);
+}
+
+.layout{
+  min-height: 100vh; /* o el alto del área donde debe vivir el layout */
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+main {
+  height: auto;
+  background-color: var(--fondo-50);
+  padding-right: 1rem;
+}
+
+svg {
+  flex-shrink: 0;
+  /* Evita que el SVG se reduzca */
+}
+
+.select-none {
+  user-select: none;
+}
+
+.header-titulo {
+  height: auto;
+  width: auto;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cont-titulo {
+  width: auto;
+  height: 10em;
+  overflow: hidden;
+}
+
+.cont-titulo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cont-img-logo {
+  display: flex;
+  justify-content: end;
+  width: auto;
+  height: 7rem;
+  overflow: hidden;
+  /* position: absolute;   Posicionamiento absoluto dentro de cont-titulo */
+  /* top: 0;               Arriba */
+  /* right: 0;   */
+  background-color: purple;
+}
+
+
+.header-titulo h2 {
+  width: auto;
+  color: var(--primario-500);
+  text-align: center;
+  font-family: Quicksand;
+  font-size: 1.5625rem;
+  font-weight: 300;
+  align-self: stretch;
+}
+
+.barra-buscar-index {
+  margin-top: 2.8rem;
+  ;
+  display: flex;
+  width: 70%;
+  height: 2.5rem;
+  padding: 0rem 1.25rem;
+  align-items: center;
+  gap: 0.8125rem;
+  border-radius: 1.25rem;
+  background-color: var(--secundario-200);
+}
+
+.barra-buscar-index input {
+  border: none;
+  outline: none;
+  background: none;
+  width: 100%;
+  height: 100%;
+
+}
+
+.barra-buscar-index input,
+input::placeholder {
+  font-family: 'Nunito';
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--negro-700);
+}
+
+
+
+#recetas {
+  margin-top: 10rem;
+  width: 100%;
+
+  height: auto;
+  margin-bottom: 10rem;
+}
+
+.cont-subtitulo-descripcion {
+  display: flex;
+  width: 45rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+
+}
+
+.cont-subtitulo-descripcion h2 {
+  font-family: Quicksand;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.cont-subtitulo-descripcion p {
+  font-family: Montserrat;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.cont-btns-recetas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 1rem;
+  margin-top: 2rem;
+}
+
+.tarjeta-receta {
+  width: 15rem;
+  height: 11rem;
+  overflow: hidden;
+  /*Todo lo que se salga de la caja se oculta*/
+  border-radius: 1rem;
+}
+
+.tarjeta-receta img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tarjeta-receta .overlay {
+  position: absolute;
+  border-radius: 1rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.40);
+  /* Negro con 40% de opacidad */
+  pointer-events: none;
+  /* Para que no bloquee clics */
+}
+
+.btn-receta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cont-btns-recetas p {
+  position: absolute;
+  color: var(--secundario-50);
+  font-family: Montserrat;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+/*SECCION PRODUCTOS*/
+
+.cont-productos-ofertas {
+  width: 100%;
+  display: flex;
+  width: 100%;
+  height: 48.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 2rem 0;
+}
+
+.cont-ofertas {
+  background-color: var(--primario-500);
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.cont-ofertas h2 {
+  color: var(--secundario-50);
+  font-family: Quicksand;
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.cont-productos {
+  width: 100%;
+  height: 50%;
+  display: grid;
+  grid-template-rows: repeat (2, 1fr);
+  gap: 2rem;
+}
+
+.cont-productos .cont-general-productos{
+  width: 100%;
+  height: 20rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.cont-productos .cont-general-productos.inferior{
+ grid-template-columns: 2fr 1fr;
+}
+
+.cont-general-productos .producto-item{
+  width: 100%;
+  height: 100%;
+  background-color: var(--secundario-200);
+  border-radius: 1.25rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 1rem 0 0 1rem;
+}
+
+.cont-productos-chicos{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* Dos columnas iguales */
+  grid-template-rows: 1fr 1fr;     /* Dos filas iguales */
+  gap: 1.5rem; 
+}
+
+.semicirculo-fondo{
+  position: absolute;
+  bottom: 0;
+  z-index: 0;
+}
+
+.producto-item .cont-img{
+  width: 100%;
+  height: 70%;
+  overflow: hidden;
+  position: absolute;
+  bottom: -.5rem;
+  right: 0;
+  z-index: 10;
+}
+
+.producto-item.chico .cont-img{
+  width: 12em;
+  height: auto;
+} 
+
+.producto-item .cont-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  
+}
+
+.producto-item.chico .cont-img img{
+  position: relative;
+}
+
+.producto-item .producto-seccion{
+  width: 70%;
+  font-family: Nunito;
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--primario-500);
+  z-index: 20;
+}
+
+
+
+
+
+/* SECCION RESTAURANTE */
+
+.cont-restaurantes-grupo {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-right: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+.restaurante {
+  display: flex;
+  width: 30rem;
+  height: auto;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: var(--secundario-100);
+  border-radius: 1rem;
+}
+
+.restaurante-imagen {
+  height: 15.625rem;
+  width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.restaurante-imagen img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.restaurante .descripcion {
+  display: flex;
+  padding: 0.3125rem 0.625rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.cont-des-superior {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.nombre-restaurante {
+  width: 100%;
+}
+
+.nombre-restaurante h4 {
+  color: var(--negro-700);
+  font-family: Quicksand;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: -webkit-box;
+  /* Necesario para usar line-clamp */
+  -webkit-line-clamp: 2;
+  /* Numero de lineas maximo */
+  line-clamp: 2;
+  /* Futuro soporte estandar */
+  -webkit-box-orient: vertical;
+  /* Define la direccion del flujo: vertical */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*Agrega (...) al final de las palabras si no entran en el visor*/
+  word-break: break-word;
+  /* Permite que las palabras largas se dividan para evitar que se desborden */
+}
+
+.cont-tipo-estrellas .tipo-cocina {
+  padding: 0.25rem 0.625rem;
+  max-width: 70%;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1rem;
+  background: var(--secundario-300);
+}
+
+.tipo-cocina p {
+  color: var(--negro-700);
+  font-family: Nunito;
+  font-size: 0.7rem;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cont-tipo-estrellas {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cont-tipo-estrellas .cont-estrellas {
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.calificacion p {
+  color: var(--negros-700);
+  font-family: Montserrat;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.cont-des-inferior {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.cont-ubicacion-hora {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+
+}
+
+.ubicacion,
+.horarios {
+  display: flex;
+  align-items: center;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.ubicacion .direccion {
+  display: -webkit-box;
+  /* Necesario para usar line-clamp */
+  -webkit-line-clamp: 2;
+  /* Numero de lineas maximo */
+  line-clamp: 2;
+  /* Futuro soporte estandar */
+  -webkit-box-orient: vertical;
+  /* Define la direccion del flujo: vertical */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*Agrega (...) al final de las palabras si no entran en el visor*/
+  word-break: break-word;
+  /* Permite que las palabras largas se dividan para evitar que se desborden */
+
+}
+
+.ubicacion p,
+.direccion p {
+  color: var(--negro-700);
+  font-family: Montserrat;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.restaurante .icon {
+  color: var(--primario-500);
+}
+
+.cont-btn-restaurantes {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cont-btn-restaurantes .btn-ver-restaurantes {
+  all: unset;
+  width: auto;
+  background-color: var(--primario-500);
+  border-radius: 1.25rem;
+  display: flex;
+  padding: 0.625rem 2.1875rem;
+  justify-content: center;
+  align-items: center;
+  color: var(--secundario-50);
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
