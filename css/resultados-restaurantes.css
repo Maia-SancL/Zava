@@ -1,0 +1,261 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+  color: var(--negro-700);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+main{
+    height: auto;
+    background-color:var(--fondo-50);
+    margin-left: 16rem;
+    padding-right: 8rem;
+    overflow: hidden;
+}
+
+svg{
+  flex-shrink: 0; /* Evita que el SVG se reduzca */
+}
+
+.icon{
+    color: var(--primario-500);
+}
+
+/*SECCION DE FILTROS*/
+
+.section-filtros{
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.section-filtros form{
+  display: flex;
+  padding: 0.625rem;
+  align-items: center;
+  gap: 1rem;
+
+  padding-bottom: 0.3125rem;
+  border-bottom: 1px solid var(--primario-500);
+}
+
+.section-filtros .filtro{
+  all:unset;
+  width: 30%;
+  padding: 0.4375rem 0.625rem;
+  border-radius: 1.25rem;
+  background: var(--secundario-50);
+
+  font-family: Montserrat;
+  font-size: 0.8rem;
+  font-weight: 500; 
+}
+
+.section-filtros .btn-filtar{
+  all:unset;
+  font-family: Montserrat;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: var(--secundario-50);
+  padding: 0.4375rem 0.8rem;
+  border-radius: 1rem;
+  font-family: Montserrat;
+  font-size: 0.8rem;
+  font-weight: 500; 
+  cursor: pointer;
+} 
+
+/*BUSQUEDA*/
+
+.resultado-busqueda{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.3125rem;
+  border-bottom:
+  1px solid var(--primario-500);
+}
+
+.cont-lbl-resultado{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;         /* Futuro soporte estandar */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.cont-lbl-resultado h3{
+  font-family: Quicksand;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.cont-resultados-select{
+  display: flex;
+  justify-content: space-between;
+}
+
+.cont-resultados-select .filtro{
+  all:unset;
+  width: 12rem;
+  padding: 0.4375rem 0.625rem;
+  border-radius: 1.25rem;
+  background: var(--secundario-50);
+
+  font-family: Montserrat;
+  font-size: 0.7rem;
+  font-weight: 500; 
+}
+
+/*SECCION RESTAURANTES*/
+.section-restaurantes{
+    background-color: blue;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 17.8rem);
+    gap: 1.8rem .8rem; /* fila columna */
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.restaurante-especifico{
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: var(--secundario-100);
+  border-radius: 1rem;
+}
+
+.restaurante-imagen{
+  height: 13.75rem;
+  width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.restaurante-imagen img{
+  height: 100%;
+  width: 100%;
+  object-fit:cover;
+}
+
+.restaurante-especifico .descripcion{
+  display: flex;
+  padding: 0.3125rem 0.625rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .5rem;
+}
+
+.cont-des-superior{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.nombre-restaurante{
+  width: 100%;
+}
+
+.nombre-restaurante h4{
+  color: var(--negro-700);
+  font-family: Quicksand;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: -webkit-box; /* Necesario para usar line-clamp */
+  -webkit-line-clamp: 2;       /* Numero de lineas maximo */
+  line-clamp: 2;         /* Futuro soporte estandar */
+  -webkit-box-orient: vertical; /* Define la direccion del flujo: vertical */
+  overflow: hidden;
+  text-overflow: ellipsis; /*Agrega (...) al final de las palabras si no entran en el visor*/
+  word-break: break-word; /* Permite que las palabras largas se dividan para evitar que se desborden */
+}
+
+.cont-tipo-estrellas .tipo-cocina{
+  padding: 0.25rem 0.625rem;
+  max-width: 70%;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1rem;
+  background: var(--secundario-300);
+}
+
+.tipo-cocina p{
+  color: var(--negro-700);
+  font-family: Nunito;
+  font-size: 0.7rem;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cont-tipo-estrellas{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cont-tipo-estrellas .cont-estrellas{
+  display: flex;
+  align-items: center;
+  gap: 0.3125rem;
+}
+
+.calificacion p{
+  color:  var(--negros-700);
+  font-family: Montserrat;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.cont-des-inferior{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.cont-ubicacion-hora{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .8rem;
+  
+}
+
+.ubicacion,.horarios{
+  display: flex;
+  align-items: center;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.ubicacion .direccion{
+  display: -webkit-box; /* Necesario para usar line-clamp */
+  -webkit-line-clamp: 2;       /* Numero de lineas maximo */
+  line-clamp: 2;         /* Futuro soporte estandar */
+  -webkit-box-orient: vertical; /* Define la direccion del flujo: vertical */
+  overflow: hidden;
+  text-overflow: ellipsis; /*Agrega (...) al final de las palabras si no entran en el visor*/
+  word-break: break-word; /* Permite que las palabras largas se dividan para evitar que se desborden */
+
+}
+
+.ubicacion p,
+.horarios p{
+    font-family: Montserrat;
+    font-size: .8rem;
+    font-weight: 400;
+}

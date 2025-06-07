@@ -1,0 +1,336 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+  color: var(--negro-700);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  height: auto;
+  background-color: var(--fondo-50);
+  margin-left: 16rem;
+  padding-right: 8rem;
+  overflow: hidden;
+}
+
+svg {
+  flex-shrink: 0;
+  /* Evita que el SVG se reduzca */
+}
+
+.icon {
+  color: var(--primario-500);
+}
+
+/*SECCION DE FILTROS*/
+
+.section-filtros {
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.section-filtros form {
+  display: flex;
+  padding: 0.625rem;
+  align-items: center;
+  gap: 1rem;
+
+  padding-bottom: 0.3125rem;
+  border-bottom: 1px solid var(--primario-500);
+}
+
+.section-filtros .filtro {
+  all: unset;
+  width: 30%;
+  padding: 0.4375rem 0.625rem;
+  border-radius: 1.25rem;
+  background: var(--secundario-50);
+
+  font-family: Montserrat;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.section-filtros .btn-filtar {
+  all: unset;
+  font-family: Montserrat;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background-color: var(--secundario-50);
+  padding: 0.4375rem 0.8rem;
+  border-radius: 1rem;
+  font-family: Montserrat;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/*BUSQUEDA*/
+
+.resultado-busqueda {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.3125rem;
+  border-bottom:
+    1px solid var(--primario-500);
+}
+
+.cont-lbl-resultado {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  /* Futuro soporte estandar */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.cont-lbl-resultado h3 {
+  font-family: Quicksand;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.cont-resultados-select {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cont-resultados-select .filtro {
+  all: unset;
+  width: 12rem;
+  padding: 0.4375rem 0.625rem;
+  border-radius: 1.25rem;
+  background: var(--secundario-50);
+
+  font-family: Montserrat;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+
+.btn-switch {
+  display: none;
+}
+
+.lbl-switch {
+  display: inline-block;
+  width: 4rem;
+  height: 1.875rem;
+  background-color: var(--secundario-50);
+  position: relative;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  overflow: hidden;
+}
+
+.icono-svg {
+  position: absolute;
+  left: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: left 0.3s ease;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* cuando el checkbox esta activo */
+.btn-switch:checked+.lbl-switch {
+  background-color: var(--primario-500);
+}
+
+.btn-switch:checked+.lbl-switch .icon {
+  color: var(--secundario-50);
+}
+
+.btn-switch:checked+.lbl-switch .icono-svg {
+  left: calc(100% - 1.9rem);
+  /* se mueve a la derecha */
+}
+
+/*SECCION PRODUCTOS*/
+.section-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 13rem);
+  gap: 1.8rem 1rem;
+  /* fila columna */
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.producto {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.producto .cont-img {
+  width: 100%;
+  height: 12rem;
+  border-radius: 1.25rem 1.25rem 0 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.producto .cont-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 1.25rem 1.25rem 0 0;
+}
+
+.cont-oferta {
+  display: flex;
+  padding: 0.125rem 0.4375rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.625rem;
+  background: var(--primario-500);
+}
+
+.cont-oferta p {
+  color: var(--secundario-50);
+  font-family: Montserrat;
+  font-size: 0.625rem;
+  font-weight: 500;
+}
+
+.cont-oferta-favorito {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 0.5rem;
+  /* arriba */
+  z-index: 20;
+  padding: 0 .5rem;
+}
+
+.cont-img .cont-oferta-favorito svg {
+  margin-left: auto;
+  /* Esto empuja el svg a la derecha */
+  position: relative;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.cont-img .cont-oferta-favorito .icon {
+  color: var(--primario-500);
+  cursor: pointer;
+}
+
+.informacion-producto {
+  background-color: var(--secundario-50);
+  border-radius: 0rem 0rem 1.25rem 1.25rem;
+  padding: 0.3125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.tipo-producto {
+  white-space: nowrap;
+  /* no permite saltos de lnea */
+  overflow: hidden;
+  /* oculta el desborde */
+  text-overflow: ellipsis;
+  /* muestra "..." si se recorta */
+  display: block;
+  max-width: 100%;
+  /* span imitado */
+  font-family: Montserrat;
+  font-size: 0.7rem;
+  font-weight: 300;
+}
+
+.titulo-producto {
+  font-family: Nunito;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  /* Futuro soporte estandar */
+  /* número de líneas máximo */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.peso-producto {
+  font-family: Montserrat;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.cont-precio-btn {
+  display: flex;
+  padding-right: 0.3125rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.precio {
+  font-family: Nunito;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.precio-oferta {
+  white-space: nowrap;
+  /* no permite saltos de lnea */
+  overflow: hidden;
+  /* oculta el desborde */
+  text-overflow: ellipsis;
+  /* muestra "..." si se recorta */
+  display: block;
+
+  font-family: Montserrat;
+  font-size: 0.625rem;
+  font-weight: 300;
+  text-decoration-line: line-through;
+}
+
+.btn-agregar-carrito {
+  all: unset;
+  display: flex;
+  padding: 0.3125rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6.25rem;
+  background-color: var(--primario-500);
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.btn-agregar-carrito .icon {
+  color: var(--secundario-50);
+}
+
+.btn-agregar-carrito .icon {
+  color: var(--secundario-50);
+}
+
+.btn-agregar-carrito:active {
+  transform: translateY(.2rem);
+  background-color: var(--secundario-100);
+  color: var(--primario-500);
+  border: 1px solid var(--primario-500);
+}
+
+.btn-agregar-carrito:active .icon {
+  color: var(--primario-500);
+}

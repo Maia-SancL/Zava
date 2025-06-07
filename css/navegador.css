@@ -17,7 +17,6 @@ nav{
   width: 100%;
   height: 4rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 0.9375rem 2.0625rem 0.9375rem 1.625rem;
 }
@@ -63,6 +62,7 @@ nav{
 
 .cont-btns{
   display: flex;
+  margin-left:auto ;
   gap:1.25rem;
 }
 

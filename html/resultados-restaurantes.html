@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/resultados-restaurantes.css">
+    <link rel="stylesheet" href="../css/colores.css">
+    <link rel="stylesheet" href="../css/fuentes.css">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+    <section class="section-filtros">
+            <form method="post" id="filtros-restaurantes">
+                <select name="tipo" class="filtro">
+                    <option value="">Ubicacion</option>
+                    <!-- <option value="Desayuno" <?= $filtro_tipo=='Desayuno'?'selected':'' ?>Desayuno</option>
+                    <option value="Almuerzo" <?= $filtro_tipo=='Almuerzo'?'selected':'' ?>Almuerzo</option>
+                    <option value="Merienda" <?= $filtro_tipo=='Merienda'?'selected':'' ?>Merienda</option>
+                    <option value="Cena" <?= $filtro_tipo=='Cena'?'selected':'' ?>Cena</option> -->
+                </select>
+                <select name="cant-estrellas" class="filtro">
+                    <option value="">Cantidad de estrellas</option>
+                    <!-- <option value="Vegetariana" <?= $filtro_dieta=='Vegetariana'?'selected':'' ?>Vegetariana</option>
+                    <option value="Vegana" <?= $filtro_dieta=='Vegana'?'selected':'' ?>Vegana</option> 
+                    <option value="Todas" <?= $filtro_dieta=='Todas'?'selected':'' ?>Todas</option> -->
+                </select>
+                <select name="tipo-comida" class="filtro">
+                    <option value="">Tipo de comida</option>
+                    <!-- <option value="Vegetariana" <?= $filtro_dieta=='Vegetariana'?'selected':'' ?>Vegetariana</option>
+                    <option value="Vegana" <?= $filtro_dieta=='Vegana'?'selected':'' ?>Vegana</option> 
+                    <option value="Todas" <?= $filtro_dieta=='Todas'?'selected':'' ?>Todas</option> -->
+                </select>
+                <button type="submit" class="btn-filtar">Filtrar</button>
+            </form>
+        </section>
+
+        <section class="resultado-busqueda">
+            <div class="cont-lbl-resultado">
+                <h3>Resultados por AAAAAAAAAAAAAAAAAA</h3>
+            </div>
+            <div class="cont-resultados-select">
+                <span class="lbl-resultados">100+ resultados encontrados</span>
+                <form method="post" id="filtros-recetas">
+                    <select name="orden" class="filtro">
+                        <option value="algabetico" <?= $orden=='alfabetico'?'selected':'' ?>A-Z</option>
+                        <option value="alfabetico" <?= $orden=='alfabetico'?'selected':'' ?>Z-A</option>
+                        <option value="tiempo" <?= $orden=='tiempo'?'selected':'' ?>Menor tiempo</option>
+                    </select>
+                </form>
+            </div>
+        </section>
+
+        <section class="section-restaurantes">
+            <article class="restaurante-especifico">
+                <div class="restaurante-imagen">
+                        <img src="../css/recursos/restaurante.jpg">
+                    </div>
+                    <div class="descripcion">
+                        <div class="cont-des-superior">
+                            <div class="nombre-restaurante">
+                                <h4>NOMBRE RESTAURANTE</h4> <!--NOMBRE DEL RESTAURANTE DESDE LA BDD-->
+                            </div>
+                            <div class="cont-tipo-estrellas">
+                                <div class="tipo-cocina">
+                                    <p>TIPO DE COCINA</p> <!--TIPO DE COCINA DEL RESTAURANTE DESDE LA BDD-->
+                                </div>
+                                <div class="cont-estrellas">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M13.51 3.139c-.652-1.185-2.368-1.185-3.021 0a28 28 0 0 0-2.114 4.894a.35.35 0 0 1-.33.223a30 30 0 0 0-4.375.436c-1.337.233-1.926 1.837-.91 2.83q.192.188.388.374a32 32 0 0 0 3.103 2.587a.274.274 0 0 1 .11.31a27.6 27.6 0 0 0-1.172 5.065c-.19 1.424 1.318 2.298 2.495 1.694a29.3 29.3 0 0 0 4.085-2.537a.4.4 0 0 1 .462 0a29 29 0 0 0 4.085 2.537c1.177.604 2.685-.27 2.495-1.694a27.6 27.6 0 0 0-1.171-5.065a.274.274 0 0 1 .11-.31a32 32 0 0 0 3.49-2.96c1.016-.994.427-2.598-.91-2.831a30 30 0 0 0-4.376-.436a.35.35 0 0 1-.329-.223a27.7 27.7 0 0 0-2.114-4.894"/></svg>
+                                    <div class="calificacion">
+                                        <p>4.7</p> <!--CALIFICACION DESDE LA BDD-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont-des-inferior">
+                            <div class="cont-ubicacion-hora">
+                                <div class="ubicacion">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" class="icon"><path class="icon" d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path class="icon" fill="currentColor" d="M12 2a9 9 0 0 1 9 9c0 3.074-1.676 5.59-3.442 7.395a20.4 20.4 0 0 1-2.876 2.416l-.426.29l-.2.133l-.377.24l-.336.205l-.416.242a1.87 1.87 0 0 1-1.854 0l-.416-.242l-.52-.32l-.192-.125l-.41-.273a20.6 20.6 0 0 1-3.093-2.566C4.676 16.589 3 14.074 3 11a9 9 0 0 1 9-9m0 6a3 3 0 1 0 0 6a3 3 0 0 0 0-6"/></g></svg>
+                                    <div class="direccion">
+                                        <p>Calle 9 de Julio 3700, Recoleta, Buenos Aires, Argentina</p> <!--DIRECCION DESDE LA BBD-->
+                                    </div>
+                                </div>
+                                 <div class="horarios">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M17 3.34a10 10 0 1 1-14.995 8.984L2 12l.005-.324A10 10 0 0 1 17 3.34M12 6a1 1 0 0 0-.993.883L11 7v5l.009.131a1 1 0 0 0 .197.477l.087.1l3 3l.094.082a1 1 0 0 0 1.226 0l.094-.083l.083-.094a1 1 0 0 0 0-1.226l-.083-.094L13 11.585V7l-.007-.117A1 1 0 0 0 12 6"/></svg>
+                                    <div class="hora">
+                                        <p>12:00 - 15:30 / 18:30 - 23:00</p> <!--HORARIOS DESDE LA BBD-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </article>
+
+            <article class="restaurante-especifico">
+                <div class="restaurante-imagen">
+                        <img src="../css/recursos/restaurante.jpg">
+                    </div>
+                    <div class="descripcion">
+                        <div class="cont-des-superior">
+                            <div class="nombre-restaurante">
+                                <h4>NOMBRE RESTAURANTE</h4> <!--NOMBRE DEL RESTAURANTE DESDE LA BDD-->
+                            </div>
+                            <div class="cont-tipo-estrellas">
+                                <div class="tipo-cocina">
+                                    <p>TIPO DE COCINA</p> <!--TIPO DE COCINA DEL RESTAURANTE DESDE LA BDD-->
+                                </div>
+                                <div class="cont-estrellas">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M13.51 3.139c-.652-1.185-2.368-1.185-3.021 0a28 28 0 0 0-2.114 4.894a.35.35 0 0 1-.33.223a30 30 0 0 0-4.375.436c-1.337.233-1.926 1.837-.91 2.83q.192.188.388.374a32 32 0 0 0 3.103 2.587a.274.274 0 0 1 .11.31a27.6 27.6 0 0 0-1.172 5.065c-.19 1.424 1.318 2.298 2.495 1.694a29.3 29.3 0 0 0 4.085-2.537a.4.4 0 0 1 .462 0a29 29 0 0 0 4.085 2.537c1.177.604 2.685-.27 2.495-1.694a27.6 27.6 0 0 0-1.171-5.065a.274.274 0 0 1 .11-.31a32 32 0 0 0 3.49-2.96c1.016-.994.427-2.598-.91-2.831a30 30 0 0 0-4.376-.436a.35.35 0 0 1-.329-.223a27.7 27.7 0 0 0-2.114-4.894"/></svg>
+                                    <div class="calificacion">
+                                        <p>4.7</p> <!--CALIFICACION DESDE LA BDD-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont-des-inferior">
+                            <div class="cont-ubicacion-hora">
+                                <div class="ubicacion">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" class="icon"><path class="icon" d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path class="icon" fill="currentColor" d="M12 2a9 9 0 0 1 9 9c0 3.074-1.676 5.59-3.442 7.395a20.4 20.4 0 0 1-2.876 2.416l-.426.29l-.2.133l-.377.24l-.336.205l-.416.242a1.87 1.87 0 0 1-1.854 0l-.416-.242l-.52-.32l-.192-.125l-.41-.273a20.6 20.6 0 0 1-3.093-2.566C4.676 16.589 3 14.074 3 11a9 9 0 0 1 9-9m0 6a3 3 0 1 0 0 6a3 3 0 0 0 0-6"/></g></svg>
+                                    <div class="direccion">
+                                        <p>Calle 9 de Julio 3700, Recoleta, Buenos Aires, Argentina</p> <!--DIRECCION DESDE LA BBD-->
+                                    </div>
+                                </div>
+                                 <div class="horarios">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M17 3.34a10 10 0 1 1-14.995 8.984L2 12l.005-.324A10 10 0 0 1 17 3.34M12 6a1 1 0 0 0-.993.883L11 7v5l.009.131a1 1 0 0 0 .197.477l.087.1l3 3l.094.082a1 1 0 0 0 1.226 0l.094-.083l.083-.094a1 1 0 0 0 0-1.226l-.083-.094L13 11.585V7l-.007-.117A1 1 0 0 0 12 6"/></svg>
+                                    <div class="hora">
+                                        <p>12:00 - 15:30 / 18:30 - 23:00</p> <!--HORARIOS DESDE LA BBD-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </article>
+
+            <article class="restaurante-especifico">
+                <div class="restaurante-imagen">
+                        <img src="../css/recursos/restaurante.jpg">
+                    </div>
+                    <div class="descripcion">
+                        <div class="cont-des-superior">
+                            <div class="nombre-restaurante">
+                                <h4>NOMBRE RESTAURANTE</h4> <!--NOMBRE DEL RESTAURANTE DESDE LA BDD-->
+                            </div>
+                            <div class="cont-tipo-estrellas">
+                                <div class="tipo-cocina">
+                                    <p>TIPO DE COCINA</p> <!--TIPO DE COCINA DEL RESTAURANTE DESDE LA BDD-->
+                                </div>
+                                <div class="cont-estrellas">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M13.51 3.139c-.652-1.185-2.368-1.185-3.021 0a28 28 0 0 0-2.114 4.894a.35.35 0 0 1-.33.223a30 30 0 0 0-4.375.436c-1.337.233-1.926 1.837-.91 2.83q.192.188.388.374a32 32 0 0 0 3.103 2.587a.274.274 0 0 1 .11.31a27.6 27.6 0 0 0-1.172 5.065c-.19 1.424 1.318 2.298 2.495 1.694a29.3 29.3 0 0 0 4.085-2.537a.4.4 0 0 1 .462 0a29 29 0 0 0 4.085 2.537c1.177.604 2.685-.27 2.495-1.694a27.6 27.6 0 0 0-1.171-5.065a.274.274 0 0 1 .11-.31a32 32 0 0 0 3.49-2.96c1.016-.994.427-2.598-.91-2.831a30 30 0 0 0-4.376-.436a.35.35 0 0 1-.329-.223a27.7 27.7 0 0 0-2.114-4.894"/></svg>
+                                    <div class="calificacion">
+                                        <p>4.7</p> <!--CALIFICACION DESDE LA BDD-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cont-des-inferior">
+                            <div class="cont-ubicacion-hora">
+                                <div class="ubicacion">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" class="icon"><path class="icon" d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path class="icon" fill="currentColor" d="M12 2a9 9 0 0 1 9 9c0 3.074-1.676 5.59-3.442 7.395a20.4 20.4 0 0 1-2.876 2.416l-.426.29l-.2.133l-.377.24l-.336.205l-.416.242a1.87 1.87 0 0 1-1.854 0l-.416-.242l-.52-.32l-.192-.125l-.41-.273a20.6 20.6 0 0 1-3.093-2.566C4.676 16.589 3 14.074 3 11a9 9 0 0 1 9-9m0 6a3 3 0 1 0 0 6a3 3 0 0 0 0-6"/></g></svg>
+                                    <div class="direccion">
+                                        <p>Calle 9 de Julio 3700, Recoleta, Buenos Aires, Argentina</p> <!--DIRECCION DESDE LA BBD-->
+                                    </div>
+                                </div>
+                                 <div class="horarios">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M17 3.34a10 10 0 1 1-14.995 8.984L2 12l.005-.324A10 10 0 0 1 17 3.34M12 6a1 1 0 0 0-.993.883L11 7v5l.009.131a1 1 0 0 0 .197.477l.087.1l3 3l.094.082a1 1 0 0 0 1.226 0l.094-.083l.083-.094a1 1 0 0 0 0-1.226l-.083-.094L13 11.585V7l-.007-.117A1 1 0 0 0 12 6"/></svg>
+                                    <div class="hora">
+                                        <p>12:00 - 15:30 / 18:30 - 23:00</p> <!--HORARIOS DESDE LA BBD-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

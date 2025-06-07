@@ -165,7 +165,7 @@ main{
     margin-bottom: 3rem;
 }
 
-/* .btn-agregar-carrito{
+ .btn-agregar-carrito{
     all: unset;
     display: flex;
     align-items: center;
@@ -180,9 +180,9 @@ main{
     user-select: none;
     cursor: pointer;
     transition: transform 0.1s ease, background-color 0.2s ease;
-} */
+} 
 
-/* .btn-agregar-carrito .icon{
+.btn-agregar-carrito .icon{
     color: var(--secundario-50);
 }
 
@@ -195,7 +195,7 @@ main{
 
 .btn-agregar-carrito:active .icon {
   color: var(--primario-500);
-} */
+}
 
 .panel-btns{
     width: auto;
@@ -203,6 +203,7 @@ main{
     align-items: center;
     flex-direction: row;
     gap: 1px;
+    margin-bottom: 1rem;
 }
 
 .quitar,

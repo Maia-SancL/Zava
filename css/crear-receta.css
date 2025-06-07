@@ -12,8 +12,9 @@ body {
   padding: 0;
 }
 
-main{
-    height: auto;
-    background-color:var(--secundario-50);
-    padding: 0 1.25rem;
+main {
+  height: auto;
+  background-color: var(--secundario-50);
+  margin-left: 16rem;
+  padding-right: 1rem;
 }

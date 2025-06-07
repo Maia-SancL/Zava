@@ -94,7 +94,7 @@ main{
 .barra-texto {
   color: var(--primario-500);
   font-family: Montserrat;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   transition: 0.6s;
 }

@@ -1,0 +1,180 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+  color: var(--negro-700);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+main{
+    height: auto;
+    background-color:var(--fondo-50);
+    margin-left: 16rem;
+    padding-right: 1rem;
+    overflow: hidden;
+}
+
+.icon{
+    color: var(--primario-500);
+}
+
+/*SECCION SUBTITULO Y BOTON AGREGAR*/
+.section-titulo-btn{
+    background-color: orange;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin:2rem 0;
+}
+
+.section-titulo-btn .subtitulo{
+    font-family: Quicksand;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color:var(--primario-500);
+}
+
+.section-titulo-btn .btn-agregar-producto{
+    all: unset;
+    display: flex;
+    padding: 0.3125rem 0.625rem;
+    align-items: center;
+    gap: 0.3125rem;
+    border-radius: 0.625rem;
+    background: var(--primario-500);
+    color: var(--secundario-50);
+    font-family: Nunito;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-agregar-producto .icon{
+    color:var(--secundario-50);
+}
+
+/*SECCION TABLA*/
+.section-tabla-productos{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap:0.6rem;
+}
+
+.producto{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.producto .nombre{
+    cursor: pointer;
+}
+
+.producto button{
+    all: unset;
+}
+
+.producto button .icon{
+    color: var(--negro-700);
+    cursor: pointer;
+}
+
+.producto .informacion-principal{
+    border-radius: 1.25rem;
+    background-color: var(--secundario-50);
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    gap: 1rem;
+    font-family: Nunito;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.informacion-principal .btns{
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:1rem;
+}
+
+.informacion-principal .informacion{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detalles-producto.oculto {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.detalles-producto.activo {
+    display: flex;
+    opacity: 1;
+}
+
+
+.detalles-producto{
+    background-color: var(--secundario-50);
+    border-top: 1px solid var(--primario-500);
+    display: flex;
+    padding: 0.625rem 1.25rem;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Nunito;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 0 0 1.25rem 1.25rem;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.detalles-producto .cont-descripcion{
+    background-color: yellow;
+    max-width: 30%;
+}
+
+.cont-descripcion h5{
+    font-family: Nunito;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.cont-descripcion p{
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+.cont-oferta{
+    max-width: 25%;
+    background-color: purple;
+    display: flex;
+    flex-direction: column;
+}
+
+.detalles-producto .cont-img{
+    width: 10rem;
+    height: 10rem;
+    overflow:hidden;
+    border-radius: 1.25rem;
+}
+
+.cont-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
