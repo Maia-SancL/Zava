@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label class="lbl-iniciar-sesion" for="contrasenia">Contraseña</label>
                 <input class="input-iniciar-sesion contrasenia" type="password" id="contrasenia" name="contrasenia" required>
             </div>
-            <a href="/Zava-php/php/general/regsitrarse.php">¿No tenes cuenta?</a>
+            <a href="/Zava-php/php/general/register.php">¿No tenes cuenta?</a>
             <button type="submit" class="btn-iniciar-sesion">Iniciar sesión</button>
         </form>
     </div>
