@@ -1,4 +1,66 @@
+<?php
+if (isset($_SESSION['tipo_usuario'])):  // Verificamos si existe una sesión iniciada con un tipo de usuario definido 
+    if ($_SESSION['tipo_usuario'] === 'comercio'): //Dependiendo del tipo de usuario, mostramos un menú lateral personalizado
+            include_once('conexion.php');
+            // Verificar si el usuario ha iniciado sesión
+        if (isset($_SESSION['id'])) {
+            $id_usuario = $_SESSION['id'];
+
+            // Consulta para obtener los datos del usuario
+            $query = "SELECT nombre, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
+            $resultado = mysqli_query($conexion, $query);
+
+            if ($resultado && mysqli_num_rows($resultado) > 0) {
+            $usuario = mysqli_fetch_assoc($resultado);
+            $nombre = htmlspecialchars($usuario['nombre']);
+            $nickname = htmlspecialchars($usuario['nickname']);
+            $foto = $usuario['foto'] ? htmlspecialchars($usuario['foto']) : 'perfil.png';
+            } else {
+                $nombre = 'Usuario';
+                $nickname = 'Usuario';
+                $foto = 'perfil.png';
+            }
+        } else {
+    $nombre = 'Usuario';
+    $nickname = 'Usuario';
+    $foto = 'perfil.png';
+}
+?>
+<!-- Menú para comercio/vendedor (es lo mismo) -->
 <link rel="stylesheet" href="/Zava-php/css/menuLateral.css">
+     <aside class="barraLateral">
+        <ul class="barra-lista">
+            <li class="barra-elemento barra-elemento-logo">
+                <img src="../css/recursos/4.0.png" class="barra-lista-icono">
+                <h2 class="barra-titulo">Zava</h2>
+            </li>
+            <li class="barra-elemento">
+                <a href="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path  class="barra-icono "fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V6.525q0-.35.113-.675t.337-.6L4.7 3.725q.275-.35.687-.538T6.25 3h11.5q.45 0 .863.188t.687.537l1.25 1.525q.225.275.338.6t.112.675V19q0 .825-.587 1.413T19 21zm.4-15h13.2l-.85-1H6.25zM16 8H8v6.375q0 .575.475.863t.975.037L12 14l2.55 1.275q.5.25.975-.038t.475-.862z"/></svg>
+                <p class="barra-texto">Mis productos</p>
+                </a>
+            </li>
+            <li class="barra-elemento">
+                <a href="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path  class="barra-icono " fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V6.525q0-.35.113-.675t.337-.6L4.7 3.725q.275-.35.687-.538T6.25 3h11.5q.45 0 .863.188t.687.537l1.25 1.525q.225.275.338.6t.112.675V10.2q0 .45-.363.725t-.812.175q-.65-.125-1.338-.075t-1.312.25q-.425.125-.8-.112T16 10.5V8H8v6.375q0 .575.475.863t.975.037L12 14l.775.375q.3.15.413.45t.012.625q-.125.35-.162.738t-.038.787q0 .725.175 1.45T13.7 19.8q.225.425.025.813T13.1 21zm13-3h-2q-.425 0-.712-.288T15 17t.288-.712T16 16h2v-2q0-.425.288-.712T19 13t.713.288T20 14v2h2q.425 0 .713.288T23 17t-.288.713T22 18h-2v2q0 .425-.288.713T19 21t-.712-.288T18 20zM5.4 6h13.2l-.85-1H6.25z"/></svg>
+                <p class="barra-texto">Agregar producto</p>
+                </a>
+            </li>
+            <li class="barra-elemento">
+                <a href="">
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path  class="barra-icono " fill="currentColor" fill-rule="evenodd" d="M8 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1h2a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm6 1h-4v2H9a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2h-1zm-6 8a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1m1 3a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2z" clip-rule="evenodd"/></svg>
+                <p class="barra-texto">Pedidos recibidos</p>
+                </a>
+            </li>
+        </ul>
+    </aside>
+  <!-- Menú para administrador -->  
+<?php elseif ($_SESSION['tipo_usuario'] === 'administrador'): ?>
+    <aside>
+    <aside>
+    <?php endif;
+else: ?>
+    <link rel="stylesheet" href="/Zava-php/css/menuLateral.css">
 <aside class="barraLateral">
         <ul class="barra-lista">
             <li class="barra-elemento barra-elemento-logo">
@@ -77,3 +139,5 @@
                 
         </ul>
     </aside>
+
+<?php endif; ?>    

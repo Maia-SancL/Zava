@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+  color: var(--negros-700, #1F1F1F);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--secundario-50);
+  background-image: url('../css/recursos/fondo-repetitivo.png'); /* Imagen PNG encima */
+  background-repeat: no-repeat;
+  background-size: cover; 
+  background-position: center;
+}
+
+main {
+  height: 100vh;
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+.cont-img-titulo {
+  width: 50%;
+  height: auto;
+  overflow: hidden;
+}
+
+.cont-img-titulo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.section-opciones-user {
+  width: 100%;
+  height: auto;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-opciones-user .tipo{
+    display: flex;
+    justify-content: center;
+}
+
+
+.section-opciones-user .btn-tipo {
+  all: unset;
+  position: relative;
+  width: 60%;
+  background-color: var(--primario-500);
+  border-radius: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.625rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.4s ease, color 0.4s ease;
+  z-index: 1;
+}
+
+.section-opciones-user .svg-icon {
+  width: 80%;
+  aspect-ratio: 1/1;
+  z-index: 200;
+}
+
+.svg-icon .icon {
+  color: var(--secundario-50);
+  transition: transform  0.4s ease, color 0.4s ease; 
+}
+
+.section-opciones-user .lbl-tipo {
+  font-family: Nunito;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--secundario-50);
+  transition: transform  0.4s ease; 
+  z-index: 250;
+}
+
+.section-opciones-user .btn-tipo {
+  position: relative;
+}
+
+.section-opciones-user .btn-tipo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--primario-500);
+  border-radius: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  background-color: var(--secundario-50);
+  z-index: 0;
+}
+
+.section-opciones-user .btn-tipo:hover {
+  transform: translateY(0.5rem);
+}
+
+.section-opciones-user .btn-tipo:hover::before {
+  opacity: 1;
+}
+
+.section-opciones-user .btn-tipo:hover .icon,
+.section-opciones-user .btn-tipo:hover .lbl-tipo {
+  transition: transform  0.4s ease; 
+  color: var(--primario-500);
+}

@@ -4,43 +4,54 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
 $mensaje = '';
 
-if (
-    isset($_POST['nombre']) &&
-    isset($_POST['apellido']) &&
-    isset($_POST['nombreDeUsuario']) &&
-    isset($_POST['correo']) &&
-    isset($_POST['contrasenia']) &&
-    isset($_POST['telefono'])
-) {
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $nombreDeUsuario = $_POST['nombreDeUsuario'];
-    $correo = $_POST['correo'];
-    $contrasenia = $_POST['contrasenia'];
-    $telefono = $_POST['telefono'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rol'])) {
+    $rol = $_POST['rol'];
 
-    // Encriptar la contraseña
-    $contrasenia_MD5 = md5($contrasenia);
-
-    // Verificar si el correo ya está registrado
-    $consulta = "SELECT correo FROM usuarios WHERE correo='$correo'";
-    $consulta1 = mysqli_query($conexion, $consulta);
-
-    if (mysqli_num_rows($consulta1) > 0) {
-        $mensaje = "El correo ya está registrado. <a href='register.php'>Vuelve</a> y usa otro.";
-    } else {
-        $sql = "INSERT INTO usuarios (nombre, apellido, nickname, correo, contrasenia, telefono, rol) VALUES ('$nombre', '$apellido', '$nombreDeUsuario', '$correo', '$contrasenia_MD5', '$telefono', '$rol')";
-        $result = mysqli_query($conexion, $sql);
-        if ($result) {
-            $mensaje = "Registro exitoso. Redirigiendo al login...";
-            header("Refresh:2; url=login.php");
-            exit;
-        } else {
-            $mensaje = "Error al registrar usuario.";
-        }
-        echo $mensaje;
+    if (!in_array($rol, ['1', '2'])) {
+        die("Rol inválido.");
     }
+
+    // Guardamos el rol en sesión para usarlo más adelante
+    $_SESSION['rol'] = $rol;
 }
+
+    if(
+        isset($_POST['nombre']) &&
+        isset($_POST['apellido']) &&
+        isset($_POST['nombreDeUsuario']) &&
+        isset($_POST['correo']) &&
+        isset($_POST['contrasenia']) &&
+        isset($_POST['telefono'])
+    ) {
+        $nombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $nombreDeUsuario = $_POST['nombreDeUsuario'];
+        $correo = $_POST['correo'];
+        $contrasenia = $_POST['contrasenia'];
+        $telefono = $_POST['telefono'];
+
+        // Encriptar la contraseña
+        $contrasenia_MD5 = md5($contrasenia);
+
+        // Verificar si el correo ya está registrado
+        $consulta = "SELECT correo FROM usuarios WHERE correo='$correo'";
+        $consulta1 = mysqli_query($conexion, $consulta);
+
+        if (mysqli_num_rows($consulta1) > 0) {
+            $mensaje = "El correo ya está registrado. <a href='register.php'>Vuelve</a> y usa otro.";
+        } else {
+            $sql = "INSERT INTO usuarios (nombre, apellido, nickname, correo, contrasenia, telefono, rol) VALUES ('$nombre', '$apellido', '$nombreDeUsuario', '$correo', '$contrasenia_MD5', '$telefono', '$rol')";
+            $result = mysqli_query($conexion, $sql);
+            if ($result) {
+                $mensaje = "Registro exitoso. Redirigiendo al login...";
+                header("Refresh:2; url=login.php");
+                exit;
+            } else {
+                $mensaje = "Error al registrar usuario.";
+            }
+            echo $mensaje;
+        }
+    }
 ?>
 <link rel="stylesheet" href="/Zava-php/css/registrarse.css">
 <main>
@@ -146,7 +157,7 @@ if (
                     <input class="input-registro" id="input_confirm_contrasenia" value="" type="password" placeholder="" name="validar-contrasenia" required maxlength="30">
                 </div> 
 
-                <button type="submit" class="btn-registrarse">Registrarse</button>
+                <button type="submit" class="btn-registrarse" name="registrarse" >Registrarse</button>
             </form>
         </div>
 </main>

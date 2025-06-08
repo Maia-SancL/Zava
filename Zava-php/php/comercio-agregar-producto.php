@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/comercio-agregar-producto.css">
-    <link rel="stylesheet" href="../css/colores.css">
-    <link rel="stylesheet" href="../css/fuentes.css">
-    <title>Document</title>
-</head>
-
-<body>
+<?php 
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/conexion.php';
+?>
+<link rel="stylesheet" href="/Zava-php/css/comercio-agregar-producto.css">
     <main>
         <section class="section-titulo-btns">
             <h4>Agregar producto</h4>
@@ -107,7 +99,7 @@
     </main>
 </body>
 <script>
-    //PARA CUANDO SE CARGUE UNA IMAGEN
+    //PARA CUANDO SE AÑADE UNA IMAGEN
     const inputFile = document.getElementById('imagen-producto');
     const contenidoUpload = inputFile.parentElement.querySelector('.contenido-upload');
     const svgIcon = contenidoUpload.querySelector('svg');
@@ -156,5 +148,3 @@
         toggleDescuento();
     });
 </script>
-
-</html>
