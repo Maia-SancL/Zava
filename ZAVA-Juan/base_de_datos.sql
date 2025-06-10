@@ -143,8 +143,8 @@ CREATE TABLE Pedidos(
     nombre_retiro VARCHAR(100) NOT NULL, -- Nombre del usuario que retira el pedido
 );
 
-CREATE TABLE Detalle_pedido{
+CREATE TABLE Detalle_pedido(
     id_pedido INT(15) NOT NULL, FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido),
     id_producto INT(15) NOT NULL, FOREIGN KEY (id_producto) REFERENCES Productos(id_producto),
     cantidad_productos INT NOT NULL -- Cantidad total de productos en el pedido
-}
+);
