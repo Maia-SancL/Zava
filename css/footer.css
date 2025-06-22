@@ -1,0 +1,119 @@
+footer {
+    background-color: var(--primario-500);
+    border-radius: 1.25rem 1.25rem 0rem 0rem;
+    padding: 1.875rem 0.625rem 1rem;
+    height: auto;
+    max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-sizing: border-box;
+  }
+
+.cont-dividido{
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between; 
+}
+
+.cont-logo{
+  display: flex;
+  width: 33.33%;
+  height: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.cont-logo .logo-titulo{
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.cont-logo .cont-img{
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+}
+
+.cont-logo .cont-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cont-logo h2{
+  font-family: Quicksand;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--secundario-50);
+}
+
+.cont-logo p{
+  font-family: Nunito;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--secundario-50);
+}
+
+.cont-media, .cont-nav{
+    display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3125rem;
+}
+
+.cont-media h3,
+.cont-nav h3{
+  color: var(--secundario-50);
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.cont-media .info-media{
+  display: flex;
+  gap: 1rem;
+}
+
+.info-media .red-social{
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+.red-social a{
+  color: var(--secundario-50);
+  font-family: Nunito;
+  font-size: 0.9rem;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.red-social .icon{
+  color: var(--secundario-50);
+}
+
+.cont-nav .info-nav{
+  display: flex;
+  gap: .9rem;
+}
+
+.cont-nav .info-nav a{
+  text-decoration: none;
+  color: var(--secundario-50);
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 300;
+  display: flex;
+  gap: .6rem;
+  cursor: pointer;
+}
+
+.cont-copy p{
+  color: var(--secundario-50);
+  font-family: Montserrat;
+  font-size: 0.9rem;
+  font-weight: 200;
+}

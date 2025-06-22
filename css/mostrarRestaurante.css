@@ -1,0 +1,88 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+  color: var(--negro-700);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+main{
+    height: auto;
+    background-color:var(--fondo-50);
+    margin-left: 16rem;
+    padding-right: 1rem;
+    overflow: hidden;
+}
+
+
+
+.icon{
+    color: var(--primario-500);
+}
+
+/* IMAGENES */
+
+.cont-imagenes-restaurante{
+    display: flex;
+    width: 100%;
+    height: 29rem;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.cont-img-izquierda{
+    width: 60%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 1.25rem;
+}
+
+.cont-img-izquierda img,
+.cont-img-derecha .cont-img img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.cont-img-derecha{
+    width: 45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+
+.cont-img-derecha .cont-img{
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    border-radius: 1.25rem
+}
+
+/* TITULO */
+
+.cont-titulo-restaurante{
+    width: 100%;
+    height: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;         /* Futuro soporte estandar */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    margin-bottom: 1rem
+}
+
+.cont-imagenes-restaurante h1{
+    font-family: Quicksand;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
