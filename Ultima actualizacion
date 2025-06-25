@@ -1,0 +1,36 @@
+09-06-25
+Actualizaciones:
+-Base de datos actualizada con nuevas tipo_comida
+-Base de datos actualizada con modificacion de tipo_dieta
+-Bug de las imagenes en recetas solucionado
+-Agregado estilo de comercio-agregar-productos.php 
+-Agregado estilo de comercio-productos.php
+-Agregado estilo de diferenciacionRegistro.php
+-Agregado el navegador del comercio
+-Agregado el menu lateral del comercio
+-Agreado botones de categorias de recetas desde le index. 
+
+Terminar en php:
+-diferenciacionRegistro.php completar el php necesario y probar que ande junto con el register y iniciar sesion.
+-index.php: Mostrar 6 restaurantes aleatorios.
+-mostrarProducto.php: Revisar los datos que esta mostrando. 
+ Falta validar las ofertas. 
+ El stock disponible no se muestra
+-crear.php: 
+ -Agregar el js para los ingredientes, pasos y imagenes.
+-REVISAR EL CODIGO, HAY 2 FORMULARIOS. 
+
+Agregar php nuevo:
+-comercio-productos.php: Agregar el php necesario para borrar y modificar productos
+-comercio-agregar-producto.php: Completar el php necesario para poder agregar productos necesarios.
+
+
+Base de datos:
+-Agregar minimo 2 usuarios (uno comercio y otro normal), con los datos bien completos.
+-Agregar minimo 6 receta, con los datos bien completos (a por ser 1 de categorias diferentes).
+-Agregar minimo 5 productos, con los datos bien completos.
+-Agregar minimo 6 restaurantes, con los datos bien completos.
+-Agregar los rols de usuarios.
+(Completen bien los datos asi ya quedan de ejemlpos y facilitar el css!).
+
+Eliminen los archivos que no sean necesarios o esten repetidos!!!
