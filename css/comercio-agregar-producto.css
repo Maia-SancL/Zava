@@ -113,7 +113,8 @@ main {
   overflow-y: auto;           /* Scroll vertical solo si se necesita */
   line-height: 1.2;           /* Mejor legibilidad */
   box-sizing: border-box;
-  overflow: hidden
+  overflow: hidden;
+  background-color: purple;
 }
 
 /* Para Chrome, Safari, Edge y Opera */
