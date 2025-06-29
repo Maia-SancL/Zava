@@ -1,4 +1,5 @@
 <?php
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/conexion.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
 
 // include_once 'php/componentes/navegador.php'; //Menú superior
@@ -29,61 +30,107 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
             </div>
             <div class="cont-btns-recetas">
                 <div class="btn-receta">
-                    <div class="tarjeta-receta">
-                        <div class="overlay"></div> <!-- Capa oscura -->
-                        <img src="/Zava-php/css/recursos/Desayuno.jpg">
-                    </div> 
-                    <p class="lbl-tipo-receta">Desayuno</p>
+                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                        <input type="hidden" name="tipo_comida" value="desayuno">
+                        <button type=submit style="background: none; border: none; padding: 0; cursor: pointer; height:100%">
+                        <div class="tarjeta-receta">
+                                <div class="overlay"></div> <!-- Capa oscura -->
+                                <img src="/Zava-php/css/recursos/Desayuno.jpg">
+                            </div>
+                        </button>
+                    </form>
+                    <p class="lbl-tipo-receta">Desayuno</p> 
                 </div>
+
                 <div class="btn-receta">
-                     <div class="tarjeta-receta">
-                        <div class="overlay"></div> <!-- Capa oscura -->
-                        <img src="/Zava-php/css/recursos/Almuerzo.jpg">
-                    </div> 
+                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                        <input type="hidden" name="tipo_comida" value="almuerzo">
+                        <button type=submit style="background: none; border: none; padding: 0; cursor: pointer; height:100%">
+                            <div class="tarjeta-receta">
+                                <div class="overlay"></div> <!--Capa oscura -->
+                                <img src="/Zava-php/css/recursos/Almuerzo.jpg">
+                            </div> 
+                        </button>
+                    </form>
                     <p class="lbl-tipo-receta">Almuerzo</p>
                 </div>
+                
                 <div class="btn-receta">
-                     <div class="tarjeta-receta">
-                        <div class="overlay"></div> <!-- Capa oscura -->
-                        <img src="/Zava-php/css/recursos/Merienda.jpg">
-                    </div> 
+                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                        <input type="hidden" name="tipo_comida" value="merienda">
+                        <button type=submit style="background: none; border: none; padding: 0; cursor: pointer; height:100%">
+                            <div class="tarjeta-receta">
+                                <div class="overlay"></div> <!-- Capa oscura -->
+                                <img src="/Zava-php/css/recursos/Merienda.jpg">
+                            </div> 
+                        </button>
+                    </form>
                     <p class="lbl-tipo-receta">Merienda</p>
                 </div>
+
                 <div class="btn-receta">
-                     <div class="tarjeta-receta">
-                        <div class="overlay"></div> <!-- Capa oscura -->
-                        <img src="/Zava-php/css/recursos/Cena.jpg">
-                    </div> 
+                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                        <input type="hidden" name="tipo_comida" value="cena">
+                         <button type=submit style="background: none; border: none; padding: 0; cursor: pointer;  height:100%">
+                            <div class="tarjeta-receta">
+                                <div class="overlay"></div> <!-- Capa oscura -->
+                                <img src="/Zava-php/css/recursos/Cena.jpg">
+                            </div> 
+                        </button>
+                     </form>
                     <p class="lbl-tipo-receta">Cena</p>
                 </div>
+
                 <div class="btn-receta">
-                     <div class="tarjeta-receta">
-                        <div class="overlay"></div> <!-- Capa oscura -->
-                        <img src="/Zava-php/css/recursos/Postre.jpg">
-                    </div> 
+                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                        <input type="hidden" name="tipo_comida" value="postre">
+                        <button type=submit style="background: none; border: none; padding: 0; cursor: pointer;  height:100%">
+                            <div class="tarjeta-receta">
+                                <div class="overlay"></div> <!-- Capa oscura -->
+                                <img src="/Zava-php/css/recursos/Postre.jpg">
+                            </div>
+                        </button>
+                    </form>
                     <p class="lbl-tipo-receta">Postre</p>
-                </div>
+                 </div>
+                    
                 <div class="btn-receta">
-                     <div class="tarjeta-receta">
-                        <div class="overlay"></div> <!-- Capa oscura -->
-                        <img src="/Zava-php/css/recursos/Panaderia.jpg">
-                    </div> 
+                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                        <input type="hidden" name="tipo_comida" value="panaderia">
+                         <button type=submit style="background: none; border: none; padding: 0; cursor: pointer;  height:100%">
+                            <div class="tarjeta-receta">
+                                <div class="overlay"></div> <!-- Capa oscura -->
+                                <img src="/Zava-php/css/recursos/Panaderia.jpg">
+                            </div> 
+                            </button>
+                        </form>
                     <p class="lbl-tipo-receta">Panaderia</p>
                 </div>
+
                 <div class="btn-receta">
-                     <div class="tarjeta-receta">
-                        <div class="overlay"></div> <!-- Capa oscura -->
-                        <img src="/Zava-php/css/recursos/Snack.jpg">
-                    </div> 
+                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                        <input type="hidden" name="tipo_comida" value="snack">
+                        <button type=submit style="background: none; border: none; padding: 0; cursor: pointer;  height:100%">
+                            <div class="tarjeta-receta">
+                                <div class="overlay"></div> <!-- Capa oscura -->
+                                <img src="/Zava-php/css/recursos/Snack.jpg">
+                            </div> 
+                        </button>
+                    </form>
                     <p class="lbl-tipo-receta">Snack</p>
                 </div>
+
                 <div class="btn-receta">
-                     <div class="tarjeta-receta">
-                        <div class="overlay"></div> <!-- Capa oscura -->
-                        <img src="/Zava-php/css/recursos/Bebidas.jpg">
-                    </div> 
-                    <p class="lbl-tipo-receta">Bebidas</p>
-                </div>
+                     <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                        <input type="hidden" name="tipo_comida" value="bebida">
+                        <button type=submit style="background: none; border: none; padding: 0; cursor: pointer; height:100%">
+                        <div class="tarjeta-receta">
+                            <div class="overlay"></div> <!-- Capa oscura -->
+                            <img src="/Zava-php/css/recursos/Bebidas.jpg"> 
+                        </div>
+                    </button>
+                </form>
+                <p class="lbl-tipo-receta">Bebidas</p>
             </div>
         </section>
 
@@ -98,6 +145,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                     </div>
                     <div class="cont-productos">
                         <div class="cont-general-productos superior">
+
                             <div class="producto-item">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 207" fill="none" class="semicirculo-fondo">
                                         <path d="M452 226C452 196.321 446.154 166.933 434.797 139.514C423.439 112.094 406.792 87.1799 385.806 66.1939C364.82 45.2078 339.906 28.5608 312.486 17.2032C285.067 5.84566 255.679 -1.2973e-06 226 0C196.321 1.2973e-06 166.933 5.84566 139.514 17.2032C112.094 28.5608 87.1799 45.2078 66.1939 66.1939C45.2078 87.1799 28.5608 112.094 17.2032 139.514C5.84566 166.933 -2.5946e-06 196.321 0 226H226H452Z" fill="#ECDCC1"/>
@@ -107,6 +155,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                 </div>
                                 <h4 class="producto-seccion">Harinas y premezclas</h4>
                             </div>
+                            
                             <div class="cont-productos-chicos">
                                 <div class="producto-item chico">
                                      <svg class="semicirculo-fondo"" viewBox="0 0 270 110" fill="none">
@@ -258,4 +307,3 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
 
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php';
 ?>
-</body>

@@ -1,6 +1,6 @@
 <?php
-include_once 'php/componentes/header.php';
-include_once('conexion.php');
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
 
 // Obtiene el ID del producto desde el formulario enviado por POST
 $id_producto = $_POST['id_producto'];

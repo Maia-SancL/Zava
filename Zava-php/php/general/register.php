@@ -4,17 +4,18 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
 $mensaje = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rol'])) {
-    $rol = $_POST['rol'];
+// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rol'])) {
+//     $rol = $_POST['rol'];
 
-    if (!in_array($rol, ['1', '2'])) {
-        die("Rol inválido.");
-    }
+//     if (!in_array($rol, ['1', '2'])) {
+//         die("Rol inválido.");
+//     }
 
-    // Guardamos el rol en sesión para usarlo más adelante
-    $_SESSION['rol'] = $rol;
-}
+//     // Guardamos el rol en sesión para usarlo más adelante
+//     $_SESSION['rol'] = $rol;
+// }
 
+$rol="1";
     if(
         isset($_POST['nombre']) &&
         isset($_POST['apellido']) &&
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rol'])) {
             $result = mysqli_query($conexion, $sql);
             if ($result) {
                 $mensaje = "Registro exitoso. Redirigiendo al login...";
-                header("Refresh:2; url=login.php");
+                header("Refresh:2; url=inicioSesion.php");
                 exit;
             } else {
                 $mensaje = "Error al registrar usuario.";

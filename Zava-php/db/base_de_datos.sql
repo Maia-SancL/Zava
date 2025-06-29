@@ -74,8 +74,8 @@ CREATE TABLE Recetas (
     pasos TEXT NOT NULL,
     imagen VARCHAR(255) DEFAULT 'receta.png',
     tiempo_preparacion TIME NOT NULL,
-    tipo_dieta ENUM('vegano', 'vegetariano', 'sin_lactosa') NOT NULL,
-    tipo_comida ENUM('desayuno', 'almuerzo', 'cena', 'snack', 'merienda', 'eventos especiales') NOT NULL,
+    tipo_dieta ENUM('vegano', 'vegetariano') NOT NULL,
+    tipo_comida ENUM('desayuno', 'almuerzo', 'merienda', 'cena', 'postre', 'panaderia' , 'snack' , 'bebida') NOT NULL,
     porciones INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
 );

@@ -1,8 +1,8 @@
 <?php
 
-include_once 'php/componentes/header.php';
-include_once('conexion.php');
-include_once 'php/componentes/mostrarComentarios.php';
+// include_once 'php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
 
 // Obtener el ID de la receta por POST
 $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
@@ -10,7 +10,7 @@ if ($id <= 0) {
     echo "<p>Receta no encontrada.</p>";
     exit;
 }
-
+$id="1";
 // Obtener datos de la receta
 $query = "SELECT * FROM recetas WHERE id_receta = $id";
 $resultado = mysqli_query($conexion, $query);

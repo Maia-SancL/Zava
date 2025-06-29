@@ -34,10 +34,10 @@
             <div class="cont-nav">
                 <h3>Navegacion Rapida</h3>
                 <div class="info-nav">
-                    <a href="#inicio">Inicio</a>
-                    <a href=#recetas>Recetas</a>
-                    <a href=#productos>Productos</a>
-                    <a href=#restaurantes>Restaurantes</a>
+                    <a href="/Zava-php/#inicio">Inicio</a>
+                    <a href="/Zava-php/php/cliente/recetario.php">Recetas</a>
+                    <a href="/Zava-php/#productos">Productos</a>
+                    <a href="Zava-php/#restaurantes">Restaurantes</a>
                     <a href="Zava-php/php/...">Perfil</a>
                 </div>
             </div>

@@ -1,6 +1,7 @@
+<link rel="stylesheet" href="/Zava-php/css/menuLateral.css">
 <?php
 if (isset($_SESSION['tipo_usuario'])):  // Verificamos si existe una sesión iniciada con un tipo de usuario definido 
-    if ($_SESSION['tipo_usuario'] === 'comercio'): //Dependiendo del tipo de usuario, mostramos un menú lateral personalizado
+    if ($_SESSION['tipo_usuario'] === 'vendedor'): //Dependiendo del tipo de usuario, mostramos un menú lateral personalizado
             include_once('conexion.php');
             // Verificar si el usuario ha iniciado sesión
         if (isset($_SESSION['id'])) {
@@ -27,11 +28,10 @@ if (isset($_SESSION['tipo_usuario'])):  // Verificamos si existe una sesión ini
 }
 ?>
 <!-- Menú para comercio/vendedor (es lo mismo) -->
-<link rel="stylesheet" href="/Zava-php/css/menuLateral.css">
      <aside class="barraLateral">
         <ul class="barra-lista">
             <li class="barra-elemento barra-elemento-logo">
-                <img src="../css/recursos/4.0.png" class="barra-lista-icono">
+                <img src="/Zava-php/css/recursos/4.0.png" class="barra-lista-icono">
                 <h2 class="barra-titulo">Zava</h2>
             </li>
             <li class="barra-elemento">
@@ -60,21 +60,20 @@ if (isset($_SESSION['tipo_usuario'])):  // Verificamos si existe una sesión ini
     <aside>
     <?php endif;
 else: ?>
-    <link rel="stylesheet" href="/Zava-php/css/menuLateral.css">
 <aside class="barraLateral">
         <ul class="barra-lista">
             <li class="barra-elemento barra-elemento-logo">
-                <img src="./css/recursos/4.0.png" class="barra-lista-icono">
+                <img src="/Zava-php/css/recursos/4.0.png" class="barra-lista-icono">
                 <h2 class="barra-titulo">Zava</h2>
             </li>
             <li class="barra-elemento">
-                <a href="<?= isset($_SESSION['id']) ? 'index.php' : 'index.php' ?>">
+                <a href="<?= isset($_SESSION['id']) ? '/Zava-php/index.php' : '/Zava-php/index.php' ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono "fill="currentColor" d="m12.707 2.293l9 9c.63.63.184 1.707-.707 1.707h-1v6a3 3 0 0 1-3 3h-1v-7a3 3 0 0 0-2.824-2.995L13 12h-2a3 3 0 0 0-3 3v7H7a3 3 0 0 1-3-3v-6H3c-.89 0-1.337-1.077-.707-1.707l9-9a1 1 0 0 1 1.414 0M13 14a1 1 0 0 1 1 1v7h-4v-7a1 1 0 0 1 .883-.993L11 14z"/></svg>
                 <p class="barra-texto">Inicio</p>
                 </a>
             </li>
             <li class="barra-elemento">
-                <a href="<?= isset($_SESSION['id']) ? 'recetario.php' : 'recetario.php' ?>">
+                <a href="<?= isset($_SESSION['id']) ? '/Zava-php/php/cliente/recetario.php' : '/Zava-php/php/cliente/recetario.php' ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono " fill="currentColor" d="M7 5a5 5 0 0 0-2 9.584v2.666h14v-2.666a5.001 5.001 0 0 0-2.737-9.53a4.502 4.502 0 0 0-8.526 0A5 5 0 0 0 7 5m11.998 13.75H5.002c.01 1.397.081 2.162.584 2.664C6.172 22 7.114 22 9 22h6c1.886 0 2.828 0 3.414-.586c.503-.502.574-1.267.584-2.664"/></svg>
                 <p class="barra-texto">Recetas</p>
                 </a>
@@ -86,7 +85,7 @@ else: ?>
                 </a>
             </li>
             <li class="barra-elemento">
-                <a href="<?= isset($_SESSION['id']) ? 'catalogoProducto.php' : 'catalogoProducto.php' ?>">
+                <a href="<?= isset($_SESSION['id']) ? '/Zava-php/php/cliente/productos.php' : '/Zava-php/php/cliente/productos.php' ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M3.778 3.655c-.181.36-.27.806-.448 1.696l-.598 2.99a3.06 3.06 0 1 0 6.043.904l.07-.69a3.167 3.167 0 1 0 6.307-.038l.073.728a3.06 3.06 0 1 0 6.043-.904l-.598-2.99c-.178-.89-.267-1.335-.448-1.696a3 3 0 0 0-1.888-1.548C17.944 2 17.49 2 16.582 2H7.418c-.908 0-1.362 0-1.752.107a3 3 0 0 0-1.888 1.548M18.269 13.5a4.53 4.53 0 0 0 2.231-.581V14c0 3.771 0 5.657-1.172 6.828c-.943.944-2.348 1.127-4.828 1.163V18.5c0-.935 0-1.402-.201-1.75a1.5 1.5 0 0 0-.549-.549C13.402 16 12.935 16 12 16s-1.402 0-1.75.201a1.5 1.5 0 0 0-.549.549c-.201.348-.201.815-.201 1.75v3.491c-2.48-.036-3.885-.22-4.828-1.163C3.5 19.657 3.5 17.771 3.5 14v-1.081a4.53 4.53 0 0 0 2.232.581a4.55 4.55 0 0 0 3.112-1.228A4.64 4.64 0 0 0 12 13.5a4.64 4.64 0 0 0 3.156-1.228a4.55 4.55 0 0 0 3.112 1.228"/></svg>
                 <p class="barra-texto">Productos</p>
                 </a>

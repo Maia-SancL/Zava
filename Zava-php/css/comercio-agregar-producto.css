@@ -116,7 +116,7 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
-.form-agregar-productos .cont-input label{
+.form-agregar-productos .lbl-producto{
   font-family: Nunito;
   font-size: 1rem;
   font-weight: 500;
