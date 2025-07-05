@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/Zava-php/css/menuLateral.css">
 <?php
 if (isset($_SESSION['tipo_usuario'])):  // Verificamos si existe una sesión iniciada con un tipo de usuario definido 
-    if ($_SESSION['tipo_usuario'] === 'vendedor'): //Dependiendo del tipo de usuario, mostramos un menú lateral personalizado
+    if ($_SESSION['tipo_usuario'] === 'cliente'): //Dependiendo del tipo de usuario, mostramos un menú lateral personalizado
             include_once('conexion.php');
             // Verificar si el usuario ha iniciado sesión
         if (isset($_SESSION['id'])) {
@@ -25,7 +25,7 @@ if (isset($_SESSION['tipo_usuario'])):  // Verificamos si existe una sesión ini
     $nombre = 'Usuario';
     $nickname = 'Usuario';
     $foto = 'perfil.png';
-}
+    }
 ?>
 <!-- Menú para comercio/vendedor (es lo mismo) -->
      <aside class="barraLateral">
@@ -57,7 +57,8 @@ if (isset($_SESSION['tipo_usuario'])):  // Verificamos si existe una sesión ini
   <!-- Menú para administrador -->  
 <?php elseif ($_SESSION['tipo_usuario'] === 'administrador'): ?>
     <aside>
-    <aside>
+        <p>ADMIN</p>
+    </aside>
     <?php endif;
 else: ?>
 <aside class="barraLateral">

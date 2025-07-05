@@ -3,21 +3,29 @@
   margin: 0;
   padding: 0;
   font-family: Nunito;
-  color: var(--negro-700);
+  color: var(--negros-700, #1F1F1F);
 }
 
 body {
+
   height: 100vh;
   margin: 0;
   padding: 0;
+  background-color: var(--fondo-50);
 }
 
-main{
-    height: auto;
-    background-color:var(--fondo-50);
-    margin-left: 16rem;
-    padding-right: 1rem;
-    overflow: hidden;
+.layout{
+  min-height: 100vh; /* o el alto del área donde debe vivir el layout */
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+main {
+  width: 100%;
+  height: auto;
+  background-color: var(--fondo-50);
+  padding-right: 1rem;
 }
 
 .icon{
