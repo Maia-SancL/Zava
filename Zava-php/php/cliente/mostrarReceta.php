@@ -1,42 +1,35 @@
 <?php
-// include_once 'php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/funciones/tags.php';
 
-// Obtener el ID de la receta por GET
-$id_receta = isset($_GET['id_receta']) ? intval($_GET['id_receta']) : 0;
-if ($id_receta <= 0) {
-    $mensaje= "Receta no encontrada";
-}
-// Obtener datos de la receta
-$query = "SELECT * FROM recetas WHERE id_receta = $id_receta";
-$resultado = mysqli_query($conexion, $query);
-$receta = mysqli_fetch_assoc($resultado);
+// Inicializar mensaje
+$mensaje = '';
+$receta = null;
+$usuario = null;
 
-$mensaje;
-if (!$receta) {
-    $mensaje= "Receta no encontrada";
-    exit;
-}
+// Validar el parámetro de la URL
+if (isset($_GET['id_receta']) && is_numeric($_GET['id_receta']) && intval($_GET['id_receta']) > 0) {
+    $id_receta = intval($_GET['id_receta']);
 
-// Obtener datos del usuario
-$id_usuario = $receta['id_usuario'];
-$query_usuario = "SELECT nombre, apellido, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
-$resultado_usuario = mysqli_query($conexion, $query_usuario);
-$usuario = mysqli_fetch_assoc($resultado_usuario);
+    // Consultar la receta
+    $query = "SELECT * FROM recetas WHERE id_receta = $id_receta";
+    $resultado = mysqli_query($conexion, $query);
+    $receta = mysqli_fetch_assoc($resultado);
 
-// Datos principales
-$nombre = $receta['nombre'];
-$descripcion = $receta['descripcion'];
-$ingredientes = isset($receta['ingredientes']) ? explode(',', $receta['ingredientes']) : [];
-$pasos = isset($receta['pasos']) ? explode('.', $receta['pasos']) : [];
-$imagenes = isset($receta['imagenes']) ? json_decode($receta['imagenes'], true) : [];
-$tiempo = isset($receta['tiempo']) ? intval($receta['tiempo']) : 0;
-$tipo_dieta = isset($receta['tipo_dieta']) ? $receta['tipo_dieta'] : '';
-$tipo_comida = isset($receta['tipo_comida']) ? $receta['tipo_comida'] : '';
-$porciones = isset($receta['porciones']) ? intval($receta['porciones']) : 1;
-$foto_usuario = $usuario['foto'] ? $usuario['foto'] : 'perfil.png';
+    if (!$receta) {
+        $mensaje = "Receta no encontrada.";
+    } else {
+        // Consultar datos del usuario creador de la receta
+        $id_usuario = $receta['id_usuario'];
+        $query_usuario = "SELECT id_usuario, nombre, apellido, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
+        $resultado_usuario = mysqli_query($conexion, $query_usuario);
+        $usuario = mysqli_fetch_assoc($resultado_usuario);
+    }
+} else {
+    $mensaje = "Receta no encontrada.";
+};
+
 
 function formatoTiempo($min) {
     return $min < 60 ? "$min min" : (floor($min/60) . " hr" . (($min % 60) ? ' ' . ($min % 60) . ' min' : ''));
@@ -72,7 +65,6 @@ if (isset($_POST['agregar_favorito']) && isset($_SESSION['id'])) {
         if (!empty($mensaje)) {
             echo $mensaje;
         }?>
-
         <article class="cont-imagenes-receta">
             <div class="cont-img-izquierda">
                 <img src="../css/recursos/galletitas-receta-2.jpg" alt="Imagen 1">

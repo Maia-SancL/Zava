@@ -42,7 +42,6 @@
   width: 0;
   height: 1px; /* grosor de la línea */
   background-color: var(--primario-500);
-  transition: width 0.3s ease, left 0.3s ease;
 }
 
 .barra-elemento a:hover::after {
