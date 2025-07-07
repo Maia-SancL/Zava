@@ -1,0 +1,134 @@
+.perfil-recetas-lista {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.contenedor-recetas {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tarjeta-receta {
+    display: flex;
+    align-items: flex-start;
+    background: #fff8f3;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px #0001;
+    padding: 1.2rem 1.5rem;
+    gap: 1.2rem;
+    position: relative;
+}
+
+.tarjeta-img {
+    width: 110px;
+    height: 90px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #fff;
+    box-shadow: 0 1px 4px #0001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tarjeta-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tarjeta-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.tarjeta-tags {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+.tag {
+    background: #f3d7d7;
+    color: #621111;
+    border-radius: 8px;
+    padding: 0.15rem 0.7rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.tarjeta-fecha {
+    margin-left: auto;
+    color: #b9b9b9;
+    font-size: 0.85rem;
+}
+
+.tarjeta-titulo {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #621111;
+    margin-bottom: 0.1rem;
+}
+.tarjeta-desc {
+    font-size: 0.97rem;
+    color: #444;
+    margin-bottom: 0.2rem;
+    max-width: 500px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tarjeta-extra {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.2rem;
+}
+.tarjeta-tiempo {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #621111;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.tarjeta-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 1.2rem;
+    align-items: flex-end;
+    justify-content: center;
+}
+.btn-modificar, .btn-eliminar {
+    border: none;
+    border-radius: 8px;
+    padding: 0.4rem 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn-modificar {
+    background: #fff;
+    color: #621111;
+    border: 1.5px solid #621111;
+}
+.btn-modificar:hover {
+    background: #f3d7d7;
+}
+.btn-eliminar {
+    background: #fff;
+    color: #a11;
+    border: 1.5px solid #a11;
+}
+.btn-eliminar:hover {
+    background: #ffe0e0;
+}

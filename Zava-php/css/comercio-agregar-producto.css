@@ -1,0 +1,221 @@
+
+main {
+  height: auto;
+  background-color: var(--fondo-50);
+  margin-left: 16rem;
+  padding-right: 1rem;
+}
+
+.icon {
+  color: var(--primario-500);
+}
+
+/* SECCION TITULO Y BOTONES */
+.section-titulo-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.section-titulo-btns h4 {
+  color: var(--primario-500);
+  font-family: Quicksand;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.section-titulo-btns .btns {
+  display: flex;
+  align-items: center;
+  gap: 0.9375rem;
+}
+
+.btn-publicar,
+.btn-borrar {
+  all: unset;
+  display: flex;
+  width: 7.25rem;
+  gap: .8rem;
+  padding: 0.4375rem 0.625rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid var(--primario-500);
+}
+
+.btn-publicar {
+  background-color: var(--primario-500);
+  color: var(--secundario-50);
+}
+
+.btn-borrar {
+  background: transparent;
+  color: var(--primario-500);
+}
+
+/* SECCION DE LOS INPUTS */
+
+.form-agregar-productos {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 1rem;
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.form-agregar-productos .cont-input {
+  width: 100%;
+  display: flex;
+  gap: .4rem;
+  flex-direction: column;
+}
+
+.form-agregar-productos .cont-input input,
+.form-agregar-productos .cont-input textarea,
+.form-agregar-productos .cont-input select {
+  all: unset;
+  background-color: var(--secundario-50);
+  border-radius: 1rem;
+  padding: .5rem;
+  font-family: "Nunito";
+  font-size: 1rem;
+}
+
+.form-agregar-productos .cont-input textarea{
+  resize: none;                /* Para evitar que el usuario lo redimensione */
+  overflow-wrap: break-word;  /* Para que el texto salte a la siguiente línea */
+  word-wrap: break-word;
+  overflow-x: hidden;         /* Quitar scroll horizontal */
+  overflow-y: auto;           /* Scroll vertical solo si se necesita */
+  line-height: 1.2;           /* Mejor legibilidad */
+  box-sizing: border-box;
+  overflow: hidden
+}
+
+/* Para Chrome, Safari, Edge y Opera */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+/* Para Firefox */
+input[type=number] {
+  appearance:unset;
+  -moz-appearance: textfield;
+}
+
+.form-agregar-productos .lbl-producto{
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 500;
+  user-select: none;
+}
+
+.btn-switch {
+  display: none;
+}
+
+.lbl-switch {
+  display: inline-block;
+  width: 4rem;
+  height: 1.875rem;
+  background-color: var(--secundario-50);
+  position: relative;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  overflow: hidden;
+}
+
+.icono-svg {
+  position: absolute;
+  left: 0.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: left 0.3s ease;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* cuando el checkbox esta activo */
+.btn-switch:checked+.lbl-switch {
+  background-color: var(--primario-500);
+}
+
+.btn-switch:checked+.lbl-switch .icon {
+  color: var(--secundario-50);
+}
+
+.btn-switch:checked+.lbl-switch .icono-svg {
+  left: calc(100% - 1.9rem);
+  /* se mueve a la derecha */
+}
+
+.cont-upload {
+  width: 100%;
+  height: 25rem;
+  display: inline-block;
+  background-color: var(--secundario-50);
+  border-radius: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cont-upload .preview-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:none;
+}
+
+.cont-upload input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.contenido-upload{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contenido-upload span{
+  text-align: center;
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primario-500);
+}
+
+.subir-img-svg{
+  width: 10rem;
+  height: 10rem;
+}
+
+.cont-input.oculto{
+  display: none;
+}
