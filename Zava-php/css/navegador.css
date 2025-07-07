@@ -1,12 +1,13 @@
+
 nav{
   background-color: var(--secundario-200);
   border-radius: 0rem 0rem 1.25rem 1.25rem;
-  width: 100%;
+  min-width: 100%;
   height: 4rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 0.9375rem 2.0625rem 0.9375rem 1.625rem;
-  margin-bottom: 1rem;
 }
 
 .barra-buscar{
@@ -50,7 +51,6 @@ nav{
 
 .cont-btns{
   display: flex;
-  margin-left:auto ;
   gap:1.25rem;
 }
 

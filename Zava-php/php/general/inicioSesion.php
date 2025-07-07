@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($pass_MD5 == $result2['contrasenia']) {
                 $_SESSION['id'] = $result2['id_usuario'];
                 $_SESSION['correo'] = $result2['correo'];
-                $_SESSION['tipo_usuario'] = $result2['rol'] === '1' ? 'administrador' : ($result2['rol'] === '2' ? 'cliente' : 'vendedor');
+                $_SESSION['rol'] = intval($result2['rol']);
                 header("Location: /Zava-php/index.php");
                 exit;
             } else {
@@ -57,4 +57,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </main>
-        
