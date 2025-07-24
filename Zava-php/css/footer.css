@@ -11,9 +11,9 @@ footer {
   }
 
 .cont-dividido{
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between; 
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  background-color: purple;
 }
 
 .cont-logo{
@@ -57,7 +57,7 @@ footer {
   color: var(--secundario-50);
 }
 
-.cont-media, .cont-nav{
+.cont-media, footer .cont-nav{
     display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -65,7 +65,7 @@ footer {
 }
 
 .cont-media h3,
-.cont-nav h3{
+footer .cont-nav h3{
   color: var(--secundario-50);
   font-family: Nunito;
   font-size: 1rem;
@@ -95,12 +95,12 @@ footer {
   color: var(--secundario-50);
 }
 
-.cont-nav .info-nav{
+footer .cont-nav .info-nav{
   display: flex;
   gap: .9rem;
 }
 
-.cont-nav .info-nav a{
+footer .cont-nav .info-nav a{
   text-decoration: none;
   color: var(--secundario-50);
   font-family: Nunito;

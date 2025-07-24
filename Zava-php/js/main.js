@@ -28,25 +28,19 @@
         function agregarIngrediente(valor = '') {
             const div = document.createElement('div');
             div.className = 'ingrediente-item';
-            div.style.display = 'flex';
-            div.style.alignItems = 'center';
-            div.style.marginBottom = '8px';
 
             const input = document.createElement('input');
+            input.className ='input-ingrediente';
             input.type = 'text';
             input.name = 'ingredientes[]';
             input.placeholder = 'Ejemplo: 300ml de leche de almendras';
             input.required = true;
             input.value = valor;
-            input.style.flex = '1';
-            input.style.marginRight = '8px';
 
             const botonEliminar = document.createElement('button');
+            botonEliminar.className ='btn-eliminar';
             botonEliminar.type = 'button';
-            botonEliminar.textContent = '🗑️';
-            botonEliminar.style.background = 'none';
-            botonEliminar.style.border = 'none';
-            botonEliminar.style.cursor = 'pointer';
+            botonEliminar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="1024" height="1024" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zm3-4q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17"/></svg>';
             botonEliminar.onclick = () => div.remove();
 
             div.appendChild(input);
@@ -109,10 +103,9 @@
 
         const botonEliminar = document.createElement('button');
         botonEliminar.type = 'button';
-        botonEliminar.textContent = '🗑️';
-        botonEliminar.style.background = 'none';
-        botonEliminar.style.border = 'none';
-        botonEliminar.style.cursor = 'pointer';
+        botonEliminar.className ='btn-eliminar';
+        botonEliminar.type = 'button';
+        botonEliminar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="1024" height="1024" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zm3-4q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17"/></svg>';
         botonEliminar.onclick = () => {
             div.remove();
             actualizarNumerosPasos();

@@ -137,7 +137,7 @@ $tiempo = isset($_GET['tiempo']) && is_numeric($_GET['tiempo']) ? (int)$_GET['ti
     <section class="section-recetas">
     <?php
     while ($fila = $result->fetch_assoc()) {
-        $ruta_imagen= 'imagenes/' . $fila['imagen'];
+        $ruta_imagen= 'uploads/' . $fila['imagen'];
         ?>
          <form action="mostrarReceta.php" method="GET">
            <article onclick="location.href='mostrarReceta.php?id_receta=<?php echo $fila['id_receta']; ?>'" class="receta-especifica">

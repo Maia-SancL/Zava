@@ -1,0 +1,204 @@
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+  color: var(--negros-700, #1F1F1F);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--fondo-50);
+}
+
+.layout{
+  min-height: 100vh; 
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+main {
+  width: 100%;
+  height: auto;
+  background-color: var(--fondo-50);
+  padding-right: 1rem;
+}
+
+/*PERFIL*/
+.cont-perfil{
+    width: 100%;
+    display: grid;
+    grid-template-columns: .5fr 3fr;
+    border-radius: 1.25rem 1.25rem 0rem 0rem;
+    border-bottom: 1.5px solid var(--primario-500);
+    background-color: var(--secundario-50);
+    align-items: center;
+    padding: 1rem;
+}
+
+
+.img-info{
+    width: 6rem;
+    height: 6rem;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.img-perfil{
+    object-fit: cover;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.cont-info{
+    min-width: 0; 
+    max-width: 100%; 
+    display: grid;
+    grid-template-columns: 4fr .8fr;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+
+}
+
+.nombre-info{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nombre-info h4{
+    color: var(--primario-500);
+    font-family: Quicksand;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nombre-info h5{
+    color: var(--negro-600);
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nombre-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-editar {
+    all: unset;
+    position: relative;
+    width: 80%;
+    display: flex;
+    padding: .5rem .2rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    background: var(--primario-500);
+    cursor: pointer;
+    transition-duration: .3s;
+    color: var(--secundario-50);
+    overflow: hidden;
+    padding-left: 2rem;
+}
+
+.btn-editar:hover {
+    color: transparent; /* texto desaparece al hacer hover */
+}
+
+
+.btn-editar svg {
+    position: absolute;
+    left: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    fill: var(--secundario-50);
+    transition: left 0.3s ease, margin 0.3s ease;
+}
+
+.btn-editar:hover svg {
+    left: 43%;
+    margin: 0;
+}
+
+.btn-editar .icon {
+    fill: var(--secundario-50);
+}
+
+/*ESTADISTICAS*/
+.panel-control{
+    margin-top: .5rem;
+    width: 100%;
+    height: 70vh;
+    background-color: purple;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel-principal{
+    width: 100%;
+    height: 90%;
+    background-color: orange;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.panel-superior{
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .9rem;
+}
+
+.panel-inferior{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(179, 130, 179);
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: .9rem;
+}
+
+.tarjeta{
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+    border-radius: 1.2rem;
+}
+
+.panel-lateral{
+    width: 100%;
+    height: 90%;
+    background-color: cadetblue;
+    border-radius: 1.2rem;
+}
+

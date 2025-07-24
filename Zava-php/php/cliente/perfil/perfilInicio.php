@@ -21,382 +21,64 @@ $nombre = htmlspecialchars($usuario['nombre']);
 $apellido = htmlspecialchars($usuario['apellido']);
 $nickname = htmlspecialchars($usuario['nickname']);
 $foto = $usuario['foto'] ? htmlspecialchars($usuario['foto']) : 'perfil.png';
-
-function formatoTiempo($tiempo) {
-    if (!$tiempo) return '';
-    $partes = explode(':', $tiempo);
-    $horas = intval($partes[0]);
-    $minutos = intval($partes[1]);
-    if ($horas > 0) {
-        return $horas . ' hr' . ($horas > 1 ? 's' : '') . ($minutos > 0 ? " $minutos min" : '');
-    } else {
-        return $minutos . ' min';
-    }
-}
+$rutaImg="../uploads/".$foto;
 ?>
-<link rel="stylesheet" href="/Zava-php/css/perfil-recetas.css">
-<main>
-    <div class="perfil">
-        <div class="perfil-foto">
-            <img src="<?= $foto ?>" alt="Foto de perfil">
-        </div>
-        <div class="perfil-info">
-            <h1 class="perfil-nombre"><?= $nombre ?> <?= $apellido ?></h1>
-            <p class="perfil-nickname">@<?= $nickname ?></p>
-        </div>
-        <button class="btn-editar-perfil" onclick="location.href='perfilEditar.php'">Editar perfil</button>
-    </div>
-    <div class="seleccionar-tipo-tabla" style="margin-bottom:2rem;">
-        <a href="?tabla=favoritos" class="tabla <?= $tabla === 'favoritos' ? 'seleccionado' : '' ?>">Favoritos</a>
-        <a href="?tabla=historial" class="tabla <?= $tabla === 'historial' ? 'seleccionado' : '' ?>">Ultimo Visto</a>
-        <a href="?tabla=recetas" class="tabla <?= $tabla === 'recetas' ? 'seleccionado' : '' ?>">Mis Recetas</a>
-        <a href="?tabla=pedidos" class="tabla <?= $tabla === 'pedidos' ? 'seleccionado' : '' ?>">Mis Pedidos</a>
-        <a href="?tabla=opiniones" class="tabla <?= $tabla === 'opiniones' ? 'seleccionado' : '' ?>">Mis Opiniones</a>
-        <a href="?tabla=reseñas" class="tabla <?= $tabla === 'reseñas' ? 'seleccionado' : '' ?>">Mis Reseñas</a>
-    </div>
-
-    <?php
-    switch ($tabla) {
-        case 'inicio':
-            ?>
-            <div class="perfil-secciones">
-                <div class="seccion" onclick="location.href='perfilInicio.php?tabla=favoritos&tipo=recetas'">
-                    <h2>Recetas favoritas</h2>
-                </div>
-                <div class="seccion" onclick="location.href='perfilInicio.php?tabla=favoritos&tipo=restaurantes'">
-                    <h2>Restaurantes favoritos</h2>
-                </div>
-                <div class="seccion" onclick="location.href='perfilInicio.php?tabla=favoritos&tipo=productos'">
-                    <h2>Productos favoritos</h2>
-                </div>
+<link rel="stylesheet" href="/Zava-php/css/perfil-inicio.css">
+    <main>
+        <div class="cont-perfil">
+            <div class="img-info">
+                <img class="img-perfil" src="<?php echo $rutaImg;?>">
             </div>
-            <?php
-            break;
-
-        case 'favoritos':
-            $tipo = $_GET['tipo'] ?? 'recetas';
-            ?>
-            <div class="seleccionar-tipo-tabla" style="margin-bottom:1rem;">
-                <a href="?tabla=favoritos&tipo=recetas" class="tabla <?= $tipo === 'recetas' ? 'seleccionado' : '' ?>">Recetas</a>
-                <a href="?tabla=favoritos&tipo=restaurantes" class="tabla <?= $tipo === 'restaurantes' ? 'seleccionado' : '' ?>">Restaurantes</a>
-                <a href="?tabla=favoritos&tipo=productos" class="tabla <?= $tipo === 'productos' ? 'seleccionado' : '' ?>">Productos</a>
+            <div class="cont-info">
+                <div class="nombre-info">
+                    <h4><?php echo $nombre." ".$apellido;?> </h4>
+                    <h5><?php echo $nickname;?></h5>
+                </div>
+                 <button class="btn-editar"> Editar perfil
+                    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="icon" d="M9.49993 15.1341L15.6633 8.9708C14.6264 8.53766 13.6847 7.90514 12.8916 7.10914C12.0952 6.31584 11.4624 5.37385 11.0291 4.33664L4.86577 10.5C4.38493 10.9808 4.1441 11.2216 3.93743 11.4866C3.69359 11.7995 3.48432 12.1379 3.31327 12.4958C3.1691 12.7991 3.0616 13.1225 2.8466 13.7675L1.7116 17.17C1.65936 17.3258 1.65161 17.493 1.68922 17.653C1.72683 17.8129 1.80831 17.9592 1.92449 18.0754C2.04068 18.1916 2.18697 18.2731 2.34692 18.3107C2.50688 18.3483 2.67415 18.3405 2.82993 18.2883L6.23243 17.1533C6.87827 16.9383 7.20077 16.8308 7.5041 16.6866C7.86355 16.5155 8.19993 16.3075 8.51327 16.0625C8.77827 15.8558 9.0191 15.615 9.49993 15.1341ZM17.3733 7.2608C17.9878 6.64628 18.333 5.8128 18.333 4.94372C18.333 4.07465 17.9878 3.24117 17.3733 2.62664C16.7587 2.01211 15.9253 1.66687 15.0562 1.66687C14.1871 1.66687 13.3536 2.01211 12.7391 2.62664L11.9999 3.3658L12.0316 3.4583C12.3958 4.50062 12.9919 5.44663 13.7749 6.22497C14.5765 7.03149 15.5557 7.63934 16.6341 7.99997L17.3733 7.2608Z" fill="#FBF6EE"/>
+                    </svg>
+                </button>
             </div>
-            <?php
-            if ($tipo === 'recetas') {
-                $q = "SELECT r.id_receta, r.nombre, r.descripcion, r.imagen, r.tiempo_preparacion
-                      FROM favoritos_recetas f
-                      JOIN recetas r ON f.id_receta = r.id_receta
-                      WHERE f.id_usuario = $id_usuario";
-                $res = mysqli_query($conexion, $q);
-                ?>
-                <section class="section-tabla-productos">
-                    <article class="producto guia">
-                        <div class="informacion-principal">
-                            <div class="informacion">
-                                <span class="lbl-informacion">Imagen</span>
-                                <span class="lbl-informacion">Nombre</span>
-                                <span class="lbl-informacion">Tiempo</span>
-                                <span class="lbl-informacion">Acciones</span>
-                            </div>
-                        </div>
-                    </article>
-                    <?php while ($receta = mysqli_fetch_assoc($res)): ?>
-                        <article class="producto" style="cursor:pointer;" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'FORM'){ window.location.href='/Zava-php/php/cliente/mostrarReceta.php?id=<?= $receta['id_receta'] ?>'; }">
-                            <div class="informacion-principal">
-                                <div class="informacion">
-                                    <span class="lbl-informacion">
-                                        <img src="<?= !empty($receta['imagen']) ? '/Zava-php/php/cliente/' . $receta['imagen'] : '/Zava-php/css/recursos/galletitas-receta-2.jpg' ?>" alt="Imagen receta" style="width:60px;height:40px;object-fit:cover;border-radius:8px;">
-                                    </span>
-                                    <span class="lbl-informacion"><?= htmlspecialchars($receta['nombre']) ?></span>
-                                    <span class="lbl-informacion"><?= formatoTiempo($receta['tiempo_preparacion']) ?></span>
-                                    <div class="btns">
-                                        <form method="POST" style="display:inline;" onsubmit="return confirm('¿Quitar de favoritos?');" onclick="event.stopPropagation();">
-                                            <input type="hidden" name="eliminar_favorito_receta" value="<?= $receta['id_receta'] ?>">
-                                            <button type="submit" class="btn-eliminar">🗑️</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    <?php endwhile; ?>
-                    <?php if (mysqli_num_rows($res) === 0): ?>
-                        <article class="producto">
-                            <div class="informacion-principal">
-                                <div class="informacion">
-                                    <span class="lbl-informacion">No tienes recetas favoritas.</span>
-                                </div>
-                            </div>
-                        </article>
-                    <?php endif; ?>
-                </section>
-                <?php
-            } elseif ($tipo === 'restaurantes') {
-                $q = "SELECT r.id_restaurante, r.nombre, r.descripcion, r.imagen
-                      FROM favoritos_restaurantes f
-                      JOIN restaurantes r ON f.id_restaurante = r.id_restaurante
-                      WHERE f.id_usuario = $id_usuario";
-                $res = mysqli_query($conexion, $q);
-                ?>
-                <section class="section-tabla-productos">
-                    <article class="producto guia">
-                        <div class="informacion-principal">
-                            <div class="informacion">
-                                <span class="lbl-informacion">Imagen</span>
-                                <span class="lbl-informacion">Nombre</span>
-                                <span class="lbl-informacion">Acciones</span>
-                            </div>
-                        </div>
-                    </article>
-                    <?php while ($rest = mysqli_fetch_assoc($res)): ?>
-                        <article class="producto" style="cursor:pointer;" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'FORM'){ window.location.href='/Zava-php/php/cliente/mostrarRestaurante.php?id=<?= $rest['id_restaurante'] ?>'; }">
-                            <div class="informacion-principal">
-                                <div class="informacion">
-                                    <span class="lbl-informacion">
-                                        <img src="<?= !empty($rest['imagen']) ? '/Zava-php/php/cliente/' . $rest['imagen'] : '/Zava-php/css/recursos/restaurante-default.jpg' ?>" alt="Imagen restaurante" style="width:60px;height:40px;object-fit:cover;border-radius:8px;">
-                                    </span>
-                                    <span class="lbl-informacion"><?= htmlspecialchars($rest['nombre']) ?></span>
-                                    <div class="btns">
-                                        <form method="POST" style="display:inline;" onsubmit="return confirm('¿Quitar de favoritos?');" onclick="event.stopPropagation();">
-                                            <input type="hidden" name="eliminar_favorito_restaurante" value="<?= $rest['id_restaurante'] ?>">
-                                            <button type="submit" class="btn-eliminar">🗑️</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    <?php endwhile; ?>
-                    <?php if (mysqli_num_rows($res) === 0): ?>
-                        <article class="producto">
-                            <div class="informacion-principal">
-                                <div class="informacion">
-                                    <span class="lbl-informacion">No tienes restaurantes favoritos.</span>
-                                </div>
-                            </div>
-                        </article>
-                    <?php endif; ?>
-                </section>
-                <?php
-            } else {
-                $q = "SELECT p.id_producto, p.nombre, p.descripcion, p.imagen, p.precio
-                      FROM favoritos_productos f
-                      JOIN productos p ON f.id_producto = p.id_producto
-                      WHERE f.id_usuario = $id_usuario";
-                $res = mysqli_query($conexion, $q);
-                ?>
-                <section class="section-tabla-productos">
-                    <article class="producto guia">
-                        <div class="informacion-principal">
-                            <div class="informacion">
-                                <span class="lbl-informacion">Imagen</span>
-                                <span class="lbl-informacion">Nombre</span>
-                                <span class="lbl-informacion">Precio</span>
-                                <span class="lbl-informacion">Acciones</span>
-                            </div>
-                        </div>
-                    </article>
-                    <?php while ($prod = mysqli_fetch_assoc($res)): ?>
-                        <article class="producto" style="cursor:pointer;" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'FORM'){ window.location.href='/Zava-php/php/cliente/mostrarProducto.php?id=<?= $prod['id_producto'] ?>'; }">
-                            <div class="informacion-principal">
-                                <div class="informacion">
-                                    <span class="lbl-informacion">
-                                        <img src="<?= !empty($prod['imagen']) ? '/Zava-php/php/cliente/' . $prod['imagen'] : '/Zava-php/css/recursos/producto-default.jpg' ?>" alt="Imagen producto" style="width:60px;height:40px;object-fit:cover;border-radius:8px;">
-                                    </span>
-                                    <span class="lbl-informacion"><?= htmlspecialchars($prod['nombre']) ?></span>
-                                    <span class="lbl-informacion">$<?= number_format($prod['precio'], 2) ?></span>
-                                    <div class="btns">
-                                        <form method="POST" style="display:inline;" onsubmit="return confirm('¿Quitar de favoritos?');" onclick="event.stopPropagation();">
-                                            <input type="hidden" name="eliminar_favorito_producto" value="<?= $prod['id_producto'] ?>">
-                                            <button type="submit" class="btn-eliminar">🗑️</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    <?php endwhile; ?>
-                    <?php if (mysqli_num_rows($res) === 0): ?>
-                        <article class="producto">
-                            <div class="informacion-principal">
-                                <div class="informacion">
-                                    <span class="lbl-informacion">No tienes productos favoritos.</span>
-                                </div>
-                            </div>
-                        </article>
-                    <?php endif; ?>
-                </section>
-                <?php
-            }
-            break;
+        </div>
 
-        case 'historial':
-            $q = "SELECT hv.*, 
-                        CASE hv.tipo_contenido
-                            WHEN 'receta' THEN r.nombre
-                            WHEN 'restaurante' THEN res.nombre
-                            WHEN 'producto' THEN p.nombre
-                        END AS nombre_contenido
-                  FROM historial_vistas hv
-                  LEFT JOIN recetas r ON hv.tipo_contenido = 'receta' AND hv.id_contenido = r.id_receta
-                  LEFT JOIN restaurantes res ON hv.tipo_contenido = 'restaurante' AND hv.id_contenido = res.id_restaurante
-                  LEFT JOIN productos p ON hv.tipo_contenido = 'producto' AND hv.id_contenido = p.id_producto
-                  WHERE hv.id_usuario = $id_usuario
-                  ORDER BY hv.fecha_vista DESC
-                  LIMIT 20";
-            $res = mysqli_query($conexion, $q);
-            ?>
-            <section class="section-tabla-productos">
-                <article class="producto guia">
-                    <div class="informacion-principal">
-                        <div class="informacion">
-                            <span class="lbl-informacion">Nombre</span>
-                            <span class="lbl-informacion">Tipo</span>
-                            <span class="lbl-informacion">Fecha</span>
-                        </div>
-                    </div>
-                </article>
-                <?php while ($h = mysqli_fetch_assoc($res)): ?>
-                    <article class="producto">
-                        <div class="informacion-principal">
-                            <div class="informacion">
-                                <span class="lbl-informacion"><?= htmlspecialchars($h['nombre_contenido']) ?></span>
-                                <span class="lbl-informacion"><?= ucfirst($h['tipo_contenido']) ?></span>
-                                <span class="lbl-informacion"><?= $h['fecha_vista'] ?></span>
-                            </div>
-                        </div>
-                    </article>
-                <?php endwhile; ?>
-            </section>
-            <?php
-            break;
-
-        case 'recetas':
-            // Eliminar receta propia
-            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar_receta'])) {
-                $id_receta = intval($_POST['eliminar_receta']);
-                $img_q = mysqli_query($conexion, "SELECT imagen FROM recetas WHERE id_receta = $id_receta AND id_usuario = $id_usuario");
-                if ($img_row = mysqli_fetch_assoc($img_q)) {
-                    $ruta_img = $img_row['imagen'];
-                    if ($ruta_img && file_exists($_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/cliente/' . $ruta_img)) {
-                        unlink($_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/cliente/' . $ruta_img);
-                    }
-                }
-                mysqli_query($conexion, "DELETE FROM recetas WHERE id_receta = $id_receta AND id_usuario = $id_usuario");
-                header("Location: perfilInicio.php?tabla=recetas");
-                exit;
-            }
-            $q = "SELECT id_receta, nombre, descripcion, imagen, tipo_comida, tiempo_preparacion, fecha_publicacion
-                  FROM recetas WHERE id_usuario = $id_usuario ORDER BY id_receta DESC";
-            $res = mysqli_query($conexion, $q);
-            ?>
-            <section class="section-tabla-productos">
-                <article class="producto guia">
-                    <div class="informacion-principal">
-                        <div class="informacion">
-                            <span class="lbl-informacion">Imagen</span>
-                            <span class="lbl-informacion">Nombre</span>
-                            <span class="lbl-informacion">Tipo</span>
-                            <span class="lbl-informacion">Tiempo</span>
-                            <span class="lbl-informacion">Fecha</span>
-                            <span class="lbl-informacion">Acciones</span>
-                        </div>
-                    </div>
-                </article>
-                <?php while ($rec = mysqli_fetch_assoc($res)): ?>
-                    <article class="producto" style="cursor:pointer;" onclick="if(event.target.tagName !== 'BUTTON' && event.target.tagName !== 'FORM' && event.target.tagName !== 'A'){ window.location.href='/Zava-php/php/cliente/mostrarReceta.php?id=<?= $rec['id_receta'] ?>'; }">
-                        <div class="informacion-principal">
-                            <div class="informacion">
-                                <span class="lbl-informacion">
-                                    <img src="<?= !empty($rec['imagen']) ? '/Zava-php/php/cliente/' . $rec['imagen'] : '/Zava-php/css/recursos/galletitas-receta-2.jpg' ?>" alt="Imagen receta" style="width:60px;height:40px;object-fit:cover;border-radius:8px;">
-                                </span>
-                                <span class="lbl-informacion"><?= htmlspecialchars($rec['nombre']) ?></span>
-                                <span class="lbl-informacion"><?= ucfirst(htmlspecialchars($rec['tipo_comida'])) ?></span>
-                                <span class="lbl-informacion"><?= formatoTiempo($rec['tiempo_preparacion']) ?></span>
-                                <span class="lbl-informacion"><?= isset($rec['fecha_publicacion']) && $rec['fecha_publicacion'] ? date('d/m/Y', strtotime($rec['fecha_publicacion'])) : '' ?></span>
-                                <div class="btns">
-                                    <a href="/Zava-php/php/cliente/perfil/modificarReceta.php?id=<?= $rec['id_receta'] ?>" class="btn-modificar" onclick="event.stopPropagation();">✏️ Modificar</a>
-                                    <form method="POST" style="display:inline;" onsubmit="return confirm('¿Seguro que deseas eliminar esta receta?');" onclick="event.stopPropagation();">
-                                        <input type="hidden" name="eliminar_receta" value="<?= $rec['id_receta'] ?>">
-                                        <button type="submit" class="btn-eliminar">🗑️ Eliminar</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                <?php endwhile; ?>
-                <?php if (mysqli_num_rows($res) === 0): ?>
-                    <article class="producto">
-                        <div class="informacion-principal">
-                            <div class="informacion">
-                                <span class="lbl-informacion">No has creado ninguna receta aún.</span>
-                            </div>
-                        </div>
-                    </article>
-                <?php endif; ?>
-            </section>
-            <?php
-            break;
-
-        case 'pedidos':
-            $q = "SELECT * FROM pedidos WHERE id_usuario = $id_usuario ORDER BY fecha DESC";
-            $res = mysqli_query($conexion, $q);
-            ?>
-            <section class="section-tabla-productos">
-                <article class="producto guia">
-                    <div class="informacion-principal">
-                        <div class="informacion">
-                            <span class="lbl-informacion">Pedido</span>
-                            <span class="lbl-informacion">Fecha</span>
-                            <span class="lbl-informacion">Estado</span>
-                        </div>
-                    </div>
-                </article>
-                <?php while ($ped = mysqli_fetch_assoc($res)): ?>
-                    <article class="producto">
-                        <div class="informacion-principal">
-                            <div class="informacion">
-                                <span class="lbl-informacion">#<?= $ped['id_pedido'] ?></span>
-                                <span class="lbl-informacion"><?= $ped['fecha'] ?></span>
-                                <span class="lbl-informacion"><?= $ped['estado'] ?></span>
-                            </div>
-                        </div>
-                    </article>
-                <?php endwhile; ?>
-            </section>
-            <?php
-            break;
-
-        case 'opiniones':
-        include __DIR__ . '/tablas/opiniones.php';
-        break;
-
-        case 'reseñas':
-            $q = "SELECT * FROM resenas WHERE id_usuario = $id_usuario ORDER BY fecha DESC";
-            $res = mysqli_query($conexion, $q);
-            ?>
-            <section class="section-tabla-productos">
-                <article class="producto guia">
-                    <div class="informacion-principal">
-                        <div class="informacion">
-                            <span class="lbl-informacion">Contenido</span>
-                            <span class="lbl-informacion">Reseña</span>
-                            <span class="lbl-informacion">Fecha</span>
-                        </div>
-                    </div>
-                </article>
-                <?php while ($rs = mysqli_fetch_assoc($res)): ?>
-                    <article class="producto">
-                        <div class="informacion-principal">
-                            <div class="informacion">
-                                <span class="lbl-informacion"><?= htmlspecialchars($rs['contenido']) ?></span>
-                                <span class="lbl-informacion"><?= htmlspecialchars($rs['resena']) ?></span>
-                                <span class="lbl-informacion"><?= $rs['fecha'] ?></span>
-                            </div>
-                        </div>
-                    </article>
-                <?php endwhile; ?>
-            </section>
-            <?php
-            break;
-    }
-    ?>
-</main>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php'; ?>
+        <div class="cont-nav">
+            <div class="caja-nav seleccionado">
+                <a>Favoritos</a>
+            </div>
+            <div class="caja-nav">
+                <a>Ultimo Visto</a>
+            </div>
+            <div class="caja-nav">
+                <a>Pedidos</a>
+            </div>
+            <div class="caja-nav">
+                <a>Opiniones</a>
+            </div>
+            <div class="caja-nav">
+                <a>Mis Recetas</a>
+            </div>
+            <div class="caja-nav">
+                <a>Mis Reseñas</a>
+            </div>
+        </div>
+        
+        <div class="cont-opciones">
+            <div class="caja-opciones">
+                <h3>Recetas</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M7 5a5 5 0 0 0-2 9.584v2.666h14v-2.666a5.001 5.001 0 0 0-2.737-9.53a4.502 4.502 0 0 0-8.526 0A5 5 0 0 0 7 5m11.998 13.75H5.002c.01 1.397.081 2.162.584 2.664C6.172 22 7.114 22 9 22h6c1.886 0 2.828 0 3.414-.586c.503-.502.574-1.267.584-2.664"/></svg>
+            </div>
+            <div class="caja-opciones">
+                <h3>Restaurantes</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 512 512"><path class="icon" fill="currentColor" d="M357.57 223.94a79.48 79.48 0 0 0 56.58-23.44l77-76.95c6.09-6.09 6.65-16 .85-22.39a16 16 0 0 0-23.17-.56l-68.63 68.58a12.29 12.29 0 0 1-17.37 0c-4.79-4.78-4.53-12.86.25-17.64l68.33-68.33a16 16 0 0 0-.56-23.16A15.62 15.62 0 0 0 440.27 56a16.7 16.7 0 0 0-11.81 4.9l-68.27 68.26a12.29 12.29 0 0 1-17.37 0c-4.78-4.78-4.53-12.86.25-17.64l68.33-68.31a16 16 0 0 0-.56-23.16A15.62 15.62 0 0 0 400.26 16a16.73 16.73 0 0 0-11.81 4.9L311.5 97.85a79.5 79.5 0 0 0-23.44 56.59v8.23a16 16 0 0 1-4.69 11.33l-35.61 35.62a4 4 0 0 1-5.66 0L68.82 36.33a16 16 0 0 0-22.58-.06C31.09 51.28 23 72.47 23 97.54c-.1 41.4 21.66 89 56.79 124.08l85.45 85.45A64.8 64.8 0 0 0 211 326a64 64 0 0 0 16.21-2.08a16.2 16.2 0 0 1 4.07-.53a15.93 15.93 0 0 1 10.83 4.25l11.39 10.52a16.12 16.12 0 0 1 4.6 11.23v5.54a47.73 47.73 0 0 0 13.77 33.65l90.05 91.57l.09.1a53.29 53.29 0 0 0 75.36-75.37L302.39 269.9a4 4 0 0 1 0-5.66L338 228.63a16 16 0 0 1 11.32-4.69Z"/><path class="icon" fill="currentColor" d="M211 358a97.32 97.32 0 0 1-68.36-28.25l-13.86-13.86a8 8 0 0 0-11.3 0l-85 84.56c-15.15 15.15-20.56 37.45-13.06 59.29a31 31 0 0 0 1.49 3.6C31 484 50.58 496 72 496a55.68 55.68 0 0 0 39.64-16.44L225 365.66a4.69 4.69 0 0 0 1.32-3.72v-.26a4.63 4.63 0 0 0-5.15-4.27A97 97 0 0 1 211 358"/></svg>
+                
+            </div>
+            <div class="caja-opciones">
+                <h3>Productos</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M3.778 3.655c-.181.36-.27.806-.448 1.696l-.598 2.99a3.06 3.06 0 1 0 6.043.904l.07-.69a3.167 3.167 0 1 0 6.307-.038l.073.728a3.06 3.06 0 1 0 6.043-.904l-.598-2.99c-.178-.89-.267-1.335-.448-1.696a3 3 0 0 0-1.888-1.548C17.944 2 17.49 2 16.582 2H7.418c-.908 0-1.362 0-1.752.107a3 3 0 0 0-1.888 1.548M18.269 13.5a4.53 4.53 0 0 0 2.231-.581V14c0 3.771 0 5.657-1.172 6.828c-.943.944-2.348 1.127-4.828 1.163V18.5c0-.935 0-1.402-.201-1.75a1.5 1.5 0 0 0-.549-.549C13.402 16 12.935 16 12 16s-1.402 0-1.75.201a1.5 1.5 0 0 0-.549.549c-.201.348-.201.815-.201 1.75v3.491c-2.48-.036-3.885-.22-4.828-1.163C3.5 19.657 3.5 17.771 3.5 14v-1.081a4.53 4.53 0 0 0 2.232.581a4.55 4.55 0 0 0 3.112-1.228A4.64 4.64 0 0 0 12 13.5a4.64 4.64 0 0 0 3.156-1.228a4.55 4.55 0 0 0 3.112 1.228"/></svg>
+            </div>
+        </div>
+    </main>
+<?php 
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php';
+?>

@@ -34,11 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
         // Manejo de una sola imagen subida
         $imagen = '';
         if (!empty($_FILES['imagen']['name'])) {
-            $target_dir = "uploads/";
-            if (!is_dir($target_dir)) {
-                mkdir($target_dir, 0777, true);
-            }
-            $target_file = $target_dir . basename($_FILES['imagen']['name']);
+            // $target_dir = "uploads/";
+            // if (!is_dir($target_dir)) {
+            //     mkdir($target_dir, 0777, true);
+            // }
+            $target_file = basename($_FILES['imagen']['name']);
             if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
                 $imagen = $target_file;
             }
@@ -85,90 +85,94 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
     <div class="crear-receta">
         <form action="crear.php" method="POST" enctype="multipart/form-data" class="form-receta">
             <div class="columna-izq">
-                <label>Imágenes:</label>
                 <div id="zona-imagenes" class="zona-imagenes">
                     <div class="icono-imagen" id="icono-imagen">
                         <!-- SVG de icono de imagen -->
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
-                            <rect x="4" y="4" width="16" height="16" rx="2" stroke="#621111" stroke-width="2"/>
-                            <polyline points="8 16 12 12 16 16" stroke="#621111" stroke-width="2" fill="none"/>
-                            <line x1="12" y1="12" x2="12" y2="16" stroke="#621111" stroke-width="2"/>
-                            <line x1="12" y1="8" x2="12" y2="12" stroke="#621111" stroke-width="2"/>
-                            <circle cx="12" cy="12" r="1.5" fill="#621111"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
+                            <path class="icon" fill="currentColor" d="M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3zm-4.7 6H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v8.3c-.6-.2-1.3-.3-2-.3c-1.1 0-2.2.3-3.1.9L14.5 12L11 16.5l-2.5-3L5 18h8.1c-.1.3-.1.7-.1 1c0 .7.1 1.4.3 2"/>
                         </svg>
                     </div>
                     <p>Agregar imagen de tu plato ya listo</p>
                     <input type="file" id="input-imagenes" name="imagen" accept="image/*" style="display:none;">
                     <div id="preview-imagenes" class="preview-imagenes"></div>
                 </div>
-                <label>Ingredientes:</label>
-                <div id="contenedor-ingredientes"></div>
-                <button type="button" id="agregar-ingrediente" class="btn-secundario">+ Ingrediente</button>
+                <label class="subtitulo">Ingredientes</label>
+                <div id="contenedor-ingredientes" class="cont-ingredientes"></div>
+                    <div class="cont-btn">
+                        <button type="button" id="agregar-ingrediente" class="btn-secundario">+ Ingrediente</button>
+                    </div>
             </div>
             <div class="columna-der">
-                <div class="fila">
-                    <div class="campo">
-                        <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" id="nombre" required placeholder="Nombre de la receta">
+                <div class="cont-superior">
+                    <div class="fila">
+                        <div class="campo">
+                            <label for="nombre"  class="subtitulo" >Nombre</label>
+                            <input type="text" name="nombre" id="nombre" required placeholder="Nombre de la receta">
+                        </div>
+
+                        <div class="campo">
+                            <label for="descripcion" class="subtitulo">Descripción</label>
+                            <textarea name="descripcion" id="descripcion" required placeholder="Comparte un poco más acerca de este plato." wrap="hard"></textarea>
+                        </div>
                     </div>
-                    <div class="campo">
-                        <label for="tipo_comida">Categoría</label>
-                        <select name="tipo_comida" id="tipo_comida" required>
-                            <option value="sin especificar">Sin especificar</option>
-                            <option value="desayuno">Desayuno</option>
-                            <option value="almuerzo">Almuerzo</option>
-                            <option value="merienda">Merienda</option>
-                            <option value="cena">Cena</option>
-                            <option value="snack">Snack</option>
-                            <option value="evento especial">Evento especial</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="fila">
-                    <div class="campo">
-                        <label for="descripcion">Descripción</label>
-                        <textarea name="descripcion" id="descripcion" required placeholder="Comparte un poco más acerca de este plato."></textarea>
-                    </div>
-                    <div class="campo">
-                        <label for="porciones">Porciones</label>
-                        <select name="porciones" id="porciones" required>
-                            <option value="Sin especificar">Sin especificar</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-                    <div class="campo">
-                        <label for="tipo_dieta">Tipo de dieta</label>
-                        <select name="tipo_dieta" id="tipo_dieta" required>
-                            <option value="sin especificar">Sin especificar</option>
-                            <option value="vegetariana">Vegetariana</option>
-                            <option value="vegana">Vegana</option>
-                            <option value="sin lactosa">Sin lactosa</option>
-                            <option value="otra">Otra</option>
-                        </select>
-                    </div>
-                    <div class="campo">
-                        <label for="tiempo">Tiempo</label>
-                        <div class="tiempo-slider-container">
-                            <input type="range" name="tiempo" id="tiempo" min="0" max="300" step="5" value="0">
-                            <div class="tiempo-labels">
-                                <span id="tiempo-valor">0 min</span>
+                    <div class="fila etiquetas">
+
+                        <div class="campo">
+                            <label for="tipo_comida" class="subtitulo">Categoría</label>
+                            <select name="tipo_comida" id="tipo_comida" required>
+                                <option value="" disabled selected>Seleccioná una opción</option>
+                                <option value="desayuno">Desayuno</option>
+                                <option value="almuerzo">Almuerzo</option>
+                                <option value="merienda">Merienda</option>
+                                <option value="cena">Cena</option>
+                                <option value="snack">Snack</option>
+                                <option value="evento especial">Evento especial</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="porciones" class="subtitulo">Porciones</label>
+                            <select name="porciones" id="porciones" required>
+                                <option value="" disabled selected>Seleccioná una opción</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+                        <div class="campo">
+                            <label for="tipo_dieta" class="subtitulo">Tipo de dieta</label>
+                            <select name="tipo_dieta" id="tipo_dieta" required>
+                                <option value="" disabled selected>Seleccioná una opción</option>
+                                <option value="vegetariana">Vegetariana</option>
+                                <option value="vegana">Vegana</option>
+                                <option value="sin lactosa">Sin lactosa</option>
+                                <option value="otra">Otra</option>
+                            </select>
+                        </div>
+                        <div class="campo">
+                            <label for="tiempo" class="subtitulo">Tiempo</label>
+                            <div class="tiempo-slider-container">
+                                <input type="range" name="tiempo" id="tiempo" min="0" max="300" step="5" value="0">
+                                <div class="tiempo-labels">
+                                    <span id="tiempo-valor">0 min</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="pasos-section">
-                    <label>Pasos</label>
-                    <div id="contenedor-pasos"></div>
-                    <button type="button" id="agregar-paso" class="btn-secundario">+ Pasos</button>
+                    <label class="subtitulo">Pasos</label>
+                    <div id="contenedor-pasos" class=cont-pasos></div>
+                    <div class="cont-btn">
+                        <button type="button" id="agregar-paso" class="btn-secundario">+ Paso</button>
+                    </div>
                 </div>
                 <div class="botones">
                     <button type="submit" class="btn-principal">Publicar</button>

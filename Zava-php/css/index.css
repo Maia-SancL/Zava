@@ -16,13 +16,14 @@ body {
 }
 
 .layout{
-  min-height: 100vh; /* o el alto del área donde debe vivir el layout */
+  min-height: 100vh; 
   display: flex;
   gap: 1rem;
   margin-bottom: 3rem;
 }
 
 main {
+  width: 100%;
   height: auto;
   background-color: var(--fondo-50);
   padding-right: 1rem;
@@ -117,7 +118,6 @@ input::placeholder {
 #recetas {
   margin-top: 10rem;
   width: 100%;
-
   height: auto;
   margin-bottom: 10rem;
 }
@@ -153,9 +153,8 @@ input::placeholder {
 
 .tarjeta-receta {
   width: 15rem;
-  height: 11rem;
+  height: 100%;
   overflow: hidden;
-  /*Todo lo que se salga de la caja se oculta*/
   border-radius: 1rem;
 }
 
@@ -179,6 +178,7 @@ input::placeholder {
 }
 
 .btn-receta {
+  height: 11rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -194,7 +194,14 @@ input::placeholder {
   font-weight: 600;
 }
 
+
 /*SECCION PRODUCTOS*/
+#productos {
+  margin-top: 10rem;
+  width: 100%;
+  height: auto;
+  margin-bottom: 10rem;
+}
 
 .cont-productos-ofertas {
   width: 100%;
@@ -312,6 +319,13 @@ input::placeholder {
 
 
 /* SECCION RESTAURANTE */
+
+#restaurantes {
+  margin-top: 10rem;
+  width: 100%;
+  height: auto;
+  margin-bottom: 10rem;
+}
 
 .cont-restaurantes-grupo {
   display: flex;
