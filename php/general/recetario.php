@@ -38,7 +38,7 @@ $resultado_categorias = mysqli_query($conexion, $query_categorias);
         <div class="contenedor-recetas">
             <?php while ($receta = mysqli_fetch_assoc($resultado_recetas)): ?>
                 <div class="tarjeta-receta">
-                    <img src="<?= !empty($receta['imagen']) ? '/Zava-php/php/cliente/' . $receta['imagen'] : '/Zava-php/css/recursos/galletitas-receta-2.jpg' ?>" alt="Imagen de la receta">
+                    <img src="<?= !empty($receta['imagen']) ? '/Zava/php/cliente/' . $receta['imagen'] : '/Zava/css/recursos/galletitas-receta-2.jpg' ?>" alt="Imagen de la receta">
                     <div class="info-receta">
                         <h3><?= htmlspecialchars($receta['nombre']) ?></h3>
                         <p><?= htmlspecialchars($receta['descripcion']) ?></p>

@@ -1,7 +1,7 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/funciones/tags.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/funciones/tags.php';
 
 // include_once 'php/componentes/navegador.php'; //Menú superior
 // include_once 'php/componentes/menuLateral.php'; //Menú lateral
@@ -39,10 +39,10 @@ $tiempo = isset($_GET['tiempo']) && is_numeric($_GET['tiempo']) ? (int)$_GET['ti
 
 ?>
 <div class="layout">
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/menuLateral.php';?>
-    <link rel="stylesheet" href="/Zava-php/css/recetario.css">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
+    <link rel="stylesheet" href="/Zava/css/recetario.css">
     <main>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
         <section class="section-filtros">
             <form action="" method="GET" id="filtros-recetas">
             <select name="tipo_comida" class="filtro">
@@ -191,5 +191,5 @@ $tiempo = isset($_GET['tiempo']) && is_numeric($_GET['tiempo']) ? (int)$_GET['ti
 </main>
 </div>
 <?php 
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>

@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="/Zava-php/css/footer.css">
+<link rel="stylesheet" href="/Zava/css/footer.css">
 <footer>
         <div class="cont-dividido">
             <div class="cont-logo">
                 <div class="logo-titulo">
                     <div class="cont-img">
-                        <img class="img-logo" src="/Zava-php/css/recursos/5.0.png">
+                        <img class="img-logo" src="/Zava/css/recursos/5.0.png">
                     </div>
                         <h2>Zava</h2>
                 </div>
@@ -34,11 +34,11 @@
             <div class="cont-nav">
                 <h3>Navegacion Rapida</h3>
                 <div class="info-nav">
-                    <a href="/Zava-php/#inicio">Inicio</a>
-                    <a href="/Zava-php/php/cliente/recetario.php">Recetas</a>
-                    <a href="/Zava-php/#productos">Productos</a>
-                    <a href="Zava-php/#restaurantes">Restaurantes</a>
-                    <a href="Zava-php/php/...">Perfil</a>
+                    <a href="/Zava/#inicio">Inicio</a>
+                    <a href="/Zava/php/cliente/recetario.php">Recetas</a>
+                    <a href="/Zava/#productos">Productos</a>
+                    <a href="Zava/#restaurantes">Restaurantes</a>
+                    <a href="Zava/php/...">Perfil</a>
                 </div>
             </div>
         </div>

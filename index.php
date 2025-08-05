@@ -1,19 +1,19 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/conexion.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 
 // include_once 'php/componentes/navegador.php'; //Menú superior
 // include_once 'php/componentes/menuLateral.php'; //Menú lateral
 ?>
 <div class="layout">
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/menuLateral.php';?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
     <main>  
-    <link rel="stylesheet" href="/Zava-php/css/index.css">
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';?>
+    <link rel="stylesheet" href="/Zava/css/index.css">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
   <header class="header-titulo" id="inicio">
             <div class="cont-titulo">
-                <img class="img-logo select-none" src="/Zava-php/css/recursos/Principal 2.0.png">
+                <img class="img-logo select-none" src="/Zava/css/recursos/Principal 2.0.png">
             </div>
             <h2 class="subtitulo-principal">Encuentra recetas, restaurantes y productos aptos<br>para celiacos.</h2>
             <div class="barra-buscar-index">
@@ -31,12 +31,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
             </div>
             <div class="cont-btns-recetas">
                 <div class="btn-receta">
-                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                    <form method="GET" action="/Zava/php/cliente/recetario.php" style="height:100%;">
                         <input type="hidden" name="tipo_comida" value="desayuno">
                         <button type=submit style="background: none; border: none; padding: 0; cursor: pointer; height:100%">
                         <div class="tarjeta-receta">
                                 <div class="overlay"></div> <!-- Capa oscura -->
-                                <img src="/Zava-php/css/recursos/Desayuno.jpg">
+                                <img src="/Zava/css/recursos/Desayuno.jpg">
                             </div>
                         </button>
                     </form>
@@ -44,12 +44,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                 </div>
 
                 <div class="btn-receta">
-                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                    <form method="GET" action="/Zava/php/cliente/recetario.php" style="height:100%;">
                         <input type="hidden" name="tipo_comida" value="almuerzo">
                         <button type=submit style="background: none; border: none; padding: 0; cursor: pointer; height:100%">
                             <div class="tarjeta-receta">
                                 <div class="overlay"></div> <!--Capa oscura -->
-                                <img src="/Zava-php/css/recursos/Almuerzo.jpg">
+                                <img src="/Zava/css/recursos/Almuerzo.jpg">
                             </div> 
                         </button>
                     </form>
@@ -57,12 +57,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                 </div>
                 
                 <div class="btn-receta">
-                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                    <form method="GET" action="/Zava/php/cliente/recetario.php" style="height:100%;">
                         <input type="hidden" name="tipo_comida" value="merienda">
                         <button type=submit style="background: none; border: none; padding: 0; cursor: pointer; height:100%">
                             <div class="tarjeta-receta">
                                 <div class="overlay"></div> <!-- Capa oscura -->
-                                <img src="/Zava-php/css/recursos/Merienda.jpg">
+                                <img src="/Zava/css/recursos/Merienda.jpg">
                             </div> 
                         </button>
                     </form>
@@ -70,12 +70,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                 </div>
 
                 <div class="btn-receta">
-                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                    <form method="GET" action="/Zava/php/cliente/recetario.php" style="height:100%;">
                         <input type="hidden" name="tipo_comida" value="cena">
                          <button type=submit style="background: none; border: none; padding: 0; cursor: pointer;  height:100%">
                             <div class="tarjeta-receta">
                                 <div class="overlay"></div> <!-- Capa oscura -->
-                                <img src="/Zava-php/css/recursos/Cena.jpg">
+                                <img src="/Zava/css/recursos/Cena.jpg">
                             </div> 
                         </button>
                      </form>
@@ -83,12 +83,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                 </div>
 
                 <div class="btn-receta">
-                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                    <form method="GET" action="/Zava/php/cliente/recetario.php" style="height:100%;">
                         <input type="hidden" name="tipo_comida" value="postre">
                         <button type=submit style="background: none; border: none; padding: 0; cursor: pointer;  height:100%">
                             <div class="tarjeta-receta">
                                 <div class="overlay"></div> <!-- Capa oscura -->
-                                <img src="/Zava-php/css/recursos/Postre.jpg">
+                                <img src="/Zava/css/recursos/Postre.jpg">
                             </div>
                         </button>
                     </form>
@@ -96,12 +96,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                  </div>
                     
                 <div class="btn-receta">
-                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                    <form method="GET" action="/Zava/php/cliente/recetario.php" style="height:100%;">
                         <input type="hidden" name="tipo_comida" value="panaderia">
                          <button type=submit style="background: none; border: none; padding: 0; cursor: pointer;  height:100%">
                             <div class="tarjeta-receta">
                                 <div class="overlay"></div> <!-- Capa oscura -->
-                                <img src="/Zava-php/css/recursos/Panaderia.jpg">
+                                <img src="/Zava/css/recursos/Panaderia.jpg">
                             </div> 
                             </button>
                         </form>
@@ -109,12 +109,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                 </div>
 
                 <div class="btn-receta">
-                    <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                    <form method="GET" action="/Zava/php/cliente/recetario.php" style="height:100%;">
                         <input type="hidden" name="tipo_comida" value="snack">
                         <button type=submit style="background: none; border: none; padding: 0; cursor: pointer;  height:100%">
                             <div class="tarjeta-receta">
                                 <div class="overlay"></div> <!-- Capa oscura -->
-                                <img src="/Zava-php/css/recursos/Snack.jpg">
+                                <img src="/Zava/css/recursos/Snack.jpg">
                             </div> 
                         </button>
                     </form>
@@ -122,12 +122,12 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                 </div>
 
                 <div class="btn-receta">
-                     <form method="GET" action="/Zava-php/php/cliente/recetario.php" style="height:100%;">
+                     <form method="GET" action="/Zava/php/cliente/recetario.php" style="height:100%;">
                         <input type="hidden" name="tipo_comida" value="bebida">
                         <button type=submit style="background: none; border: none; padding: 0; cursor: pointer; height:100%">
                         <div class="tarjeta-receta">
                             <div class="overlay"></div> <!-- Capa oscura -->
-                            <img src="/Zava-php/css/recursos/Bebidas.jpg"> 
+                            <img src="/Zava/css/recursos/Bebidas.jpg"> 
                         </div>
                     </button>
                 </form>
@@ -152,7 +152,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                         <path d="M452 226C452 196.321 446.154 166.933 434.797 139.514C423.439 112.094 406.792 87.1799 385.806 66.1939C364.82 45.2078 339.906 28.5608 312.486 17.2032C285.067 5.84566 255.679 -1.2973e-06 226 0C196.321 1.2973e-06 166.933 5.84566 139.514 17.2032C112.094 28.5608 87.1799 45.2078 66.1939 66.1939C45.2078 87.1799 28.5608 112.094 17.2032 139.514C5.84566 166.933 -2.5946e-06 196.321 0 226H226H452Z" fill="#ECDCC1"/>
                                     </svg>
                                 <div class="cont-img">
-                                    <img src="/Zava-php//css/recursos/Harinas--y-premezclas.png" alt="Imgagen-premezcla">
+                                    <img src="/Zava//css/recursos/Harinas--y-premezclas.png" alt="Imgagen-premezcla">
                                 </div>
                                 <h4 class="producto-seccion">Harinas y premezclas</h4>
                             </div>
@@ -163,7 +163,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                         <path d="M452 226C452 196.321 446.154 166.933 434.797 139.514C423.439 112.094 406.792 87.1799 385.806 66.1939C364.82 45.2078 339.906 28.5608 312.486 17.2032C285.067 5.84566 255.679 -1.2973e-06 226 0C196.321 1.2973e-06 166.933 5.84566 139.514 17.2032C112.094 28.5608 87.1799 45.2078 66.1939 66.1939C45.2078 87.1799 28.5608 112.094 17.2032 139.514C5.84566 166.933 -2.5946e-06 196.321 0 226H226H452Z" fill="#ECDCC1"/>
                                      </svg>
                                      <div class="cont-img">
-                                        <img src="/Zava-php//css/recursos/galletitas.png" alt="Imgagen-galletitas">
+                                        <img src="/Zava//css/recursos/galletitas.png" alt="Imgagen-galletitas">
                                     </div>
                                     <h4 class="producto-seccion">Galletitas</h4>
                                 </div>
@@ -172,7 +172,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                         <path d="M452 226C452 196.321 446.154 166.933 434.797 139.514C423.439 112.094 406.792 87.1799 385.806 66.1939C364.82 45.2078 339.906 28.5608 312.486 17.2032C285.067 5.84566 255.679 -1.2973e-06 226 0C196.321 1.2973e-06 166.933 5.84566 139.514 17.2032C112.094 28.5608 87.1799 45.2078 66.1939 66.1939C45.2078 87.1799 28.5608 112.094 17.2032 139.514C5.84566 166.933 -2.5946e-06 196.321 0 226H226H452Z" fill="#ECDCC1"/>
                                      </svg>
                                      <div class="cont-img">
-                                        <img src="/Zava-php//css/recursos/Golosinas.png" alt="Imgagen-golosinas">
+                                        <img src="/Zava//css/recursos/Golosinas.png" alt="Imgagen-golosinas">
                                     </div>
                                     <h4 class="producto-seccion">Golosinas</h4>
                                 </div>
@@ -182,7 +182,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                      </svg>
                                       <h4 class="producto-seccion">Cereales</h4>
                                      <div class="cont-img">
-                                        <img src="/Zava-php//css/recursos/Cereales.png" alt="Imgagen-cereales">
+                                        <img src="/Zava//css/recursos/Cereales.png" alt="Imgagen-cereales">
                                     </div>
                                 </div>
                                 <div class="producto-item">
@@ -191,7 +191,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                      </svg>
                                      <h4 class="producto-seccion">Infusiones</h4>
                                      <div class="cont-img">
-                                        <img src="/Zava-php//css/recursos/Infusiones.png" alt="Imgagen-infusiones">
+                                        <img src="/Zava//css/recursos/Infusiones.png" alt="Imgagen-infusiones">
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +205,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                      </svg>
                                      <h4 class="producto-seccion">Aderezos</h4>
                                      <div class="cont-img">
-                                        <img src="/Zava-php//css/recursos/Aderezos.png" alt="Imgagen-aderezos">
+                                        <img src="/Zava//css/recursos/Aderezos.png" alt="Imgagen-aderezos">
                                     </div>
                                     
                                 </div>
@@ -214,7 +214,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                         <path d="M452 226C452 196.321 446.154 166.933 434.797 139.514C423.439 112.094 406.792 87.1799 385.806 66.1939C364.82 45.2078 339.906 28.5608 312.486 17.2032C285.067 5.84566 255.679 -1.2973e-06 226 0C196.321 1.2973e-06 166.933 5.84566 139.514 17.2032C112.094 28.5608 87.1799 45.2078 66.1939 66.1939C45.2078 87.1799 28.5608 112.094 17.2032 139.514C5.84566 166.933 -2.5946e-06 196.321 0 226H226H452Z" fill="#ECDCC1"/>
                                      </svg>
                                      <div class="cont-img">
-                                        <img src="/Zava-php//css/recursos/Congelados.png" alt="Imgagen-congelados">
+                                        <img src="/Zava//css/recursos/Congelados.png" alt="Imgagen-congelados">
                                     </div>
                                     <h4 class="producto-seccion">Congelados</h4>
                                 </div>
@@ -224,7 +224,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                      </svg>
                                       <h4 class="producto-seccion">Snacks</h4>
                                      <div class="cont-img">
-                                        <img src="/Zava-php//css/recursos/Snack.png" alt="Imgagen-snacks">
+                                        <img src="/Zava//css/recursos/Snack.png" alt="Imgagen-snacks">
                                     </div>
                                 </div>
                                 <div class="producto-item">
@@ -233,7 +233,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                      </svg>
                                       <h4 class="producto-seccion">Bebidas</h4>
                                      <div class="cont-img">
-                                        <img src="/Zava-php//css/recursos/Bebidas.png" alt="Imgagen-bebidas">
+                                        <img src="/Zava//css/recursos/Bebidas.png" alt="Imgagen-bebidas">
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                                         <path d="M452 226C452 196.321 446.154 166.933 434.797 139.514C423.439 112.094 406.792 87.1799 385.806 66.1939C364.82 45.2078 339.906 28.5608 312.486 17.2032C285.067 5.84566 255.679 -1.2973e-06 226 0C196.321 1.2973e-06 166.933 5.84566 139.514 17.2032C112.094 28.5608 87.1799 45.2078 66.1939 66.1939C45.2078 87.1799 28.5608 112.094 17.2032 139.514C5.84566 166.933 -2.5946e-06 196.321 0 226H226H452Z" fill="#ECDCC1"/>
                                     </svg>
                                 <div class="cont-img">
-                                    <img src="/Zava-php//css/recursos/Pastas-y-arroces.png" alt="Imgagen-pastas-y-arroces">
+                                    <img src="/Zava//css/recursos/Pastas-y-arroces.png" alt="Imgagen-pastas-y-arroces">
                                 </div>
                                 <h4 class="producto-seccion">Pastas y arroces</h4>
                             </div>
@@ -260,7 +260,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
                 <div class="restaurante">
                     <!--SE MOSTRARAN 6 RESTAURANTES (CUALQUIERA) DESDE LA BDD-->
                     <div class="restaurante-imagen">
-                        <img src="/Zava-php//css/recursos/restaurante.jpg">
+                        <img src="/Zava//css/recursos/restaurante.jpg">
                     </div>
                     <div class="descripcion">
                         <div class="cont-des-superior">
@@ -306,5 +306,5 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
 </div>
 <?php 
 
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>

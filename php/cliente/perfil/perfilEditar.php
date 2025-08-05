@@ -1,7 +1,7 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';
 include_once('conexion.php');
 
 
@@ -31,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
         $nombre_archivo = 'perfil_' . $id_usuario . '_' . time() . '.' . $ext;
-        $ruta_destino = $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/img/perfiles/' . $nombre_archivo;
+        $ruta_destino = $_SERVER['DOCUMENT_ROOT'] . '/Zava/img/perfiles/' . $nombre_archivo;
         if (move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_destino)) {
-            $foto = 'img/perfiles/' . $nombre_archivo;
+            $foto = 'Zava/imagenes/perfiles/' . $nombre_archivo;
         }
     }
 
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<link rel="stylesheet" href="/Zava-php/css/perfil-editar.css">
+<link rel="stylesheet" href="/Zava/css/perfil-editar.css">
 <main>
     <div class="contenedor-editar-perfil">
         <h2>Editar Perfil</h2>
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
         <form method="POST" enctype="multipart/form-data" class="form-editar-perfil">
             <div class="foto-perfil-editar">
-                <img src="/Zava-php/<?= htmlspecialchars($usuario['foto']) ?>" alt="Foto de perfil" style="width:100px;height:100px;object-fit:cover;border-radius:50%;">
+                <img src="/Zava/<?= htmlspecialchars($usuario['foto']) ?>" alt="Foto de perfil" style="width:100px;height:100px;object-fit:cover;border-radius:50%;">
                 <input type="file" name="foto" accept="image/*">
             </div>
             <div class="campos-editar">
@@ -89,4 +89,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </main>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php'; ?>

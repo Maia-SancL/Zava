@@ -1,6 +1,6 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
 
 // Obtiene el ID del producto desde el formulario enviado por POST
 $id_producto = $_GET['id_producto'];
@@ -27,10 +27,10 @@ $rutaImagenComercio= "uploads/".$foto_usuario_comercio;
 ?>
 
 <div class="layout">
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/menuLateral.php';?>
-    <link rel="stylesheet" href="/Zava-php/css/mostrarProducto.css">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
+    <link rel="stylesheet" href="/Zava/css/mostrarProducto.css">
     <main>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
         <section class="section-principal">
             <div class="cont-img">
                 <img src="<?php echo $rutaImagenProducto?>" alt="<?php echo $producto['nombre'];?>">
@@ -81,7 +81,7 @@ $rutaImagenComercio= "uploads/".$foto_usuario_comercio;
     </main>
 </div>
 <?php 
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>
 
    

@@ -1,10 +1,10 @@
 <?php 
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 ?>
-<link rel="stylesheet" href="/Zava-php/css/diferenciacionRegistro.css">
+<link rel="stylesheet" href="/Zava/css/diferenciacionRegistro.css">
 <main class="main-tipo-user">
     <div class="cont-img-titulo">
-        <img src="/Zava-php/css/recursos/Principal.png" alt="titulo">
+        <img src="/Zava/css/recursos/Principal.png" alt="titulo">
     </div>
     <p>Elige el tipo de usuario que desee</p>
     <section class="section-opciones-user">

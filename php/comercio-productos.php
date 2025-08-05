@@ -1,8 +1,8 @@
 <?php 
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/conexion.php';
 ?>
-<link rel="stylesheet" href="/Zava-php/css/comercio-productos.css">
+<link rel="stylesheet" href="/Zava/css/comercio-productos.css">
     <main>
         <section class="section-titulo-btn">
             <h2 class="subtitulo">Productos</h2>

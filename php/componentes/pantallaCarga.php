@@ -1,9 +1,9 @@
-<!--NO SE. O HIZO CHATGPT DESPUES DE DISCUTIR 1 HORA. PERO QUEDA LINDO :D-->
+<!--NO SE. LO HIZO CHATGPT DESPUES DE DISCUTIR 1 HORA. PERO QUEDA LINDO :D-->
 <?php
 
 $mensaje = ($_POST['mensaje']) ?? "Cargando...";
-$destino = $_POST['destino'] ?? '/Zava-php/index.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
+$destino = $_POST['destino'] ?? '/Zava/index.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 ?>
 <style>
   body, html {

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/conexion.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 
 $id_usuario = $_SESSION['id'];
 // Datos del comercio
@@ -15,10 +15,10 @@ $foto = $comercio['foto'] ? htmlspecialchars($comercio['foto']) : 'perfil.png';
 $rutaImg="../uploads/".$foto;
 ?>
 <div class="layout">
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/menuLateral.php';?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
     <main>
-        <link rel="stylesheet" href="/Zava-php/css/index-comercio.css">
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';?>
+        <link rel="stylesheet" href="/Zava/css/index-comercio.css">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
 
         <div class="cont-perfil">
             <div class="img-info">

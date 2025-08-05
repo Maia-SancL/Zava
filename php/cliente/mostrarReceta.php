@@ -1,7 +1,7 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/funciones/tags.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/funciones/tags.php';
 
 // Inicializar mensaje
 $mensaje = '';
@@ -57,16 +57,16 @@ function convertirTiempoAMinutos($hora) {
 // ?>
 
 <div class="layout">
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/menuLateral.php';?>
-    <link rel="stylesheet" href="/Zava-php/css/mostrarReceta.css">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
+    <link rel="stylesheet" href="/Zava/css/mostrarReceta.css">
     <main>
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';?>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
         <?php
         if (!empty($mensaje)) {
             echo $mensaje;
         }?>
         <?php 
-        $rutaImg="uploads/". $receta['imagen']?>
+        $rutaImg="/Zava/img/recetas/". $receta['imagen']?>
         <article class="cont-imagenes-receta">
             <div class="cont-img-izquierda">
                 <img src="<?php echo $rutaImg;?>" alt="Imagen 1">
@@ -175,5 +175,5 @@ function convertirTiempoAMinutos($hora) {
     </main>
 </div>
 <?php 
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>

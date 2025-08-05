@@ -1,7 +1,7 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';
 include_once 'conexion.php';
 
 if (!isset($_SESSION['id'])) {
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <script>
             setTimeout(function(){
-                window.location.href = '/Zava-php/index.php';
+                window.location.href = '/Zava/index.php';
             }, 1800);
         </script>
         ";
@@ -118,8 +118,8 @@ if (!empty($receta['tiempo_preparacion'])) {
 $imagen = $receta['imagen'];
 ?>
 
-<link rel="stylesheet" href="/Zava-php/css/crear-receta.css">
-<script src="/Zava-php/js/main.js"></script>
+<link rel="stylesheet" href="/Zava/css/crear-receta.css">
+<script src="/Zava/js/main.js"></script>
 <main>
     <div class="crear-receta">
         <form action="modificarReceta.php?id=<?= $id_receta ?>" method="POST" enctype="multipart/form-data" class="form-receta">
@@ -248,4 +248,4 @@ document.querySelectorAll('.eliminar-paso').forEach(btn => {
     }
 });
 </script>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php'; ?>

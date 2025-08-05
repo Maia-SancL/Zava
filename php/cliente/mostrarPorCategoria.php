@@ -1,7 +1,7 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/cliente/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/cliente/conexion.php';
 
 $categoria = isset($_POST['categoria']) ? mysqli_real_escape_string($conexion, $_POST['categoria']) : '';
  if (empty($categoria)) {
@@ -234,4 +234,4 @@ $resultado_recetas = mysqli_query($conexion, $query_recetas);
         <a href="recetario.php" class="btn-volver">Volver al recetario</a>
     </div>
 </div>
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php'; ?>

@@ -1,7 +1,7 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
 
 $mensaje = '';
 
@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['tipo_usuario'] = $result2['rol'];
                 switch($result2['rol']){
                     case("1"):
-                        header('Location: /Zava-php/index.php');
+                        header('Location: /Zava/index.php');
                         exit;
                         break;
                     case("2"):
-                        header('Location: /Zava-php/php/comercio/index.php');
+                        header('Location: /Zava/php/comercio/index.php');
                         exit;
                         break;
                     case("3"):
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         exit;
                         break;
                     default:
-                        header('Location: /Zava-php/index.php');
+                        header('Location: /Zava/index.php');
                         exit;
                         break;
                 }
@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <header>
-    <link rel="stylesheet" href="/Zava-php/css/inicioSesion.css">
+    <link rel="stylesheet" href="/Zava/css/inicioSesion.css">
 </header>
 <main>
     <div class="imagen-principal">
-         <img class="img-iniciar-sesion" src="/Zava-php/css/recursos/Principal.png"> 
+         <img class="img-iniciar-sesion" src="/Zava/css/recursos/Principal.png"> 
     </div>
     <div class="cont-formulario-iniciar-sesion">
         <h4 class="titulo-iniciar-sesion">Iniciar sesión</h4>
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($mensaje): ?>
             <p style="color:red;"><?= $mensaje ?></p>
         <?php endif; ?>
-            <a href="/Zava-php/php/general/diferenciacionRegistro.php">¿No tenes cuenta?</a>
+            <a href="/Zava/php/general/diferenciacionRegistro.php">¿No tenes cuenta?</a>
             <button type="submit" class="btn-iniciar-sesion">Iniciar sesión</button>
         </form>
     </div>

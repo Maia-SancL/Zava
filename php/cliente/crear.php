@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';
 include_once 'conexion.php';
 
 $mensaje = '';  // Variable para mensajes de error o exito
@@ -34,10 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
         // Manejo de una sola imagen subida
         $imagen = '';
         if (!empty($_FILES['imagen']['name'])) {
-            // $target_dir = "uploads/";
-            // if (!is_dir($target_dir)) {
-            //     mkdir($target_dir, 0777, true);
-            // }
+             $target_dir = "/Zava/imagenes/recetas/";
+             if (!is_dir($target_dir)) {
+                 mkdir($target_dir, 0777, true);
+             }
             $target_file = basename($_FILES['imagen']['name']);
             if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
                 $imagen = $target_file;
@@ -79,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
     }
 }
 ?>
-<link rel="stylesheet" href="/Zava-php/css/crear-receta.css">
-<script src="/Zava-php/js/main.js"></script>
+<link rel="stylesheet" href="/Zava/css/crear-receta.css">
+<script src="/Zava/js/main.js"></script>
 <main>
     <div class="crear-receta">
         <form action="crear.php" method="POST" enctype="multipart/form-data" class="form-receta">

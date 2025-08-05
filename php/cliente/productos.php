@@ -1,6 +1,6 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/conexion.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 
 if (isset($_GET['tipo_producto'])) {
     $tipo_producto = $_GET['tipo_producto'];
@@ -12,10 +12,10 @@ $descuento = isset($_GET['descuento']) ? true : false;
 
 ?>
 <div class="layout">
-    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/menuLateral.php';?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
     <main>
-        <link rel="stylesheet" href="/Zava-php/css/productos.css">
-         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';?>
+        <link rel="stylesheet" href="/Zava/css/productos.css">
+         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
          <section class="section-filtros">
             <form method="get" id="filtros-restaurantes" action="">
                 <select name="tipo_producto" class="filtro">
@@ -162,5 +162,5 @@ $descuento = isset($_GET['descuento']) ? true : false;
     </main>
 </div>
 <?php 
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/footer.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>

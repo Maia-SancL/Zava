@@ -74,7 +74,7 @@ $res_ayer = mysqli_query($conexion, $q_ayer);
             <div class="informacion-principal">
                 <div class="informacion">
                     <span class="lbl-informacion">
-                        <img src="<?= !empty($h['imagen_contenido']) ? '/Zava-php/php/cliente/' . $h['imagen_contenido'] : '/Zava-php/css/recursos/galletitas-receta-2.jpg' ?>" alt="Imagen" style="width:60px;height:40px;object-fit:cover;border-radius:8px;">
+                        <img src="<?= !empty($h['imagen_contenido']) ? '/Zava/php/cliente/' . $h['imagen_contenido'] : '/Zava/css/recursos/galletitas-receta-2.jpg' ?>" alt="Imagen" style="width:60px;height:40px;object-fit:cover;border-radius:8px;">
                     </span>
                     <span class="lbl-informacion"><?= htmlspecialchars($h['nombre_contenido']) ?></span>
                     <span class="lbl-informacion"><?= ucfirst($h['tipo_contenido']) ?></span>
@@ -111,7 +111,7 @@ $res_ayer = mysqli_query($conexion, $q_ayer);
             <div class="informacion-principal">
                 <div class="informacion">
                     <span class="lbl-informacion">
-                        <img src="<?= !empty($h['imagen_contenido']) ? '/Zava-php/php/cliente/' . $h['imagen_contenido'] : '/Zava-php/css/recursos/galletitas-receta-2.jpg' ?>" alt="Imagen" style="width:60px;height:40px;object-fit:cover;border-radius:8px;">
+                        <img src="<?= !empty($h['imagen_contenido']) ? '/Zava/php/cliente/' . $h['imagen_contenido'] : '/Zava/css/recursos/galletitas-receta-2.jpg' ?>" alt="Imagen" style="width:60px;height:40px;object-fit:cover;border-radius:8px;">
                     </span>
                     <span class="lbl-informacion"><?= htmlspecialchars($h['nombre_contenido']) ?></span>
                     <span class="lbl-informacion"><?= ucfirst($h['tipo_contenido']) ?></span>

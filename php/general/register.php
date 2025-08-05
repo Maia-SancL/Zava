@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="/Zava-php/css/registrarse.css">
+<link rel="stylesheet" href="/Zava/css/registrarse.css">
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/general/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
 
 $mensaje = '';
 
@@ -68,9 +68,9 @@ if (isset($_POST['registrarse'])) {
 
                     if ($insert_result) {
                         echo '
-                        <form id="postRedirect" action="/Zava-php/php/componentes/pantallaCarga.php" method="POST">
+                        <form id="postRedirect" action="/Zava/php/componentes/pantallaCarga.php" method="POST">
                             <input type="hidden" name="mensaje" value="Registro exitoso. Redirigiendo a inicio de sesión...">
-                            <input type="hidden" name="destino" value="/Zava-php/php/general/inicioSesion.php">
+                            <input type="hidden" name="destino" value="/Zava/php/general/inicioSesion.php">
                         </form>
                         <script>document.getElementById("postRedirect").submit();</script>';
                         exit;
@@ -85,7 +85,7 @@ if (isset($_POST['registrarse'])) {
 ?>
 <main>
     <div class="imagen-principal">
-        <img class="img-registro" src="/Zava-php/css/recursos/Principal.png" alt="Imagen principal">
+        <img class="img-registro" src="/Zava/css/recursos/Principal.png" alt="Imagen principal">
     </div>
     <div class="cont-registro">
         <h4 class="titulo-registro">Registrarse</h4>
