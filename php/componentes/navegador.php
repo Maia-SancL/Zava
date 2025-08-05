@@ -1,32 +1,28 @@
 <?php
-//Vericia si ya se ferifico la sesion
-include_once('conexion.php');
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-?>
-<!--Link estilo del navegador-->
-<link rel="stylesheet" href="/Zava/css/navegador.css"> 
-
-<?php
-//Navegadores para los usuarios con sesion
-if (isset($_SESSION['id']) && isset($_SESSION['tipo_usuario'])) { 
-    $id_usuario = $_SESSION['id']; //Seteamos el id del usarios
-    $rol = $_SESSION['tipo_usuario']; //Seteamos el rol del usuario
-    //Hacemos una consulta para obtener los datos del usuario y mostrarlos en el deplegable
-    $query = "SELECT nombre, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
-    $resultado = mysqli_query($conexion, $query);
-    if (!$resultado || mysqli_num_rows($resultado) === 0) {
-    return; 
-    }
-    $usuario = mysqli_fetch_assoc($resultado);
-    $nombre = htmlspecialchars($usuario['nombre']);
-    $nickname = htmlspecialchars($usuario['nickname']);
-    $foto = $usuario['foto'] ? htmlspecialchars($usuario['foto']) : 'perfil.png';
-
-    switch ($rol){
-        case ('1'): //Si el rol es cliente?>
-            <nav class="nav">
+// No llamar a session_start() aca.
+// Solo muestra menú de usuario si hay sesión real
+if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'])):
+    if ($_SESSION['tipo_usuario'] === 'Usuario'):
+        include_once('conexion.php');
+        $id_usuario = $_SESSION['id'];
+        $query = "SELECT nombre, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
+        $resultado = mysqli_query($conexion, $query);
+        if ($resultado && mysqli_num_rows($resultado) > 0) {
+            $usuario = mysqli_fetch_assoc($resultado);
+            $nombre = htmlspecialchars($usuario['nombre']);
+            $nickname = htmlspecialchars($usuario['nickname']);
+            $foto = $usuario['foto'] ? htmlspecialchars($usuario['foto']) : 'perfil.png';
+$rutaImg="/Zava/img/perfiles/".$foto;
+        } else {
+            $nombre = 'Usuario';
+            $nickname = 'Usuario';
+            $foto = '/Zava/img/perfiles/';
+            $rutaImg="/Zava/img/perfiles/".$foto;
+        }
+        ?>
+        <link rel="stylesheet" href="/Zava/css/navegador.css">
+        <!-- Menú para clientes -->
+        <nav class="nav">
             <div class="barra-buscar">
                 <div class="btn-buscar">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="nav-icono"fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/></svg>
@@ -44,8 +40,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['tipo_usuario'])) {
                             <li>
                                 <div class="user-info">
                                     <div class="cont-user-img">
-                                         <?php $rutaImg = "/Zava/php/cliente/uploads/". $foto;?>
-                                        <img src="<?php echo $rutaImg; ?>" alt="Foto de perfil" class="user-avatar">
+                                        <img src="<?= $rutaImg ?>" alt="Foto de perfil" class="user-avatar">
                                     </div>
                                     <span class="user-name"><?= $nombre ?></span>
                                     <span class="user-username"><?= $nickname ?></span>
@@ -76,35 +71,31 @@ if (isset($_SESSION['id']) && isset($_SESSION['tipo_usuario'])) {
                 </div>
             </div>
         </nav>
-        <?php  break;
-
-        case ('2'): //Si el rol es comercio?> 
-         <nav class="nav">
+    <?php elseif ($_SESSION['tipo_usuario'] === 'Vendedor'): ?>
+        <!-- Menú para vendedores -->
+        <nav class="nav">
             <div class="cont-btns">
                 <ul class="nav-lista-btns">
-                    <!-- <li class="btns">Panel vendedor</li> -->
+                    <li class="btns">Panel vendedor</li>
                     <li class="btns user-dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" onclick="bandejaUsuario(event)"><circle cx="12" cy="6" r="4" fill="currentColor " class="nav-icono"/><path class="nav-icono"fill="currentColor" d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5"/></svg>
                         <ul class="user-dropdown-content">
                             <li>
                                 <div class="user-info">
                                     <div class="cont-user-img">
-                                        <?php $rutaImg = "/Zava/php/cliente/uploads/". $foto;?>
-                                        <img src="<?php echo $rutaImg; ?>" alt="Foto de perfil" class="user-avatar">
+                                        <img src="perfil.png" alt="Foto de perfil" class="user-avatar">
                                     </div>
-                                    <span class="user-name"><?= $nombre ?></span>
-                                    <span class="user-username"><?= $nickname ?></span>
+                                    <span class="user-name">Vendedor</span>
+                                    <span class="user-username">Vendedor</span>
                                 </div>
                             </li>
-                            <!-- <li>
+                            <li>
                                 <div class="btn-dropdown perfil">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" onclick="bandejaUsuario(event)"><circle cx="12" cy="6" r="4" fill="currentColor " class="nav-icono"/><path class="nav-icono"fill="currentColor" d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5"/></svg>
-                                    <a onclick="location.href='/Zava/php/cliente/perfil/perfilInicio.php'" class="profile-btn">Ir a mi perfil</a>
+                                    <a href="perfil.php" class="profile-btn">Ir a mi perfil</a>
                                 </div>
-                            </li> -->
+                            </li>
                             <li>
                                 <div class="btn-dropdown logout">
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="nav-icono" fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h6q.425 0 .713.288T12 4t-.288.713T11 5H5v14h6q.425 0 .713.288T12 20t-.288.713T11 21zm12.175-8H10q-.425 0-.712-.288T9 12t.288-.712T10 11h7.175L15.3 9.125q-.275-.275-.275-.675t.275-.7t.7-.313t.725.288L20.3 11.3q.3.3.3.7t-.3.7l-3.575 3.575q-.3.3-.712.288t-.713-.313q-.275-.3-.262-.712t.287-.688z"/></svg>
                                     <form action="/Zava/php/componentes/funciones/cerrarSesion.php" method="POST">
                                         <button type="submit" class="logout-btn">Cerrar sesión</button>
                                     </form>
@@ -121,14 +112,29 @@ if (isset($_SESSION['id']) && isset($_SESSION['tipo_usuario'])) {
                 </div>
             </div>
         </nav>
-        <?php break;
-
-        case('3'): //Si es admin ?>
-
-        <?php break;
-    } 
-} else { //Navegador sin sesion iniciada?>
-     <nav class="nav">
+    <?php elseif ($_SESSION['tipo_usuario'] === 'Admin'): ?>
+        <!-- Menú para administradores -->
+        <nav class="nav">
+            <div class="cont-btns">
+                <ul class="nav-lista-btns">
+                    <li class="btns">Navegador Administrador</li>
+                    <li class="btns"><a href="/Zava/php/admin/panelAdmin.php">Panel</a></li>
+                    <li class="btns"><a href="/Zava/php/admin/usuarios.php">Usuarios</a></li>
+                    <li class="btns"><a href="/Zava/php/admin/reportes.php">Reportes</a></li>
+                    <li class="btns"><a href="/Zava/php/admin/configuracion.php">Configuración</a></li>
+                    <li class="btns">
+                        <form action="/Zava/php/componentes/funciones/cerrarSesion.php" method="POST" style="display:inline;">
+                            <button type="submit" class="logout-btn">Cerrar sesión</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    <?php endif;
+else: ?>
+    <!-- Menú para visitantes (no logueados) -->
+    <link rel="stylesheet" href="/Zava/css/navegador.css">
+    <nav class="nav">
         <div class="barra-buscar">
             <div class="btn-buscar">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="nav-icono"fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/></svg>
@@ -152,5 +158,4 @@ if (isset($_SESSION['id']) && isset($_SESSION['tipo_usuario'])) {
             </ul>
         </div>
     </nav>
-<?php }
-?>
+<?php endif; ?>

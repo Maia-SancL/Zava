@@ -1,4 +1,5 @@
 <?php
+session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/funciones/tags.php';

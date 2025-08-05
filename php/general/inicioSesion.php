@@ -7,37 +7,42 @@ $mensaje = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['correo']) && isset($_POST['contrasenia'])) {
-        $correo = $_POST['correo'];
-        $contrasenia = $_POST['contrasenia'];
+        $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
+        $pass = $_POST['contrasenia'];
+        $pass_MD5 = md5($pass);
 
-        $sql = "SELECT * FROM usuarios WHERE correo = '$correo'";
+        $sql = "SELECT * FROM Usuarios WHERE correo = '$correo' AND activo = 1";
         $result = mysqli_query($conexion, $sql);
 
         if ($result && mysqli_num_rows($result) == 1) {
             $result2 = mysqli_fetch_assoc($result);
-            $hash_guardado = $result2['contrasenia'];
-            if (password_verify($contrasenia, $hash_guardado)) {
+            if ($pass_MD5 == $result2['contrasenia']) {
                 $_SESSION['id'] = $result2['id_usuario'];
-                $_SESSION['tipo_usuario'] = $result2['rol'];
-                switch($result2['rol']){
-                    case("1"):
-                        header('Location: /Zava/index.php');
-                        exit;
+                $_SESSION['correo'] = $result2['correo'];
+                $_SESSION['nickname'] = $result2['nickname'];
+                $_SESSION['nombre'] = $result2['nombre'];
+                $_SESSION['apellido'] = $result2['apellido'];
+                $_SESSION['id_rol'] = $result2['id_rol'];
+                
+                // Definir tipo de usuario basado en el rol (coincide con nombres en DB)
+                switch($result2['id_rol']) {
+                    case 1:
+                        $_SESSION['tipo_usuario'] = 'Usuario';
                         break;
-                    case("2"):
-                        header('Location: /Zava/php/comercio/index.php');
-                        exit;
+                    case 2:
+                        $_SESSION['tipo_usuario'] = 'Vendedor';
                         break;
-                    case("3"):
-                        
-                        exit;
+                    case 3:
+                        $_SESSION['tipo_usuario'] = 'Restaurante';
+                        break;
+                    case 4:
+                        $_SESSION['tipo_usuario'] = 'Admin';
                         break;
                     default:
-                        header('Location: /Zava/index.php');
-                        exit;
-                        break;
+                        $_SESSION['tipo_usuario'] = 'Usuario';
                 }
                 
+                header("Location: /Zava/index.php");
                 exit;
             } else {
                 $mensaje = 'Contraseña incorrecta';
@@ -57,6 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="cont-formulario-iniciar-sesion">
         <h4 class="titulo-iniciar-sesion">Iniciar sesión</h4>
+        <?php if ($mensaje): ?>
+            <p style="color:red;"><?= $mensaje ?></p>
+        <?php endif; ?>
         <form action="inicioSesion.php" method="POST" class="form-iniciar-sesion">
             <div class="cont-input">
                 <label class="lbl-iniciar-sesion" for="correo">Correo</label>
@@ -66,9 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label class="lbl-iniciar-sesion" for="contrasenia">Contraseña</label>
                 <input class="input-iniciar-sesion contrasenia" type="password" id="contrasenia" name="contrasenia" required>
             </div>
-        <?php if ($mensaje): ?>
-            <p style="color:red;"><?= $mensaje ?></p>
-        <?php endif; ?>
             <a href="/Zava/php/general/diferenciacionRegistro.php">¿No tenes cuenta?</a>
             <button type="submit" class="btn-iniciar-sesion">Iniciar sesión</button>
         </form>

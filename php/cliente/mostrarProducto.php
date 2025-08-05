@@ -10,20 +10,23 @@ $query_producto = "SELECT * FROM productos WHERE id_producto = $id_producto";
 $resultado_producto = mysqli_query($conexion, $query_producto);
 $producto = mysqli_fetch_array($resultado_producto);
 
-// Consulta para obtener los datos del usuario que registró el producto
+// Consulta para obtener los datos del usuario que registro el producto
 $id_usuario = $producto['id_usuario'];
 $query_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
 $resultado_usuario = mysqli_query($conexion, $query_usuario);
-$usuario = mysqli_fetch_array($resultado_usuario);
+$usuario = mysqli_fetch_assoc($resultado_usuario);
 
-// Imagen del producto
-$imagen_producto = $producto['imagen'] ? $producto['imagen'] : 'default.png';
-$rutaImagenProducto= "../comercio/uploads/".$imagen_producto;
+// Imagen del producto (zava_completa.sql usa 'imagen' y/o 'imagen_principal')
+$imagen_producto = $producto['imagen'] ? $producto['imagen'] : 'producto_default.png';
+$rutaImagenProducto = "/Zava/img/productos/" . $imagen_producto;
 
-// Datos del comercio
+// Datos del vendedor
 $nickname_comercio = $usuario['nickname'];
 $foto_usuario_comercio = $usuario['foto'] ? $usuario['foto'] : 'perfil.png';
-$rutaImagenComercio= "uploads/".$foto_usuario_comercio;
+$rutaImagenComercio = "/Zava/img/usuarios/" . $foto_usuario_comercio;
+
+// Nombre de la categoria (obtenido del JOIN)
+$nombre_categoria = $producto['categoria'];
 ?>
 
 <div class="layout">
@@ -38,9 +41,64 @@ $rutaImagenComercio= "uploads/".$foto_usuario_comercio;
             <article class="informacion">
                 <div class="informacion-principal">
                     <div class="cont-tipo-btns">
-                        <span class="tipo-producto"><?php echo $producto['categoria'];?></span>
+                        <span class="tipo-producto"><?php echo $nombre_categoria;?></span>
                         <div class="btns">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
+<?php
+$isFavorito = false;
+if (isset($_SESSION['id']) && isset($producto['id_producto'])) {
+    $id_usuario = $_SESSION['id'];
+    $id_producto_actual = $producto['id_producto'];
+    $query_fav = "SELECT 1 FROM Favoritos_Productos WHERE id_producto = $id_producto_actual AND id_usuario = $id_usuario LIMIT 1";
+    $res_fav = mysqli_query($conexion, $query_fav);
+    if ($res_fav && mysqli_num_rows($res_fav) > 0) {
+        $isFavorito = true;
+    }
+}
+?>
+<button id="btn-favorito" class="btn-favorito" data-favorito="<?= $isFavorito ? '1' : '0' ?>">
+    <?php if ($isFavorito): ?>
+        <!-- icono relleno -->
+        <svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
+    <?php else: ?>
+        <!-- icono vacio -->
+        <svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="none" stroke="currentColor" stroke-width="2" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z"/></svg>
+    <?php endif; ?>
+</button>
+<script> // codigo para agregar y eliminar favoritos
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnFav = document.getElementById('btn-favorito');
+        if (!btnFav) return;
+        btnFav.addEventListener('click', function(e) {
+            e.preventDefault();
+            const esFavorito = btnFav.getAttribute('data-favorito') === '1';
+            const idProducto = <?= isset($producto['id_producto']) ? intval($producto['id_producto']) : 0 ?>;
+            if (!idProducto) return;
+            const accion = esFavorito ? 'eliminar' : 'agregar';
+            fetch(`/Zava/php/cliente/perfil/${accion}_favorito.php`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `tipo=producto&id=${idProducto}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    btnFav.setAttribute('data-favorito', esFavorito ? '0' : '1');
+                    const iconFav = document.getElementById('icon-fav');
+                    if (esFavorito) {
+                        iconFav.outerHTML = `<svg id=\"icon-fav\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path class=\"icon\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" d=\"M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z\"/></svg>`;
+                    } else {
+                        iconFav.outerHTML = `<svg id=\"icon-fav\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path class=\"icon\" fill=\"currentColor\" d=\"M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125\"/></svg>`;
+                    }
+                } else {
+                    alert(data.message || 'Error al actualizar favorito');
+                }
+            })
+            .catch(() => {
+                alert('Error de conexión');
+            });
+        });
+    });
+</script>
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92"/></svg>
                         </div>
