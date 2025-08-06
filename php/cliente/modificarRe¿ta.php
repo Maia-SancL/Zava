@@ -1,11 +1,12 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';
-include_once 'conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava-php/php/componentes/navegador.php';
+include_once '../general/conexion.php';
 
-if (!isset($_SESSION['id'])) {
-    header("Location: login.php");
+// Verificar sesión y rol de cliente
+if (!isset($_SESSION['id']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 1) {
+    header("Location: /Zava-php/php/general/inicioSesion.php");
     exit;
 }
 
@@ -35,43 +36,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pasos = isset($_POST['pasos']) ? mysqli_real_escape_string($conexion, implode('. ', $_POST['pasos'])) : '';
     $tipo_comida = mysqli_real_escape_string($conexion, $_POST['tipo_comida']);
     $porciones = isset($_POST['porciones']) ? intval($_POST['porciones']) : 1;
-    $tipo_dieta = isset($_POST['tipo_dieta']) ? mysqli_real_escape_string($conexion, $_POST['tipo_dieta']) : '';
     $tiempo = isset($_POST['tiempo']) ? intval($_POST['tiempo']) : 0;
+    $dificultad = mysqli_real_escape_string($conexion, $_POST['dificultad']);
+    $tipo_dieta = mysqli_real_escape_string($conexion, $_POST['tipo_dieta']);
 
     // Manejo de imagen
     $imagen = $receta['imagen'];
     if (!empty($_FILES['imagen']['name'])) {
-        $target_dir = "uploads/";
+        $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/Zava-php/uploads/recetas/";
         if (!is_dir($target_dir)) {
             mkdir($target_dir, 0777, true);
         }
-        $target_file = $target_dir . basename($_FILES['imagen']['name']);
+
+        $extension = strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+        $nuevo_nombre = uniqid() . '.' . $extension;
+        $target_file = $target_dir . $nuevo_nombre;
+
         if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
             // Elimina la imagen anterior si existe y es diferente
-            if ($imagen && file_exists($imagen) && $imagen !== $target_file) {
-                unlink($imagen);
+            if ($imagen && file_exists($target_dir . $imagen) && $imagen !== 'receta_default.png') {
+                unlink($target_dir . $imagen);
             }
-            $imagen = $target_file;
+            $imagen = $nuevo_nombre;
         }
-    } elseif (isset($_POST['eliminar_imagen']) && $_POST['eliminar_imagen'] == '1') {
-        if ($imagen && file_exists($imagen)) {
-            unlink($imagen);
-        }
-        $imagen = '';
     }
 
     // Actualizar la receta
     $query = "UPDATE recetas SET 
-        nombre='$nombre',
-        descripcion='$descripcion',
-        ingredientes='$ingredientes',
-        pasos='$pasos',
-        tipo_comida='$tipo_comida',
-        porciones=$porciones,
-        tipo_dieta='$tipo_dieta',
-        tiempo_preparacion=SEC_TO_TIME($tiempo*60),
-        imagen='$imagen'
-        WHERE id_receta=$id_receta AND id_usuario=$id_usuario";
+        nombre = '$nombre',
+        descripcion = '$descripcion',
+        ingredientes = '$ingredientes',
+        pasos = '$pasos',
+        tipo_comida = '$tipo_comida',
+        porciones = $porciones,
+        tiempo_preparacion = $tiempo,
+        dificultad = '$dificultad',
+        tipo_dieta = '$tipo_dieta',
+        imagen = '$imagen',
+        imagen_principal = '$imagen'
+        WHERE id_receta = $id_receta AND id_usuario = $id_usuario";
+
     $resultado = mysqli_query($conexion, $query);
 
     if ($resultado) {
@@ -92,13 +96,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <script>
             setTimeout(function(){
-                window.location.href = '/Zava/index.php';
+                window.location.href = '/Zava-php/php/cliente/recetario.php';
             }, 1800);
         </script>
         ";
         exit;
     } else {
-        $mensaje = "Error al modificar la receta.";
+        $mensaje = "Error al modificar la receta: " . mysqli_error($conexion);
     }
 }
 

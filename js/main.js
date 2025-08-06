@@ -122,70 +122,7 @@
 
     botonAgregarPaso.onclick = () => agregarPaso();
 
-    // SUBIDA DE IMÁGENES PERSONALIZADA
-      const zonaImagenes = document.getElementById('zona-imagenes');
-    const inputImagenes = document.getElementById('input-imagenes');
-    const previewImagenes = document.getElementById('preview-imagenes');
-    const iconoImagen = document.getElementById('icono-imagen');
-    const textoImagen = zonaImagenes.querySelector('p');
 
-    // Al hacer clic en la zona, abre el selector de archivos
-    zonaImagenes.addEventListener('click', () => inputImagenes.click());
-
-    // Cuando seleccionas un archivo
-    inputImagenes.addEventListener('change', function () {
-        if (this.files.length > 1) {
-            alert('Solo puedes seleccionar una imagen.');
-            this.value = '';
-            previewImagenes.innerHTML = '';
-            iconoImagen.style.display = '';
-            textoImagen.style.display = '';
-            return;
-        }
-        mostrarPreviewImagen(this.files[0]);
-    });
-
-    function mostrarPreviewImagen(file) {
-        previewImagenes.innerHTML = '';
-        if (!file) {
-            iconoImagen.style.display = '';
-            textoImagen.style.display = '';
-            return;
-        }
-        iconoImagen.style.display = 'none';
-        textoImagen.style.display = 'none';
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            img.style.width = '100%';
-            img.style.height = '100%';
-            img.style.objectFit = 'cover';
-            img.style.borderRadius = '16px';
-            previewImagenes.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-    }
-
-    // Drag & drop (opcional, si quieres permitirlo)
-    zonaImagenes.addEventListener('dragover', function (e) {
-        e.preventDefault();
-        zonaImagenes.classList.add('dragover');
-    });
-    zonaImagenes.addEventListener('dragleave', function (e) {
-        e.preventDefault();
-        zonaImagenes.classList.remove('dragover');
-    });
-    zonaImagenes.addEventListener('drop', function (e) {
-        e.preventDefault();
-        zonaImagenes.classList.remove('dragover');
-        if (e.dataTransfer.files.length > 1) {
-            alert('Solo puedes seleccionar una imagen.');
-            return;
-        }
-        inputImagenes.files = e.dataTransfer.files;
-        mostrarPreviewImagen(inputImagenes.files[0]);
-    });
 });
 
 

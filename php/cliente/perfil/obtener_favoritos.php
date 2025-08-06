@@ -86,7 +86,7 @@ switch($tipo) {
                             <p>Dificultad: ' . htmlspecialchars($item['dificultad']) . '</p>
                             <p>Agregado: ' . date('d/m/Y', strtotime($item['fecha_agregado'])) . '</p>
                             <div class="acciones-dinamico">
-                                <a href="/Zava/php/cliente/mostrarReceta.php?id=' . $item['id_receta'] . '" class="btn-ver-dinamico">Ver Receta</a>
+                                <a href="/Zava/php/cliente/mostrarReceta.php?id_receta=' . $item['id_receta'] . '" class="btn-ver-dinamico">Ver Receta</a>
                                 <button onclick="eliminarFavoritoDinamico(\'receta\', ' . $item['id_receta'] . ')" class="btn-eliminar-dinamico">♥</button>
                             </div>
                         </div>

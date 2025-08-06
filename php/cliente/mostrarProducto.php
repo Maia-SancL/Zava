@@ -1,9 +1,34 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/cliente/conexion.php';
+session_start();
+if (isset($_SESSION['id']) && isset($_GET['id_producto'])) {
+    $id_usuario_hist = intval($_SESSION['id']);
+    $id_producto_hist = intval($_GET['id_producto']);
+    $tipo_contenido = 'producto';
+    // Insertar la vista
+    $conexion->query("INSERT INTO Historial_Vistas (id_usuario, tipo_contenido, id_contenido, fecha_vista) VALUES ($id_usuario_hist, '$tipo_contenido', $id_producto_hist, NOW())");
+    // Eliminar duplicados del mismo contenido en el día, dejando solo el más reciente
+    $conexion->query("DELETE hv FROM Historial_Vistas hv 
+        JOIN (SELECT id_usuario, tipo_contenido, id_contenido, MAX(id_vista) as max_id
+              FROM Historial_Vistas
+              WHERE id_usuario = $id_usuario_hist AND DATE(fecha_vista) = CURDATE()
+              GROUP BY tipo_contenido, id_contenido
+              HAVING COUNT(*) > 1) sub
+        ON hv.id_usuario = sub.id_usuario AND hv.tipo_contenido = sub.tipo_contenido AND hv.id_contenido = sub.id_contenido
+        WHERE hv.id_vista < sub.max_id");
+    // Limitar a los últimos 5 vistos del día actual (productos y recetas juntos)
+    $res = $conexion->query("SELECT id_vista FROM Historial_Vistas WHERE id_usuario = $id_usuario_hist AND DATE(fecha_vista) = CURDATE() ORDER BY fecha_vista DESC");
+    $ids = array();
+    while($row = $res->fetch_assoc()){ $ids[] = $row['id_vista']; }
+    if(count($ids) > 5){
+        $ids_to_delete = array_slice($ids, 5);
+        $ids_str = implode(',', $ids_to_delete);
+        $conexion->query("DELETE FROM Historial_Vistas WHERE id_vista IN ($ids_str)");
+    }
+}
 
 // Obtiene el ID del producto desde el formulario enviado por POST
-$id_producto = $_GET['id_producto'];
+$id_producto = $_GET['id_producto']; 
 
 // Consulta para obtener los datos del producto
 $query_producto = "SELECT * FROM productos WHERE id_producto = $id_producto";
@@ -23,10 +48,10 @@ $rutaImagenProducto = "/Zava/img/productos/" . $imagen_producto;
 // Datos del vendedor
 $nickname_comercio = $usuario['nickname'];
 $foto_usuario_comercio = $usuario['foto'] ? $usuario['foto'] : 'perfil.png';
-$rutaImagenComercio = "/Zava/img/usuarios/" . $foto_usuario_comercio;
+$rutaImagenComercio = "/Zava/img/perfiles/" . $foto_usuario_comercio;
 
 // Nombre de la categoria (obtenido del JOIN)
-$nombre_categoria = $producto['categoria'];
+$nombre_categoria = $producto['categoria'] ?? 'Sin categoría';
 ?>
 
 <div class="layout">

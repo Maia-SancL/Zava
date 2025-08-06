@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';
@@ -23,75 +24,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
     ) {
         $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
         $descripcion = mysqli_real_escape_string($conexion, $_POST['descripcion']);
-        $ingredientes = isset($_POST['ingredientes']) ? mysqli_real_escape_string($conexion, implode('; ', $_POST['ingredientes'])) : '';
+        $ingredientes = isset($_POST['ingredientes']) ? mysqli_real_escape_string($conexion, implode(', ', $_POST['ingredientes'])) : '';
         $pasos = isset($_POST['pasos']) ? mysqli_real_escape_string($conexion, implode('. ', $_POST['pasos'])) : '';
         $tipo_comida = mysqli_real_escape_string($conexion, $_POST['tipo_comida']);
         $porciones = isset($_POST['porciones']) ? intval($_POST['porciones']) : 1;
-        $tipo_dieta = mysqli_real_escape_string($conexion, $_POST['tipo_dieta']);
+        $tipo_dieta = isset($_POST['tipo_dieta']) ? mysqli_real_escape_string($conexion, $_POST['tipo_dieta']) : '';
         $tiempo = isset($_POST['tiempo']) ? intval($_POST['tiempo']) : 0;
-        $dificultad = mysqli_real_escape_string($conexion, $_POST['dificultad']);
-        $id_categoria = intval($_POST['categoria']);
 
-        // Guardar imágenes
-        $imagenes_guardadas = [];
-        if (!empty($_FILES['imagenes']['name'][0])) {
-            $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/Zava/imagenes/recetas/";
-            if (!is_dir($target_dir)) {
-                mkdir($target_dir, 0777, true);
-            }
-
-            foreach ($_FILES['imagenes']['name'] as $key => $name) {
-                if ($_FILES['imagenes']['error'][$key] == 0) {
-                    $nombre_archivo = time() . '_' . basename($name);
-                    $ruta_completa = $target_dir . $nombre_archivo;
-                    if (move_uploaded_file($_FILES['imagenes']['tmp_name'][$key], $ruta_completa)) {
-                        $imagenes_guardadas[] = $nombre_archivo;
-                    }
-                }
+        // Manejo de una sola imagen subida
+        $imagen = '';
+        if (!empty($_FILES['imagen']['name'])) {
+             $target_dir = "/Zava/imagenes/recetas/";
+             if (!is_dir($target_dir)) {
+                 mkdir($target_dir, 0777, true);
+             }
+            $target_file = basename($_FILES['imagen']['name']);
+            if (move_uploaded_file($_FILES['imagen']['tmp_name'], $target_file)) {
+                $imagen = $target_file;
             }
         }
 
-        $imagen_principal = !empty($imagenes_guardadas) ? $imagenes_guardadas[0] : 'receta_default.png';
-
-        // Insertar receta principal
-        $query = "INSERT INTO Recetas (id_usuario, nombre, descripcion, ingredientes, pasos, tiempo_preparacion, porciones, dificultad, tipo_comida, tipo_dieta, id_categoria, imagen_principal)
-                  VALUES ('$id_usuario', '$nombre', '$descripcion', '$ingredientes', '$pasos', '$tiempo', '$porciones', '$dificultad', '$tipo_comida', '$tipo_dieta', '$id_categoria', '$imagen_principal')";
-        
-        if (mysqli_query($conexion, $query)) {
-            $id_receta = mysqli_insert_id($conexion);
-
-            // Insertar imágenes secundarias
-            if (count($imagenes_guardadas) > 1) {
-                for ($i = 1; $i < count($imagenes_guardadas); $i++) {
-                    $imagen_secundaria = $imagenes_guardadas[$i];
-                    $query_img = "INSERT INTO Receta_Imagenes (id_receta, url_imagen) VALUES ('$id_receta', '$imagen_secundaria')";
-                    mysqli_query($conexion, $query_img);
-                }
-            }
-            
-            // Enviar respuesta JSON de éxito
-            header('Content-Type: application/json');
-            echo json_encode(['success' => true, 'id_receta' => $id_receta]);
-
-        } else {
-            // Enviar respuesta JSON de error
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false, 'error' => mysqli_error($conexion)]);
-        }
-        exit; // Detener la ejecución para no renderizar el HTML
+        // Inserta la receta en la base de datos
+        $query = "INSERT INTO recetas (id_usuario, nombre, descripcion, ingredientes, pasos, tipo_comida, porciones, tipo_dieta, tiempo_preparacion, imagen) 
+        VALUES ($id_usuario, '$nombre', '$descripcion', '$ingredientes', '$pasos', '$tipo_comida', $porciones, '$tipo_dieta', SEC_TO_TIME($tiempo*60), '$imagen')";
         $resultado = mysqli_query($conexion, $query);
 
         if ($resultado) {
             $id_receta = mysqli_insert_id($conexion); // OBTIENE EL ID DE LA NUEVA RECETA
-            
-            // Guardar imágenes adicionales en la tabla Receta_Imagenes
-            if (!empty($imagenes_subidas)) {
-                foreach ($imagenes_subidas as $index => $nombre_imagen) {
-                    $es_principal = ($index === 0) ? 1 : 0; // La primera imagen es principal
-                    $query_imagen = "INSERT INTO Receta_Imagenes (id_receta, ruta_imagen, es_principal) VALUES ($id_receta, '$nombre_imagen', $es_principal)";
-                    mysqli_query($conexion, $query_imagen);
-                }
-            }
             echo "
             <div id='mensaje-exito' style='
                 position:fixed;
@@ -115,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
             ";
             exit; // Detiene el resto del HTML
         } else {
-            $mensaje = "Error al crear la receta: " . mysqli_error($conexion);
+            $mensaje = "Error al crear la receta.";
         }
     }
 }
@@ -133,14 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                             <path class="icon" fill="currentColor" d="M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3zm-4.7 6H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v8.3c-.6-.2-1.3-.3-2-.3c-1.1 0-2.2.3-3.1.9L14.5 12L11 16.5l-2.5-3L5 18h8.1c-.1.3-.1.7-.1 1c0 .7.1 1.4.3 2"/>
                         </svg>
                     </div>
-                    <p id="zona-texto">Agregar imágenes de tu plato (máximo 3)</p>
-                    <input type="file" id="input-imagenes" name="imagenes[]" accept="image/*" style="display:none;">
-                    <p class="error-message" id="errorMessage" style="color:red; display:none;">¡Solo puedes seleccionar hasta 3 imágenes!</p>
-                    <div class="preview-container" id="previewContainer" style="display:none; grid-template-columns:240px 110px; gap:8px; margin-top:12px; height:240px;">
-                        <div class="preview-slot" id="slot-0" style="width:240px;height:240px;grid-row:1/span 2;border:2px dashed #bbb;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;"></div>
-                        <div class="preview-slot" id="slot-1" style="width:110px;height:110px;border:2px dashed #bbb;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;"></div>
-                        <div class="preview-slot" id="slot-2" style="width:110px;height:110px;border:2px dashed #bbb;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;"></div>
-                    </div>
+                    <p>Agregar imagen de tu plato ya listo</p>
+                    <input type="file" id="input-imagenes" name="imagen" accept="image/*" style="display:none;">
+                    <div id="preview-imagenes" class="preview-imagenes"></div>
                 </div>
                 <label class="subtitulo">Ingredientes</label>
                 <div id="contenedor-ingredientes" class="cont-ingredientes"></div>
@@ -228,5 +182,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
         </form>
     </div>
 </main>
-
-<script src="/Zava/js/preview-imagenes-receta.js"></script>

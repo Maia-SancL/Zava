@@ -51,7 +51,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                     </a>
                 </li>
                 <li class="barra-elemento">
-                    <a href="<?= isset($_SESSION['id']) ? '.php' : '.php' ?>">
+                    <a href="<?= isset($_SESSION['id']) ? '/Zava/php/cliente/perfil/perfilInicio.php' : '/Zava/php/cliente/perfil/perfilInicio.php' ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
                     <p class="barra-texto">Favoritos</p>
                     </a>
@@ -87,12 +87,6 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                             <a href="<?= isset($_SESSION['id']) ? 'perfilRecetasFavoritas.php' : 'registrarCuenta.php' ?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g  class="barra-icono" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path class="barra-icono" fill="currentColor" d="M42 36V20H14v16a6 6 0 0 0 6 6h16a6 6 0 0 0 6-6"/><path class="barra-icono" d="M4 20h40M18 8v4m10-6v6m10-4v4"/></g></svg>
                             <p class="barra-texto">Recetas</p>
-                            </a>
-                        </li>
-                        <li class="barra-elemento submenu">
-                            <a href="<?= isset($_SESSION['id']) ? 'perfilRestaurantesFavoritos.php' : 'registrarCuenta.php' ?>">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 576 512"><path class="barra-icono" fill="currentColor" d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v125.7l-86.8 86.8c-10.3 10.3-17.5 23.1-21 37.2l-18.7 74.9c-2.3 9.2-1.8 18.8 1.3 27.5L64 512c-35.3 0-64-28.7-64-64zm384 64H256V0zm165.8 107.7l14.4 14.4c15.6 15.6 15.6 40.9 0 56.6l-29.4 29.4l-71-71l29.4-29.4c15.6-15.6 40.9-15.6 56.6 0M311.9 417l129.2-129.2l71 71l-129.2 129.1c-4.1 4.1-9.2 7-14.9 8.4l-60.1 15c-5.5 1.4-11.2-.2-15.2-4.2s-5.6-9.7-4.2-15.2l15-60.1c1.4-5.6 4.3-10.8 8.4-14.9z"/></svg>
-                            <p class="barra-texto">Restaurantes</p>
                             </a>
                         </li>
                     
@@ -229,12 +223,6 @@ else: ?>
                         <a href="<?= isset($_SESSION['id']) ? 'perfilRecetasFavoritas.php' : 'registrarCuenta.php' ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g  class="barra-icono" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path class="barra-icono" fill="currentColor" d="M42 36V20H14v16a6 6 0 0 0 6 6h16a6 6 0 0 0 6-6"/><path class="barra-icono" d="M4 20h40M18 8v4m10-6v6m10-4v4"/></g></svg>
                         <p class="barra-texto">Recetas</p>
-                        </a>
-                    </li>
-                    <li class="barra-elemento submenu">
-                        <a href="<?= isset($_SESSION['id']) ? 'perfilRestaurantesFavoritos.php' : 'registrarCuenta.php' ?>">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 576 512"><path class="barra-icono" fill="currentColor" d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v125.7l-86.8 86.8c-10.3 10.3-17.5 23.1-21 37.2l-18.7 74.9c-2.3 9.2-1.8 18.8 1.3 27.5L64 512c-35.3 0-64-28.7-64-64zm384 64H256V0zm165.8 107.7l14.4 14.4c15.6 15.6 15.6 40.9 0 56.6l-29.4 29.4l-71-71l29.4-29.4c15.6-15.6 40.9-15.6 56.6 0M311.9 417l129.2-129.2l71 71l-129.2 129.1c-4.1 4.1-9.2 7-14.9 8.4l-60.1 15c-5.5 1.4-11.2-.2-15.2-4.2s-5.6-9.7-4.2-15.2l15-60.1c1.4-5.6 4.3-10.8 8.4-14.9z"/></svg>
-                        <p class="barra-texto">Restaurantes</p>
                         </a>
                     </li>
                 
