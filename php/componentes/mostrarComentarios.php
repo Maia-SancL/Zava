@@ -19,14 +19,14 @@ $comentarios = [];
 if ($tipo && $id > 0) {
     if ($tipo === 'receta') {
         $sql = "SELECT c.*, u.nombre, u.nickname, u.foto 
-                FROM comentarios_receta c
-                JOIN usuarios u ON c.id_usuario = u.id_usuario
+                FROM Comentarios_Recetas c
+                JOIN Usuarios u ON c.id_usuario = u.id_usuario
                 WHERE c.id_receta = $id
                 ORDER BY c.fecha_comentario DESC";
     } elseif ($tipo === 'restaurante') {
         $sql = "SELECT c.*, u.nombre, u.nickname, u.foto 
-                FROM comentarios_restaurante c
-                JOIN usuarios u ON c.id_usuario = u.id_usuario
+                FROM Comentarios_Restaurantes c
+                JOIN Usuarios u ON c.id_usuario = u.id_usuario
                 WHERE c.id_restaurante = $id
                 ORDER BY c.fecha_comentario DESC";
     }
@@ -67,7 +67,7 @@ if ($tipo && $id > 0) {
             <div class="comentario-user">
                 <div class="info-user">
                     <div class="cont-img">
-                        <img src="<?= htmlspecialchars($comentario['foto'] ?? './css/recursos/Almuerzo.jpg') ?>" alt="Foto de perfil">
+                        <img src="/Zava/img/perfiles/<?= htmlspecialchars($comentario['foto'] ?? 'default.png') ?>" alt="Foto de perfil">
                     </div>
                     <div class="info">
                         <div class="fullname-username">
@@ -85,15 +85,17 @@ if ($tipo && $id > 0) {
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
+    <?php if (isset($_SESSION['usuario'])): ?>
     <div class="cont-agregar-comentario">
         <div class="cont-img">
-            <img src="./css/recursos/Bebidas.jpg" alt="Foto de perfil">
+            <img src="/Zava/img/perfiles/<?= htmlspecialchars($_SESSION['usuario']['foto'] ?? 'default.png') ?>" alt="Foto de perfil">
         </div>
-        <div class="agregar-comentario">
-            <input type="text" placeholder="Agregar un comentario">
-            <button class="btn-enviar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="nav-icono"fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14"/></svg>
+        <form id="form-comentario" class="agregar-comentario" data-tipo="<?= $tipo ?>" data-id="<?= $id ?>">
+            <input type="text" id="comentario-input" name="comentario" placeholder="Agregar un comentario..." required>
+            <button type="submit" class="btn-enviar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M3.4 20.4l17.4-8.4c.8-.4.8-1.6 0-2L3.4 1.6c-.8-.4-1.6.4-1.4 1.2l3.6 7.2c.2.4.2.8 0 1.2L2 19.2c-.2.8.6 1.6 1.4 1.2Z"/></svg>
             </button>
-        </div>
-     </div>
+        </form>
+    </div>
+<?php endif; ?>
 </section>

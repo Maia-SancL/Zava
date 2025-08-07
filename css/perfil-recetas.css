@@ -1,154 +1,286 @@
-/* Estilos para la sección de "Mis Recetas" */
-.main-content {
+.caja-nav-seleccionado{
+    background-color: var(--Primaro-500, #621111);
+    color: var(--secundario-100);
     width: 100%;
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 0 20px;
-}
-
-.lista-recetas {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.receta-card {
-    display: flex;
-    background-color: #FBF6EE; /* Color de fondo similar a la imagen */
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    transition: transform 0.2s ease;
-    border: 1px solid #EFEBE5;
-}
-
-.receta-card:hover {
-    transform: translateY(-5px);
-}
-
-.receta-img {
-    width: 200px;
-    height: 100%;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.receta-info {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.receta-header {
-    display: flex;
+    padding: 0.625rem 0rem;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-size: 0.8rem;
-    color: #757575;
-    flex-wrap: wrap;
+    gap: 0.625rem;
+    border-radius: 0.625rem;
 }
 
-.receta-header .fecha {
-    margin-left: auto;
-}
-
-.tag-tipo-comida, .tag-tipo-dieta {
-    background-color: #EFEBE5;
-    padding: 3px 8px;
-    border-radius: 12px;
-}
-
-.receta-titulo {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #333;
-    margin: 0 0 5px 0;
-}
-
-.receta-descripcion {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 0 0 15px 0;
-    flex-grow: 1;
-}
-
-.receta-meta {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 15px;
-}
-
-.receta-meta .tiempo i {
-    margin-right: 5px;
-}
-
-.receta-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: auto; /* Alinea los botones al final */
-}
-
-.btn-modificar, .btn-eliminar {
-    padding: 8px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
+.global{
     display: inline-flex;
+    align-items: flex-start;
+    gap: 46px;
+    margin-left: 2.5%;
+    margin-top: 2.5%;
+}
+
+.filtroVistos{
+    background: #faf4ec;
+    border-radius: 24px;
+    padding: 10px 20px 20px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    width: 319px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    border-radius: 0px 20px 20px 0px;
+    border-left: 1px solid var(--Primaro-500, #621111);
+    background: var(--Secundario-50, #FBF6EE);
+    margin-top: 1%;
+}
+
+.tipoContenido{
+    display: flex;
+    width: 100%;
+    height: 30px;
+    padding: 7px 10px;
+    justify-content: space-between;
     align-items: center;
+    flex: 1 0 0;
+    border-radius: 20px;
+    background: var(--Secundario-100, #F2E9DD);
+}
+
+.tipoContenido p{
+    color: var(--Negros-700, #1F1F1F);
+    font-family: Montserrat;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 97px;
+}
+
+.tipoContenido svg{
+    width: 20px;
+    height: 20px;
+    aspect-ratio: 1/1;
+}
+
+.tiempoContenido{
+    display: flex;
+    height: 30px;
+    padding: 7px 10px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 20px;
+    background: var(--Secundario-100, #F2E9DD);
+}
+
+.tiempoContenido p{
+    color: var(--Negros-700, #1F1F1F);
+    font-family: Montserrat;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 97px;
+}
+
+.tiempoContenido svg{
+    width: 20px;
+    height: 20px;
+    aspect-ratio: 1/1;
+}
+
+.globalReceta{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 8px;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
+    align-self: stretch;
 }
 
-.btn-modificar {
-    background-color: #A0522D; /* Tono marrón/rojizo como en la imagen */
-    color: #FBF6EE;
-    border: 1px solid transparent;
+.listaGlobal{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
 }
 
-.btn-modificar:hover {
-    background-color: #8B4513;
+.receta{
+    display: flex;
+    height: 158px;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 0px 20px 20px 0px;
+    background: var(--Secundario-50, #FBF6EE);
 }
 
-.btn-eliminar {
-    background-color: transparent;
-    color: #A0522D;
-    border: 1px solid #A0522D;
+.contImagen{
+    overflow: hidden;
 }
 
-.btn-eliminar:hover {
-    background-color: #fdf0e6;
+.imagenGlobal{
+    object-fit: cover;
+    display: flex;
+    width: 234.366px;
+    height: 158px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px 0px 0px 10px;
 }
 
-.no-recetas {
+.contGlobal{
+    display: flex;
+    padding: 5px 0px 5px 10px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 1 0 0;
+    align-self: stretch;
+    margin-right: 2%;
+}
+
+.contEtiquetas{
+    display: flex;
+    padding-right: 15px;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.etiquetas{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.etiquetaGlobal{
+    display: flex;
+    padding: 2.441px 6.102px;
+    justify-content: center;
+    align-items: center;
+    gap: 3.051px;
+    border-radius: 20px;
+    background: var(--Secundario-100, #F2E9DD);
+}
+
+.etiquetaGlobal svg{
+    width: 14.646px;
+    height: 14.646px;
+    aspect-ratio: 14.65/14.65;
+}
+
+.etiquetaGlobal p{
+    color: var(--Negros-700, #1F1F1F);
+    font-family: Montserrat;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.fechaAniadida{
+    color: var(--Negros-700);
+    font-family: Montserrat;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+}
+
+.contGlobal h5{
+    color: var(--Negros-700, #1F1F1F);
     text-align: center;
-    padding: 50px;
-    background-color: #FBF6EE;
-    border-radius: 15px;
-    border: 1px solid #EFEBE5;
+    font-family: Quicksand;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.no-recetas p {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 20px;
+.contGlobal p{
+    color: var(--Negros-700, #1F1F1F);
+    text-align: center;
+    font-family: Quicksand;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
 }
 
-.btn-crear-receta {
-    background-color: #A0522D;
-    color: white;
-    padding: 12px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
+.tiempoReceta{
+    display: flex;
+    padding: 5px 0px;
+    align-items: center;
+    gap: 2px;
 }
 
-.btn-crear-receta:hover {
-    background-color: #8B4513;
+.tiempoReceta svg{
+    width: 18px;
+    height: 18px;
+    aspect-ratio: 1/1;
+}
+
+.tiempoReceta p{
+    color: var(--Negros-700, #1F1F1F);
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.botonGlobal{
+    display: flex;
+    align-items: center;
+    gap: 10px;  
+}
+
+.botonModificar{
+    display: flex;
+    padding: 5px 12px;
+    align-items: center;
+    gap: 5px;
+    border-radius: 20px;
+    border: 1px solid #621111;
+    background: var(--Primaro-500, #621111);
+}
+
+.botonModificar svg{
+    width: 18px;
+    height: 18px;
+    aspect-ratio: 1/1;
+}
+
+.botonModificar p{
+   color: var(--Blanco-100, #F4F4F4);
+    font-family: Nunito;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal; 
+}
+
+.botonEliminar{
+    display: flex;
+    padding: 4px 12px;
+    align-items: center;
+    gap: 5px;
+    border-radius: 20px;
+    border: 1px solid var(--Primaro-500, #621111);
+}
+
+.botonEliminar svg{
+    width: 24px;
+    height: 24px;
+    aspect-ratio: 1/1;
+}
+
+.botonEliminar p{
+    color: #621111;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }

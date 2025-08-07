@@ -61,9 +61,6 @@ $rutaImg = "/Zava/img/perfiles/" . $foto;
         <div onclick="location.href='/Zava/php/cliente/perfil/perfilRecetas.php'" class="caja-nav">
             <a>Mis Recetas</a>
         </div>
-        <div onclick="location.href='/Zava/php/cliente/perfil/perfilReseñas.php'" class="caja-nav">
-            <a>Mis Reseñas</a>
-        </div>
     </div>
 
     <?php

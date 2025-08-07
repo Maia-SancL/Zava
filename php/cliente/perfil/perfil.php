@@ -59,9 +59,6 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             <div  onclick="location.href='/Zava/php/cliente/perfil/perfilRecetas.php'" class="caja-nav">
                 <a>Mis Recetas</a>
             </div>
-            <div  onclick="location.href='/Zava/php/cliente/perfil/perfilReseñas.php'" class="caja-nav">
-                <a>Mis Reseñas</a>
-            </div>
         </div>
         
         <div class="cont-opciones">
@@ -83,7 +80,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
                 <button onclick="ocultarFavoritos()" class="btn-volver">← Volver</button>
             </div>
             <div id="grid-favoritos" class="grid-favoritos-dinamico">
-                <!-- Aca se carga dinamicamente y si... -->
+                <!-- Aca se carga dinamicamente, y si papito como si no... -->
             </div>
         </div>
     </main>

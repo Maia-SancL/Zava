@@ -53,6 +53,14 @@ if (isset($_GET['id_receta']) && is_numeric($_GET['id_receta']) && intval($_GET[
         $query_usuario = "SELECT id_usuario, nombre, apellido, nickname, foto FROM Usuarios WHERE id_usuario = $id_usuario";
         $resultado_usuario = mysqli_query($conexion, $query_usuario);
         $usuario_receta = mysqli_fetch_assoc($resultado_usuario);
+
+        // Consultar imágenes adicionales
+        $query_imagenes = "SELECT ruta_imagen FROM Receta_Imagenes WHERE id_receta = $id_receta AND es_principal = 0 LIMIT 2";
+        $resultado_imagenes = mysqli_query($conexion, $query_imagenes);
+        $imagenes_adicionales = [];
+        while ($fila = mysqli_fetch_assoc($resultado_imagenes)) {
+            $imagenes_adicionales[] = $fila['ruta_imagen'];
+        }
     }
 } else {
     $mensaje = "Receta no encontrada.";
@@ -79,19 +87,19 @@ function convertirTiempoAMinutos($hora) {
             echo $mensaje;
         }?>
         <?php 
-        $rutaImg="/Zava/img/recetas/". $receta['imagen']?>
+        $rutaPrincipal = "/Zava/imagenes/recetas/" . $receta['imagen'];
+        ?>
         <article class="cont-imagenes-receta">
             <div class="cont-img-izquierda">
-                <img src="<?php echo $rutaImg;?>" alt="Imagen 1">
+                <img src="<?= $rutaPrincipal ?>" alt="Imagen principal de la receta">
             </div>
-            <!-- <div class="cont-img-derecha">
-                <div class="cont-img">
-                    <img src="../css/recursos/galletitas-receta.jpg" alt="Imagen 2">
-                </div>
-                <div class="cont-img">
-                    <img src="../css/recursos/galletitas-receta.jpg" alt="Imagen 3">
-                </div>
-            </div> -->
+            <div class="cont-img-derecha">
+                <?php foreach ($imagenes_adicionales as $index => $img_path): ?>
+                    <div class="cont-img">
+                        <img src="/Zava/imagenes/recetas/<?= htmlspecialchars($img_path) ?>" alt="Imagen adicional de la receta <?= $index + 1 ?>">
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </article>
         <div class="cont-titulo-receta">
             <h1 class="titulo-receta"><?php echo $receta['nombre'];?></h1>
@@ -239,8 +247,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </article>
         </section>
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/mostrarComentarios.php';?>
     </main>
 </div>
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>
+<script src="/Zava/js/comentarios.js"></script>

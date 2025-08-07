@@ -10,7 +10,40 @@ if (!isset($_SESSION['id'])) {
 }
 
 $id_usuario = $_SESSION['id'];
-$tabla = $_GET['tabla'] ?? 'inicio';
+
+// Paginación
+$comentarios_por_pagina = 7;
+$pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+$offset = ($pagina_actual - 1) * $comentarios_por_pagina;
+
+// Contar total de comentarios del usuario
+$query_total = "SELECT COUNT(*) as total FROM Comentarios_Recetas WHERE id_usuario = $id_usuario AND activo = 1";
+$resultado_total = mysqli_query($conexion, $query_total);
+$total_comentarios = mysqli_fetch_assoc($resultado_total)['total'];
+$total_paginas = ceil($total_comentarios / $comentarios_por_pagina);
+
+// Obtener comentarios del usuario con información de la receta
+$query_comentarios = "SELECT 
+    c.id_comentario,
+    c.comentario,
+    c.fecha_comentario,
+    r.id_receta,
+    r.nombre as nombre_receta,
+    r.imagen_principal,
+    u.nombre as nombre_autor,
+    u.apellido as apellido_autor
+    FROM Comentarios_Recetas c
+    INNER JOIN Recetas r ON c.id_receta = r.id_receta
+    INNER JOIN Usuarios u ON r.id_usuario = u.id_usuario
+    WHERE c.id_usuario = $id_usuario AND c.activo = 1
+    ORDER BY c.fecha_comentario DESC
+    LIMIT $comentarios_por_pagina OFFSET $offset";
+
+$resultado_comentarios = mysqli_query($conexion, $query_comentarios);
+$comentarios = [];
+while ($row = mysqli_fetch_assoc($resultado_comentarios)) {
+    $comentarios[] = $row;
+}
 
 // Datos usuario
 $query_usuario = "SELECT nombre, apellido, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
@@ -59,7 +92,313 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             <div  onclick="location.href='/Zava/php/cliente/perfil/perfilRecetas.php'" class="caja-nav">
                 <a>Mis Recetas</a>
             </div>
-            <div  onclick="location.href='/Zava/php/cliente/perfil/perfilReseñas.php'" class="caja-nav">
-                <a>Mis Reseñas</a>
-            </div>
         </div>
+
+        <!-- Sección de Opiniones -->
+        <div class="cont-opiniones">
+            <div class="titulo-seccion">
+                <h3>Mis Opiniones</h3>
+                <span class="contador-opiniones"><?php echo $total_comentarios; ?> comentarios</span>
+            </div>
+
+            <?php if (empty($comentarios)): ?>
+                <div class="sin-opiniones">
+                    <div class="icono-vacio">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h4>No has publicado opiniones aún</h4>
+                    <p>Tus comentarios en recetas aparecerán aquí</p>
+                </div>
+            <?php else: ?>
+                <div class="lista-opiniones">
+                    <?php foreach ($comentarios as $comentario): ?>
+                        <div class="opinion-item">
+                            <div class="opinion-header">
+                                <div class="receta-info">
+                                    <img src="/Zava/imagenes/recetas/<?php echo htmlspecialchars($comentario['imagen_principal'] ?: 'default.jpg'); ?>" 
+                                         alt="<?php echo htmlspecialchars($comentario['nombre_receta']); ?>" 
+                                         class="receta-miniatura">
+                                    <div class="receta-detalles">
+                                        <h4 class="nombre-receta">
+                                            <a href="/Zava/php/cliente/mostrarReceta.php?id=<?php echo $comentario['id_receta']; ?>">
+                                                <?php echo htmlspecialchars($comentario['nombre_receta']); ?>
+                                            </a>
+                                        </h4>
+                                        <span class="autor-receta">
+                                            por <?php echo htmlspecialchars($comentario['nombre_autor'] . ' ' . $comentario['apellido_autor']); ?>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="fecha-comentario">
+                                    <?php 
+                                    $fecha = new DateTime($comentario['fecha_comentario']);
+                                    echo $fecha->format('d/m/Y H:i');
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="opinion-contenido">
+                                <p><?php echo htmlspecialchars($comentario['comentario']); ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <!-- Paginación -->
+                <?php if ($total_paginas > 1): ?>
+                    <div class="paginacion">
+                        <?php if ($pagina_actual > 1): ?>
+                            <a href="?pagina=<?php echo $pagina_actual - 1; ?>" class="btn-paginacion">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15,18 9,12 15,6"></polyline>
+                                </svg>
+                                Anterior
+                            </a>
+                        <?php endif; ?>
+
+                        <div class="numeros-pagina">
+                            <?php 
+                            $inicio = max(1, $pagina_actual - 2);
+                            $fin = min($total_paginas, $pagina_actual + 2);
+                            
+                            for ($i = $inicio; $i <= $fin; $i++): 
+                            ?>
+                                <a href="?pagina=<?php echo $i; ?>" 
+                                   class="numero-pagina <?php echo $i == $pagina_actual ? 'activa' : ''; ?>">
+                                    <?php echo $i; ?>
+                                </a>
+                            <?php endfor; ?>
+                        </div>
+
+                        <?php if ($pagina_actual < $total_paginas): ?>
+                            <a href="?pagina=<?php echo $pagina_actual + 1; ?>" class="btn-paginacion">
+                                Siguiente
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9,18 15,12 9,6"></polyline>
+                                </svg>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+    </main>
+
+    <style>
+    .cont-opiniones {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .titulo-seccion {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #e0e0e0;
+    }
+
+    .titulo-seccion h3 {
+        color: #333;
+        font-size: 1.8rem;
+        margin: 0;
+    }
+
+    .contador-opiniones {
+        color: #666;
+        font-size: 0.9rem;
+        background: #f5f5f5;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+    }
+
+    .sin-opiniones {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #666;
+    }
+
+    .icono-vacio {
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+
+    .sin-opiniones h4 {
+        margin: 1rem 0 0.5rem 0;
+        color: #333;
+    }
+
+    .lista-opiniones {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .opinion-item {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+
+    .opinion-item:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
+
+    .opinion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+    }
+
+    .receta-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .receta-miniatura {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 2px solid #f0f0f0;
+    }
+
+    .receta-detalles h4 {
+        margin: 0 0 0.25rem 0;
+        font-size: 1.1rem;
+    }
+
+    .nombre-receta a {
+        color: #333;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .nombre-receta a:hover {
+        color: #ff6b35;
+    }
+
+    .autor-receta {
+        color: #666;
+        font-size: 0.85rem;
+    }
+
+    .fecha-comentario {
+        color: #999;
+        font-size: 0.8rem;
+        text-align: right;
+    }
+
+    .opinion-contenido {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 8px;
+        border-left: 4px solid #ff6b35;
+    }
+
+    .opinion-contenido p {
+        margin: 0;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .paginacion {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .btn-paginacion {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-paginacion:hover {
+        background: #ff6b35;
+        color: white;
+        border-color: #ff6b35;
+    }
+
+    .numeros-pagina {
+        display: flex;
+        gap: 0.25rem;
+    }
+
+    .numero-pagina {
+        padding: 0.75rem 1rem;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        color: #333;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        min-width: 45px;
+        text-align: center;
+    }
+
+    .numero-pagina:hover {
+        background: #f0f0f0;
+    }
+
+    .numero-pagina.activa {
+        background: #ff6b35;
+        color: white;
+        border-color: #ff6b35;
+    }
+
+    @media (max-width: 768px) {
+        .cont-opiniones {
+            margin: 1rem auto;
+            padding: 0 0.5rem;
+        }
+
+        .opinion-header {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .receta-info {
+            width: 100%;
+        }
+
+        .fecha-comentario {
+            text-align: left;
+        }
+
+        .paginacion {
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .btn-paginacion {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .numero-pagina {
+            padding: 0.5rem 0.75rem;
+            min-width: 40px;
+        }
+    }
+    </style>
