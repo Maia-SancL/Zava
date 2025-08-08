@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/funciones/tags.php';
 // include_once 'php/componentes/navegador.php'; //Menú superior
 // include_once 'php/componentes/menuLateral.php'; //Menú lateral
 
-//Verificamos si se recibip una categoría por GET desde el index
+//Verificamos si se recibip una categoria por GET desde el index
 if (isset($_GET['tipo_comida'])) {
     $tipo_comida = $_GET['tipo_comida'];
 }
@@ -138,7 +138,7 @@ $tiempo = isset($_GET['tiempo']) && is_numeric($_GET['tiempo']) ? (int)$_GET['ti
     <section class="section-recetas">
     <?php
     while ($fila = $result->fetch_assoc()) {
-        $ruta_imagen= 'uploads/' . $fila['imagen'];
+        $ruta_imagen= '/Zava/imagenes/recetas/' . $fila['imagen'];
         ?>
          <form action="mostrarReceta.php" method="GET">
            <article onclick="location.href='mostrarReceta.php?id_receta=<?php echo $fila['id_receta']; ?>'" class="receta-especifica">

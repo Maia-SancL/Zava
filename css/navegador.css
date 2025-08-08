@@ -210,3 +210,29 @@ nav{
 .icon-iniciar-sesion{
   color: var(--secundario-200);
 }
+
+.cart-container {
+    position: relative;
+    display: inline-block; /* O flex, dependiendo del layout */
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px; /* Ajusta según sea necesario */
+    right: -8px; /* Ajusta según sea necesario */
+    background-color: var(--acento-500);
+    color: var(--primario-500);
+    border-radius: 50%;
+    padding: 0.1em 0.4em;
+    font-family: Nunito;
+    font-size: 0.75rem;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 18px;
+    min-height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 2px solid var(--secundario-200);
+}

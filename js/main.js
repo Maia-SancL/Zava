@@ -68,7 +68,7 @@
     document.getElementById('cancelar-boton').addEventListener('click', function () {
                 if (confirm('¿Estás seguro de que deseas cancelar la creación de la receta?')) {
                     alert('Se canceló la creación de la receta.');
-                    window.location.href = 'index.php'; // Redirige al index
+                    window.location.href = '/Zava/index.php'; // Redirige al index
                     }
                 });
 

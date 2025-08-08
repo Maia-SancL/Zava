@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['nombre'] = $result2['nombre'];
                 $_SESSION['apellido'] = $result2['apellido'];
                 $_SESSION['id_rol'] = $result2['id_rol'];
+                $_SESSION['foto'] = $result2['foto'];
+                $_SESSION['usuario'] = $result2;
                 
                 // Definir tipo de usuario basado en el rol (coincide con nombres en DB)
                 switch($result2['id_rol']) {

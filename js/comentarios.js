@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('tipo', tipo);
             formData.append('id', id);
 
-            fetch('/Zava/php/componentes/agregar_comentario.php', {
+            fetch('/Zava/php/componentes/funciones/agregarComentario.php', {
                 method: 'POST',
                 body: formData
             })

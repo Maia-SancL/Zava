@@ -12,7 +12,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
             $nombre = htmlspecialchars($usuario['nombre']);
             $nickname = htmlspecialchars($usuario['nickname']);
             $foto = $usuario['foto'] ? htmlspecialchars($usuario['foto']) : 'perfil.png';
-$rutaImg="/Zava/img/perfiles/".$foto;
+        $rutaImg="/Zava/img/perfiles/".$foto;
         } else {
             $nombre = 'Usuario';
             $nickname = 'Usuario';
@@ -31,7 +31,18 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             </div>
             <div class="cont-btns">
                 <ul class="nav-lista-btns">
-                    <li class="btns">
+                    <?php
+                    $total_productos = 0;
+                    if (isset($_SESSION['carrito']) && is_array($_SESSION['carrito'])) {
+                        foreach ($_SESSION['carrito'] as $cantidad) {
+                            $total_productos += $cantidad;
+                        }
+                    }
+?>
+                    <li class="btns cart-container" onclick="location.href='/Zava/php/cliente/carrito.php'">
+                        <?php if ($total_productos > 0): ?>
+                            <span class="cart-count" id="cart-count"><?= $total_productos ?></span>
+                        <?php endif; ?>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="nav-icono" fill="currentColor" fill-rule="evenodd" d="M10 2.25a1.75 1.75 0 0 0-1.582 1c-.684.006-1.216.037-1.692.223A3.25 3.25 0 0 0 5.3 4.563c-.367.493-.54 1.127-.776 1.998l-.047.17l-.513 2.964q-.277.191-.486.459c-.901 1.153-.472 2.87.386 6.301c.545 2.183.818 3.274 1.632 3.91C6.31 21 7.435 21 9.685 21h4.63c2.25 0 3.375 0 4.189-.635c.814-.636 1.086-1.727 1.632-3.91c.858-3.432 1.287-5.147.386-6.301a2.2 2.2 0 0 0-.487-.46l-.513-2.962l-.046-.17c-.237-.872-.41-1.506-.776-2a3.25 3.25 0 0 0-1.426-1.089c-.476-.186-1.009-.217-1.692-.222A1.75 1.75 0 0 0 14 2.25zm8.418 6.896l-.362-2.088c-.283-1.04-.386-1.367-.56-1.601a1.75 1.75 0 0 0-.768-.587c-.22-.086-.486-.111-1.148-.118A1.75 1.75 0 0 1 14 5.75h-4a1.75 1.75 0 0 1-1.58-.998c-.663.007-.928.032-1.148.118a1.75 1.75 0 0 0-.768.587c-.174.234-.277.56-.56 1.6l-.362 2.089C6.58 9 7.91 9 9.685 9h4.63c1.775 0 3.105 0 4.103.146M8 12.25a.75.75 0 0 1 .75.75v4a.75.75 0 0 1-1.5 0v-4a.75.75 0 0 1 .75-.75m8.75.75a.75.75 0 0 0-1.5 0v4a.75.75 0 0 0 1.5 0zM12 12.25a.75.75 0 0 1 .75.75v4a.75.75 0 0 1-1.5 0v-4a.75.75 0 0 1 .75-.75" clip-rule="evenodd"/></svg>
                     </li>
                     <li class="btns user-dropdown">

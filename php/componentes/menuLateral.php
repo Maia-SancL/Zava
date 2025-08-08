@@ -27,25 +27,25 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                     <h2 class="barra-titulo">Zava</h2>
                 </li>
                 <li class="barra-elemento">
-                    <a href="<?= isset($_SESSION['id']) ? '/Zava/index.php' : '/Zava/index.php' ?>">
+                    <a onclick="location.href='/Zava/index.php'">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono "fill="currentColor" d="m12.707 2.293l9 9c.63.63.184 1.707-.707 1.707h-1v6a3 3 0 0 1-3 3h-1v-7a3 3 0 0 0-2.824-2.995L13 12h-2a3 3 0 0 0-3 3v7H7a3 3 0 0 1-3-3v-6H3c-.89 0-1.337-1.077-.707-1.707l9-9a1 1 0 0 1 1.414 0M13 14a1 1 0 0 1 1 1v7h-4v-7a1 1 0 0 1 .883-.993L11 14z"/></svg>
                     <p class="barra-texto">Inicio</p>
                     </a>
                 </li>
                 <li class="barra-elemento">
-                    <a href="<?= isset($_SESSION['id']) ? '/Zava/php/cliente/recetario.php' : '/Zava/php/cliente/recetario.php' ?>">
+                    <a href="/Zava/php/cliente/recetario.php">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono " fill="currentColor" d="M7 5a5 5 0 0 0-2 9.584v2.666h14v-2.666a5.001 5.001 0 0 0-2.737-9.53a4.502 4.502 0 0 0-8.526 0A5 5 0 0 0 7 5m11.998 13.75H5.002c.01 1.397.081 2.162.584 2.664C6.172 22 7.114 22 9 22h6c1.886 0 2.828 0 3.414-.586c.503-.502.574-1.267.584-2.664"/></svg>
                     <p class="barra-texto">Recetas</p>
                     </a>
                 </li>
                 <li class="barra-elemento">
-                    <a href="<?= isset($_SESSION['id']) ? '/Zava/php/cliente/productos.php' : '/Zava/php/cliente/productos.php' ?>">
+                    <a href="/Zava/php/cliente/productos.php">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M3.778 3.655c-.181.36-.27.806-.448 1.696l-.598 2.99a3.06 3.06 0 1 0 6.043.904l.07-.69a3.167 3.167 0 1 0 6.307-.038l.073.728a3.06 3.06 0 1 0 6.043-.904l-.598-2.99c-.178-.89-.267-1.335-.448-1.696a3 3 0 0 0-1.888-1.548C17.944 2 17.49 2 16.582 2H7.418c-.908 0-1.362 0-1.752.107a3 3 0 0 0-1.888 1.548M18.269 13.5a4.53 4.53 0 0 0 2.231-.581V14c0 3.771 0 5.657-1.172 6.828c-.943.944-2.348 1.127-4.828 1.163V18.5c0-.935 0-1.402-.201-1.75a1.5 1.5 0 0 0-.549-.549C13.402 16 12.935 16 12 16s-1.402 0-1.75.201a1.5 1.5 0 0 0-.549.549c-.201.348-.201.815-.201 1.75v3.491c-2.48-.036-3.885-.22-4.828-1.163C3.5 19.657 3.5 17.771 3.5 14v-1.081a4.53 4.53 0 0 0 2.232.581a4.55 4.55 0 0 0 3.112-1.228A4.64 4.64 0 0 0 12 13.5a4.64 4.64 0 0 0 3.156-1.228a4.55 4.55 0 0 0 3.112 1.228"/></svg>
                     <p class="barra-texto">Productos</p>
                     </a>
                 </li>
                 <li class="barra-elemento">
-                    <a href="<?= isset($_SESSION['id']) ? '/Zava/php/cliente/perfil/perfilInicio.php' : '/Zava/php/cliente/perfil/perfilInicio.php' ?>">
+                    <a href="/Zava/php/cliente/perfil/perfil.php">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
                     <p class="barra-texto">Favoritos</p>
                     </a>
@@ -56,19 +56,19 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                 </li>
         
                         <li class="barra-elemento submenu">
-                            <a href="<?= isset($_SESSION['id']) ? '.php' : '.php' ?>">
+                            <a href="/Zava/php/cliente/perfil/perfilUltimosVistos.php">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
                             <p class="barra-texto">Ultimo visto</p>
                             </a>
                         </li>
                         <li class="barra-elemento submenu">
-                            <a href="<?= isset($_SESSION['id']) ? '.php' : '.php' ?>">
+                            <a href="/Zava/php/cliente/perfil/perfilPedidos.php">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V6.525q0-.35.113-.675t.337-.6L4.7 3.725q.275-.35.687-.538T6.25 3h11.5q.45 0 .863.188t.687.537l1.25 1.525q.225.275.338.6t.112.675V19q0 .825-.587 1.413T19 21zm.4-15h13.2l-.85-1H6.25zM16 8H8v6.375q0 .575.475.863t.975.037L12 14l2.55 1.275q.5.25.975-.038t.475-.862z"/></svg>
                             <p class="barra-texto">Pedidos</p>
                             </a>
                         </li>
                         <li class="barra-elemento submenu">
-                            <a href="<?= isset($_SESSION['id']) ? '.php' : '.php' ?>">
+                            <a href="/Zava/php/cliente/perfil/perfilOpiniones.php">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12a10 10 0 0 0 .951 4.262l-.93 4.537a1 1 0 0 0 1.18 1.18l4.537-.93c1.294.61 2.74.95 4.262.95c5.523 0 10-4.476 10-10c0-5.522-4.477-10-10-10" clip-rule="evenodd"/></svg>
                             <p class="barra-texto">Opiniones</p>
                             </a>
@@ -78,7 +78,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                     <p class="barra-texto">Mi Coleccion</p>
                 </li>
                     <li class="barra-elemento submenu">
-                            <a href="<?= isset($_SESSION['id']) ? 'perfilRecetasFavoritas.php' : 'registrarCuenta.php' ?>">
+                            <a href="/Zava/php/cliente/perfil/perfilRecetas.php">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g  class="barra-icono" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path class="barra-icono" fill="currentColor" d="M42 36V20H14v16a6 6 0 0 0 6 6h16a6 6 0 0 0 6-6"/><path class="barra-icono" d="M4 20h40M18 8v4m10-6v6m10-4v4"/></g></svg>
                             <p class="barra-texto">Recetas</p>
                             </a>
@@ -157,25 +157,25 @@ else: ?>
                 <h2 class="barra-titulo">Zava</h2>
             </li>
             <li class="barra-elemento">
-                <a href="<?= isset($_SESSION['id']) ? '/Zava/index.php' : '/Zava/index.php' ?>">
+                <a href="/Zava/index.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono "fill="currentColor" d="m12.707 2.293l9 9c.63.63.184 1.707-.707 1.707h-1v6a3 3 0 0 1-3 3h-1v-7a3 3 0 0 0-2.824-2.995L13 12h-2a3 3 0 0 0-3 3v7H7a3 3 0 0 1-3-3v-6H3c-.89 0-1.337-1.077-.707-1.707l9-9a1 1 0 0 1 1.414 0M13 14a1 1 0 0 1 1 1v7h-4v-7a1 1 0 0 1 .883-.993L11 14z"/></svg>
                 <p class="barra-texto">Inicio</p>
                 </a>
             </li>
             <li class="barra-elemento">
-                <a href="<?= isset($_SESSION['id']) ? '/Zava/php/cliente/recetario.php' : '/Zava/php/cliente/recetario.php' ?>">
+                <a href="/Zava/php/cliente/recetario.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono " fill="currentColor" d="M7 5a5 5 0 0 0-2 9.584v2.666h14v-2.666a5.001 5.001 0 0 0-2.737-9.53a4.502 4.502 0 0 0-8.526 0A5 5 0 0 0 7 5m11.998 13.75H5.002c.01 1.397.081 2.162.584 2.664C6.172 22 7.114 22 9 22h6c1.886 0 2.828 0 3.414-.586c.503-.502.574-1.267.584-2.664"/></svg>
                 <p class="barra-texto">Recetas</p>
                 </a>
             </li>
             <li class="barra-elemento">
-                <a href="<?= isset($_SESSION['id']) ? '/Zava/php/cliente/productos.php' : '/Zava/php/cliente/productos.php' ?>">
+                <a href="/Zava/php/cliente/productos.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M3.778 3.655c-.181.36-.27.806-.448 1.696l-.598 2.99a3.06 3.06 0 1 0 6.043.904l.07-.69a3.167 3.167 0 1 0 6.307-.038l.073.728a3.06 3.06 0 1 0 6.043-.904l-.598-2.99c-.178-.89-.267-1.335-.448-1.696a3 3 0 0 0-1.888-1.548C17.944 2 17.49 2 16.582 2H7.418c-.908 0-1.362 0-1.752.107a3 3 0 0 0-1.888 1.548M18.269 13.5a4.53 4.53 0 0 0 2.231-.581V14c0 3.771 0 5.657-1.172 6.828c-.943.944-2.348 1.127-4.828 1.163V18.5c0-.935 0-1.402-.201-1.75a1.5 1.5 0 0 0-.549-.549C13.402 16 12.935 16 12 16s-1.402 0-1.75.201a1.5 1.5 0 0 0-.549.549c-.201.348-.201.815-.201 1.75v3.491c-2.48-.036-3.885-.22-4.828-1.163C3.5 19.657 3.5 17.771 3.5 14v-1.081a4.53 4.53 0 0 0 2.232.581a4.55 4.55 0 0 0 3.112-1.228A4.64 4.64 0 0 0 12 13.5a4.64 4.64 0 0 0 3.156-1.228a4.55 4.55 0 0 0 3.112 1.228"/></svg>
                 <p class="barra-texto">Productos</p>
                 </a>
             </li>
             <li class="barra-elemento">
-                <a href="<?= isset($_SESSION['id']) ? '.php' : '.php' ?>">
+                <a href="/Zava/php/general/inicioSesion.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
                 <p class="barra-texto">Favoritos</p>
                 </a>
@@ -186,19 +186,19 @@ else: ?>
             </li>
     
                     <li class="barra-elemento submenu">
-                        <a href="<?= isset($_SESSION['id']) ? '.php' : '.php' ?>">
+                        <a href="/Zava/php/general/inicioSesion.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5"/></svg>
                         <p class="barra-texto">Ultimo visto</p>
                         </a>
                     </li>
                     <li class="barra-elemento submenu">
-                        <a href="<?= isset($_SESSION['id']) ? '.php' : '.php' ?>">
+                        <a href="/Zava/php/general/inicioSesion.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V6.525q0-.35.113-.675t.337-.6L4.7 3.725q.275-.35.687-.538T6.25 3h11.5q.45 0 .863.188t.687.537l1.25 1.525q.225.275.338.6t.112.675V19q0 .825-.587 1.413T19 21zm.4-15h13.2l-.85-1H6.25zM16 8H8v6.375q0 .575.475.863t.975.037L12 14l2.55 1.275q.5.25.975-.038t.475-.862z"/></svg>
                         <p class="barra-texto">Pedidos</p>
                         </a>
                     </li>
                     <li class="barra-elemento submenu">
-                          <a href="<?= isset($_SESSION['id']) ? '.php' : '.php' ?>">
+                          <a href="/Zava/php/general/inicioSesion.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12a10 10 0 0 0 .951 4.262l-.93 4.537a1 1 0 0 0 1.18 1.18l4.537-.93c1.294.61 2.74.95 4.262.95c5.523 0 10-4.476 10-10c0-5.522-4.477-10-10-10" clip-rule="evenodd"/></svg>
                         <p class="barra-texto">Opiniones</p>
                         </a>
@@ -208,7 +208,7 @@ else: ?>
                 <p class="barra-texto">Mi Coleccion</p>
             </li>
                 <li class="barra-elemento submenu">
-                        <a href="<?= isset($_SESSION['id']) ? 'perfilRecetasFavoritas.php' : 'registrarCuenta.php' ?>">
+                        <a href="/Zava/php/general/inicioSesion.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><g  class="barra-icono" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path class="barra-icono" fill="currentColor" d="M42 36V20H14v16a6 6 0 0 0 6 6h16a6 6 0 0 0 6-6"/><path class="barra-icono" d="M4 20h40M18 8v4m10-6v6m10-4v4"/></g></svg>
                         <p class="barra-texto">Recetas</p>
                         </a>

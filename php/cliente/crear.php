@@ -149,6 +149,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                     </div>
             </div>
             <div class="columna-der">
+                <div class="botones">
+                    <button type="submit" class="btn-principal">Publicar</button>
+                    <button type="reset" id="cancelar-boton" class="btn-secundario"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/></svg> Borrar</button>
+                </div>
                 <div class="cont-superior">
                     <div class="fila">
                         <div class="campo">
@@ -220,10 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                         <button type="button" id="agregar-paso" class="btn-secundario">+ Paso</button>
                     </div>
                 </div>
-                <div class="botones">
-                    <button type="submit" class="btn-principal">Publicar</button>
-                    <button type="reset" id="cancelar-boton" class="btn-secundario">Borrar</button>
-                </div>
+
             </div>
         </form>
     </div>

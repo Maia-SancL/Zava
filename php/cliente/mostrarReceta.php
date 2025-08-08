@@ -87,7 +87,8 @@ function convertirTiempoAMinutos($hora) {
             echo $mensaje;
         }?>
         <?php 
-        $rutaPrincipal = "/Zava/imagenes/recetas/" . $receta['imagen'];
+        // Asegurarse de que la ruta de la imagen principal sea correcta
+        $rutaPrincipal = "/Zava/imagenes/recetas/" . $receta['imagen_principal'];
         ?>
         <article class="cont-imagenes-receta">
             <div class="cont-img-izquierda">
@@ -254,3 +255,4 @@ document.addEventListener('DOMContentLoaded', function() {
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>
 <script src="/Zava/js/comentarios.js"></script>
+

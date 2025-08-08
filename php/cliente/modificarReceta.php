@@ -43,144 +43,127 @@ $dificultad = $receta['dificultad'];
 $id_categoria = $receta['id_categoria'];
 $imagen_principal = $receta['imagen_principal'];
 
-// Las imágenes ya se obtuvieron en la consulta principal de la receta ($receta)
+// Cargar la imagen principal y las secundarias
 $imagenes_existentes = [];
 if (!empty($receta['imagen_principal'])) {
     $imagenes_existentes[] = $receta['imagen_principal'];
 }
-if (!empty($receta['imagenes_secundarias'])) {
-    $secundarias = json_decode($receta['imagenes_secundarias'], true);
-    if (is_array($secundarias)) {
-        $imagenes_existentes = array_merge($imagenes_existentes, $secundarias);
-    }
+
+// Consultar imaagenes secundarias en la tabla Receta_Imagenes
+$query_imagenes = "SELECT ruta_imagen FROM Receta_Imagenes WHERE id_receta = $id_receta";
+$resultado_imagenes = mysqli_query($conexion, $query_imagenes);
+while ($fila_imagen = mysqli_fetch_assoc($resultado_imagenes)) {
+        $imagenes_existentes[] = $fila_imagen['ruta_imagen'];
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado por POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validar que los campos requeridos no estén vacíos
     if (
-        isset($_POST['nombre']) &&
-        isset($_POST['descripcion']) &&
-        isset($_POST['ingredientes']) &&
-        isset($_POST['pasos']) &&
-        isset($_POST['tipo_comida'])
+        !empty($_POST['nombre']) &&
+        !empty($_POST['descripcion']) &&
+        !empty($_POST['ingredientes']) &&
+        !empty($_POST['pasos']) &&
+        !empty($_POST['tipo_comida'])
     ) {
-        $nombre_nuevo = mysqli_real_escape_string($conexion, $_POST['nombre']);
-        $descripcion_nueva = mysqli_real_escape_string($conexion, $_POST['descripcion']);
-        $ingredientes_nuevos = isset($_POST['ingredientes']) ? mysqli_real_escape_string($conexion, implode(', ', $_POST['ingredientes'])) : '';
-        $pasos_nuevos = isset($_POST['pasos']) ? mysqli_real_escape_string($conexion, implode('. ', $_POST['pasos'])) : '';
-        $tipo_comida_nuevo = mysqli_real_escape_string($conexion, $_POST['tipo_comida']);
-        $porciones_nuevas = isset($_POST['porciones']) ? intval($_POST['porciones']) : 1;
-        $tipo_dieta_nuevo = mysqli_real_escape_string($conexion, $_POST['tipo_dieta']);
-        $tiempo_nuevo = isset($_POST['tiempo']) ? intval($_POST['tiempo']) : 0;
-        $dificultad_nueva = mysqli_real_escape_string($conexion, $_POST['dificultad']);
-        $id_categoria_nueva = intval($_POST['categoria']);
+        // Sanitizar datos del formulario
+        $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
+        $descripcion = mysqli_real_escape_string($conexion, $_POST['descripcion']);
+        $ingredientes = mysqli_real_escape_string($conexion, implode(', ', $_POST['ingredientes']));
+        $pasos = mysqli_real_escape_string($conexion, implode('. ', $_POST['pasos']));
+        $tipo_comida = mysqli_real_escape_string($conexion, $_POST['tipo_comida']);
+        $porciones = intval($_POST['porciones']);
+        $tipo_dieta = mysqli_real_escape_string($conexion, $_POST['tipo_dieta']);
+        $tiempo = intval($_POST['tiempo']);
+        $dificultad = mysqli_real_escape_string($conexion, $_POST['dificultad']);
+        $id_categoria = intval($_POST['categoria']);
 
-        // Manejar imágenes eliminadas
-        $imagenes_actualizadas = $imagenes_existentes;
-        for ($i = 0; $i < 3; $i++) {
-            if (isset($_POST['eliminar_imagen_' . $i]) && $_POST['eliminar_imagen_' . $i] == '1') {
-                if (isset($imagenes_actualizadas[$i])) {
-                    // Aquí podrías eliminar el archivo del servidor si lo deseas
-                    // unlink($_SERVER['DOCUMENT_ROOT'] . '/Zava/imagenes/recetas/' . $imagenes_actualizadas[$i]);
-                    $imagenes_actualizadas[$i] = null;
+        // --- Imagenes ---
+        $imagenes_finales = $imagenes_existentes;
+
+        // Caso 1 Se suben nuevas imagenes (reemplaza todo lo viejo)
+        if (isset($_FILES['imagenes']) && !empty($_FILES['imagenes']['name'][0])) {
+            // Borrar imagenes viejas
+            foreach ($imagenes_existentes as $imagen_vieja) {
+                $ruta_imagen_vieja = $_SERVER['DOCUMENT_ROOT'] . '/Zava/imagenes/recetas/' . $imagen_vieja;
+                if (file_exists($ruta_imagen_vieja)) {
+                    unlink($ruta_imagen_vieja);
                 }
             }
-        }
-        $imagenes_actualizadas = array_filter($imagenes_actualizadas);
 
-        // Guardar nuevas imágenes
-        $imagenes_guardadas = [];
-        if (!empty($_FILES['imagenes']['name'][0])) {
-            $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/Zava/imagenes/recetas/";
-            if (!is_dir($target_dir)) {
-                mkdir($target_dir, 0777, true);
-            }
+            // Guardar las nuevas imagenes
+            $imagenes_guardadas = [];
+            $directorio_destino = $_SERVER['DOCUMENT_ROOT'] . "/Zava/imagenes/recetas/";
+            if (!is_dir($directorio_destino)) mkdir($directorio_destino, 0777, true);
 
-            foreach ($_FILES['imagenes']['name'] as $key => $name) {
+            foreach ($_FILES['imagenes']['name'] as $key => $nombre_archivo_original) {
                 if ($_FILES['imagenes']['error'][$key] == 0) {
-                    $nombre_archivo = time() . '_' . basename($name);
-                    $ruta_completa = $target_dir . $nombre_archivo;
-                    if (move_uploaded_file($_FILES['imagenes']['tmp_name'][$key], $ruta_completa)) {
+                    $nombre_archivo = time() . '_' . uniqid() . '_' . basename($nombre_archivo_original);
+                    $archivo_destino = $directorio_destino . $nombre_archivo;
+                    if (move_uploaded_file($_FILES['imagenes']['tmp_name'][$key], $archivo_destino)) {
                         $imagenes_guardadas[] = $nombre_archivo;
                     }
                 }
             }
-        }
-
-        // Combinar imágenes existentes (no eliminadas) con las nuevas
-        $imagenes_finales = array_merge($imagenes_actualizadas, $imagenes_guardadas);
-        $imagenes_finales = array_slice($imagenes_finales, 0, 3); // Limitar a 3 imágenes
-
-        $imagen_principal_nueva = !empty($imagenes_finales) ? $imagenes_finales[0] : '';
+            $imagenes_finales = $imagenes_guardadas;
         
-
-
-        // Actualizar receta principal
-        $query = "UPDATE Recetas SET 
-                    nombre = '$nombre_nuevo', 
-                    descripcion = '$descripcion_nueva', 
-                    ingredientes = '$ingredientes_nuevos', 
-                    pasos = '$pasos_nuevos', 
-                    tiempo_preparacion = '$tiempo_nuevo', 
-                    porciones = '$porciones_nuevas', 
-                    dificultad = '$dificultad_nueva', 
-                    tipo_comida = '$tipo_comida_nuevo', 
-                    tipo_dieta = '$tipo_dieta_nuevo', 
-                    id_categoria = '$id_categoria_nueva', 
-                    imagen_principal = '$imagen_principal_nueva'
-                  WHERE id_receta = $id_receta AND id_usuario = $id_usuario";
-        
-        if (mysqli_query($conexion, $query)) {
-            // Actualizar imágenes secundarias
-            $query_delete_img = "DELETE FROM Receta_Imagenes WHERE id_receta = $id_receta";
-            mysqli_query($conexion, $query_delete_img);
-            
-            if (count($imagenes_finales) > 1) {
-                for ($i = 1; $i < count($imagenes_finales); $i++) {
-                    $imagen_secundaria = $imagenes_finales[$i];
-                    $query_img = "INSERT INTO Receta_Imagenes (id_receta, url_imagen) VALUES ('$id_receta', '$imagen_secundaria')";
-                    mysqli_query($conexion, $query_img);
+        } else {
+            // Caso 2 no se suben nuevas imagenes, pero se pueden eliminar viejas
+            $imagenes_a_mantener = [];
+            for ($i = 0; $i < count($imagenes_existentes); $i++) {
+                if (isset($_POST['eliminar_imagen_' . $i]) && $_POST['eliminar_imagen_' . $i] == '1') {
+                    $ruta_a_borrar = $_SERVER['DOCUMENT_ROOT'] . '/Zava/imagenes/recetas/' . $imagenes_existentes[$i];
+                    if (file_exists($ruta_a_borrar)) {
+                        unlink($ruta_a_borrar);
+                    }
+                } else {
+                    $imagenes_a_mantener[] = $imagenes_existentes[$i];
                 }
             }
-            
-            // Enviar respuesta JSON de éxito
+            $imagenes_finales = $imagenes_a_mantener;
+        }
+
+        // --- ACTUALIZACONN DE LA BADE DE DATOS ---
+        $imagen_principal_final = !empty($imagenes_finales) ? array_shift($imagenes_finales) : '';
+        $imagenes_secundarias = $imagenes_finales;
+
+        $sql_actualizar = "UPDATE Recetas SET 
+            nombre = '$nombre', 
+            descripcion = '$descripcion', 
+            ingredientes = '$ingredientes', 
+            pasos = '$pasos', 
+            tipo_comida = '$tipo_comida',
+            porciones = $porciones,
+            tipo_dieta = '$tipo_dieta',
+            tiempo_preparacion = $tiempo,
+            dificultad = '$dificultad',
+            id_categoria = $id_categoria,
+            imagen_principal = '$imagen_principal_final'
+            WHERE id_receta = $id_receta AND id_usuario = $id_usuario";
+
+        if (mysqli_query($conexion, $sql_actualizar)) {
+            // Limpiar y re-insertar imágenes secundarias
+            mysqli_query($conexion, "DELETE FROM Receta_Imagenes WHERE id_receta = $id_receta");
+            if (!empty($imagenes_secundarias)) {
+                foreach ($imagenes_secundarias as $imagen_sec) {
+                    $imagen_sec_esc = mysqli_real_escape_string($conexion, $imagen_sec);
+                    $sql_insertar_secundaria = "INSERT INTO Receta_Imagenes (id_receta, ruta_imagen) VALUES ($id_receta, '$imagen_sec_esc')";
+                    mysqli_query($conexion, $sql_insertar_secundaria);
+                }
+            }
+
             header('Content-Type: application/json');
             echo json_encode(['success' => true, 'id_receta' => $id_receta]);
+            exit;
 
         } else {
-            // Enviar respuesta JSON de error
             header('Content-Type: application/json');
-            echo json_encode(['success' => false, 'error' => mysqli_error($conexion)]);
+            echo json_encode(['success' => false, 'error' => 'Error al actualizar la receta: ' . mysqli_error($conexion)]);
+            exit;
         }
-        exit; // Detener la ejecución para no renderizar el HTML
-        
-        $resultado = mysqli_query($conexion, $query);
-
-        if ($resultado) {
-            echo "
-            <div id='mensaje-exito' style='
-                position:fixed;
-                top:30px;right:30px;
-                background:#e0ffe0;
-                color:#27632a;
-                border:1px solid #b2e2b2;
-                border-radius:8px;
-                padding:18px 28px;
-                font-size:1.1rem;
-                z-index:9999;
-                box-shadow:0 2px 8px #0002;
-                '>
-                Receta modificada exitosamente.
-            </div>
-            <script>
-                setTimeout(function(){
-                    window.location.href = 'mostrarReceta.php?id=$id_receta';
-                }, 1800);
-            </script>
-            ";
-            exit; // Detiene el resto del HTML
-        } else {
-            $mensaje = "Error al modificar la receta: " . mysqli_error($conexion);
-        }
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode(['success' => false, 'error' => 'Faltan datos requeridos en el formulario.']);
+        exit;
     }
 }
 ?>
@@ -264,6 +247,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                     </div>
             </div>
             <div class="columna-der">
+                <div class="botones">
+                    <button type="submit" class="btn-principal">Guardar Cambios</button>
+                    <button type="reset" id="cancelar-boton" class="btn-secundario"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/></svg> Borrar</button>
+                </div>
                 <div class="cont-superior">
                     <div class="fila">
                         <div class="campo">
@@ -325,11 +312,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                     <label class="subtitulo">Pasos</label>
                     <div id="contenedor-pasos" class="cont-pasos">
                         <?php foreach($pasos as $index => $paso): ?>
-                            <div class="paso-item">
-                                <span class="numero-paso"><?php echo ($index + 1); ?></span>
-                                <input type="text" name="pasos[]" value="<?php echo htmlspecialchars($paso); ?>" required>
-                                <button type="button" class="eliminar-paso">Eliminar</button>
+                            <div class="paso-item" bis_skin_checked="1" style="display: flex; align-items: center; margin-bottom: 8px;">
+                                <span class="numero-paso" style="display: inline-block; width: 32px; height: 32px; border-radius: 50%; background: rgb(237, 229, 218); color: rgb(125, 90, 74); text-align: center; line-height: 32px; margin-right: 12px; font-weight: bold;"><?php echo ($index + 1); ?></span>
+                                <input type="text" name="pasos[]" value="<?php echo htmlspecialchars($paso); ?>" required="" style="flex: 1 1 0%; margin-right: 8px;">
+                                <button type="button" class="btn-eliminar" disabled="" style="opacity: 0.3; pointer-events: none;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" width="1024" height="1024" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zm3-4q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17"></path></svg>
+                                </button>
                             </div>
+                            
                         <?php endforeach; ?>
                         <?php if(empty($pasos)): ?>
                             <div class="paso-item">
@@ -343,136 +333,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                         <button type="button" id="agregar-paso" class="btn-secundario">+ Paso</button>
                     </div>
                 </div>
-                <div class="botones">
+                <!-- <div class="botones">
                     <button type="submit" class="btn-principal">Guardar Cambios</button>
                     <button type="reset" id="cancelar-boton" class="btn-secundario">Borrar</button>
-                </div>
+                </div> -->
             </div>
         </form>
     </div>
 </main>
 
-<script>
-// Configurar funcionalidad de ingredientes y pasos después de que se cargue la página
-window.addEventListener('load', function() {
-    // Actualizar el valor del slider de tiempo
-    const tiempoSlider = document.getElementById('tiempo');
-    const tiempoValor = document.getElementById('tiempo-valor');
-    if (tiempoSlider && tiempoValor) {
-        tiempoValor.textContent = tiempoSlider.value + ' min';
-    }
-    
-    // Configurar eventos para eliminar ingredientes
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('eliminar-ingrediente')) {
-            const ingredienteItems = document.querySelectorAll('.ingrediente-item');
-            if (ingredienteItems.length > 1) {
-                e.target.parentElement.remove();
-            }
-        }
-        
-        if (e.target.classList.contains('eliminar-paso')) {
-            const pasoItems = document.querySelectorAll('.paso-item');
-            if (pasoItems.length > 1) {
-                e.target.parentElement.remove();
-                actualizarNumerosPasos();
-            }
-        }
-    });
-    
-    // Función para actualizar números de pasos
-    function actualizarNumerosPasos() {
-        const pasos = document.querySelectorAll('.paso-item');
-        pasos.forEach(function(paso, index) {
-            const numeroSpan = paso.querySelector('.numero-paso');
-            if (numeroSpan) {
-                numeroSpan.textContent = index + 1;
-            }
-        });
-    }
-    
-    // Configurar botones de agregar
-    const botonAgregarIngrediente = document.getElementById('agregar-ingrediente');
-    if (botonAgregarIngrediente) {
-        botonAgregarIngrediente.addEventListener('click', function() {
-            const contenedor = document.getElementById('contenedor-ingredientes');
-            const nuevoIngrediente = document.createElement('div');
-            nuevoIngrediente.className = 'ingrediente-item';
-            nuevoIngrediente.innerHTML = `
-                <input type="text" name="ingredientes[]" value="" required>
-                <button type="button" class="eliminar-ingrediente">Eliminar</button>
-            `;
-            contenedor.appendChild(nuevoIngrediente);
-        });
-    }
-    
-    const botonAgregarPaso = document.getElementById('agregar-paso');
-    if (botonAgregarPaso) {
-        botonAgregarPaso.addEventListener('click', function() {
-            const contenedor = document.getElementById('contenedor-pasos');
-            const pasoItems = document.querySelectorAll('.paso-item');
-            const numeroNuevo = pasoItems.length + 1;
-            
-            const nuevoPaso = document.createElement('div');
-            nuevoPaso.className = 'paso-item';
-            nuevoPaso.innerHTML = `
-                <span class="numero-paso">${numeroNuevo}</span>
-                <input type="text" name="pasos[]" value="" required>
-                <button type="button" class="eliminar-paso">Eliminar</button>
-            `;
-            contenedor.appendChild(nuevoPaso);
-        });
-    }
-    
-    // Deshabilitar el botón eliminar del primer ingrediente y primer paso
-    setTimeout(function() {
-        const primerIngrediente = document.querySelector('.ingrediente-item .eliminar-ingrediente');
-        const primerPaso = document.querySelector('.paso-item .eliminar-paso');
-        
-        if (primerIngrediente) {
-            primerIngrediente.style.opacity = '0.5';
-            primerIngrediente.style.pointerEvents = 'none';
-        }
-        
-        if (primerPaso) {
-            primerPaso.style.opacity = '0.5';
-            primerPaso.style.pointerEvents = 'none';
-        }
-    }, 100);
-    
-    // Funcionalidad para eliminar imágenes existentes
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('remove-image')) {
-            const slot = e.target.getAttribute('data-slot');
-            const slotElement = document.getElementById('slot-' + slot);
-            
-            // Limpiar el slot
-            if (slot === '0') {
-                slotElement.innerHTML = '<span style="color:#999;font-size:14px;">Imagen principal</span>';
-            } else {
-                slotElement.innerHTML = '<span style="color:#999;font-size:12px;">+</span>';
-            }
-            
-            // Agregar input hidden para marcar la imagen como eliminada
-            const hiddenInput = document.createElement('input');
-            hiddenInput.type = 'hidden';
-            hiddenInput.name = 'eliminar_imagen_' + slot;
-            hiddenInput.value = '1';
-            document.querySelector('form').appendChild(hiddenInput);
-        }
-    });
-});
 
-// Inicializar el preview de imágenes si ya existen imágenes
-window.addEventListener('load', function() {
-    const previewContainer = document.getElementById('previewContainer');
-    const zonaTexto = document.getElementById('zona-texto');
-    const iconoImagen = document.getElementById('icono-imagen');
-    
-    // Si hay imágenes existentes, mostrar el contenedor y ocultar el icono
-    if (previewContainer && previewContainer.style.display !== 'none') {
-        if (iconoImagen) iconoImagen.style.display = 'none';
-    }
-});
-</script>
 <script src="/Zava/js/preview-imagenes-receta.js"></script>
