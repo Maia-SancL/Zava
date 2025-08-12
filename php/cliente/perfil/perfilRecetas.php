@@ -28,6 +28,13 @@ $rutaImg="/Zava/img/perfiles/".$foto;
 
     <?php require_once($_SERVER['DOCUMENT_ROOT'].'/Zava/php/componentes/funciones/tags.php'); ?>
 <main>
+    <?php
+    if (isset($_SESSION['mensaje'])) {
+        $mensaje = $_SESSION['mensaje'];
+        echo "<div class='alerta " . htmlspecialchars($mensaje['tipo']) . "'>" . htmlspecialchars($mensaje['texto']) . "</div>";
+        unset($_SESSION['mensaje']);
+    }
+    ?>
         <div class="cont-perfil">
             <div class="img-info">
                 <img class="img-perfil" src="<?php echo $rutaImg;?>">

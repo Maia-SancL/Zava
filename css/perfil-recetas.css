@@ -205,10 +205,10 @@ body{
 .contGlobal p{
     color: var(--Negros-700, #1F1F1F);
     text-align: center;
-    font-family: Quicksand;
-    font-size: 13px;
+    font-family: Montserrat;
+    font-size: 14px;
     font-style: normal;
-    font-weight: 200;
+    font-weight: 300;
     line-height: normal;
 }
 
@@ -287,4 +287,23 @@ body{
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+
+/* Alertas de sesión */
+.alerta {
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    max-width: 90%;
+}
+
+.alerta.exito {
+    background-color: #4CAF50; /* Verde */
+}
+
+.alerta.error {
+    background-color: #f44336; /* Rojo */
 }

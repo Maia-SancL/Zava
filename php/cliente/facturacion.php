@@ -57,7 +57,7 @@ if ($resultado) {
     }
 
 
-$costo_envio = 2000; // Valor de envío fijo por ahora
+$costo_envio = 2000; // Valor de envio fijo por ahora
 $total_final = $total_carrito + $costo_envio;
 
 ?>

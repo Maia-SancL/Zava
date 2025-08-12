@@ -69,25 +69,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                 }
             }
             
-            // Enviar respuesta JSON de éxito
+           
             header('Content-Type: application/json');
             echo json_encode(['success' => true, 'id_receta' => $id_receta]);
 
         } else {
-            // Enviar respuesta JSON de error
+            
             header('Content-Type: application/json');
             echo json_encode(['success' => false, 'error' => mysqli_error($conexion)]);
         }
-        exit; // Detener la ejecución para no renderizar el HTML
+        exit; 
         $resultado = mysqli_query($conexion, $query);
 
         if ($resultado) {
-            $id_receta = mysqli_insert_id($conexion); // OBTIENE EL ID DE LA NUEVA RECETA
-            
-            // Guardar imágenes adicionales en la tabla Receta_Imagenes
+            $id_receta = mysqli_insert_id($conexion); 
+    
             if (!empty($imagenes_subidas)) {
                 foreach ($imagenes_subidas as $index => $nombre_imagen) {
-                    $es_principal = ($index === 0) ? 1 : 0; // La primera imagen es principal
+                    $es_principal = ($index === 0) ? 1 : 0; 
                     $query_imagen = "INSERT INTO Receta_Imagenes (id_receta, ruta_imagen, es_principal) VALUES ($id_receta, '$nombre_imagen', $es_principal)";
                     mysqli_query($conexion, $query_imagen);
                 }
@@ -113,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                 }, 1800);
             </script>
             ";
-            exit; // Detiene el resto del HTML
+            exit; 
         } else {
             $mensaje = "Error al crear la receta: " . mysqli_error($conexion);
         }

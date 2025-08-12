@@ -1,11 +1,10 @@
 <?php
 session_start();
-include_once('perfil/conexion.php');
-
-header('Content-Type: application/json');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/conexion.php');
 
 if (!isset($_SESSION['id'])) {
-    echo json_encode(['success' => false, 'message' => 'No autorizado']);
+    $_SESSION['mensaje'] = ['tipo' => 'error', 'texto' => 'No autorizado.'];
+    header('Location: /Zava/php/login.php');
     exit;
 }
 
@@ -13,33 +12,28 @@ $id_usuario = $_SESSION['id'];
 $id_receta = isset($_POST['id']) ? intval($_POST['id']) : 0;
 
 if ($id_receta <= 0) {
-    echo json_encode(['success' => false, 'message' => 'ID de receta inválido.']);
+    $_SESSION['mensaje'] = ['tipo' => 'error', 'texto' => 'ID de receta inválido.'];
+    header('Location: /Zava/php/cliente/perfil/perfilRecetas.php');
     exit;
 }
 
-// Iniciar transacción
+$id_usuario_esc = mysqli_real_escape_string($conexion, $id_usuario);
+$id_receta_esc = mysqli_real_escape_string($conexion, $id_receta);
+
 mysqli_begin_transaction($conexion);
 
 try {
-    // Verificar que la receta pertenece al usuario
-    $query = "SELECT imagen_principal FROM Recetas WHERE id_receta = ? AND id_usuario = ?";
-    $stmt = mysqli_prepare($conexion, $query);
-    mysqli_stmt_bind_param($stmt, "ii", $id_receta, $id_usuario);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
+    $query = "SELECT imagen_principal FROM Recetas WHERE id_receta = '{$id_receta_esc}' AND id_usuario = '{$id_usuario_esc}'";
+    $result = mysqli_query($conexion, $query);
 
-    if (mysqli_num_rows($result) == 0) {
-        throw new Exception('No tienes permiso para eliminar esta receta.');
+    if (!$result || mysqli_num_rows($result) == 0) {
+        throw new Exception('No tienes permiso para eliminar esta receta o la receta no existe.');
     }
     $row = mysqli_fetch_assoc($result);
     $imagen_principal = $row['imagen_principal'];
 
-    // Eliminar imágenes de galería
-    $galeria_query = "SELECT ruta_imagen FROM Receta_Imagenes WHERE id_receta = ?";
-    $stmt_galeria = mysqli_prepare($conexion, $galeria_query);
-    mysqli_stmt_bind_param($stmt_galeria, "i", $id_receta);
-    mysqli_stmt_execute($stmt_galeria);
-    $galeria_result = mysqli_stmt_get_result($stmt_galeria);
+    $galeria_query = "SELECT ruta_imagen FROM Receta_Imagenes WHERE id_receta = '{$id_receta_esc}'";
+    $galeria_result = mysqli_query($conexion, $galeria_query);
     while ($img = mysqli_fetch_assoc($galeria_result)) {
         $img_path = $_SERVER['DOCUMENT_ROOT'].'/Zava/img/recetas/'.$img['ruta_imagen'];
         if (file_exists($img_path)) {
@@ -47,35 +41,28 @@ try {
         }
     }
 
-    // Eliminar imagen principal
     if ($imagen_principal && file_exists($_SERVER['DOCUMENT_ROOT'].'/Zava/img/recetas/'.$imagen_principal)) {
         unlink($_SERVER['DOCUMENT_ROOT'].'/Zava/img/recetas/'.$imagen_principal);
     }
 
-    // Eliminar registros de la base de datos
     $tablas_a_limpiar = ['Receta_Imagenes', 'Comentarios_Recetas', 'Favoritos_Recetas', 'Recetas'];
     foreach ($tablas_a_limpiar as $tabla) {
-        $delete_query = "DELETE FROM $tabla WHERE id_receta = ?";
+        $delete_query = "DELETE FROM {$tabla} WHERE id_receta = '{$id_receta_esc}'";
         if ($tabla === 'Recetas') {
-            $delete_query .= " AND id_usuario = ?";
+            $delete_query .= " AND id_usuario = '{$id_usuario_esc}'";
         }
-        $stmt_delete = mysqli_prepare($conexion, $delete_query);
-        if ($tabla === 'Recetas') {
-            mysqli_stmt_bind_param($stmt_delete, "ii", $id_receta, $id_usuario);
-        } else {
-            mysqli_stmt_bind_param($stmt_delete, "i", $id_receta);
+        if (!mysqli_query($conexion, $delete_query)) {
+            throw new Exception("Error al eliminar de la tabla {$tabla}: " . mysqli_error($conexion));
         }
-        mysqli_stmt_execute($stmt_delete);
     }
 
-    // Confirmar transacción
     mysqli_commit($conexion);
-    echo json_encode(['success' => true, 'message' => 'Receta eliminada correctamente.']);
+    $_SESSION['mensaje'] = ['tipo' => 'exito', 'texto' => 'Receta eliminada correctamente.'];
 
 } catch (Exception $e) {
-    // Revertir transacción en caso de error
     mysqli_rollback($conexion);
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    $_SESSION['mensaje'] = ['tipo' => 'error', 'texto' => $e->getMessage()];
 }
 
+header('Location: /Zava/php/cliente/perfil/perfilRecetas.php');
 exit;

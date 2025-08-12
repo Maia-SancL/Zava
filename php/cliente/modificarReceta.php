@@ -4,23 +4,23 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';
 include_once 'conexion.php';
 
-$mensaje = '';  // Variable para mensajes de error o exito
+$mensaje = '';  
 
-if (!isset($_SESSION['id'])) {  // Verifica si el usuario ha iniciado sesion
+if (!isset($_SESSION['id'])) {  
     header("Location: login.php");
     exit;
 }
 
-$id_usuario = $_SESSION['id'];  // Obtiene el ID del usuario de la sesion
+$id_usuario = $_SESSION['id'];  
 
-// Obtener el ID de la receta a modificar
+
 $id_receta = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($id_receta <= 0) {
     header("Location: perfil/perfilRecetas.php");
     exit;
 }
 
-// Verificar que la receta pertenece al usuario
+
 $query_verificar = "SELECT * FROM Recetas WHERE id_receta = $id_receta AND id_usuario = $id_usuario";
 $resultado_verificar = mysqli_query($conexion, $query_verificar);
 $receta = mysqli_fetch_assoc($resultado_verificar);
@@ -30,7 +30,7 @@ if (!$receta) {
     exit;
 }
 
-// Preparar datos para el formulario
+
 $nombre = htmlspecialchars($receta['nombre']);
 $descripcion = htmlspecialchars($receta['descripcion']);
 $ingredientes = array_filter(array_map('trim', explode(',', $receta['ingredientes'])));
@@ -43,13 +43,13 @@ $dificultad = $receta['dificultad'];
 $id_categoria = $receta['id_categoria'];
 $imagen_principal = $receta['imagen_principal'];
 
-// Cargar la imagen principal y las secundarias
+
 $imagenes_existentes = [];
 if (!empty($receta['imagen_principal'])) {
     $imagenes_existentes[] = $receta['imagen_principal'];
 }
 
-// Consultar imaagenes secundarias en la tabla Receta_Imagenes
+
 $query_imagenes = "SELECT ruta_imagen FROM Receta_Imagenes WHERE id_receta = $id_receta";
 $resultado_imagenes = mysqli_query($conexion, $query_imagenes);
 while ($fila_imagen = mysqli_fetch_assoc($resultado_imagenes)) {
@@ -57,7 +57,7 @@ while ($fila_imagen = mysqli_fetch_assoc($resultado_imagenes)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validar que los campos requeridos no estén vacíos
+    
     if (
         !empty($_POST['nombre']) &&
         !empty($_POST['descripcion']) &&
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         !empty($_POST['pasos']) &&
         !empty($_POST['tipo_comida'])
     ) {
-        // Sanitizar datos del formulario
+        
         $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
         $descripcion = mysqli_real_escape_string($conexion, $_POST['descripcion']);
         $ingredientes = mysqli_real_escape_string($conexion, implode(', ', $_POST['ingredientes']));
