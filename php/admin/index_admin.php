@@ -1,6 +1,7 @@
 <div class="layout">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php'; ?>
     <main>
+        <link rel="stylesheet" href="/Zava/css/index.css">
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php'; ?>
         <div class="container">
             <h1>Panel de Administración</h1>
