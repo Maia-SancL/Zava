@@ -100,48 +100,6 @@ switch($tipo) {
         }
         break;
         
-    case 'restaurantes':
-        // Consultar restaurantes favoritos
-        $query = "SELECT r.*, fr.fecha_agregado, u.nombre as propietario_nombre 
-                  FROM favoritos_restaurantes fr 
-                  JOIN restaurantes r ON fr.id_restaurante = r.id_restaurante 
-                  JOIN usuarios u ON r.id_usuario = u.id_usuario 
-                  WHERE fr.id_usuario = ? AND r.activo = 1 
-                  ORDER BY fr.fecha_agregado DESC";
-        $stmt = mysqli_prepare($conexion, $query);
-        mysqli_stmt_bind_param($stmt, "i", $id_usuario);
-        mysqli_stmt_execute($stmt);
-        $favoritos = mysqli_stmt_get_result($stmt);
-        
-        if(mysqli_num_rows($favoritos) > 0) {
-            while($item = mysqli_fetch_assoc($favoritos)) {
-                echo '<div class="item-favorito-dinamico">
-                        <div class="imagen-favorito-dinamico">
-                            <img src="/Zava/img/restaurantes/' . htmlspecialchars($item['imagen_principal']) . '" 
-                                 alt="' . htmlspecialchars($item['nombre']) . '" 
-                                 onerror="this.src=\'/Zava/img/restaurantes/restaurante_default.png\'">
-                        </div>
-                        <div class="info-favorito-dinamico">
-                            <h4>' . htmlspecialchars($item['nombre']) . '</h4>
-                            <p>Por: ' . htmlspecialchars($item['propietario_nombre']) . '</p>
-                            <p>Dirección: ' . htmlspecialchars($item['direccion']) . '</p>
-                            <p>Tipo: ' . htmlspecialchars($item['tipo_comida']) . '</p>
-                            <p>Agregado: ' . date('d/m/Y', strtotime($item['fecha_agregado'])) . '</p>
-                            <div class="acciones-dinamico">
-                                <a href="/Zava/php/cliente/mostrarRestaurante.php?id=' . $item['id_restaurante'] . '" class="btn-ver-dinamico">Ver Restaurante</a>
-                                <button onclick="eliminarFavoritoDinamico(\'restaurante\', ' . $item['id_restaurante'] . ')" class="btn-eliminar-dinamico">♥</button>
-                            </div>
-                        </div>
-                      </div>';
-            }
-        } else {
-            echo '<div class="sin-favoritos-dinamico">
-                    No tienes restaurantes favoritos aún. 
-                    <a href="/Zava/php/cliente/restaurantes.php">Explorar restaurantes</a>
-                  </div>';
-        }
-        break;
-        
     default:
         echo '<div class="sin-favoritos-dinamico">Tipo de favorito no válido.</div>';
         break;

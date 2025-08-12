@@ -32,12 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['tipo_usuario'] = 'Usuario';
                         break;
                     case 2:
-                        $_SESSION['tipo_usuario'] = 'Vendedor';
+                        $_SESSION['tipo_usuario'] = 'Comercio';
                         break;
                     case 3:
-                        $_SESSION['tipo_usuario'] = 'Restaurante';
-                        break;
-                    case 4:
                         $_SESSION['tipo_usuario'] = 'Admin';
                         break;
                     default:

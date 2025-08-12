@@ -27,9 +27,7 @@ switch($tipo) {
     case 'receta':
         $query = "DELETE FROM favoritos_recetas WHERE id_receta = ? AND id_usuario = ?";
         break;
-    case 'restaurante':
-        $query = "DELETE FROM favoritos_restaurantes WHERE id_restaurante = ? AND id_usuario = ?";
-        break;
+
     default:
         echo json_encode(['success' => false, 'message' => 'Tipo de favorito no válido']);
         exit;

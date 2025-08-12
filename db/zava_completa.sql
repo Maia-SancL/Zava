@@ -22,7 +22,7 @@ CREATE TABLE Roles (
 CREATE TABLE Categorias (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    tipo ENUM('producto', 'receta', 'restaurante') NOT NULL,
+    tipo ENUM('producto', 'receta') NOT NULL,
     activo BOOLEAN DEFAULT TRUE
 );
 
@@ -175,75 +175,6 @@ CREATE TABLE Comentarios_Recetas (
 );
 
 -- =====================================================
--- TABLA RESTAURANTES
--- =====================================================
-
--- Tabla Restaurantes
-CREATE TABLE Restaurantes (
-    id_restaurante INT AUTO_INCREMENT PRIMARY KEY,
-    id_usuario INT NOT NULL,
-    nombre VARCHAR(150) NOT NULL,
-    descripcion TEXT,
-    direccion VARCHAR(255) NOT NULL,
-    telefono VARCHAR(20),
-    tipo_comida ENUM('italiana', 'mexicana', 'china', 'japonesa', 'argentina', 'vegetariana', 'vegana', 'comida_rapida', 'parrilla', 'mariscos', 'otra') NOT NULL,
-    horario_apertura TIME,
-    horario_cierre TIME,
-    imagen_principal VARCHAR(255) DEFAULT 'restaurante_default.png',
-    imagen VARCHAR(255) DEFAULT 'restaurante_default.png',
-    activo BOOLEAN DEFAULT TRUE,
-    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario)
-);
-
--- Tabla Imágenes de Restaurantes (simplificada)
-CREATE TABLE Restaurante_Imagenes (
-    id_imagen INT AUTO_INCREMENT PRIMARY KEY,
-    id_restaurante INT NOT NULL,
-    ruta_imagen VARCHAR(500) NOT NULL,
-    es_principal BOOLEAN DEFAULT FALSE,
-    FOREIGN KEY (id_restaurante) REFERENCES Restaurantes(id_restaurante) ON DELETE CASCADE
-);
-
--- Tabla Calificaciones de Restaurantes
-CREATE TABLE Restaurante_Calificaciones (
-    id_calificacion INT AUTO_INCREMENT PRIMARY KEY,
-    id_restaurante INT NOT NULL,
-    id_usuario INT NOT NULL,
-    calificacion DECIMAL(2,1) NOT NULL CHECK (calificacion >= 1 AND calificacion <= 5),
-    comentario TEXT,
-    fecha_calificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_restaurante) REFERENCES Restaurantes(id_restaurante) ON DELETE CASCADE,
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
-    UNIQUE KEY unique_rating (id_restaurante, id_usuario)
-);
-
--- Tabla Favoritos Restaurantes
-CREATE TABLE Favoritos_Restaurantes (
-    id_favorito INT AUTO_INCREMENT PRIMARY KEY,
-    id_restaurante INT NOT NULL,
-    id_usuario INT NOT NULL,
-    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_restaurante) REFERENCES Restaurantes(id_restaurante) ON DELETE CASCADE,
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
-    UNIQUE KEY unique_favorite (id_restaurante, id_usuario)
-);
-
--- Tabla Comentarios de Restaurantes
-CREATE TABLE Comentarios_Restaurantes (
-    id_comentario INT AUTO_INCREMENT PRIMARY KEY,
-    id_restaurante INT NOT NULL,
-    id_usuario INT NOT NULL,
-    comentario TEXT NOT NULL,
-    fecha_comentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    activo BOOLEAN DEFAULT TRUE,
-    FOREIGN KEY (id_restaurante) REFERENCES Restaurantes(id_restaurante) ON DELETE CASCADE,
-    FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
-    INDEX idx_restaurante (id_restaurante),
-    INDEX idx_usuario (id_usuario)
-);
-
--- =====================================================
 -- SISTEMA DE PEDIDOS
 -- =====================================================
 
@@ -307,7 +238,7 @@ CREATE TABLE Detalle_Pedido (
 CREATE TABLE Historial_Vistas (
     id_vista INT AUTO_INCREMENT PRIMARY KEY,
     id_usuario INT NOT NULL,
-    tipo_contenido ENUM('receta', 'producto', 'restaurante') NOT NULL,
+    tipo_contenido ENUM('receta', 'producto') NOT NULL,
     id_contenido INT NOT NULL,
     fecha_vista TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario) ON DELETE CASCADE,
@@ -344,13 +275,7 @@ INSERT INTO Categorias (nombre, tipo) VALUES
 ('Entradas', 'receta'),
 ('Ensaladas', 'receta'),
 ('Sopas', 'receta'),
--- Restaurantes
-('Comida Rápida', 'restaurante'),
-('Restaurante', 'restaurante'),
-('Cafetería', 'restaurante'),
-('Parrilla', 'restaurante'),
-('Pizzería', 'restaurante'),
-('Heladería', 'restaurante');
+
 
 -- =====================================================
 -- DATOS DE PRUEBA
@@ -380,10 +305,7 @@ INSERT INTO Recetas (id_usuario, nombre, descripcion, ingredientes, pasos, tiemp
 (2, 'Ensalada César', 'Ensalada fresca con pollo y aderezo césar', 'Lechuga romana, pollo, crutones, queso parmesano, aderezo césar', '1. Lavar y cortar lechuga\n2. Cocinar pollo\n3. Preparar crutones\n4. Mezclar con aderezo', 20, 2, 'fácil', 'almuerzo', 13, 'ensalada_cesar.jpg', 'uploads/recetas/ensalada_cesar.jpg'),
 (4, 'Brownies de Chocolate', 'Brownies húmedos y deliciosos', 'Chocolate, manteca, huevos, azúcar, harina, nueces', '1. Derretir chocolate\n2. Mezclar ingredientes\n3. Hornear 25 minutos', 45, 8, 'fácil', 'postre', 10, 'brownies.jpg', 'uploads/recetas/brownies.jpg');
 
--- Restaurantes de prueba
-INSERT INTO Restaurantes (id_usuario, nombre, descripcion, direccion, telefono, tipo_comida, horario_apertura, horario_cierre, imagen_principal, imagen) VALUES
-(4, 'Pizzería Roma', 'Auténtica pizza italiana con ingredientes frescos', 'Av. Corrientes 1234', '11-1234-5678', 'italiana', '18:00:00', '00:00:00', 'pizzeria_roma.jpg', 'uploads/restaurantes/pizzeria_roma.jpg'),
-(4, 'El Buen Sabor', 'Comida casera argentina', 'San Martín 567', '11-8765-4321', 'argentina', '12:00:00', '15:00:00', 'el_buen_sabor.jpg', 'uploads/restaurantes/el_buen_sabor.jpg');
+
 
 -- Favoritos de prueba
 INSERT INTO Favoritos_Productos (id_producto, id_usuario) VALUES
@@ -392,8 +314,7 @@ INSERT INTO Favoritos_Productos (id_producto, id_usuario) VALUES
 INSERT INTO Favoritos_Recetas (id_receta, id_usuario) VALUES
 (1, 4), (2, 2), (3, 2);
 
-INSERT INTO Favoritos_Restaurantes (id_restaurante, id_usuario) VALUES
-(1, 2), (2, 4);
+
 
 -- Calificaciones de prueba
 INSERT INTO Receta_Calificaciones (id_receta, id_usuario, calificacion, comentario) VALUES
@@ -401,9 +322,7 @@ INSERT INTO Receta_Calificaciones (id_receta, id_usuario, calificacion, comentar
 (2, 4, 5.0, 'Perfecta para el almuerzo'),
 (3, 2, 4.0, 'Muy ricos brownies');
 
-INSERT INTO Restaurante_Calificaciones (id_restaurante, id_usuario, calificacion, comentario) VALUES
-(1, 2, 4.5, 'Excelente pizza y muy buen servicio'),
-(2, 2, 4.0, 'Comida casera deliciosa');
+
 
 -- Comentarios de prueba
 INSERT INTO Comentarios_Recetas (id_receta, id_usuario, comentario) VALUES
@@ -411,18 +330,16 @@ INSERT INTO Comentarios_Recetas (id_receta, id_usuario, comentario) VALUES
 (2, 4, 'Muy fresca y sabrosa'),
 (3, 2, 'Los brownies quedaron perfectos');
 
-INSERT INTO Comentarios_Restaurantes (id_restaurante, id_usuario, comentario) VALUES
-(1, 2, 'Ambiente muy acogedor y pizza deliciosa'),
-(2, 2, 'Excelente atención y comida casera');
+
 
 -- Historial de vistas de prueba
 INSERT INTO Historial_Vistas (id_usuario, tipo_contenido, id_contenido, fecha_vista) VALUES
 (2, 'receta', 1, DATE_SUB(NOW(), INTERVAL 1 HOUR)),
 (2, 'producto', 1, DATE_SUB(NOW(), INTERVAL 2 HOURS)),
-(2, 'restaurante', 1, DATE_SUB(NOW(), INTERVAL 3 HOURS)),
+
 (4, 'receta', 2, DATE_SUB(NOW(), INTERVAL 1 DAY)),
 (4, 'producto', 2, DATE_SUB(NOW(), INTERVAL 1 DAY)),
-(4, 'restaurante', 2, DATE_SUB(NOW(), INTERVAL 2 DAYS));
+
 
 -- Pedidos de prueba
 INSERT INTO Datos_Entrega (id_usuario, calle, numero, ciudad) VALUES
@@ -452,4 +369,4 @@ SELECT COUNT(*) AS total_tablas FROM information_schema.tables WHERE table_schem
 SELECT 'Usuarios creados:', COUNT(*) FROM Usuarios;
 SELECT 'Productos creados:', COUNT(*) FROM Productos;
 SELECT 'Recetas creadas:', COUNT(*) FROM Recetas;
-SELECT 'Restaurantes creados:', COUNT(*) FROM Restaurantes;
+

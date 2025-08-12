@@ -82,27 +82,39 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                 </div>
             </div>
         </nav>
-    <?php elseif ($_SESSION['tipo_usuario'] === 'Vendedor'): ?>
-        <!-- Menú para vendedores -->
+    <?php elseif ($_SESSION['tipo_usuario'] === 'Vendedor'):
+        include_once('conexion.php');
+        $id_comercio = $_SESSION['id'];
+        $query = "SELECT nombre, foto FROM usuarios WHERE id_usuario = $id_comercio";
+        $resultado = mysqli_query($conexion, $query);
+        if ($resultado && mysqli_num_rows($resultado) > 0) {
+            $comercio = mysqli_fetch_assoc($resultado);
+            $nombre = htmlspecialchars($comercio['nombre']);
+            $foto = $comercio['foto'] ? htmlspecialchars($comercio['foto']) : 'perfil.png';
+            $rutaImg = "/Zava/img/perfiles/" . $foto;
+        } else {
+            $nombre = 'Comercio';
+            $rutaImg = '/Zava/img/perfiles/perfil.png';
+        }
+    ?>
+        <!-- Menú para comercios -->
+        <link rel="stylesheet" href="/Zava/css/navegador.css">
         <nav class="nav">
             <div class="cont-btns">
                 <ul class="nav-lista-btns">
-                    <li class="btns">Panel vendedor</li>
+                    <li class="btns" onclick="location.href='/Zava/php/comercio/index_comercio.php'">Panel de Comercio</li>
                     <li class="btns user-dropdown">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" onclick="bandejaUsuario(event)"><circle cx="12" cy="6" r="4" fill="currentColor " class="nav-icono"/><path class="nav-icono"fill="currentColor" d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" onclick="bandejaUsuario(event)"><circle cx="12" cy="6" r="4" fill="currentColor" class="nav-icono"/><path class="nav-icono" fill="currentColor" d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5"/></svg>
                         <ul class="user-dropdown-content">
                             <li>
                                 <div class="user-info">
                                     <div class="cont-user-img">
-                                        <img src="perfil.png" alt="Foto de perfil" class="user-avatar">
+                                        <img src="<?= $rutaImg ?>" alt="Foto de perfil">
                                     </div>
-                                    <span class="user-name">Vendedor</span>
-                                    <span class="user-username">Vendedor</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="btn-dropdown perfil">
-                                    <a href="perfil.php" class="profile-btn">Ir a mi perfil</a>
+                                    <div class="user-details">
+                                        <p><?= $nombre ?></p>
+                                    </div>
+                                    <a onclick="location.href='/Zava/php/comercio/perfil.php'" class="profile-btn">Ir a mi perfil</a>
                                 </div>
                             </li>
                             <li>
@@ -116,9 +128,9 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                     </li>
                 </ul>
                 <div class="cont-btn-agregar-receta">
-                    <button class="btn-agregar-receta">
+                    <button class="btn-agregar-receta" onclick="location.href='/Zava/php/comercio/crearProducto.php'">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="btn-agregar-icono"fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z"/></svg>
-                        Crear
+                        Crear Producto
                     </button>
                 </div>
             </div>

@@ -2,38 +2,28 @@
 
 include_once('conexion.php');
 
-// Detectar el tipo y el id del contenido
-$tipo = '';
+// Detectar el id de la receta
 $id = 0;
 
 if (isset($id_receta)) {
-    $tipo = 'receta';
     $id = intval($id_receta);
-} elseif (isset($id_restaurante)) {
-    $tipo = 'restaurante';
-    $id = intval($id_restaurante);
+} else {
+    echo "<p>No se ha especificado una receta para mostrar comentarios.</p>";
+    return;
 }
 
-// Obtener comentarios según el tipo
+// Obtener comentarios de la receta
 $comentarios = [];
-if ($tipo && $id > 0) {
-    if ($tipo === 'receta') {
-        $sql = "SELECT c.*, u.nombre, u.nickname, u.foto 
-                FROM Comentarios_Recetas c
-                JOIN Usuarios u ON c.id_usuario = u.id_usuario
-                WHERE c.id_receta = $id
-                ORDER BY c.fecha_comentario DESC";
-    } elseif ($tipo === 'restaurante') {
-        $sql = "SELECT c.*, u.nombre, u.nickname, u.foto 
-                FROM Comentarios_Restaurantes c
-                JOIN Usuarios u ON c.id_usuario = u.id_usuario
-                WHERE c.id_restaurante = $id
-                ORDER BY c.fecha_comentario DESC";
-    }
-    $res = mysqli_query($conexion, $sql);
-    while ($row = mysqli_fetch_assoc($res)) {
-        $comentarios[] = $row;
-    }
+$query_comentarios = "
+    SELECT c.id_comentario, c.comentario, c.fecha_comentario, u.nombre, u.nickname, u.foto
+    FROM Comentarios_Recetas c
+    JOIN Usuarios u ON c.id_usuario = u.id_usuario
+    WHERE c.id_receta = $id
+    ORDER BY c.fecha_comentario DESC
+";
+$res = mysqli_query($conexion, $query_comentarios);
+while ($row = mysqli_fetch_assoc($res)) {
+    $comentarios[] = $row;
 }
 
 ?>
@@ -84,7 +74,7 @@ if ($tipo && $id > 0) {
                 <img src="/Zava/img/perfiles/<?php echo $_SESSION['foto'] ?? 'default.png' ?>" alt="Foto de perfil">
             </div>
             <form action="/Zava/php/componentes/funciones/agregarComentario.php" method="POST" class="agregar-comentario">
-                <input type="hidden" name="tipo" value="<?= $tipo ?>">
+                <input type="hidden" name="tipo" value="receta">
                 <input type="hidden" name="id" value="<?= $id ?>">
                 <input type="text" name="comentario" placeholder="Agregar un comentario..." required>
                 <button type="submit" class="btn-enviar">

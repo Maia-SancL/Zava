@@ -25,9 +25,7 @@ switch($tipo) {
     case 'receta':
         $query = "INSERT IGNORE INTO Favoritos_Recetas (id_receta, id_usuario) VALUES (?, ?)";
         break;
-    case 'restaurante':
-        $query = "INSERT IGNORE INTO Favoritos_Restaurantes (id_restaurante, id_usuario) VALUES (?, ?)";
-        break;
+
     default:
         echo json_encode(['success' => false, 'message' => 'Tipo de favorito no válido']);
         exit;

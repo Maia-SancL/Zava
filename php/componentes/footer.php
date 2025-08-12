@@ -37,13 +37,12 @@
                     <a href="/Zava/#inicio">Inicio</a>
                     <a href="/Zava/php/cliente/recetario.php">Recetas</a>
                     <a href="/Zava/#productos">Productos</a>
-                    <a href="Zava/#restaurantes">Restaurantes</a>
                     <a href="Zava/php/...">Perfil</a>
                 </div>
             </div>
         </div>
         <div class="cont-copy">
-            <p>© 2025 Zava — Tu espacio libre de gluten. Todos los derechos reservados.</p>
+            <p> 2025 Zava — Tu espacio libre de gluten. Todos los derechos reservados.</p>
         </div>
     </footer>
 <script src="/Zava/js/cliente/busqueda.js"></script>

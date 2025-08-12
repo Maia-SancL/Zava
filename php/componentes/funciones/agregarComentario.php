@@ -10,9 +10,9 @@ if (isset($_SESSION['id']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_contenido = intval($_POST['id']);
 
     // Validaciones básicas
-    if (!empty($comentario) && in_array($tipo, ['receta', 'restaurante']) && $id_contenido > 0) {
-        $tabla = ($tipo === 'receta') ? 'Comentarios_Recetas' : 'Comentarios_Restaurantes';
-        $columna_id = ($tipo === 'receta') ? 'id_receta' : 'id_restaurante';
+    if (!empty($comentario) && $tipo === 'receta' && $id_contenido > 0) {
+        $tabla = 'Comentarios_Recetas';
+        $columna_id = 'id_receta';
         
         // Escapar el comentario para seguridad
         $comentario_escaped = mysqli_real_escape_string($conexion, $comentario);
