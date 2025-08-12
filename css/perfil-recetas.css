@@ -1,3 +1,7 @@
+body{
+    background-color: var(--secundario-50);
+    color: var(--secundario-50);
+}
 .caja-nav-seleccionado{
     background-color: var(--Primaro-500, #621111);
     color: var(--secundario-100);

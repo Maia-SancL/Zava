@@ -88,7 +88,7 @@ function convertirTiempoAMinutos($hora) {
         }?>
         <?php 
         // Asegurarse de que la ruta de la imagen principal sea correcta
-        $rutaPrincipal = "/Zava/imagenes/recetas/" . $receta['imagen_principal'];
+        $rutaPrincipal = "/Zava/img/recetas/" . $receta['imagen_principal'];
         ?>
         <article class="cont-imagenes-receta">
             <div class="cont-img-izquierda">
@@ -139,60 +139,60 @@ function convertirTiempoAMinutos($hora) {
             </article>
             <article class="cont-fav-compartir">
                 <?php
-$isFavorito = false;
-if (isset($_SESSION['id']) && isset($receta['id_receta'])) {
-    $id_usuario = $_SESSION['id'];
-    $id_receta_actual = $receta['id_receta'];
-    $query_fav = "SELECT 1 FROM Favoritos_Recetas WHERE id_usuario = $id_usuario AND id_receta = $id_receta_actual";
-    $res_fav = mysqli_query($conexion, $query_fav);
-    $isFavorito = mysqli_fetch_assoc($res_fav) ? true : false;
-}
-?>
-<button id="btn-favorito" class="btn-favorito" data-favorito="<?= $isFavorito ? '1' : '0' ?>">
-    <?php if ($isFavorito): ?>
-        <!-- icono relleno -->
-        <svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
-    <?php else: ?>
-        <!-- icono vacio -->
-        <svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="none" stroke="currentColor" stroke-width="2" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z"/></svg>
-    <?php endif; ?>
-</button>
-<script> // codigo para agregar y eliminar favoritos
-document.addEventListener('DOMContentLoaded', function() { 
-    const btnFav = document.getElementById('btn-favorito'); // boton favorito
-    if (!btnFav) return; // si no existe el boton favorito
-    btnFav.addEventListener('click', function(e) { // cuando se hace click en el boton favorito
-        e.preventDefault(); // prevenir el comportamiento por defecto
-        const esFavorito = btnFav.getAttribute('data-favorito') === '1'; // verificar si es favorito
-        const idReceta = <?= isset($receta['id_receta']) ? intval($receta['id_receta']) : 0 ?>; // id de la receta
-        if (!idReceta) return; // si no existe el id de la receta
-        const accion = esFavorito ? 'eliminar' : 'agregar'; // accion a realizar
-        fetch(`/Zava/php/cliente/perfil/${accion}_favorito.php`, { // ruta del archivo php
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `tipo=receta&id=${idReceta}`
-        })
-        .then(response => response.json()) // respuesta del archivo php
-        .then(data => { 
-            if (data.success) {
-                btnFav.setAttribute('data-favorito', esFavorito ? '0' : '1'); // actualizar el atributo data-favorito
-                const iconFav = document.getElementById('icon-fav'); // icono favorito
-                if (esFavorito) {
-                    iconFav.outerHTML = `<svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="none" stroke="currentColor" stroke-width="2" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z"/></svg>`;
-                } else {
-                    iconFav.outerHTML = `<svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>`;
+                $isFavorito = false;
+                if (isset($_SESSION['id']) && isset($receta['id_receta'])) {
+                    $id_usuario = $_SESSION['id'];
+                    $id_receta_actual = $receta['id_receta'];
+                    $query_fav = "SELECT 1 FROM Favoritos_Recetas WHERE id_usuario = $id_usuario AND id_receta = $id_receta_actual";
+                    $res_fav = mysqli_query($conexion, $query_fav);
+                    $isFavorito = mysqli_fetch_assoc($res_fav) ? true : false;
                 }
-            } else {
-                alert(data.message || 'Error al actualizar favorito'); // mensaje de error
-            }
-        })
-        .catch(err => {
-            alert('Error de conexión');
-        });
-    });
-});
-</script>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92"/></svg>
+                ?>
+                <button id="btn-favorito" class="btn-favorito" data-favorito="<?= $isFavorito ? '1' : '0' ?>">
+                    <?php if ($isFavorito): ?>
+                        <!-- icono relleno -->
+                        <svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
+                    <?php else: ?>
+                        <!-- icono vacio -->
+                        <svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="none" stroke="currentColor" stroke-width="2" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z"/></svg>
+                    <?php endif; ?>
+                </button>
+            <script> // codigo para agregar y eliminar favoritos
+            document.addEventListener('DOMContentLoaded', function() { 
+                const btnFav = document.getElementById('btn-favorito'); // boton favorito
+                if (!btnFav) return; // si no existe el boton favorito
+                btnFav.addEventListener('click', function(e) { // cuando se hace click en el boton favorito
+                    e.preventDefault(); // prevenir el comportamiento por defecto
+                    const esFavorito = btnFav.getAttribute('data-favorito') === '1'; // verificar si es favorito
+                    const idReceta = <?= isset($receta['id_receta']) ? intval($receta['id_receta']) : 0 ?>; // id de la receta
+                    if (!idReceta) return; // si no existe el id de la receta
+                    const accion = esFavorito ? 'eliminar' : 'agregar'; // accion a realizar
+                    fetch(`/Zava/php/cliente/perfil/${accion}_favorito.php`, { // ruta del archivo php
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `tipo=receta&id=${idReceta}`
+                    })
+                    .then(response => response.json()) // respuesta del archivo php
+                    .then(data => { 
+                        if (data.success) {
+                            btnFav.setAttribute('data-favorito', esFavorito ? '0' : '1'); // actualizar el atributo data-favorito
+                            const iconFav = document.getElementById('icon-fav'); // icono favorito
+                            if (esFavorito) {
+                                iconFav.outerHTML = `<svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="none" stroke="currentColor" stroke-width="2" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z"/></svg>`;
+                            } else {
+                                iconFav.outerHTML = `<svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>`;
+                            }
+                        } else {
+                            alert(data.message || 'Error al actualizar favorito'); // mensaje de error
+                        }
+                    })
+                    .catch(err => {
+                        alert('Error de conexión');
+                    });
+                });
+            });
+            </script>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92"/></svg>
             </article>
         </section>
 

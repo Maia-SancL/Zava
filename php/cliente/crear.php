@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
         // Guardar imágenes
         $imagenes_guardadas = [];
         if (!empty($_FILES['imagenes']['name'][0])) {
-            $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/Zava/imagenes/recetas/";
+            $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/Zava/img/recetas/";
             if (!is_dir($target_dir)) {
                 mkdir($target_dir, 0777, true);
             }
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
             }
         }
 
-        $imagen_principal = !empty($imagenes_guardadas) ? $imagenes_guardadas[0] : 'receta_default.png';
+        $imagen_principal = !empty($imagenes_guardadas) ? $imagenes_guardadas[0] : 'receta.jpg';
 
         // Insertar receta principal
         $query = "INSERT INTO Recetas (id_usuario, nombre, descripcion, ingredientes, pasos, tiempo_preparacion, porciones, dificultad, tipo_comida, tipo_dieta, id_categoria, imagen_principal)

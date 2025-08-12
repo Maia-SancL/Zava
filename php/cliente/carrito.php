@@ -156,7 +156,7 @@ if (!empty($_SESSION['carrito'])) {
                     <input type="hidden" name="accion" value="vaciar">
                     <button type="submit" class="btn-vaciar">Vaciar carrito</button>
                 </form>
-                <button class="btn-comprar">Procesar pago</button>
+                <a href="/Zava/php/cliente/facturacion.php" class="btn-comprar">Procesar pago</a>
             </div>
         </section>
          </main>

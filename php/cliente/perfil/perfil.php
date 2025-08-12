@@ -23,6 +23,8 @@ $foto = $usuario['foto'] ? htmlspecialchars($usuario['foto']) : 'perfil.png';
 $rutaImg="/Zava/img/perfiles/".$foto;
 ?>
 <link rel="stylesheet" href="/Zava/css/perfil-inicio.css">
+<link rel="stylesheet" href="/Zava/css/editarPerfil.css">
+<link rel="stylesheet" href="/Zava/css/perfil-favoritos.css">
     <main>
         <div class="cont-perfil">
             <div class="img-info">
@@ -33,7 +35,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
                     <h4><?php echo $nombre." ".$apellido;?> </h4>
                     <h5><?php echo $nickname;?></h5>
                 </div>
-                <a> <button class="btn-editar"> Editar perfil
+                <a> <button class="btn-editar" id="openModalBtn"> Editar perfil
                     
                     <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path class="icon" d="M9.49993 15.1341L15.6633 8.9708C14.6264 8.53766 13.6847 7.90514 12.8916 7.10914C12.0952 6.31584 11.4624 5.37385 11.0291 4.33664L4.86577 10.5C4.38493 10.9808 4.1441 11.2216 3.93743 11.4866C3.69359 11.7995 3.48432 12.1379 3.31327 12.4958C3.1691 12.7991 3.0616 13.1225 2.8466 13.7675L1.7116 17.17C1.65936 17.3258 1.65161 17.493 1.68922 17.653C1.72683 17.8129 1.80831 17.9592 1.92449 18.0754C2.04068 18.1916 2.18697 18.2731 2.34692 18.3107C2.50688 18.3483 2.67415 18.3405 2.82993 18.2883L6.23243 17.1533C6.87827 16.9383 7.20077 16.8308 7.5041 16.6866C7.86355 16.5155 8.19993 16.3075 8.51327 16.0625C8.77827 15.8558 9.0191 15.615 9.49993 15.1341ZM17.3733 7.2608C17.9878 6.64628 18.333 5.8128 18.333 4.94372C18.333 4.07465 17.9878 3.24117 17.3733 2.62664C16.7587 2.01211 15.9253 1.66687 15.0562 1.66687C14.1871 1.66687 13.3536 2.01211 12.7391 2.62664L11.9999 3.3658L12.0316 3.4583C12.3958 4.50062 12.9919 5.44663 13.7749 6.22497C14.5765 7.03149 15.5557 7.63934 16.6341 7.99997L17.3733 7.2608Z" fill="#FBF6EE"/>
@@ -85,235 +87,67 @@ $rutaImg="/Zava/img/perfiles/".$foto;
         </div>
     </main>
 
-<style> <!-- Estilos para cambiar estoy gaga ya ke sueño -->
-    .contenido-favoritos {
-        margin-top: 30px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        padding: 20px;
-    }
 
-    .header-favoritos {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        border-bottom: 2px solid #e74c3c;
-        padding-bottom: 15px;
-    }
+<script src="/Zava/js/perfil-favoritos.js"></script>
 
-    .header-favoritos h3 {
-        color: #2c3e50;
-        margin: 0;
-        font-size: 1.5em;
-    }
+<!-- El Modal -->
+<div id="editProfileModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Editar Perfil</h2>
+            <span class="close-btn">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form action="actualizar_perfil.php" method="POST" enctype="multipart/form-data" class="edit-form">
+                <div class="form-group profile-pic-group">
+                    <label for="foto">Foto de Perfil:</label>
+                    <img src="<?php echo $rutaImg; ?>" alt="Foto de perfil actual" class="current-pic">
+                    <input type="file" id="foto" name="foto" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" value="<?php echo $nombre; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" value="<?php echo $apellido; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="nickname">Nickname:</label>
+                    <input type="text" id="nickname" name="nickname" value="<?php echo $nickname; ?>" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-guardar">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-    .btn-volver {
-        background: #95a5a6;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1em;
-        transition: background 0.3s ease;
-    }
-
-    .btn-volver:hover {
-        background: #7f8c8d;
-    }
-
-    .grid-favoritos-dinamico {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        margin-top: 20px;
-    }
-
-    .item-favorito-dinamico {
-        background: #f8f9fa;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .item-favorito-dinamico:hover {
-        transform: translateY(-5px);
-    }
-
-    .imagen-favorito-dinamico {
-        height: 200px;
-        overflow: hidden;
-    }
-
-    .imagen-favorito-dinamico img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .info-favorito-dinamico {
-        padding: 15px;
-    }
-
-    .info-favorito-dinamico h4 {
-        color: #2c3e50;
-        margin: 0 0 10px 0;
-        font-size: 1.2em;
-    }
-
-    .info-favorito-dinamico p {
-        margin: 5px 0;
-        color: #7f8c8d;
-        font-size: 0.9em;
-    }
-
-    .precio-dinamico {
-        font-weight: bold;
-        color: #e74c3c !important;
-        font-size: 1.1em !important;
-    }
-
-    .acciones-dinamico {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 15px;
-    }
-
-    .btn-ver-dinamico {
-        background: #3498db;
-        color: white;
-        padding: 8px 16px;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 0.9em;
-        transition: background 0.3s ease;
-    }
-
-    .btn-ver-dinamico:hover {
-        background: #2980b9;
-    }
-
-    .btn-eliminar-dinamico {
-        background: #e74c3c;
-        color: white;
-        border: none;
-        padding: 8px 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1.2em;
-        transition: background 0.3s ease;
-    }
-
-    .btn-eliminar-dinamico:hover {
-        background: #c0392b;
-    }
-
-    .sin-favoritos-dinamico {
-        text-align: center;
-        color: #7f8c8d;
-        font-style: italic;
-        padding: 40px;
-        background: #f8f9fa;
-        border-radius: 10px;
-    }
-
-    .sin-favoritos-dinamico a {
-        color: #3498db;
-        text-decoration: none;
-    }
-
-    .sin-favoritos-dinamico a:hover {
-        text-decoration: underline;
-    }
-
-    .caja-opciones {
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .caja-opciones:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    .loading {
-        text-align: center;
-        padding: 40px;
-        color: #7f8c8d;
-        font-style: italic;
-    }
-</style>
 <script>
-    function mostrarFavoritos(tipo) {
-        // Ocultar las opciones y mostrar el contenedor de favoritos
-        document.querySelector('.cont-opciones').style.display = 'none';
-        document.getElementById('contenido-favoritos').style.display = 'block';
-        
-        // Actualizar el título
-        const titulos = {
-            'recetas': 'Recetas Favoritas',
-            'restaurantes': 'Restaurantes Favoritos',
-            'productos': 'Productos Favoritos'
-        };
-        document.getElementById('titulo-favoritos').textContent = titulos[tipo];
-        
-        // Mostrar loading
-        document.getElementById('grid-favoritos').innerHTML = '<div class="loading">Cargando favoritos...</div>';
-        
-        // Hacer petición AJAX para obtener los favoritos
-        fetch('obtener_favoritos.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: 'tipo=' + encodeURIComponent(tipo)
-        })
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('grid-favoritos').innerHTML = data;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('grid-favoritos').innerHTML = '<div class="sin-favoritos-dinamico">Error al cargar los favoritos. Inténtalo de nuevo.</div>';
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('editProfileModal');
+    const openBtn = document.getElementById('openModalBtn');
+    const closeBtn = document.querySelector('.close-btn');
+
+    if (openBtn) {
+        openBtn.addEventListener('click', function() {
+            modal.style.display = 'flex';
         });
     }
 
-    function ocultarFavoritos() {
-        // Mostrar las opciones y ocultar el contenedor de favoritos
-        document.querySelector('.cont-opciones').style.display = 'flex';
-        document.getElementById('contenido-favoritos').style.display = 'none';
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
     }
 
-    function eliminarFavoritoDinamico(tipo, id) {
-        if(confirm('¿Estás seguro de que quieres eliminar este elemento de tus favoritos?')) {
-            fetch('eliminar_favorito.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'tipo=' + encodeURIComponent(tipo) + '&id=' + encodeURIComponent(id)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    // Recargar los favoritos actuales
-                    const tipoActual = document.getElementById('titulo-favoritos').textContent.toLowerCase().includes('recetas') ? 'recetas' :
-                                    document.getElementById('titulo-favoritos').textContent.toLowerCase().includes('restaurantes') ? 'restaurantes' : 'productos';
-                    mostrarFavoritos(tipoActual);
-                } else {
-                    alert('Error al eliminar el favorito: ' + data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al eliminar el favorito');
-            });
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
         }
-    }
+    });
+});
 </script>
 
 <?php 
