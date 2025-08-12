@@ -124,31 +124,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('editProfileModal');
-    const openBtn = document.getElementById('openModalBtn');
-    const closeBtn = document.querySelector('.close-btn');
-
-    if (openBtn) {
-        openBtn.addEventListener('click', function() {
-            modal.style.display = 'flex';
-        });
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-    }
-
-    window.addEventListener('click', function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    });
-});
-</script>
+<script src="/Zava/js/cliente/modalPerfil.js"></script>
 
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';

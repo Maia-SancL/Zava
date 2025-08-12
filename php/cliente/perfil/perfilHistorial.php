@@ -117,9 +117,9 @@ $rutaImg = "/Zava/img/perfiles/" . $foto;
                 <div class="contVistos">
                     <div class="buscadorVistos">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.5 14H14.71L14.43 13.73C15.444 12.5541 16.0012 11.0527 16 9.5C16 8.21442 15.6188 6.95772 14.9046 5.8888C14.1903 4.81988 13.1752 3.98676 11.9874 3.49479C10.7997 3.00282 9.49279 2.87409 8.23192 3.1249C6.97104 3.3757 5.81285 3.99477 4.90381 4.90381C3.99477 5.81285 3.3757 6.97104 3.1249 8.23192C2.87409 9.49279 3.00282 10.7997 3.49479 11.9874C3.98676 13.1752 4.81988 14.1903 5.8888 14.9046C6.95772 15.6188 8.21442 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z" fill="#1F1F1F"/>
+                        <path d="M15.5 14H14.71L14.43 13.73C15.444 12.5541 16.0012 11.0527 16 9.5C16 8.21442 15.6188 6.95772 14.9046 5.8888C14.1903 4.81988 13.1752 3.98676 11.9874 3.49479C10.7997 3.00282 9.49279 2.87409 8.23192 3.1249C6.97104 3.3757 5.81285 3.99477 4.90381 4.90381C3.99477 5.81285 3.3757 6.97104 3.1249 8.23192C2.87409 9.49279 3.00282 10.7997 3.49479 11.9874C3.98676 13.1752 4.81988 14.1903 5.8888 14.9046C6.95772 15.6188 8.21442 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z" fill="#1F1F1F"></path>
                         </svg>
-                        <p>Buscar</p>
+                        <input type="text" id="filtro-historial" placeholder="Buscar en tu historial...">
                     </div>
                     <div class="globalVistos">
                         <p>Ultimas 24 horas</p>
@@ -271,66 +271,11 @@ $rutaImg = "/Zava/img/perfiles/" . $foto;
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('editProfileModal');
-    const openBtn = document.getElementById('openModalBtn');
-    const closeBtn = document.querySelector('.close-btn');
 
-    if (openBtn) {
-        openBtn.addEventListener('click', function() {
-            modal.style.display = 'flex';
-        });
-    }
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-    }
-
-    window.addEventListener('click', function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    });
-});
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.btn-favorito-historial').forEach(function(btnFav) {
-        btnFav.addEventListener('click', function(e) {
-            e.preventDefault();
-            const id = this.getAttribute('data-id');
-            const tipo = this.getAttribute('data-tipo');
-            let esFavorito = this.getAttribute('data-favorito') === '1';
-            const accion = esFavorito ? 'eliminar' : 'agregar';
-            fetch(`/Zava/php/cliente/perfil/${accion}_favorito.php`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `tipo=${tipo}&id=${id}`
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    this.setAttribute('data-favorito', esFavorito ? '0' : '1');
-                    if (esFavorito) {
-                        this.innerHTML = `<svg class=\"icon-fav-historial\" xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" d=\"M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z\"/></svg>`;
-                    } else {
-                        this.innerHTML = `<svg class=\"icon-fav-historial\" xmlns=\"http://www.w3.org/2000/svg\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>`;
-                    }
-                } else {
-                    alert(data.message || 'Error al actualizar favorito');
-                }
-            })
-            .catch(err => {
-                alert('Error de conexión');
-            });
-        });
-    });
-});
-</script>
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>
-<script src="/Zava/php/cliente/perfil/perfilHistorial.js"></script>
+<script src="/Zava/js/cliente/modalPerfil.js"></script>
+<script src="/Zava/js/cliente/perfilHistorial.js"></script>
+<script src="/Zava/js/cliente/filtroHistorial.js"></script>

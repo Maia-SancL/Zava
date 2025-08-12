@@ -100,151 +100,36 @@ $nombre_categoria = $producto['categoria'] ?? 'Sin categoría';
     <link rel="stylesheet" href="/Zava/css/mostrarProducto.css">
     <main>
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
-        <section class="section-principal">
-            <div class="cont-img">
-                <img src="<?php echo $rutaImagenProducto?>" alt="<?php echo $producto['nombre'];?>">
-            </div>
-            <article class="informacion">
-                <div class="informacion-principal">
-                    <div class="cont-tipo-btns">
-                        <span class="tipo-producto"><?php echo $nombre_categoria;?></span>
-                        <div class="btns">
+        <section id="producto-contenedor" class="producto-principal" data-id-producto="<?php echo $producto['id_producto']; ?>">
+            <article class="producto-contenedor">
+                <div class="cont-imgs">
+                    <div class="cont-img-principal">
+                        <img src="<?php echo $rutaImagenProducto; ?>" alt="Imagen principal del producto">
+                    </div>
+                </div>
+                <div class="cont-detalles">
+                    <div class="cont-btns">
+                        <div class="cont-fav-share">
 <?php
 $isFavorito = false;
-if (isset($_SESSION['id']) && isset($producto['id_producto'])) {
+if (isset($_SESSION['id'])) {
     $id_usuario = $_SESSION['id'];
-    $id_producto_actual = $producto['id_producto'];
-    $query_fav = "SELECT 1 FROM Favoritos_Productos WHERE id_producto = $id_producto_actual AND id_usuario = $id_usuario LIMIT 1";
+    $query_fav = "SELECT * FROM favoritos_productos WHERE id_usuario = $id_usuario AND id_producto = $id_producto";
     $res_fav = mysqli_query($conexion, $query_fav);
     if ($res_fav && mysqli_num_rows($res_fav) > 0) {
         $isFavorito = true;
     }
 }
 ?>
-<button id="btn-favorito" class="btn-favorito" data-favorito="<?= $isFavorito ? '1' : '0' ?>">
+<button id="btn-favorito" class="btn-favorito" data-id="<?= $producto['id_producto'] ?? 0 ?>" data-tipo="producto" data-favorito="<?= $isFavorito ? '1' : '0' ?>">
+    <span id="icon-fav">
     <?php if ($isFavorito): ?>
-        <!-- icono relleno -->
-        <svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125"/></svg>
     <?php else: ?>
-        <!-- icono vacio -->
-        <svg id="icon-fav" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="none" stroke="currentColor" stroke-width="2" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="none" stroke="currentColor" stroke-width="2" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z"/></svg>
     <?php endif; ?>
+    </span>
 </button>
-<script> 
-    document.addEventListener('DOMContentLoaded', function() {
-        const btnFav = document.getElementById('btn-favorito');
-        if (btnFav) {
-            btnFav.addEventListener('click', function(e) {
-                e.preventDefault();
-                const esFavorito = btnFav.getAttribute('data-favorito') === '1';
-                const idProducto = <?php echo $producto['id_producto']; ?>;
-                fetch('/Zava/php/componentes/funciones/favoritos.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `tipo=producto&id=${idProducto}`
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        btnFav.setAttribute('data-favorito', esFavorito ? '0' : '1');
-                        const iconFav = document.getElementById('icon-fav');
-                        if (esFavorito) {
-                            iconFav.innerHTML = '<path class="icon" fill="none" stroke="currentColor" stroke-width="2" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z"/>';
-                        } else {
-                            iconFav.innerHTML = '<path class="icon" fill="currentColor" d="M12 20.325q-.35 0-.712-.125t-.638-.4l-1.725-1.575q-2.65-2.425-4.788-4.812T2 8.15Q2 5.8 3.575 4.225T7.5 2.65q1.325 0 2.5.562t2 1.538q.825-.975 2-1.537t2.5-.563q2.35 0 3.925 1.575T22 8.15q0 2.875-2.125 5.275T15.05 18.25l-1.7 1.55q-.275.275-.637.4t-.713.125z"/>';
-                        }
-                    } else {
-                        alert(data.message || 'Error al actualizar favorito');
-                    }
-                })
-                .catch(() => {
-                    alert('Error de conexión');
-                });
-            });
-        }
-
-        // === FUNCIONALIDAD DEL CARRITO ===
-        const btnSumar = document.querySelector('.sumar');
-        const btnQuitar = document.querySelector('.quitar');
-        const spanCantidad = document.querySelector('.cantidad');
-        const btnAgregarCarrito = document.querySelector('.btn-agregar-carrito');
-        
-        let cantidad = 1; // Iniciar en 1
-
-        function actualizarCantidad(nuevaCantidad) {
-            cantidad = Math.max(1, nuevaCantidad); // La cantidad min es 1
-            spanCantidad.textContent = cantidad;
-        }
-
-        if (btnSumar) {
-            btnSumar.addEventListener('click', function() {
-                actualizarCantidad(cantidad + 1);
-            });
-        }
-
-        if (btnQuitar) {
-            btnQuitar.addEventListener('click', function() {
-                actualizarCantidad(cantidad - 1);
-            });
-        }
-
-        if (btnAgregarCarrito) {
-            btnAgregarCarrito.addEventListener('click', function() {
-                const idProducto = <?php echo $producto['id_producto']; ?>;
-                
-                const formData = new FormData();
-                formData.append('accion', 'add_to_cart');
-                formData.append('id_producto', idProducto); // Usar la constante JS definida arriba
-                formData.append('cantidad', cantidad);
-
-                fetch(window.location.href, { 
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    const contentType = response.headers.get("content-type");
-                    if (contentType && contentType.indexOf("application/json") !== -1) {
-                        return response.json();
-                    } else {
-                        return response.text().then(text => {
-                            throw new Error(`Respuesta inesperada del servidor:\n${text}`);
-                        });
-                    }
-                })
-                .then(data => {
-                    if (data.status === 'success') {
-                        const totalProductos = data.total_productos;
-                        let cartCount = document.getElementById('cart-count');
-
-                        if (!cartCount) {
-                            const cartContainer = document.querySelector('.cart-container');
-                            if (cartContainer) {
-                                cartCount = document.createElement('span');
-                                cartCount.id = 'cart-count';
-                                cartCount.className = 'cart-count';
-                                cartContainer.insertBefore(cartCount, cartContainer.firstChild);
-                            }
-                        }
-
-                        if (cartCount) {
-                            cartCount.innerText = totalProductos;
-                            cartCount.style.display = 'flex';
-                        }
-                    } else {
-                        alert('Error: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error en la petición fetch:', error);
-                    window.location.href = '/Zava/php/cliente/carrito.php';
-                });
-            });
-        }
-
-        // Inicializar estado
-        actualizarCantidad(1);
-    });
-</script>
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="icon" fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92"/></svg>
                         </div>
@@ -287,5 +172,7 @@ if (isset($_SESSION['id']) && isset($producto['id_producto'])) {
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>
+<script src="/Zava/js/cliente/favoritos.js"></script>
+<script src="/Zava/js/cliente/producto.js"></script>
 
    

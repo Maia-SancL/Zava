@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
 }
 ?>
 <link rel="stylesheet" href="/Zava/css/crear-receta.css">
-<script src="/Zava/js/main.js"></script>
+
 <main>
     <div class="crear-receta">
         <form action="crear.php" method="POST" enctype="multipart/form-data" class="form-receta">
@@ -230,4 +230,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
     </div>
 </main>
 
-<script src="/Zava/js/preview-imagenes-receta.js"></script>
+
+<script src="/Zava/js/cliente/crearReceta.js"></script>
+<script src="/Zava/js/cliente/preview-imagenes-receta.js"></script>

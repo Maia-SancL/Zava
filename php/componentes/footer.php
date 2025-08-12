@@ -46,5 +46,7 @@
             <p>© 2025 Zava — Tu espacio libre de gluten. Todos los derechos reservados.</p>
         </div>
     </footer>
+<script src="/Zava/js/cliente/busqueda.js"></script>
+<script src="/Zava/js/cliente/main.js"></script>
 </body>
 </html>

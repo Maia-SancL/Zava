@@ -46,19 +46,19 @@ $rutaImg="/Zava/img/perfiles/".$foto;
         </div>
 
         <div class="cont-nav">
-            <div onclick="location.href='/Zava/php/cliente/perfil/perfil.php'" class="caja-nav">
+                        <div data-href="/Zava/php/cliente/perfil/perfil.php" class="caja-nav">
                 <a>Favoritos</a>
             </div>
-            <div  onclick="location.href='/Zava/php/cliente/perfil/perfilHistorial.php'" class="caja-nav">
+                        <div data-href="/Zava/php/cliente/perfil/perfilHistorial.php" class="caja-nav">
                 <a>Ultimo Visto</a>
             </div>
             <div class="caja-nav seleccionado">
                 <a>Pedidos</a>
             </div>
-            <div  onclick="location.href='/Zava/php/cliente/perfil/perfilOpiniones.php'" class="caja-nav">
+                        <div data-href="/Zava/php/cliente/perfil/perfilOpiniones.php" class="caja-nav">
                 <a>Opiniones</a>
             </div>
-            <div  onclick="location.href='/Zava/php/cliente/perfil/perfilRecetas.php'" class="caja-nav">
+                        <div data-href="/Zava/php/cliente/perfil/perfilRecetas.php" class="caja-nav">
                 <a>Mis Recetas</a>
             </div>
         </div>
@@ -89,7 +89,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
                     echo '        <p><strong>Total:</strong> $' . number_format($pedido['total'], 2, ',', '.') . '</p>';
                     echo '    </div>';
                     echo '    <div class="estado-pedido ' . $estado_clase . '">' . htmlspecialchars($pedido['estado']) . '</div>';
-                    echo '    <button class="btn-detalles" onclick="toggleDetalles(' . $id_pedido . ')">Ver detalles</button>';
+                    echo '    <button class="btn-detalles" data-id="' . $id_pedido . '">Ver detalles</button>';
                     echo '  </div>';
 
                     echo '  <div id="detalles-' . $id_pedido . '" class="detalles-pedido" style="display:none;">';
@@ -114,19 +114,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             ?>
         </div>
     </main>
-    <script>
-    function toggleDetalles(idPedido) {
-      var detalles = document.getElementById('detalles-' + idPedido);
-      var boton = event.target;
-      if (detalles.style.display === 'none') {
-        detalles.style.display = 'block';
-        boton.textContent = 'Ocultar detalles';
-      } else {
-        detalles.style.display = 'none';
-        boton.textContent = 'Ver detalles';
-      }
-    }
-    </script>
+
         <!-- El Modal -->
         <div id="editProfileModal" class="modal-overlay">
     <div class="modal-content">
@@ -161,31 +149,9 @@ $rutaImg="/Zava/img/perfiles/".$foto;
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('editProfileModal');
-    const openBtn = document.getElementById('openModalBtn');
-    const closeBtn = document.querySelector('.close-btn');
 
-    if (openBtn) {
-        openBtn.addEventListener('click', function() {
-            modal.style.display = 'flex';
-        });
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-    }
-
-    window.addEventListener('click', function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    });
-});
-</script>
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>
+<script src="/Zava/js/cliente/modalPerfil.js"></script>
+<script src="/Zava/js/cliente/pedidos.js"></script>

@@ -37,6 +37,7 @@ function formatoTiempo($tiempo) {
 $tipo_comida = isset($_GET['tipo_comida']) ? $_GET['tipo_comida'] : '';
 $tipo_dieta = isset($_GET['tipo_dieta']) ? $_GET['tipo_dieta'] : '';
 $tiempo = isset($_GET['tiempo']) && is_numeric($_GET['tiempo']) ? (int)$_GET['tiempo'] : 0;
+$busqueda = isset($_GET['busqueda']) ? $conexion->real_escape_string($_GET['busqueda']) : '';
 
 ?>
 <div class="layout">
@@ -65,7 +66,7 @@ $tiempo = isset($_GET['tiempo']) && is_numeric($_GET['tiempo']) ? (int)$_GET['ti
                 <option value="todo" <?php echo ($tipo_dieta == 'todo') ? 'selected' : ''; ?>>Todas</option>
             </select>
 
-                <input class="filtro" type="number" name="tiempo" id="tiempo" value="<?php echo htmlspecialchars        ($tiempo); ?>" min="0" max="300" step="5" placeholder="Tiempo (min)" />
+                <input class="filtro" type="number" name="tiempo" id="tiempo" value="<?php echo htmlspecialchars($tiempo); ?>" min="0" max="300" step="5" placeholder="Tiempo (min)" />
 
                 <button type="submit" class="btn-filtrar" value="filtrar">Filtrar</button>
             </form>
@@ -76,6 +77,10 @@ $tiempo = isset($_GET['tiempo']) && is_numeric($_GET['tiempo']) ? (int)$_GET['ti
 
         //Escribimos el principio de la consulta
         $query = "SELECT * FROM recetas WHERE 1=1";
+
+        if ($busqueda !== '') {
+            $query .= " AND nombre LIKE '%$busqueda%'";
+        }
 
         if ($tipo_comida != '') { //Si la var tipo_comida esta con algun dato entonces busca el seleccionado  
             $query .= " AND tipo_comida = '" . mysqli_real_escape_string($conexion, $tipo_comida) . "'";
@@ -125,7 +130,7 @@ $tiempo = isset($_GET['tiempo']) && is_numeric($_GET['tiempo']) ? (int)$_GET['ti
             <input type="hidden" name="tipo_dieta" value="<?php echo htmlspecialchars($tipo_dieta); ?>">
             <input type="hidden" name="tiempo" value="<?php echo htmlspecialchars($tiempo); ?>">
 
-            <select name="orden" class="filtro" onchange="document.getElementById('form-orden').submit();"> <!--Se activa automaticamente cuando el usuario elige una nueva opcion y envia el formulario-->
+            <select name="orden" class="filtro"> <!--Se activa automaticamente cuando el usuario elige una nueva opcion y envia el formulario-->
                 <option value="alfabetico" <?php echo ($orden == 'alfabetico') ? 'selected' : ''; ?>>A-Z</option>
                 <option value="z-a" <?php echo ($orden == 'z-a') ? 'selected' : ''; ?>>Z-A</option>
                 <option value="tiempo" <?php echo ($orden == 'tiempo') ? 'selected' : ''; ?>>Menor tiempo</option>
@@ -193,4 +198,5 @@ $tiempo = isset($_GET['tiempo']) && is_numeric($_GET['tiempo']) ? (int)$_GET['ti
 </div>
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
+?><script src="/Zava/js/cliente/recetario.js"></script>
 ?>

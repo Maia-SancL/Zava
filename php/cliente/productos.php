@@ -10,6 +10,7 @@ if (isset($_GET['tipo_producto'])) {
 $tipo_producto = isset($_GET['tipo_producto']) ? $_GET['tipo_producto'] : '';
 $marca = isset($_GET['marca']) ? $_GET['marca'] : '';
 $descuento = isset($_GET['descuento']) ? true : false;
+$busqueda = isset($_GET['busqueda']) ? $conexion->real_escape_string($_GET['busqueda']) : '';
 
 ?>
 <div class="layout">
@@ -60,6 +61,10 @@ $descuento = isset($_GET['descuento']) ? true : false;
         //Escribimos el principio de la consulta
         $query = "SELECT * FROM productos WHERE 1=1";
 
+        if ($busqueda !== '') {
+            $query .= " AND nombre LIKE '%$busqueda%'";
+        }
+
         if ($tipo_producto != '') { //Si la var tipo_producto esta con algun dato entonces busca el seleccionado  
             $query .= " AND tipo = '" . mysqli_real_escape_string($conexion, $tipo_producto) . "'";
         }
@@ -94,6 +99,7 @@ $descuento = isset($_GET['descuento']) ? true : false;
         }
 
     if ($result = $conexion->query($query)) {
+        ob_start(); // Iniciar el buffer de salida
         ?>
     
 
@@ -124,7 +130,7 @@ $descuento = isset($_GET['descuento']) ? true : false;
         while ($fila = $result->fetch_assoc()) {
             $ruta_imagen= '../comercio/uploads/' . $fila['imagen'];
             ?>
-                <article onclick="location.href='mostrarProducto.php?id_producto=<?php echo $fila['id_producto']; ?>'" class="producto">
+                                <article data-href="mostrarProducto.php?id_producto=<?php echo $fila['id_producto']; ?>" class="producto">
                     <div class="cont-img">
                         <img src="<?php echo $ruta_imagen;?>" alt="<?php echo $fila['nombre'];?>">
                         <div class="cont-oferta-favorito"> 
@@ -155,13 +161,22 @@ $descuento = isset($_GET['descuento']) ? true : false;
                         </div>
                     </div>
                 </article>
-    <?php } //cierre while
-    } //cierre if ?>
+    <?php 
+        } //cierre while
+    } //cierre if 
 
+    $productos_html = ob_get_clean(); // Obtener el contenido del buffer y limpiarlo
 
+    if (isset($_GET['ajax'])) {
+        echo $productos_html; // Si es una petición AJAX, solo devolver los productos
+        exit;
+    }
+?>
+        <?php echo $productos_html; // Imprimir los productos en la carga inicial ?>
         </section>
     </main>
 </div>
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php';
 ?>
+<script src="/Zava/js/cliente/productos.js"></script>

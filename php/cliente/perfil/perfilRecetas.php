@@ -64,37 +64,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             <a>Mis Recetas</a>
         </div>
     </div>
-    <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const filtroTipo = document.getElementById('filtro-tipo-comida');
-    const filtroTiempo = document.getElementById('filtro-tiempo');
-    const recetas = document.querySelectorAll('.globalReceta');
 
-    function filtrarRecetas() {
-        const tipo = filtroTipo.value;
-        const tiempo = filtroTiempo.value;
-
-        recetas.forEach(receta => {
-            const recetaTipo = receta.getAttribute('data-tipo-comida');
-            const recetaTiempo = parseInt(receta.getAttribute('data-tiempo'), 10);
-            let mostrar = true;
-
-            if (tipo && recetaTipo !== tipo) mostrar = false;
-            if (tiempo) {
-                if (tiempo == 15 && recetaTiempo > 15) mostrar = false;
-                else if (tiempo == 30 && recetaTiempo > 30) mostrar = false;
-                else if (tiempo == 60 && recetaTiempo > 60) mostrar = false;
-                else if (tiempo == 61 && recetaTiempo <= 60) mostrar = false;
-            }
-
-            receta.style.display = mostrar ? '' : 'none';
-        });
-    }
-
-    filtroTipo.addEventListener('change', filtrarRecetas);
-    filtroTiempo.addEventListener('change', filtrarRecetas);
-});
-</script>
     <?php
             $query_recetas = "SELECT id_receta, nombre, descripcion, tiempo_preparacion, imagen_principal, fecha_publicacion, tipo_comida, tipo_dieta FROM Recetas WHERE id_usuario = $id_usuario ORDER BY fecha_publicacion DESC";
             $resultado_recetas = mysqli_query($conexion, $query_recetas);
@@ -149,12 +119,12 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </svg>
                                         <p>Modificar</p>
                                     </div>
-                                    <div class="botonEliminar" onclick="if(confirm('¿Estás seguro de que deseas eliminar esta receta? Esta acción es irreversible.')) location.href='/Zava/php/cliente/eliminarReceta.php?id=<?php echo $receta['id_receta']; ?>';">
+                                    <button class="botonEliminar" data-id="<?php echo $receta['id_receta']; ?>">
                                         <svg viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M7.36573 21C6.81573 21 6.34506 20.8043 5.95373 20.413C5.56239 20.0217 5.36639 19.5507 5.36573 19V6C5.08239 6 4.84506 5.904 4.65373 5.712C4.46239 5.52 4.36639 5.28267 4.36573 5C4.36506 4.71733 4.46106 4.48 4.65373 4.288C4.84639 4.096 5.08373 4 5.36573 4H9.36573C9.36573 3.71667 9.46173 3.47933 9.65373 3.288C9.84573 3.09667 10.0831 3.00067 10.3657 3H14.3657C14.6491 3 14.8867 3.096 15.0787 3.288C15.2707 3.48 15.3664 3.71733 15.3657 4H19.3657C19.6491 4 19.8867 4.096 20.0787 4.288C20.2707 4.48 20.3664 4.71733 20.3657 5C20.3651 5.28267 20.2691 5.52033 20.0777 5.713C19.8864 5.90567 19.6491 6.00133 19.3657 6V19C19.3657 19.55 19.1701 20.021 18.7787 20.413C18.3874 20.805 17.9164 21.0007 17.3657 21H7.36573ZM10.3657 17C10.6491 17 10.8867 16.904 11.0787 16.712C11.2707 16.52 11.3664 16.2827 11.3657 16V9C11.3657 8.71667 11.2697 8.47933 11.0777 8.288C10.8857 8.09667 10.6484 8.00067 10.3657 8C10.0831 7.99933 9.84573 8.09533 9.65373 8.288C9.46173 8.48067 9.36573 8.718 9.36573 9V16C9.36573 16.2833 9.46173 16.521 9.65373 16.713C9.84573 16.905 10.0831 17.0007 10.3657 17ZM14.3657 17C14.6491 17 14.8867 16.904 15.0787 16.712C15.2707 16.52 15.3664 16.2827 15.3657 16V9C15.3657 8.71667 15.2697 8.47933 15.0777 8.288C14.8857 8.09667 14.6484 8.00067 14.3657 8C14.0831 7.99933 13.8457 8.09533 13.6537 8.288C13.4617 8.48067 13.3657 8.718 13.3657 9V16C13.3657 16.2833 13.4617 16.521 13.6537 16.713C13.8457 16.905 14.0831 17.0007 14.3657 17Z" fill="#621111"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.25 2.25C10.25 1.83579 10.5858 1.5 11 1.5H14C14.4142 1.5 14.75 1.83579 14.75 2.25V3H18.25C18.6642 3 19 3.33579 19 3.75V4.5C19 4.91421 18.6642 5.25 18.25 5.25H6.75C6.33579 5.25 6 4.91421 6 4.5V3.75C6 3.33579 6.33579 3 6.75 3H10.25V2.25ZM8.13039 6.75H16.8696L16.1935 19.3305C16.1473 20.2173 15.419 21 14.5299 21H10.4701C9.58099 21 8.85272 20.2173 8.80651 19.3305L8.13039 6.75ZM10.25 9.75C10.25 9.33579 9.91421 9 9.5 9C9.08579 9 8.75 9.33579 8.75 9.75V16.5C8.75 16.9142 9.08579 17.25 9.5 17.25C9.91421 17.25 10.25 16.9142 10.25 16.5V9.75ZM13 9.75C13 9.33579 12.6642 9 12.25 9C11.8358 9 11.5 9.33579 11.5 9.75V16.5C11.5 16.9142 11.8358 17.25 12.25 17.25C12.6642 17.25 13 16.9142 13 16.5V9.75ZM15.5 9C15.9142 9 16.25 9.33579 16.25 9.75V16.5C16.25 16.9142 15.9142 17.25 15.5 17.25C15.0858 17.25 14.75 16.9142 14.75 16.5V9.75C14.75 9.33579 15.0858 9 15.5 9Z" fill="#1F1F1F"/>
                                         </svg>
                                         <p>Eliminar</p>
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -237,30 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('editProfileModal');
-    const openBtn = document.getElementById('openModalBtn');
-    const closeBtn = document.querySelector('.close-btn');
-
-    if (openBtn) {
-        openBtn.addEventListener('click', function() {
-            modal.style.display = 'flex';
-        });
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-    }
-
-    window.addEventListener('click', function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    });
-});
-</script>
+<script src="/Zava/js/cliente/modalPerfil.js"></script>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/footer.php'; ?>
+    <script src="/Zava/js/cliente/perfilRecetas.js"></script>
     

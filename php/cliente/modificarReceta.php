@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <link rel="stylesheet" href="/Zava/css/crear-receta.css">
-<script src="/Zava/js/main.js"></script>
+
 <main>
     <div class="crear-receta">
         <form action="modificarReceta.php?id=<?php echo $id_receta; ?>" method="POST" enctype="multipart/form-data" class="form-receta">
@@ -343,4 +343,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </main>
 
 
-<script src="/Zava/js/preview-imagenes-receta.js"></script>
+
+<script src="/Zava/js/cliente/crearReceta.js"></script>
+<script src="/Zava/js/cliente/preview-imagenes-receta.js"></script>
