@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['correo'])) {
 }
 ?>
 
-<link rel="stylesheet" href="/Zava/css/verificar.css">
+<link rel="stylesheet" href="/Zava/css/cliente/verificar.css">
 <main>
     <div class="verificacion-container">
         <h2>Restaurar Contraseña</h2>

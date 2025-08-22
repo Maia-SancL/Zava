@@ -1,0 +1,238 @@
+.titulo-icono{
+    height: 10rem;
+}
+
+.contenedor-tit-ico{
+    display: flex;
+    gap: 5px;
+    margin-left: 2rem;
+    height: 10rem;
+}
+
+.cont{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+
+h2{
+width: 110px;
+
+font-family: 'Quicksand';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 30px;
+
+color: #621111;
+
+flex: none;
+order: 1;
+flex-grow: 0;
+
+}
+
+.carrito-container{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    height: 30rem;
+    width: auto;
+    margin-left: 2rem;
+}
+
+.contenedor{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+}
+
+.contenedor.productos{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: auto;
+    width: 32rem;
+    margin-left: 3rem;
+}
+
+.contenedor.resumen{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 14rem;
+}
+
+.producto{
+    display: flex;
+    flex-direction: row;
+    height: 5.7rem;
+    width: 100%;
+}
+
+.producto .contenedor-producto{
+    display: inline;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+}
+
+.contenedor-producto.eliminar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 8rem;
+}
+
+.btn-eliminar{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 6rem;
+    height: auto;
+}
+
+.btn-eliminar .equis{
+    width: 1.1rem;
+    height: 1.1rem;
+    color: var(--negro-700);
+}
+
+.contenedor-producto.imagen-nombre-peso{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    height: auto;
+    width: 100%;
+}
+.cont-prod{
+    display: inline;
+    align-items: center;
+    height: auto;   
+    width: auto;
+}
+
+.cont-prod.nombre-peso{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+}
+
+.cont-prod.imagen{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 5rem;
+    height: 5rem;
+}
+
+.imagen-producto{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 5rem;
+    height: 5rem;
+
+}
+
+.informacion{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.nombre-producto span {
+    display: flex;
+    margin-left: -6rem;
+    margin-top: -0.8rem;
+    height: 2rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--negro-900);
+}
+
+.peso-producto span {
+    display: flex;
+    margin-left: -3.3rem;
+    margin-top: -2rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    color: var(--negro-500);
+}
+
+.contenedor-producto.precio-cantidad-subtotal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cont-prod.precio{
+    display: flex;
+    margin-left: -1.2rem;
+}
+.cont-prod.precio,
+.cont-prod.subtotal {
+    flex: 1;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.cont-prod.cantidad {
+    flex: 1.5;
+    display: flex;
+    justify-content: center;
+}
+
+.cont-cantidad-btns {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.cont-cantidad-btns .btn-cantidad {
+    background-color: transparent;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.cont-cantidad-btns .btn-cantidad:first-child {
+    border-right: 1px solid #ccc;
+}
+
+.cont-cantidad-btns .btn-cantidad:last-child {
+    border-left: 1px solid #ccc;
+}
+
+.cont-cantidad-btns span.cantidad {
+    padding: 0.5rem 1rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+}
+

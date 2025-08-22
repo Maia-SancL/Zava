@@ -54,7 +54,7 @@ if ($token_valido && $_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-<link rel="stylesheet" href="/Zava/css/verificar.css">
+<link rel="stylesheet" href="/Zava/css/cliente/verificar.css">
 <main>
     <div class="verificacion-container">
         <h2>Establecer Nueva Contraseña</h2>

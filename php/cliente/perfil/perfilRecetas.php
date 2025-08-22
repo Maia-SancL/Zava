@@ -22,9 +22,9 @@ $nickname = htmlspecialchars($usuario['nickname']);
 $foto = $usuario['foto'] ? htmlspecialchars($usuario['foto']) : 'perfil.png';
 $rutaImg="/Zava/img/perfiles/".$foto;
 ?>
-<link rel="stylesheet" href="/Zava/css/perfil-inicio.css">
-<link rel="stylesheet" href="/Zava/css/perfil-recetas.css">
-<link rel="stylesheet" href="/Zava/css/editarPerfil.css">
+<link rel="stylesheet" href="/Zava/css/cliente/perfil-inicio.css">
+<link rel="stylesheet" href="/Zava/css/cliente/perfil-recetas.css">
+<link rel="stylesheet" href="/Zava/css/cliente/editarPerfil.css">
 
     <?php require_once($_SERVER['DOCUMENT_ROOT'].'/Zava/php/componentes/funciones/tags.php'); ?>
 <main>

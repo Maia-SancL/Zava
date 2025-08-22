@@ -24,9 +24,9 @@ $nickname = htmlspecialchars($usuario['nickname']);
 $foto = $usuario['foto'] ? htmlspecialchars($usuario['foto']) : 'perfil.png';
 $rutaImg = "/Zava/img/perfiles/" . $foto;
 ?>
-<link rel="stylesheet" href="/Zava/css/perfil-inicio.css">
-<link rel="stylesheet" href="/Zava/css/perfilHistorial.css">
-<link rel="stylesheet" href="/Zava/css/editarPerfil.css">
+<link rel="stylesheet" href="/Zava/css/cliente/perfil-inicio.css">
+<link rel="stylesheet" href="/Zava/css/cliente/perfilHistorial.css">
+<link rel="stylesheet" href="/Zava/css/cliente/editarPerfil.css">
 <main>
     <div class="cont-perfil">
         <div class="img-info">

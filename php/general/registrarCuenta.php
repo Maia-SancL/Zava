@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'])) {
     }
 }
 ?>
-<link rel="stylesheet" href="/Zava/css/registrarCuenta.css">
+<link rel="stylesheet" href="/Zava/css/general/registrarCuenta.css">
 <main>
 <div class="imagen-principal">
             <img class="img-registro" src="/Zava/css/recursos/Principal.png">

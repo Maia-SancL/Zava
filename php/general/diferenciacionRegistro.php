@@ -1,7 +1,7 @@
 <?php 
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 ?>
-<link rel="stylesheet" href="/Zava/css/diferenciacionRegistro.css">
+<link rel="stylesheet" href="/Zava/css/general/diferenciacionRegistro.css">
 <main class="main-tipo-user">
     <div class="cont-img-titulo">
         <img src="/Zava/css/recursos/Principal.png" alt="titulo">

@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <header>
-    <link rel="stylesheet" href="/Zava/css/inicioSesion.css">
+    <link rel="stylesheet" href="/Zava/css/general/inicioSesion.css">
 </header>
 <main>
     <div class="imagen-principal">
