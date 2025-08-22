@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', function() {
             const id = this.getAttribute('data-id');
             if (confirm('¿Estás seguro de que deseas eliminar esta opinión?')) {
-                fetch('eliminar_opinion.php', {
+                fetch('/Zava/php/cliente/funciones/eliminarOpinion.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'

@@ -46,9 +46,7 @@ if (isset($_SESSION['id']) && isset($_GET['id_producto'])) {
     $id_usuario_hist = intval($_SESSION['id']);
     $id_producto_hist = intval($_GET['id_producto']);
     $tipo_contenido = 'producto';
-    // Insertar la vista
     $conexion->query("INSERT INTO Historial_Vistas (id_usuario, tipo_contenido, id_contenido, fecha_vista) VALUES ($id_usuario_hist, '$tipo_contenido', $id_producto_hist, NOW())");
-    // Eliminar duplicados del mismo contenido en el día, dejando solo el más reciente
     $conexion->query("DELETE hv FROM Historial_Vistas hv 
         JOIN (SELECT id_usuario, tipo_contenido, id_contenido, MAX(id_vista) as max_id
               FROM Historial_Vistas
@@ -57,7 +55,6 @@ if (isset($_SESSION['id']) && isset($_GET['id_producto'])) {
               HAVING COUNT(*) > 1) sub
         ON hv.id_usuario = sub.id_usuario AND hv.tipo_contenido = sub.tipo_contenido AND hv.id_contenido = sub.id_contenido
         WHERE hv.id_vista < sub.max_id");
-    // Limitar a los últimos 5 vistos del día actual (productos y recetas juntos)
     $res = $conexion->query("SELECT id_vista FROM Historial_Vistas WHERE id_usuario = $id_usuario_hist AND DATE(fecha_vista) = CURDATE() ORDER BY fecha_vista DESC");
     $ids = array();
     while($row = $res->fetch_assoc()){ $ids[] = $row['id_vista']; }
@@ -68,43 +65,42 @@ if (isset($_SESSION['id']) && isset($_GET['id_producto'])) {
     }
 }
 
-// Obtiene el ID del producto desde el formulario enviado por POST
 $id_producto = $_GET['id_producto']; 
 
-// Consulta para obtener los datos del producto
 $query_producto = "SELECT * FROM productos WHERE id_producto = $id_producto";
 $resultado_producto = mysqli_query($conexion, $query_producto);
 $producto = mysqli_fetch_array($resultado_producto);
 
-// Consulta para obtener los datos del usuario que registro el producto
 $id_usuario = $producto['id_usuario'];
 $query_usuario = "SELECT * FROM usuarios WHERE id_usuario = $id_usuario";
 $resultado_usuario = mysqli_query($conexion, $query_usuario);
 $usuario = mysqli_fetch_assoc($resultado_usuario);
 
-// Imagen del producto (zava_completa.sql usa 'imagen' y/o 'imagen_principal')
 $imagen_producto = $producto['imagen'] ? $producto['imagen'] : 'producto_default.png';
 $rutaImagenProducto = "/Zava/img/productos/" . $imagen_producto;
 
-// Datos del vendedor
 $nickname_comercio = $usuario['nickname'];
 $foto_usuario_comercio = $usuario['foto'] ? $usuario['foto'] : 'perfil.png';
 $rutaImagenComercio = "/Zava/img/perfiles/" . $foto_usuario_comercio;
 
-// Nombre de la categoria (obtenido del JOIN)
 $nombre_categoria = $producto['categoria'] ?? 'Sin categoría';
 ?>
 
 <div class="layout">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
-    <link rel="stylesheet" href="/Zava/css/mostrarProducto.css">
+    <link rel="stylesheet" href="/Zava/css/cliente/mostrarProducto.css">
     <main>
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
         <section id="producto-contenedor" class="producto-principal" data-id-producto="<?php echo $producto['id_producto']; ?>">
             <article class="producto-contenedor">
                 <div class="cont-imgs">
                     <div class="cont-img-principal">
-                        <img src="<?php echo $rutaImagenProducto; ?>" alt="Imagen principal del producto">
+                        <img src="<?php echo $rutaImagenProducto ?>" alt="Imagen del producto">
+                        <?php if($producto['descuento'] == 1 && !empty($producto['porcentaje_descuento'])): ?>
+                            <div class="cont-oferta-badge">
+                                <p>%<?php echo $producto['porcentaje_descuento']; ?> off</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="cont-detalles">
@@ -142,9 +138,20 @@ if (isset($_SESSION['id'])) {
                             <span class="estado-producto <?php echo $producto['stock'] > 0 ? 'in-stock' : 'out-of-stock';?>">En stock</span> 
                         <?php }; ?>
                     </div>
-                    <div class="cont-precios">
-                        <span class="precio-principal">$<?php echo number_format($producto['precio'], 2, ',', '.');?></span> <!--EN CASO DE QUE ESTE EN OFERTA SE MOSTRARA ESE PRECIO (EL QUE TIENE DESCUENTO)-->
-                        <span class="precio-oferta">$<?php echo number_format($producto['precio'], 2, ',','.');?></span> <!--SE MOSTRARA UNICAMENTE SI EL PRODUCTO ESTA EN OFERTA. EL CONTENIDO SERA EL PRECIO ORIGINAL-->
+                                        <div class="cont-precios">
+                        <?php 
+                        $precio_final = $producto['precio'];
+                        $precio_original = null;
+
+                        if($producto['descuento'] == 1 && !empty($producto['porcentaje_descuento']) && $producto['porcentaje_descuento'] > 0){
+                            $precio_original = $producto['precio'];
+                            $descuento_valor = $precio_original * ($producto['porcentaje_descuento'] / 100);
+                            $precio_final = $precio_original - $descuento_valor;
+                        ?>
+                            <span class="precio-oferta">$<?php echo number_format($precio_original, 2, ',', '.')?></span>
+                        <?php } ?>
+                        
+                        <span class="precio-principal">$<?php echo number_format($precio_final, 2, ',', '.')?></span>
                     </div>
                     <p class="descripcion"><?php echo $producto['descripcion'];?></p>
 

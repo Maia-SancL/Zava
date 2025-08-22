@@ -20,7 +20,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
             $rutaImg="/Zava/img/perfiles/".$foto;
         }
         ?>
-        <link rel="stylesheet" href="/Zava/css/navegador.css">
+        <link rel="stylesheet" href="/Zava/css/general/navegador.css">
         <!-- Menú para clientes -->
         <nav class="nav">
             <div class="barra-buscar" id="contenedor-busqueda-nav" style="position: relative;">
@@ -82,7 +82,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                 </div>
             </div>
         </nav>
-    <?php elseif ($_SESSION['tipo_usuario'] === 'Vendedor'):
+    <?php elseif ($_SESSION['tipo_usuario'] === 'Comercio'):
         include_once('conexion.php');
         $id_comercio = $_SESSION['id'];
         $query = "SELECT nombre, foto FROM usuarios WHERE id_usuario = $id_comercio";
@@ -98,11 +98,11 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
         }
     ?>
         <!-- Menú para comercios -->
-        <link rel="stylesheet" href="/Zava/css/navegador.css">
+        <link rel="stylesheet" href="/Zava/css/general/navegador.css">
         <nav class="nav">
             <div class="cont-btns">
                 <ul class="nav-lista-btns">
-                    <li class="btns" onclick="location.href='/Zava/php/comercio/index_comercio.php'">Panel de Comercio</li>
+                    <li class="btns" onclick="location.href='/Zava/'">Panel de Comercio</li>
                     <li class="btns user-dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" onclick="bandejaUsuario(event)"><circle cx="12" cy="6" r="4" fill="currentColor" class="nav-icono"/><path class="nav-icono" fill="currentColor" d="M20 17.5c0 2.485 0 4.5-8 4.5s-8-2.015-8-4.5S7.582 13 12 13s8 2.015 8 4.5"/></svg>
                         <ul class="user-dropdown-content">
@@ -114,7 +114,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                                     <div class="user-details">
                                         <p><?= $nombre ?></p>
                                     </div>
-                                    <a onclick="location.href='/Zava/php/comercio/perfil.php'" class="profile-btn">Ir a mi perfil</a>
+                                    <a onclick="location.href='/Zava/php/comercio/perfil/perfil.php'" class="profile-btn">Ir a mi perfil</a>
                                 </div>
                             </li>
                             <li>
@@ -137,6 +137,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
         </nav>
     <?php elseif ($_SESSION['tipo_usuario'] === 'Admin'): ?>
         <!-- Menú para administradores -->
+        <link rel="stylesheet" href="/Zava/css/general/navegador.css">
         <nav class="nav">
             <div class="cont-btns">
                 <ul class="nav-lista-btns">
@@ -156,7 +157,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
     <?php endif;
 else: ?>
     <!-- Menú para visitantes (no logueados) -->
-    <link rel="stylesheet" href="/Zava/css/navegador.css">
+    <link rel="stylesheet" href="/Zava/css/general/navegador.css">
     <nav class="nav">
         <div class="barra-buscar">
             <div class="btn-buscar">

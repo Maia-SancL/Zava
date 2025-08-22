@@ -1,6 +1,11 @@
 <?php
 session_start();
-include_once('conexion.php');
+// Usar ruta absoluta para incluir el archivo de conexión
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/conexion.php');
+
+// Habilitar reporte de errores para depuración
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Verificar que el usuario esté logueado
 if (!isset($_SESSION['id'])) {
@@ -9,7 +14,8 @@ if (!isset($_SESSION['id'])) {
 }
 
 $id_usuario = $_SESSION['id'];
-$tipo = $_POST['tipo'] ?? '';
+// Obtener el tipo de favorito de GET o POST
+$tipo = $_GET['tipo'] ?? $_POST['tipo'] ?? '';
 
 if (empty($tipo)) {
     echo '<div class="sin-favoritos-dinamico">Tipo de favorito no especificado.</div>';

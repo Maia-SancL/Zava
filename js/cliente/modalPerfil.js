@@ -20,4 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (modal) modal.style.display = 'none';
         }
     });
+
+    const deleteForm = document.getElementById('deleteAccountFormCliente');
+
+    if (deleteForm) {
+        deleteForm.addEventListener('submit', function(event) {
+            const confirmDelete = confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.');
+            if (!confirmDelete) {
+                event.preventDefault();
+            }
+        });
+    }
 });

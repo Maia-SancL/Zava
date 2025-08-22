@@ -12,7 +12,7 @@ if (!isset($_SESSION['id'])) {
 $id_usuario = $_SESSION['id'];
 $tabla = $_GET['tabla'] ?? 'inicio';
 
-// Datos usuario
+
 $query_usuario = "SELECT nombre, apellido, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
 $resultado_usuario = mysqli_query($conexion, $query_usuario);
 $usuario = mysqli_fetch_assoc($resultado_usuario);
@@ -66,9 +66,9 @@ $rutaImg="/Zava/img/perfiles/".$foto;
         <div class="cont-pedidos">
             <h3>Mis Pedidos</h3>
             <?php
-            // para pruebas, si no hay sesion, usamos un id de usuario por defecto.
+            
             if (!isset($_SESSION['id_usuario'])) {
-                $_SESSION['id_usuario'] = 1; // id de usuario de prueba.
+                $_SESSION['id_usuario'] = 1; 
             }
             $id_usuario = $_SESSION['id_usuario'];
 
@@ -123,7 +123,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             <span class="close-btn">&times;</span>
         </div>
         <div class="modal-body">
-            <form action="editarPerfil.php" method="POST" enctype="multipart/form-data" class="edit-form">
+            <form action="/Zava/php/cliente/funciones/actualizarPerfil.php" method="post" enctype="multipart/form-data" id="form-perfil">
                 <div class="form-group profile-pic-group">
                     <label for="foto">Foto de Perfil:</label>
                     <img src="<?php echo $rutaImg; ?>" alt="Foto de perfil actual" class="current-pic">

@@ -12,7 +12,7 @@ if (!isset($_SESSION['id'])) {
 $id_usuario = $_SESSION['id'];
 $tabla = $_GET['tabla'] ?? 'inicio';
 
-// Datos usuario
+
 $query_usuario = "SELECT nombre, apellido, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
 $resultado_usuario = mysqli_query($conexion, $query_usuario);
 $usuario = mysqli_fetch_assoc($resultado_usuario);
@@ -118,7 +118,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
                                 </div>
                                 
                                 <div class="botonGlobal">
-                                    <div class="botonModificar" onclick="location.href='/Zava/php/cliente/modificarReceta.php?id=<?php echo $receta['id_receta']; ?>'">
+                                                                        <div class="botonModificar" onclick="location.href='/Zava/php/cliente/funciones/modificarReceta.php?id=<?php echo $receta['id_receta']; ?>'">
                                         <svg viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4.11572 12L3.36572 15L6.36572 14.25L15.0552 5.56052C15.3364 5.27923 15.4944 4.89776 15.4944 4.50002C15.4944 4.10227 15.3364 3.72081 15.0552 3.43952L14.9262 3.31052C14.6449 3.02931 14.2635 2.87134 13.8657 2.87134C13.468 2.87134 13.0865 3.02931 12.8052 3.31052L4.11572 12Z" stroke="#F4F4F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         <path d="M4.11572 12L3.36572 15L6.36572 14.25L13.8657 6.75L11.6157 4.5L4.11572 12Z" fill="#F4F4F4"/>
@@ -188,7 +188,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             <span class="close-btn">&times;</span>
         </div>
         <div class="modal-body">
-            <form action="editarPerfil.php" method="POST" enctype="multipart/form-data" class="edit-form">
+            <form action="/Zava/php/cliente/funciones/actualizarPerfil.php" method="post" enctype="multipart/form-data" id="form-perfil">
                 <div class="form-group profile-pic-group">
                     <label for="foto">Foto de Perfil:</label>
                     <img src="<?php echo $rutaImg; ?>" alt="Foto de perfil actual" class="current-pic">

@@ -3,17 +3,12 @@ session_start();
 include 'conexion.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 
-// Obtener productos del carrito
 $productos_info = [];
 $total_carrito = 0;
 $cantidad_productos = 0;
 
-// para pruebas, si no hay sesion, usamos un id de usuario por defecto.
 if (!isset($_SESSION['id_usuario'])) {
-    $_SESSION['id_usuario'] = 1; // id de usuario de prueba.
-    // en un sistema real, aqui redirigiriamos al login:
-    // header('Location: /Zava/login.php');
-    // exit();
+    $_SESSION['id_usuario'] = 1; 
 }
 
 if (empty($_SESSION['carrito'])) {
@@ -57,20 +52,20 @@ if ($resultado) {
     }
 
 
-$costo_envio = 2000; // Valor de envio fijo por ahora
+$costo_envio = 2000;
 $total_final = $total_carrito + $costo_envio;
 
 ?>
 <link rel="stylesheet" href="/Zava/css/cliente/facturacion.css">
 <div class="layout">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
-    <link rel="stylesheet" href="/Zava/css/mostrarReceta.css">
+    <link rel="stylesheet" href="/Zava/css/general/index.css">
     <main>
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
 
         <div class="container">
             <div class="form-section">
-                <form action="procesar_pago.php" method="POST" id="form-pago">
+                <form action="funciones/procesarPago.php" method="POST" id="form-pago">
                     <div class="delivery-details">
                         <h2>Detalle de entrega</h2>
                         <div class="input-group">

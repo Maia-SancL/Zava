@@ -18,7 +18,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
             $foto = 'perfil.png';
         }
         ?>
-        <link rel="stylesheet" href="/Zava/css/menuLateral.css">
+        <link rel="stylesheet" href="/Zava/css/general/menuLateral.css">
         <!-- Menú lateral para cliente -->
     <aside class="barraLateral">
             <ul class="barra-lista">
@@ -86,8 +86,8 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                     
             </ul>
         </aside>
-    <?php elseif ($_SESSION['tipo_usuario'] === 'Vendedor'): ?>
-        <link rel="stylesheet" href="/Zava/css/menuLateral.css">
+    <?php elseif ($_SESSION['tipo_usuario'] === 'Comercio'): ?>
+        <link rel="stylesheet" href="/Zava/css/general/menuLateral.css">
         <!-- Menú lateral para comercio -->
         <aside class="barraLateral">
             <ul class="barra-lista">
@@ -102,7 +102,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                     </a>
                 </li>
                 <li class="barra-elemento">
-                    <a href="/Zava/php/comercio/agregarProducto.php">
+                    <a href="/Zava/php/comercio/comercio-agregar-producto.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M5 21q-.825 0-1.412-.587T3 19V6.525q0-.35.113-.675t.337-.6L4.7 3.725q.275-.35.687-.538T6.25 3h11.5q.45 0 .863.188t.687.537l1.25 1.525q.225.275.338.6t.112.675V10.2q0 .45-.363.725t-.812.175q-.65-.125-1.338-.075t-1.312.25q-.425.125-.8-.112T16 10.5V8H8v6.375q0 .575.475.863t.975.037L12 14l.775.375q.3.15.413.45t.012.625q-.125.35-.162.738t-.038.787q0 .725.175 1.45T13.7 19.8q.225.425.025.813T13.1 21zm13-3h-2q-.425 0-.712-.288T15 17t.288-.712T16 16h2v-2q0-.425.288-.712T19 13t.713.288T20 14v2h2q.425 0 .713.288T23 17t-.288.713T22 18h-2v2q0 .425-.288.713T19 21t-.712-.288T18 20zM5.4 6h13.2l-.85-1H6.25z"/></svg>
                         <p class="barra-texto">Agregar producto</p>
                     </a>
@@ -119,6 +119,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
         </aside>
     <?php elseif ($_SESSION['tipo_usuario'] === 'Admin'): ?>
         <!-- Menú lateral para administrador -->
+        <link rel="stylesheet" href="/Zava/css/general/menuLateral.css">
         <aside class="barraLateral">
             <ul class="barra-lista">
                 <li class="barra-elemento barra-elemento-logo">
@@ -126,7 +127,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                     <h2 class="barra-titulo">Zava</h2>
                 </li>
                 <li class="barra-elemento">
-                    <a href="/Zava/php/admin/panelAdmin.php">
+                    <a href="/Zava/php/admin/panelAdministracion.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 8h14v-2H7v2zm0-4h14v-2H7v2zm0-6v2h14V7H7z"/></svg>
                         <p class="barra-texto">Panel Admin</p>
                     </a>
@@ -135,6 +136,12 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
                     <a href="/Zava/php/admin/usuarios.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono" fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5S5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05c1.16.84 1.97 2.08 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                         <p class="barra-texto">Usuarios</p>
+                    </a>
+                </li>
+                <li class="barra-elemento">
+                    <a href="/Zava/php/admin/panelAdministracion.php?tabla=recetas">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path class="barra-icono " fill="currentColor" d="M7 5a5 5 0 0 0-2 9.584v2.666h14v-2.666a5.001 5.001 0 0 0-2.737-9.53a4.502 4.502 0 0 0-8.526 0A5 5 0 0 0 7 5m11.998 13.75H5.002c.01 1.397.081 2.162.584 2.664C6.172 22 7.114 22 9 22h6c1.886 0 2.828 0 3.414-.586c.503-.502.574-1.267.584-2.664"/></svg>
+                        <p class="barra-texto">Recetas</p>
                     </a>
                 </li>
                 <li class="barra-elemento">
@@ -150,7 +157,7 @@ if (isset($_SESSION) && isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'
     <?php endif;
 else: ?>
     <!-- Menú lateral para visitante (no logueado) -->
-    <link rel="stylesheet" href="/Zava/css/menuLateral.css">
+    <link rel="stylesheet" href="/Zava/css/general/menuLateral.css">
 <aside class="barraLateral">
         <ul class="barra-lista">
             <li class="barra-elemento barra-elemento-logo">

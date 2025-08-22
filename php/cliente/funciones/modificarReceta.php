@@ -4,14 +4,14 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';
 include_once 'conexion.php';
 
-$mensaje = '';  
+$mensaje = '';
 
-if (!isset($_SESSION['id'])) {  
+if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit;
 }
 
-$id_usuario = $_SESSION['id'];  
+$id_usuario = $_SESSION['id'];
 
 
 $id_receta = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -77,12 +77,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $dificultad = mysqli_real_escape_string($conexion, $_POST['dificultad']);
         $id_categoria = intval($_POST['categoria']);
 
-        // --- Imagenes ---
         $imagenes_finales = $imagenes_existentes;
 
-        // Caso 1 Se suben nuevas imagenes (reemplaza todo lo viejo)
         if (isset($_FILES['imagenes']) && !empty($_FILES['imagenes']['name'][0])) {
-            // Borrar imagenes viejas
             foreach ($imagenes_existentes as $imagen_vieja) {
                 $ruta_imagen_vieja = $_SERVER['DOCUMENT_ROOT'] . '/Zava/imagenes/recetas/' . $imagen_vieja;
                 if (file_exists($ruta_imagen_vieja)) {
@@ -90,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-            // Guardar las nuevas imagenes
             $imagenes_guardadas = [];
             $directorio_destino = $_SERVER['DOCUMENT_ROOT'] . "/Zava/imagenes/recetas/";
             if (!is_dir($directorio_destino)) mkdir($directorio_destino, 0777, true);
@@ -107,7 +103,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $imagenes_finales = $imagenes_guardadas;
         
         } else {
-            // Caso 2 no se suben nuevas imagenes, pero se pueden eliminar viejas
             $imagenes_a_mantener = [];
             for ($i = 0; $i < count($imagenes_existentes); $i++) {
                 if (isset($_POST['eliminar_imagen_' . $i]) && $_POST['eliminar_imagen_' . $i] == '1') {
@@ -122,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $imagenes_finales = $imagenes_a_mantener;
         }
 
-        // --- ACTUALIZACONN DE LA BADE DE DATOS ---
         $imagen_principal_final = !empty($imagenes_finales) ? array_shift($imagenes_finales) : '';
         $imagenes_secundarias = $imagenes_finales;
 
@@ -141,7 +135,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             WHERE id_receta = $id_receta AND id_usuario = $id_usuario";
 
         if (mysqli_query($conexion, $sql_actualizar)) {
-            // Limpiar y re-insertar imágenes secundarias
             mysqli_query($conexion, "DELETE FROM Receta_Imagenes WHERE id_receta = $id_receta");
             if (!empty($imagenes_secundarias)) {
                 foreach ($imagenes_secundarias as $imagen_sec) {
@@ -176,7 +169,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div id="zona-imagenes" class="zona-imagenes">
                     <?php if (empty($imagenes_existentes)): ?>
                         <div class="icono-imagen" id="icono-imagen">
-                            <!-- SVG de icono de imagen -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
                                 <path class="icon" fill="currentColor" d="M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3zm-4.7 6H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v8.3c-.6-.2-1.3-.3-2-.3c-1.1 0-2.2.3-3.1.9L14.5 12L11 16.5l-2.5-3L5 18h8.1c-.1.3-.1.7-.1 1c0 .7.1 1.4.3 2"/>
                             </svg>
@@ -190,7 +182,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <p class="error-message" id="errorMessage" style="color:red; display:none;">¡Solo puedes seleccionar hasta 3 imágenes!</p>
                     
                     <div class="preview-container" id="previewContainer" style="<?php echo !empty($imagenes_existentes) ? 'display:grid;' : 'display:none;'; ?> grid-template-columns:240px 110px; gap:8px; margin-top:12px; height:240px;">
-                        <!-- Slot 0 - Imagen principal -->
                         <div class="preview-slot" id="slot-0" style="width:240px;height:240px;grid-row:1/span 2;border:2px dashed #bbb;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;">
                             <?php if (isset($imagenes_existentes[0])): ?>
                                 <img src="/Zava/imagenes/recetas/<?php echo htmlspecialchars($imagenes_existentes[0]); ?>" 
@@ -202,7 +193,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php endif; ?>
                         </div>
                         
-                        <!-- Slot 1 - Segunda imagen -->
                         <div class="preview-slot" id="slot-1" style="width:110px;height:110px;border:2px dashed #bbb;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;">
                             <?php if (isset($imagenes_existentes[1])): ?>
                                 <img src="/Zava/imagenes/recetas/<?php echo htmlspecialchars($imagenes_existentes[1]); ?>" 
@@ -214,7 +204,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <?php endif; ?>
                         </div>
                         
-                        <!-- Slot 2 - Tercera imagen -->
                         <div class="preview-slot" id="slot-2" style="width:110px;height:110px;border:2px dashed #bbb;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;">
                             <?php if (isset($imagenes_existentes[2])): ?>
                                 <img src="/Zava/imagenes/recetas/<?php echo htmlspecialchars($imagenes_existentes[2]); ?>" 
@@ -333,10 +322,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <button type="button" id="agregar-paso" class="btn-secundario">+ Paso</button>
                     </div>
                 </div>
-                <!-- <div class="botones">
-                    <button type="submit" class="btn-principal">Guardar Cambios</button>
-                    <button type="reset" id="cancelar-boton" class="btn-secundario">Borrar</button>
-                </div> -->
             </div>
         </form>
     </div>

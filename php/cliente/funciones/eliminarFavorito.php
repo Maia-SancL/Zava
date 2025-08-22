@@ -4,7 +4,6 @@ include_once('conexion.php');
 
 header('Content-Type: application/json');
 
-// Verificar que el usuario esté logueado
 if (!isset($_SESSION['id'])) {
     echo json_encode(['success' => false, 'message' => 'Debes iniciar sesión']);
     exit;

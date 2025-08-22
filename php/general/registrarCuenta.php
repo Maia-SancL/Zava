@@ -7,16 +7,19 @@ $mensaje = '';
 // Obtener el rol desde POST (viene del formulario de diferenciación)
 $rol_seleccionado = isset($_POST['rol']) ? $_POST['rol'] : 1; // Por defecto Usuario
 
+// Incluir la función para enviar correos de verificación
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/mails/enviarVerificacion.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'])) {
     if (
-        isset($_POST['nombre']) &&
-        isset($_POST['apellido']) &&
-        isset($_POST['nombreDeUsuario']) &&
-        isset($_POST['correo']) &&
-        isset($_POST['contrasenia']) &&
-        isset($_POST['confirmarContrasenia']) &&
-        isset($_POST['telefono']) &&
-        isset($_POST['rol']) 
+        !empty($_POST['nombre']) &&
+        !empty($_POST['apellido']) &&
+        !empty($_POST['nombreDeUsuario']) &&
+        !empty($_POST['correo']) &&
+        !empty($_POST['contrasenia']) &&
+        !empty($_POST['confirmarContrasenia']) &&
+        !empty($_POST['telefono']) &&
+        isset($_POST['rol'])
     ) {
         $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
         $apellido = mysqli_real_escape_string($conexion, $_POST['apellido']);
@@ -26,37 +29,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'])) {
         $confirmarContrasenia = $_POST['confirmarContrasenia'];
         $telefono = mysqli_real_escape_string($conexion, $_POST['telefono']);
         $rol = (int)$_POST['rol'];
-        
-        // Validar que las contraseñas coincidan
+
         if ($contrasenia !== $confirmarContrasenia) {
             $mensaje = "Las contraseñas no coinciden. Por favor, inténtalo de nuevo.";
         } else {
-            // Encriptar la contraseña
-            $contrasenia_MD5 = md5($contrasenia);
-            
-            // Verificar si el correo ya está registrado
-            $consulta = "SELECT correo FROM Usuarios WHERE correo='$correo'";
-            $consulta1 = mysqli_query($conexion, $consulta);
-            
-            if (mysqli_num_rows($consulta1) > 0) {
+            $contrasenia_hashed = password_hash($contrasenia, PASSWORD_DEFAULT);
+            $token_verificacion = bin2hex(random_bytes(50));
+            $token_expiracion = date('Y-m-d H:i:s', strtotime('+1 day'));
+
+            $consulta_correo = "SELECT correo FROM Usuarios WHERE correo='$correo'";
+            $resultado_correo = mysqli_query($conexion, $consulta_correo);
+
+            $consulta_nick = "SELECT nickname FROM Usuarios WHERE nickname='$nombreDeUsuario'";
+            $resultado_nick = mysqli_query($conexion, $consulta_nick);
+
+            if (mysqli_num_rows($resultado_correo) > 0) {
                 $mensaje = "El correo ya está registrado. <a href='diferenciacionRegistro.php'>Vuelve</a> y usa otro.";
+            } elseif (mysqli_num_rows($resultado_nick) > 0) {
+                $mensaje = "El nombre de usuario ya está registrado. Por favor, elige otro.";
             } else {
-                // Verificar si el nickname ya está registrado
-                $consulta_nick = "SELECT nickname FROM Usuarios WHERE nickname='$nombreDeUsuario'";
-                $consulta_nick_result = mysqli_query($conexion, $consulta_nick);
+                // Prepara la consulta SQL para insertar el nuevo usuario con el token de verificación.
+                $sql = "INSERT INTO Usuarios (nombre, apellido, nickname, correo, telefono, contrasenia, id_rol, token_verificacion, token_expiracion) VALUES ('$nombre', '$apellido', '$nombreDeUsuario', '$correo', '$telefono', '$contrasenia_hashed', '$rol', '$token_verificacion', '$token_expiracion')";
                 
-                if (mysqli_num_rows($consulta_nick_result) > 0) {
-                    $mensaje = "El nombre de usuario ya está registrado. Por favor, elige otro.";
-                } else {
-                    $sql = "INSERT INTO Usuarios (nombre, apellido, nickname, correo, telefono, contrasenia, id_rol) VALUES ('$nombre', '$apellido', '$nombreDeUsuario', '$correo', '$telefono', '$contrasenia_MD5', '$rol')";
-                    $result = mysqli_query($conexion, $sql);
-                    
-                    if ($result) {
-                        $mensaje = "Registro exitoso. Redirigiendo al login...";
-                        echo "<script>setTimeout(function(){ window.location.href='inicioSesion.php'; }, 2000);</script>";
+                // Ejecuta la consulta y, si tiene éxito, procede a enviar el correo.
+                $resultado_insert = mysqli_query($conexion, $sql);
+
+                if ($resultado_insert) {
+                    $envio_correo = enviarCorreoVerificacion($correo, $nombre, $token_verificacion);
+
+                    if ($envio_correo === true) {
+                        $reenvio_link = "mails/solicitarReenvio.php?token={$token_verificacion}";
+                        $mensaje = "Registro exitoso. Se ha enviado un correo de verificación a tu dirección. Si no lo recibes, <a href='{$reenvio_link}'>haz clic aquí para reenviarlo</a>.";
                     } else {
-                        $mensaje = "Error al registrar usuario: " . mysqli_error($conexion);
+                        // Si el envío falla, se muestra el error devuelto por la función.
+                        $mensaje = $envio_correo;
                     }
+                } else {
+                    // Si la consulta SQL para insertar al usuario falla, se muestra un error de la base de datos.
+                    $mensaje = "Error al registrar usuario: " . mysqli_error($conexion);
                 }
             }
         }

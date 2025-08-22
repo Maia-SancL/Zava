@@ -9,45 +9,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['correo']) && isset($_POST['contrasenia'])) {
         $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
         $pass = $_POST['contrasenia'];
-        $pass_MD5 = md5($pass);
 
         $sql = "SELECT * FROM Usuarios WHERE correo = '$correo' AND activo = 1";
         $result = mysqli_query($conexion, $sql);
 
         if ($result && mysqli_num_rows($result) == 1) {
-            $result2 = mysqli_fetch_assoc($result);
-            if ($pass_MD5 == $result2['contrasenia']) {
-                $_SESSION['id'] = $result2['id_usuario'];
-                $_SESSION['correo'] = $result2['correo'];
-                $_SESSION['nickname'] = $result2['nickname'];
-                $_SESSION['nombre'] = $result2['nombre'];
-                $_SESSION['apellido'] = $result2['apellido'];
-                $_SESSION['id_rol'] = $result2['id_rol'];
-                $_SESSION['foto'] = $result2['foto'];
-                $_SESSION['usuario'] = $result2;
+            $usuario = mysqli_fetch_assoc($result);
+
+            // Verificar la contraseña usando password_verify
+            if (password_verify($pass, $usuario['contrasenia'])) {
                 
-                // Definir tipo de usuario basado en el rol (coincide con nombres en DB)
-                switch($result2['id_rol']) {
-                    case 1:
-                        $_SESSION['tipo_usuario'] = 'Usuario';
-                        break;
-                    case 2:
-                        $_SESSION['tipo_usuario'] = 'Comercio';
-                        break;
-                    case 3:
-                        $_SESSION['tipo_usuario'] = 'Admin';
-                        break;
-                    default:
-                        $_SESSION['tipo_usuario'] = 'Usuario';
+                // Comprobar si la cuenta ha sido verificada
+                if ($usuario['verificado']) {
+                    $_SESSION['id'] = $usuario['id_usuario'];
+                    $_SESSION['correo'] = $usuario['correo'];
+                    $_SESSION['nickname'] = $usuario['nickname'];
+                    $_SESSION['nombre'] = $usuario['nombre'];
+                    $_SESSION['apellido'] = $usuario['apellido'];
+                    $_SESSION['id_rol'] = $usuario['id_rol'];
+                    $_SESSION['foto'] = $usuario['foto'];
+                    $_SESSION['usuario'] = $usuario;
+                    
+                    // Definir tipo de usuario basado en el rol
+                    switch($usuario['id_rol']) {
+                        case 1: $_SESSION['tipo_usuario'] = 'Usuario'; break;
+                        case 2: $_SESSION['tipo_usuario'] = 'Comercio'; break;
+                        case 3: $_SESSION['tipo_usuario'] = 'Admin'; break;
+                        default: $_SESSION['tipo_usuario'] = 'Usuario';
+                    }
+                    
+                    echo '
+                    <form id="postRedirect" action="/Zava/php/componentes/pantallaCarga.php" method="POST">
+                        <input type="hidden" name="mensaje" value="Iniciando sesión...">
+                        <input type="hidden" name="destino" value="/Zava/index.php">
+                    </form>
+                    <script>document.getElementById("postRedirect").submit();</script>';
+                    exit;
+                } else {
+                    $mensaje = 'Tu cuenta aún no ha sido verificada. Por favor, revisa tu correo electrónico.';
                 }
-                
-                header("Location: /Zava/index.php");
-                exit;
             } else {
-                $mensaje = 'Contraseña incorrecta';
+                $mensaje = 'Correo o contraseña incorrectos.';
             }
         } else {
-            $mensaje = 'No existe la cuenta';
+            $mensaje = 'Correo o contraseña incorrectos.';
         }
     }
 }
@@ -74,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input class="input-iniciar-sesion contrasenia" type="password" id="contrasenia" name="contrasenia" required>
             </div>
             <a href="/Zava/php/general/diferenciacionRegistro.php">¿No tenes cuenta?</a>
+            <a href="/Zava/php/general/solicitarRestauracion.php">¿Olvidaste tu contraseña?</a>
             <button type="submit" class="btn-iniciar-sesion">Iniciar sesión</button>
         </form>
     </div>

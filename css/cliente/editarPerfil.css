@@ -131,3 +131,19 @@
 .btn-guardar:hover {
     background-color: #3a6a8a;
 }
+
+.btn-eliminar {
+    background-color: #c9302c;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background-color: #a92824;
+}

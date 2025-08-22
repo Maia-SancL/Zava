@@ -12,7 +12,6 @@ if (!isset($_SESSION['id'])) {
 $id_usuario = $_SESSION['id'];
 $tabla = $_GET['tabla'] ?? 'inicio';
 
-// Datos usuario
 $query_usuario = "SELECT nombre, apellido, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
 $resultado_usuario = mysqli_query($conexion, $query_usuario);
 $usuario = mysqli_fetch_assoc($resultado_usuario);
@@ -75,22 +74,19 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             </div>
         </div>
         
-        <!-- Contenedor dinamico XD -->
         <div id="contenido-favoritos" class="contenido-favoritos" style="display: none;">
             <div class="header-favoritos">
                 <h3 id="titulo-favoritos">Favoritos</h3>
                 <button onclick="ocultarFavoritos()" class="btn-volver">← Volver</button>
             </div>
             <div id="grid-favoritos" class="grid-favoritos-dinamico">
-                <!-- Aca se carga dinamicamente, y si papito como si no... -->
             </div>
         </div>
     </main>
 
 
-<script src="/Zava/js/perfil-favoritos.js"></script>
+<script src="/Zava/js/cliente/perfil-favoritos.js"></script>
 
-<!-- El Modal -->
 <div id="editProfileModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-header">
@@ -98,7 +94,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             <span class="close-btn">&times;</span>
         </div>
         <div class="modal-body">
-            <form action="actualizar_perfil.php" method="POST" enctype="multipart/form-data" class="edit-form">
+            <form action="/Zava/php/cliente/funciones/actualizarPerfil.php" method="POST" enctype="multipart/form-data" class="edit-form">
                 <div class="form-group profile-pic-group">
                     <label for="foto">Foto de Perfil:</label>
                     <img src="<?php echo $rutaImg; ?>" alt="Foto de perfil actual" class="current-pic">
@@ -120,6 +116,29 @@ $rutaImg="/Zava/img/perfiles/".$foto;
                     <button type="submit" class="btn-guardar">Guardar Cambios</button>
                 </div>
             </form>
+            <hr style="margin: 20px 0; border-top: 1px solid #e0e0e0;">
+            <div class="advanced-settings-section">
+                <h4 style="color: var(--primario-100);">Configuración Avanzada</h4>
+                <p style="font-size: 0.9em; color: #666;">Para cambiar tu correo electrónico, ingresa la nueva dirección. Se enviará un enlace de confirmación a tu correo actual para validar el cambio.</p>
+                <form id="changeEmailForm" action="/Zava/php/cliente/funciones/iniciarCambioCorreo.php" method="POST">
+                    <div class="form-group">
+                        <label for="nuevo_correo">Nuevo Correo Electrónico:</label>
+                        <input type="email" id="nuevo_correo" name="nuevo_correo" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-guardar">Solicitar Cambio de Correo</button>
+                    </div>
+                </form>
+            </div>
+            <hr style="margin: 20px 0; border-top: 1px solid #e0e0e0;">
+            <div class="delete-account-section">
+                <h4 style="color: var(--primario-100);">Eliminar Cuenta</h4>
+                <p style="font-size: 0.9em; color: #666;">Esta acción es permanente y no se puede deshacer. Se eliminarán todos tus datos (favoritos, pedidos, etc.).</p>
+                <form id="deleteAccountRequestForm" action="/Zava/php/cliente/funciones/iniciarEliminacion.php" method="POST">
+                 <button type="submit" class="btn-eliminar">Eliminar mi cuenta</button>
+            </form>
+            <p style="font-size: 0.8em; color: #666; margin-top: 10px;">Se te enviará un correo electrónico para confirmar la eliminación.</p>
+            </div>
         </div>
     </div>
 </div>

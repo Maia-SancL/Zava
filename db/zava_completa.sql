@@ -43,6 +43,16 @@ CREATE TABLE Usuarios (
     foto VARCHAR(255) DEFAULT 'perfil.png',
     activo BOOLEAN DEFAULT TRUE,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    verificado BOOLEAN DEFAULT FALSE,
+    token_verificacion VARCHAR(255) NULL,
+    token_expiracion DATETIME NULL,
+    token_restauracion VARCHAR(255) NULL,
+    token_restauracion_expiracion DATETIME NULL,
+    nuevo_correo VARCHAR(100) NULL,
+    token_cambio_correo VARCHAR(255) NULL,
+    token_cambio_correo_expiracion DATETIME NULL,
+    token_eliminacion VARCHAR(255) NULL,
+    token_eliminacion_expiracion DATETIME NULL,
     FOREIGN KEY (id_rol) REFERENCES Roles(id_rol)
 );
 
@@ -70,7 +80,8 @@ CREATE TABLE Productos (
     peso DECIMAL(10,2),
     precio DECIMAL(10,2) NOT NULL,
     stock INT NOT NULL DEFAULT 0,
-    descuento DECIMAL(5,2) DEFAULT 0,
+    descuento BOOLEAN NOT NULL DEFAULT FALSE,
+    porcentaje_descuento INT(3) NULL DEFAULT NULL,
     imagen_principal VARCHAR(255) DEFAULT 'producto_default.png',
     imagen VARCHAR(255) DEFAULT 'producto_default.png',
     activo BOOLEAN DEFAULT TRUE,
@@ -254,20 +265,26 @@ CREATE TABLE Historial_Vistas (
 INSERT INTO Roles (nombre, descripcion) VALUES
 ('Usuario', 'Usuario estándar'),
 ('Vendedor', 'Usuario vendedor'),
-('Restaurante', 'Usuario restaurante'),
 ('Admin', 'Administrador');
 
 -- Insertar Categorías básicas
 INSERT INTO Categorias (nombre, tipo) VALUES
 -- Productos
-('Lácteos', 'producto'),
-('Carnes', 'producto'),
-('Frutas', 'producto'),
-('Verduras', 'producto'),
-('Bebidas', 'producto'),
+('Golosinas', 'producto'),
+('Panaderia', 'producto'),
 ('Snacks', 'producto'),
-('Panadería', 'producto'),
-('Condimentos', 'producto'),
+('Cereales', 'producto'),
+('Aderezos', 'producto'),
+('Infusiones', 'producto'),
+('Pastas', 'producto'),
+('Harinas y premezclas', 'producto'),
+('Arroz y legumbres', 'producto'),
+('Mermeladas y Dulces', 'producto'),
+('Congelados', 'producto'),
+('Lacteos', 'producto'),
+('Quesos', 'producto'),
+('Bebidas', 'producto'),
+('Salsas y Pure de Tomate', 'producto'),
 -- Recetas
 ('Platos Principales', 'receta'),
 ('Postres', 'receta'),

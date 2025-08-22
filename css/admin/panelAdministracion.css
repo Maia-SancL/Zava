@@ -1,0 +1,304 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Nunito;
+    color: var(--negros-700, #1F1F1F);
+}
+
+.layout {
+    min-height: 100vh;
+    display: flex
+;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--blanco-50);
+}
+
+main {
+    width: 100%;
+    height: auto;
+    background-color: var(--fondo-50);
+    padding-right: 1rem;
+}
+
+.svg-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+}
+
+.svg-icon .icon {
+    color: var(--blanco-50);
+}
+
+.cont-titulo-btn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid var(--terciario-50);
+    margin-bottom: 1rem;
+}
+
+.cont-titulo-btn .subtitulo{
+    color: var(--terciario-50);
+    font-family: Noto_Sans;
+    font-weight: 800;
+    font-family: 1.5rem;
+}
+
+.cont-titulo-btn .btn-agregar{
+    all: unset;
+    background-color: var(--secundario-50);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: var(--blanco-50);
+    padding: .5rem 2rem;
+    border-radius: 1.25rem;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+
+.cont-titulo-btn .btn-agregar:hover{
+    background-color: var(--terciario-50);
+    transform: scale(1.1);
+}
+
+.seleccionar-tipo-tabla{
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    gap:.5rem;
+    border-bottom: 1px solid var(--terciario-50);
+    padding-bottom: .6rem;
+}
+
+.seleccionar-tipo-tabla .tabla{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .4rem .4rem;
+    border-radius: 1.25rem;
+    text-decoration: none;
+    font-size: .9em;
+    transition: all .5s ease;
+    font-weight: 500;
+    color: var(--terciario-terciario);
+    border: 1.5px solid var(--secundario-50);
+
+}
+
+.seleccionar-tipo-tabla .tabla:hover,
+.seleccionar-tipo-tabla .tabla.seleccionado{
+    background-color: var(--secundario-50);
+    color: var(--blanco-50);
+}
+/* FILTROS */
+
+.form-filtros{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: .8rem;
+    border-bottom: 1px solid var(--terciario-50);
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.form-filtros .filtros{
+    width: auto;
+    display: flex;
+    gap: 2rem;
+}
+
+.form-filtros .select-filtro{
+    all:unset;
+    width: 15rem;
+    height: 1.5rem;
+    background-color: var(--blanco-50);
+    padding: .3rem .5rem;
+    border-radius: .9rem;
+    color: var(--negro-700);
+    font-size: .8rem;
+    display: flex;
+    align-items: center;
+    border:1px solid var(--terciario-50);
+}
+
+.form-filtros .barra-buscar{
+    width: 15rem;
+    height: 100%;
+    background-color: var(--blanco-50);
+    padding: .3rem .5rem;
+    border-radius: .9rem;
+    color: var(--negro-700);
+    font-size: .8rem;
+    display: flex;
+    gap: .3rem;
+    align-items: center;
+    border:1px solid var(--terciario-50);
+
+}
+
+.barra-buscar .input-buscar{
+    all: unset;
+    width: 100%;
+}
+
+.barra-buscar .icon{
+    color: var(--terciario-50);
+}
+
+.form-filtros .btn-filtrar{
+    all:unset;
+    width: 10rem;
+    background-color: var(--secundario-50);
+    color: var(--blanco-50);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .9rem;
+    cursor: pointer;
+    transition: background-color .3s ease;
+}
+
+.form-filtros .btn-filtrar:hover{
+    background-color: var(--terciario-50);
+}
+
+/* TABLA PRODUCTOS */
+.producto {
+  display: flex;
+  flex-direction: column;
+}
+
+.producto button{
+    all: unset;
+}
+
+.producto button .icon{
+    color: var(--terciario-50);
+    cursor: pointer;
+}
+
+.producto .informacion-principal{
+    border-radius: 1.25rem 1.25rem 0 0;
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    gap: .2rem;
+    font-family: Nunito;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: var(--blanco-50);
+    border-bottom:1px solid var(--terciario-50);
+}
+
+.informacion-principal .btns{
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:1.5rem;
+}
+
+
+.informacion-principal .informacion{
+    width: 100%;
+    display: grid;
+    align-items: center;
+
+}
+
+.section-tabla-productos.productos .informacion-principal .informacion{
+    grid-template-columns: .1fr .3fr .4fr 1fr .5fr .5fr .3fr;
+}
+
+.section-tabla-productos.paquetes .informacion-principal .informacion{
+    grid-template-columns: .4fr .4fr .7fr 1.2fr .7fr .7fr; 
+}
+
+.section-tabla-productos.excursiones .informacion-principal .informacion{
+    grid-template-columns: .3fr .3fr .7fr .2fr .1fr .3fr .3fr; 
+}
+
+.section-tabla-productos.vehiculos .informacion-principal .informacion{
+    grid-template-columns: .3fr .3fr .4fr .4fr .1fr .7fr .4fr .3fr; 
+}
+
+.section-tabla-productos.estadias .informacion-principal .informacion{
+    grid-template-columns: .4fr .4fr .9fr .9fr 1.1fr .1fr .3fr;
+}
+
+.section-tabla-productos.boletos-avion .informacion-principal .informacion{
+    grid-template-columns: .4fr .4fr 1fr 1fr .5fr .4fr .3fr;
+}
+
+
+.informacion .lbl-informacion{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 .2rem;
+    border-left: .5px solid var(--terciario-50);
+    border-right: .5px solid var(--terciario-50);
+}
+
+.cont-productos-paquete{
+    width: 100%;
+}
+
+.detalles-producto.oculto {
+    width: 100%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.detalles-producto.activo {
+    width: 100%;
+    display: flex;
+    opacity: 1;
+    background-color: var(--blanco-50);
+    border-left: 1px solid var(--terciario-50);
+    border-right: 1px solid var(--terciario-50);
+    border-bottom: 1px solid var(--terciario-50);
+    border-radius: 0 0 1.25rem 1.25rem;
+
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.cont-descripcion h5{
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.cont-descripcion p{
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.detalles-producto .informacion{
+    width: 100%;;
+    display: grid;
+    grid-template-columns: .6fr .7fr .5fr 1.2fr;
+    border-bottom: .5px solid var(--terciario-50) ;
+    margin: 1rem 0;
+}
+
+.cont-productos-paquete .lbl-informacion{
+    margin-bottom: .2rem;
+}

@@ -17,7 +17,6 @@ if ($id_comentario <= 0) {
     exit;
 }
 
-// Solo permitir borrar comentarios del usuario actual
 $query = "UPDATE Comentarios_Recetas SET activo = 0 WHERE id_comentario = $id_comentario AND id_usuario = $id_usuario";
 $result = mysqli_query($conexion, $query);
 

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/Zava/css/footer.css">
+<link rel="stylesheet" href="/Zava/css/general/footer.css">
 <footer>
         <div class="cont-dividido">
             <div class="cont-logo">
@@ -37,7 +37,7 @@
                     <a href="/Zava/#inicio">Inicio</a>
                     <a href="/Zava/php/cliente/recetario.php">Recetas</a>
                     <a href="/Zava/#productos">Productos</a>
-                    <a href="Zava/php/...">Perfil</a>
+                    <a href="/Zava/php/cliente/perfil/perfil.php">Perfil</a>
                 </div>
             </div>
         </div>

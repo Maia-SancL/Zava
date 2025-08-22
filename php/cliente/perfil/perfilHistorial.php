@@ -242,7 +242,7 @@ $rutaImg = "/Zava/img/perfiles/" . $foto;
             <span class="close-btn">&times;</span>
         </div>
         <div class="modal-body">
-            <form action="editarPerfil.php" method="POST" enctype="multipart/form-data" class="edit-form">
+            <form action="/Zava/php/cliente/funciones/actualizarPerfil.php" method="post" enctype="multipart/form-data" id="form-perfil">
                 <div class="form-group profile-pic-group">
                     <label for="foto">Foto de Perfil:</label>
                     <img src="<?php echo $rutaImg; ?>" alt="Foto de perfil actual" class="current-pic">

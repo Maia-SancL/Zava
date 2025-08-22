@@ -4,12 +4,10 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/cliente/conexion.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/funciones/tags.php';
 
-// Inicializar carrito
 if (!isset($_SESSION['carrito'])) {
     $_SESSION['carrito'] = [];
 }
 
-// Procesar acciones del carrito
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
     $id_producto = isset($_POST['id_producto']) ? (int)$_POST['id_producto'] : 0;
 
@@ -42,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
     exit;
 }
 
-// Obtener productos del carrito
 $productos_info = [];
 $total_carrito = 0;
 
@@ -74,7 +71,7 @@ if (!empty($_SESSION['carrito'])) {
 <div class="layout">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
     <main>  
-        <link rel="stylesheet" href="/Zava/css/index.css">
+        <link rel="stylesheet" href="/Zava/css/general/index.css">
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
         
         <section class="titulo">

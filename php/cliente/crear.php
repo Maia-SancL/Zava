@@ -4,16 +4,16 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';
 include_once 'conexion.php';
 
-$mensaje = '';  // Variable para mensajes de error o exito
+$mensaje = '';
 
-if (!isset($_SESSION['id'])) {  // Verifica si el usuario ha iniciado sesion
+if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit;
 }
 
-$id_usuario = $_SESSION['id'];  // Obtiene el ID del usuario de la sesion
+$id_usuario = $_SESSION['id'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado por POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (
         isset($_POST['nombre']) &&
         isset($_POST['descripcion']) &&
@@ -30,9 +30,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
         $tipo_dieta = mysqli_real_escape_string($conexion, $_POST['tipo_dieta']);
         $tiempo = isset($_POST['tiempo']) ? intval($_POST['tiempo']) : 0;
         $dificultad = mysqli_real_escape_string($conexion, $_POST['dificultad']);
-        $id_categoria = intval($_POST['categoria']);
 
-        // Guardar imágenes
+        $categoria_nombre = $tipo_comida;
+        $id_categoria = null;
+        if (!empty($categoria_nombre)) {
+            $sql_cat = "SELECT id_categoria FROM Categorias WHERE nombre = '" . mysqli_real_escape_string($conexion, $categoria_nombre) . "' AND tipo = 'receta' LIMIT 1";
+            $resultado_cat = mysqli_query($conexion, $sql_cat);
+            if ($fila_cat = mysqli_fetch_assoc($resultado_cat)) {
+                $id_categoria = $fila_cat['id_categoria'];
+            }
+        }
+
+        if ($id_categoria === null) {
+            $sql_default_cat = "SELECT id_categoria FROM Categorias WHERE tipo = 'receta' LIMIT 1";
+            $res_default_cat = mysqli_query($conexion, $sql_default_cat);
+            if($row_default = mysqli_fetch_assoc($res_default_cat)) {
+                $id_categoria = $row_default['id_categoria'];
+            }
+        }
+
         $imagenes_guardadas = [];
         if (!empty($_FILES['imagenes']['name'][0])) {
             $target_dir = $_SERVER['DOCUMENT_ROOT'] . "/Zava/img/recetas/";
@@ -53,14 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
 
         $imagen_principal = !empty($imagenes_guardadas) ? $imagenes_guardadas[0] : 'receta.jpg';
 
-        // Insertar receta principal
         $query = "INSERT INTO Recetas (id_usuario, nombre, descripcion, ingredientes, pasos, tiempo_preparacion, porciones, dificultad, tipo_comida, tipo_dieta, id_categoria, imagen_principal)
                   VALUES ('$id_usuario', '$nombre', '$descripcion', '$ingredientes', '$pasos', '$tiempo', '$porciones', '$dificultad', '$tipo_comida', '$tipo_dieta', '$id_categoria', '$imagen_principal')";
         
         if (mysqli_query($conexion, $query)) {
             $id_receta = mysqli_insert_id($conexion);
 
-            // Insertar imágenes secundarias
             if (count($imagenes_guardadas) > 1) {
                 for ($i = 1; $i < count($imagenes_guardadas); $i++) {
                     $imagen_secundaria = $imagenes_guardadas[$i];
@@ -119,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
     }
 }
 ?>
-<link rel="stylesheet" href="/Zava/css/crear-receta.css">
+<link rel="stylesheet" href="/Zava/css/cliente/crear-receta.css">
 
 <main>
     <div class="crear-receta">
@@ -127,7 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
             <div class="columna-izq">
                 <div id="zona-imagenes" class="zona-imagenes">
                     <div class="icono-imagen" id="icono-imagen">
-                        <!-- SVG de icono de imagen -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" viewBox="0 0 24 24">
                             <path class="icon" fill="currentColor" d="M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3zm-4.7 6H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v8.3c-.6-.2-1.3-.3-2-.3c-1.1 0-2.2.3-3.1.9L14.5 12L11 16.5l-2.5-3L5 18h8.1c-.1.3-.1.7-.1 1c0 .7.1 1.4.3 2"/>
                         </svg>
@@ -148,9 +161,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                     </div>
             </div>
             <div class="columna-der">
-                <div class="botones">
-                    <button type="submit" class="btn-principal">Publicar</button>
-                    <button type="reset" id="cancelar-boton" class="btn-secundario"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/></svg> Borrar</button>
+                <div class="btns">
+                    <button type="submit" class="btn-publicar">Publicar
+                        
+                    </button>
+                    <button type="reset" id="cancelar-boton" class="btn-borrar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path class="icon" fill="currentColor"
+                                d="M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zm3-4q.425 0 .713-.288T11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17m4 0q.425 0 .713-.288T15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17" />
+                        </svg>
+                    </button>
                 </div>
                 <div class="cont-superior">
                     <div class="fila">
@@ -170,12 +190,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {    // Si el formulario fue enviado 
                             <label for="tipo_comida" class="subtitulo">Categoría</label>
                             <select name="tipo_comida" id="tipo_comida" required>
                                 <option value="" disabled selected>Seleccioná una opción</option>
-                                <option value="desayuno">Desayuno</option>
-                                <option value="almuerzo">Almuerzo</option>
-                                <option value="merienda">Merienda</option>
-                                <option value="cena">Cena</option>
-                                <option value="snack">Snack</option>
-                                <option value="evento especial">Evento especial</option>
+                                <option value="Platos Principales">Platos Principales</option>
+                                <option value="Postres">Postres</option>
+                                <option value="Bebidas">Bebidas</option>
+                                <option value="Entradas">Entradas</option>
+                                <option value="Ensaladas">Ensaladas</option>
+                                <option value="Sopas">Sopas</option>
                             </select>
                         </div>
 

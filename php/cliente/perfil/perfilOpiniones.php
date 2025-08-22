@@ -11,18 +11,18 @@ if (!isset($_SESSION['id'])) {
 
 $id_usuario = $_SESSION['id'];
 
-// Paginación
+
 $comentarios_por_pagina = 7;
 $pagina_actual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $offset = ($pagina_actual - 1) * $comentarios_por_pagina;
 
-// Contar total de comentarios del usuario
+
 $query_total = "SELECT COUNT(*) as total FROM Comentarios_Recetas WHERE id_usuario = $id_usuario AND activo = 1";
 $resultado_total = mysqli_query($conexion, $query_total);
 $total_comentarios = mysqli_fetch_assoc($resultado_total)['total'];
 $total_paginas = ceil($total_comentarios / $comentarios_por_pagina);
 
-// Obtener comentarios del usuario con información de la receta
+
 $query_comentarios = "SELECT 
     c.id_comentario,
     c.comentario,
@@ -45,7 +45,7 @@ while ($row = mysqli_fetch_assoc($resultado_comentarios)) {
     $comentarios[] = $row;
 }
 
-// Datos usuario
+
 $query_usuario = "SELECT nombre, apellido, nickname, foto FROM usuarios WHERE id_usuario = $id_usuario";
 $resultado_usuario = mysqli_query($conexion, $query_usuario);
 $usuario = mysqli_fetch_assoc($resultado_usuario);
@@ -96,7 +96,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             </div>
         </div>
 
-        <!-- Sección de Opiniones -->
+        
         <div class="cont-opiniones">
             <div class="titulo-seccion">
                 <h3>Mis Opiniones</h3>
@@ -193,7 +193,7 @@ $rutaImg="/Zava/img/perfiles/".$foto;
             <span class="close-btn">&times;</span>
         </div>
         <div class="modal-body">
-            <form action="editarPerfil.php" method="POST" enctype="multipart/form-data" class="edit-form">
+            <form action="/Zava/php/cliente/funciones/actualizarPerfil.php" method="post" enctype="multipart/form-data" id="form-perfil">
                 <div class="form-group profile-pic-group">
                     <label for="foto">Foto de Perfil:</label>
                     <img src="<?php echo $rutaImg; ?>" alt="Foto de perfil actual" class="current-pic">

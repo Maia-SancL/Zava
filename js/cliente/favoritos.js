@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        const url = isFavorito ? '/Zava/php/cliente/perfil/eliminar_favorito.php' : '/Zava/php/cliente/perfil/agregar_favorito.php';
+        const url = isFavorito ? '/Zava/php/cliente/funciones/eliminarFavorito.php' : '/Zava/php/cliente/funciones/agregarFavorito.php';
 
         fetch(url, {
             method: 'POST',

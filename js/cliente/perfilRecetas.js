@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             const idReceta = this.dataset.id;
             if (confirm('¿Estás seguro de que deseas eliminar esta receta? Esta acción es irreversible.')) {
-                fetch('/Zava/php/cliente/eliminarReceta.php', {
+                fetch('/Zava/php/cliente/funciones/eliminarReceta.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',

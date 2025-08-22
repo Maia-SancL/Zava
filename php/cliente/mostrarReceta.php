@@ -5,9 +5,7 @@ if (isset($_SESSION['id']) && isset($_GET['id_receta']) && is_numeric($_GET['id_
     $id_usuario_hist = intval($_SESSION['id']);
     $id_receta_hist = intval($_GET['id_receta']);
     $tipo_contenido = 'receta';
-    // Insertar la vista
     $conexion->query("INSERT INTO Historial_Vistas (id_usuario, tipo_contenido, id_contenido, fecha_vista) VALUES ($id_usuario_hist, '$tipo_contenido', $id_receta_hist, NOW())");
-    // Eliminar duplicados del mismo contenido en el día, dejando solo el más reciente
     $conexion->query("DELETE hv FROM Historial_Vistas hv 
         JOIN (SELECT id_usuario, tipo_contenido, id_contenido, MAX(id_vista) as max_id
               FROM Historial_Vistas
@@ -16,7 +14,6 @@ if (isset($_SESSION['id']) && isset($_GET['id_receta']) && is_numeric($_GET['id_
               HAVING COUNT(*) > 1) sub
         ON hv.id_usuario = sub.id_usuario AND hv.tipo_contenido = sub.tipo_contenido AND hv.id_contenido = sub.id_contenido
         WHERE hv.id_vista < sub.max_id");
-    // Limitar a los últimos 5 vistos del día actual (productos y recetas juntos)
     $res = $conexion->query("SELECT id_vista FROM Historial_Vistas WHERE id_usuario = $id_usuario_hist AND DATE(fecha_vista) = CURDATE() ORDER BY fecha_vista DESC");
     $ids = array();
     while($row = $res->fetch_assoc()){ $ids[] = $row['id_vista']; }
@@ -31,16 +28,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/header.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/funciones/tags.php';
 
-// Inicializar mensaje
 $mensaje = '';
 $receta = null;
 $usuario = null;
 
-// Validar el parámetro de la URL
 if (isset($_GET['id_receta']) && is_numeric($_GET['id_receta']) && intval($_GET['id_receta']) > 0) {
     $id_receta = intval($_GET['id_receta']);
 
-    // Consultar la receta
     $query = "SELECT * FROM Recetas WHERE id_receta = $id_receta";
     $resultado = mysqli_query($conexion, $query);
     $receta = mysqli_fetch_assoc($resultado);
@@ -48,13 +42,11 @@ if (isset($_GET['id_receta']) && is_numeric($_GET['id_receta']) && intval($_GET[
     if (!$receta) {
         $mensaje = "Receta no encontrada.";
     } else {
-        // Consultar datos del usuario creador de la receta
         $id_usuario = $receta['id_usuario'];
         $query_usuario = "SELECT id_usuario, nombre, apellido, nickname, foto FROM Usuarios WHERE id_usuario = $id_usuario";
         $resultado_usuario = mysqli_query($conexion, $query_usuario);
         $usuario_receta = mysqli_fetch_assoc($resultado_usuario);
 
-        // Consultar imágenes adicionales
         $query_imagenes = "SELECT ruta_imagen FROM Receta_Imagenes WHERE id_receta = $id_receta AND es_principal = 0 LIMIT 2";
         $resultado_imagenes = mysqli_query($conexion, $query_imagenes);
         $imagenes_adicionales = [];
@@ -79,7 +71,7 @@ function convertirTiempoAMinutos($hora) {
 
 <div class="layout">
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/menuLateral.php';?>
-    <link rel="stylesheet" href="/Zava/css/mostrarReceta.css">
+    <link rel="stylesheet" href="/Zava/css/cliente/mostrarReceta.css">
     <main>
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/componentes/navegador.php';?>
         <?php
@@ -87,7 +79,6 @@ function convertirTiempoAMinutos($hora) {
             echo $mensaje;
         }?>
         <?php 
-        // Asegurarse de que la ruta de la imagen principal sea correcta
         $rutaPrincipal = "/Zava/img/recetas/" . $receta['imagen_principal'];
         ?>
         <article class="cont-imagenes-receta">
@@ -201,7 +192,6 @@ function convertirTiempoAMinutos($hora) {
                     </div>
                     <ol>
                         <?php 
-                            // Dividir los pasos por punto o punto y coma, y eliminar elementos vacíos
                             $pasos_lista = preg_split('/[;.]\s*/', $receta['pasos'], -1, PREG_SPLIT_NO_EMPTY);
                             foreach ($pasos_lista as $paso) {
                                 echo "<li>" . trim($paso) . "</li>";
