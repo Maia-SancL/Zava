@@ -1,0 +1,35 @@
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background-color: #f4f4f4;
+}
+
+.verificacion-container {
+    text-align: center;
+    padding: 40px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.verificacion-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.verificacion-container p {
+    color: #555;
+    font-size: 1.1em;
+}
+
+.verificacion-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.verificacion-container a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,186 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Nunito;
+  color: var(--negro-700);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.icon{
+    color: var(--primario-500);
+}
+
+/*CONT-INFO*/
+
+.info-princiapl{
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+/*INFO USER*/
+
+.info-user{
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3125rem;
+}
+
+.info-user .cont-img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.info-user .cont-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-user .info{
+    width: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.3125rem;
+}
+
+.fullname-username{
+    display: flex;
+    align-items: flex-start;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.fullname-username .fullname{
+    max-width:20rem;
+    overflow: hidden;
+    word-break: break-word;
+    white-space: nowrap; /*Evita el salto de linea*/
+    text-overflow: ellipsis;
+
+    font-family: Nunito;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.fullname-username .username{
+    max-width:15rem;
+    overflow: hidden;
+    word-break: break-word;
+    white-space: nowrap; /*Evita el salto de linea*/
+    text-overflow: ellipsis;
+
+    color: var(--negros-400);
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 300;
+}
+
+.info .fecha{
+    font-family: Montserrat;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+
+.subtitulo{
+    display: flex;
+    padding-bottom: 0.3125rem;
+    align-items: center;
+    gap: 0.3125rem;
+    border-bottom: 1px solid var(--primario-500);
+}
+
+.subtitulo h4{
+    color: var(--primario-500);
+    font-family: Quicksand;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/*COMENTARIO*/
+/* .comentario-user{
+    background-color: purple;
+} */
+.cont-comentarios{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.cont-comentario{
+    display: flex;
+    padding-left: 2.8125rem;
+    align-items: center;
+    width: 100%;
+}
+
+.cont-comentario .comentario{
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.cont-agregar-comentario{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.agregar-comentario{
+  display: flex;
+  width: 100%;
+  height: 2.5rem;
+  padding: 0rem 1.25rem;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1.25rem;
+  background-color: var(--secundario-50);
+}
+
+.agregar-comentario input{
+  border: none;
+  outline: none;
+  background: none;
+  width: 100%;
+  height: 100%;
+  
+}
+
+.agregar-comentario input,input::placeholder{
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--negro-700);
+}
+
+.agregar-comentario button{
+    all:unset;
+    cursor:pointer;
+}
+
+.cont-agregar-comentario .cont-img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.cont-agregar-comentario .cont-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
