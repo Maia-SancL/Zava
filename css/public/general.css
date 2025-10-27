@@ -1,0 +1,636 @@
+/*===================================
+            TIPOGRAFIAS
+====================================*/
+
+/* TITULO PRINCIPAL */
+@font-face {
+    font-family: 'Tan-Nimbus';
+    src: url('./tipografias/TAN_Nimbus/TAN-NIMBUS.otf') format('truetype');
+}
+
+/* SUBTITULOS */
+@font-face {
+    font-family: 'Quicksand';
+    src: url('./tipografias/Quicksand/Quicksand-VariableFont_wght.ttf') format('truetype');
+}
+
+/* CUERPO */
+@font-face {
+    font-family: 'Montserrat';
+    src: url('./tipografias/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+}
+
+
+.titulo {
+    font-size: clamp(3rem, 6vw, 8rem);
+    line-height: .8;
+    font-family: 'Tan-Nimbus';
+    font-weight: 800;
+    vertical-align: middle;
+    letter-spacing: .4rem;
+}
+
+.tipo-quicksand {
+    font-family: 'Quicksand';
+}
+
+
+.subtitulo {
+    font-family: 'Quicksand';
+    font-weight: 300;
+}
+
+.cuerpo {
+    font-family: 'Montserrat';
+    font-weight: 200;
+}
+
+
+
+/*===================================
+            COLORES
+====================================*/
+
+.color-primario {
+    color: var(--primerio-500);
+}
+
+.color-secundario {
+    color: var(--secundario-100);
+}
+
+.color-blanco {
+    color: var(--blanco-50);
+}
+
+.color-error{
+    color: var(--error);
+} 
+:root {
+    /* === Primario === */
+    --fondo-50: #FDFDFD;
+
+    /* === Primarios === */
+    --primario-50: #ec9393;
+    --primario-100: #e25d5d;
+    --primario-200: #d92727;
+    --primario-300: #a31d1d;
+    --primario-400: #821717;
+    --primario-500: #621111;
+    --primario-600: #410c0c;
+
+    /* === Secundarios === */
+    --secundario-50: #fffbf6;
+    --secundario-100: #f9f3ea;
+    --secundario-200: #f2e8d6;
+    --secundario-300: #ecdcc1;
+    --secundario-400: #e5d0ad;
+    --secundario-500: #dfc498;
+    --secundario-600: #d2ad6f;
+
+
+    /* === Negros === */
+    --negro-50: #dddddd;
+    --negro-100: #bbbbbb;
+    --negro-200: #9a9a9a;
+    --negro-300: #787878;
+    --negro-400: #565656;
+    --negro-500: #343434;
+    --negro-600: #2a2a2a;
+    --negro-700: #1f1f1f;
+    --negro-800: #151515;
+    --negro-900: #0c0c0c;
+
+    /* === Blancos === */
+    --blanco-50: #ffffff;
+    --blanco-100: #f4f4f4;
+    --blanco-200: #e9e9e9;
+    --blanco-300: #dedede;
+    --blanco-400: #d3d3d3;
+    --blanco-500: #c8c8c8;
+    --blanco-600: #afafaf;
+    --blanco-700: #969696;
+    --blanco-800: #7d7d7d;
+    --blanco-900: #646464;
+
+    /* === Éxito === */
+    --exito: #a2d250;
+
+    /* === Advertencia === */
+    --advertencia: #f6f369;
+
+    /* === Error === */
+    --error: #911D1D;
+
+}
+
+.color-primario {
+    color: var(--primario-500);
+}
+
+/*===================================
+            ETIQUETAS
+====================================*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    color: var(--negro-700);
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: var(--fondo-50);
+}
+
+section {
+    margin: clamp(.8rem, 5vw, 2rem) 0;
+}
+
+button {
+    all: unset;
+}
+
+a {
+    text-decoration: none;
+}
+
+b {
+    font-weight: Bold;
+}
+
+/* ===================================
+           MEDIA ETIQUETAS
+====================================*/
+
+
+/* Moviles pequeños */
+@media (max-width: 480px) {}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {}
+
+/* Desktops */
+@media (min-width: 1281px) {}
+
+
+/*===================================
+            CLASES
+====================================*/
+
+.cont {
+    padding-left: clamp(.2rem, 2vw, 5rem);
+    padding-right: clamp(.2rem, 2vw, 5rem);
+}
+
+.espacio-vertical {
+    margin: clamp(1rem, 3vw, 2.6rem) 0;
+}
+
+.btn {
+    width: 100%;
+    max-width: 95%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding: 8px 12px;
+    border-radius: .8rem;
+    gap: clamp(0.5rem, 1vw, 0.75rem);
+
+    transition: background-color 0.3s ease-out, transform 0.3s ease-out;
+    cursor: pointer;
+}
+
+.btn-primario {
+    background-color: var(--primario-500);
+    color: var(--secundario-100);
+
+    .icon {
+        color: var(--secundario-100);
+    }
+}
+
+.btn-secundario {
+    background-color: var(--secundario-100);
+    color: var(--primario-500);
+
+    .icon {
+        color: var(--primario-500);
+    }
+}
+
+.btn-cerrar {
+    cursor: pointer;
+    padding: .1rem;
+    transition: .3s ease;
+}
+
+.btn-cerrar:hover {
+    transform: scale(1.1);
+}
+
+.btn-agregar-favorito {
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.btn-agregar-favorito:hover {
+    transform: scale(1.09);
+}
+
+.texto-truncado {
+    max-width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.doble-linea {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: wrap;
+}
+
+.resultado-busqueda {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    border-bottom: .2px solid var(--negro-700);
+    padding: 1rem 0;
+}
+
+.texto-centrado {
+    text-align: center;
+}
+
+.tachado {
+    text-decoration: line-through;
+}
+
+.medium {
+    font-weight: 500;
+}
+
+.light {
+    font-weight: 300;
+}
+
+.super-negrita {
+    font-weight: 800;
+}
+
+.media-negrita {
+    font-weight: 600;
+}
+
+.shadow {
+    box-shadow: 0 4px 10px rgba(185, 185, 185, 0.5);
+}
+
+.borde-redondeado {
+    border-radius: clamp(.7rem, 2vw, 1rem);
+}
+
+.oculto {
+    display: none;
+    opacity: 0;
+}
+
+.mostrar-flex {
+    display: flex;
+    opacity: 1;
+}
+
+.mostrar-block {
+    display: block;
+    opacity: 1;
+}
+
+.capa-overflow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(22, 22, 22, 0.839);
+    z-index: 100;
+}
+
+
+/* BARRA BUSQUEDA */
+
+.barra-busqueda {
+    width: 100%;
+    display: flex;
+    line-height: 28px;
+    align-items: center;
+    position: relative;
+}
+
+.barra-busqueda .input-busqueda {
+    width: 100%;
+    line-height: 28px;
+    padding: 1% 3%;
+    border-radius: 2rem;
+    outline: none;
+    background-color: var(--blanco-50);
+    color: var(--negro-700);
+    max-height: 2.1rem;
+    padding-left: 2.5rem;
+}
+
+.barra-busqueda .input-busqueda::placeholder {
+    color: var(--blanco-200);
+}
+
+.barra-busqueda .icon {
+    position: absolute;
+    width: 100%;
+    left: 10px;
+}
+
+/* INPUTS */
+.input-texto {
+    all: unset;
+    font-size: clamp(0.625rem, 1vw, 0.75rem);
+    border-radius: clamp(.7rem, 2vw, 1rem);
+    background-color: var(--secundario-100);
+    padding: 7px 12px;
+    min-height: 1.2rem;
+}
+
+/* FILTROS */
+
+.section-filtros {
+    margin: 0;
+    padding-bottom: 1rem;
+    border-bottom: .1px solid var(--negro-700);
+}
+
+.contenedor-filtros {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.boton-filtros-tablet {
+    width: auto;
+    display: inline-flex;
+    flex-direction: row;
+    gap: 7px;
+    align-items: center;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.caja-filtro {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+}
+
+.caja-filtro p {
+    user-select: none;
+}
+
+.caja-filtro .caja-filtro-principal {
+    background-color: var(--secundario-50);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .5rem .8rem;
+    cursor: pointer;
+    align-items: center;
+}
+
+.caja-filtro .caja-filtro-principal .icon {
+    transition: transform .3s ease;
+}
+
+
+.caja-filtro .caja-filtro-contenido {
+    width: 100%;
+    height: auto;
+    background-color: var(--secundario-50);
+    padding: .5rem .8rem;
+    flex-direction: column;
+    gap: .2rem;
+    border-bottom-left-radius: .8rem;
+    border-bottom-right-radius: .8rem;
+
+    position: absolute;
+    top: 100%;
+    z-index: 80;
+}
+
+.caja-filtro .caja-filtro-contenido p {
+    cursor: pointer;
+    transition: .3s ease;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+.caja-filtro .caja-filtro-contenido p:hover {
+    font-weight: 500;
+    background-color: var(--secundario-50);
+}
+
+
+/*===================================
+           MEDIA FILTROS
+====================================*/
+
+
+/* Moviles pequeños */
+@media (max-width: 480px) {
+    /* .cont{
+    background-color: pink;
+  } */
+}
+
+/* Tablets */
+@media (min-width: 0px) and (max-width: 1024px) {
+
+    .contenedor-filtros.responsive .header-filtros {
+        display: flex;
+        opacity: 1;
+        justify-content: space-between;
+    }
+
+    .contenedor-filtros.responsive {
+        width: 90%;
+        height: 90%;
+        height: auto;
+        top: 5%;
+        left: 5%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        background-color: var(--blanco-50);
+        position: fixed;
+        border-radius: .5rem;
+        box-shadow: 0 4px 10px rgba(185, 185, 185, 0.5);
+        padding: 2rem .7rem;
+        z-index: 120;
+
+    }
+
+    .boton-filtros-tablet,
+    .btns-filtros {
+        width: 100%;
+        display: inline-flex;
+        justify-content: end;
+        margin-left: auto;
+        opacity: 1;
+    }
+
+    .btns-filtros {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .caja-filtro.responsive p {
+        user-select: none;
+    }
+
+    .caja-filtro.responsive .caja-filtro-principal {
+        background-color: var(--blanco-50);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: .5rem .8rem;
+        cursor: pointer;
+
+        .icon {
+            opacity: 0;
+            display: none;
+        }
+
+    }
+
+    .caja-filtro.responsive .caja-filtro-principal .icon {
+        transition: transform .3s ease;
+    }
+
+
+    .caja-filtro.responsive .caja-filtro-contenido {
+        all: unset;
+        display: flex;
+        opacity: 1;
+        flex-direction: column;
+        margin-left: 1rem;
+    }
+
+    .caja-filtroresponsive .caja-filtro-contenido p:hover {
+        font-weight: 500;
+        background-color: var(--blanco-50);
+    }
+
+}
+
+/* Desktops */
+@media (min-width: 1025px) {
+    .caja-filtro .caja-filtro-principal {
+        .icon {
+            opacity: 1;
+            display: block;
+        }
+
+    }
+
+}
+
+
+
+
+
+/*===================================
+        LETRAS Y ICONOS TAMAÑOS
+====================================*/
+.grande,
+.icon-grande {
+    font-size: clamp(3rem, 8vw, 4rem);
+    /* 48px - 64px */
+}
+
+h1,
+.icon-h1 {
+    font-size: clamp(1.6rem, 7vw, 3rem);
+    /* 40px - 48px */
+}
+
+h2,
+.icon-h2 {
+    font-size: clamp(1.4rem, 5vw, 2.5rem);
+    /* 32px - 40px */
+}
+
+h3,
+.icon-h3 {
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    /* 28px - 32px */
+}
+
+h4,
+.icon-h4 {
+    font-size: clamp(1.2rem, 3.5vw, 1.75rem);
+    /* 24px - 28px */
+}
+
+h5,
+.icon-h5 {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    /* 20px - 24px */
+}
+
+h6,
+.icon-h6 {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    /* 18px - 20px */
+}
+
+p,
+span,
+.icon-p {
+    font-size: clamp(0.8rem, 2vw, 1.125rem);
+    /* 16px - 18px */
+}
+
+.pequenio,
+.icon-pequenio {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    /* 12px - 14px */
+}
+
+.muy-pequenio,
+.icon-muy-pequenio {
+    font-size: clamp(0.625rem, 1vw, 0.75rem);
+    /* 10px - 12px */
+}
+
+span,
+.icon-span {
+    font-size: clamp(0.8rem, 2vw, 1.125rem);
+    /* 16px - 18px */
+}

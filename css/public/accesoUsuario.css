@@ -1,0 +1,259 @@
+.contenedor-principal {
+    width: 100vw;
+    height: 100%;
+    background-color: var(--primario-500);
+    position: relative;
+    background-image: url("../css/imagenes/Fondo.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.contenedor-principal .imagen-titulo {
+    width: 40%;
+    height: auto;
+}
+
+.contenedor-principal .imagen-titulo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.contenedor-general {
+    margin: 0;
+    width: 60vw;
+    height: 100%;
+    background-color: var(--secundario-100);
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    align-items: center;
+}
+
+.contenedor-general.iniciar-sesion {
+    border-radius: clamp(1rem, 2vw, 2rem) 0 0 clamp(1rem, 2vw, 2rem);
+    margin-left: auto;
+}
+
+.contenedor-general.registrarse {
+    border-radius: 0 clamp(1rem, 2vw, 2rem) clamp(1rem, 2vw, 2rem) 0;
+    margin-right: auto;
+}
+
+.contenedor-general .contenedor-form {
+    width: 100%;
+    padding: 0 clamp(.6rem, 8vw, 8rem);
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+
+
+.contenedor-general .contenedor-form .contenedor-input-doble {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .6rem;
+}
+
+.contenedor-general .contenedor-form .contenedor-inputs {
+    padding: 0 .9rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contenedor-general .contenedor-form .contenedor-inputs .contenedor-input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+}
+
+.contenedor-general .contenedor-form .contenedor-inputs .contenedor-input .input {
+    border: none;
+    height: 38px;
+    padding: 2px 10px;
+    cursor: pointer;
+    background-color: var(--secundario-50);
+    border-radius: clamp(.5rem, 2vw, .8rem);
+}
+
+.contenedor-general .contenedor-form .contenedor-inputs .contenedor-input .input:focus {
+    outline: none;
+    border: 1px solid var(--primario-500);
+}
+
+.contenedor-general .contenedor-form .vinculo-registrarse {
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+.contenedor-general .contenedor-form .vinculo-registrarse:hover {
+    font-weight: 400;
+}
+
+.contenedor-general .contenedor-form .btn-enviar-formulario {
+    width: auto;
+    max-width: 200px;
+    background-color: var(--primario-500);
+    transition: .3s ease;
+}
+
+.contenedor-general .contenedor-form .btn-enviar-formulario:hover {
+    transform: scale(1.04);
+    /* border: 1px solid var(--primario-500);
+    background-color: transparent;
+    color: var(--primario-500); */
+}
+
+
+/* ESTILO PARA ELEGIR USER */
+.contenedor-principal.elegir-user {
+    background-color: var(--secundario-50);
+    background-image: url("../css/imagenes/Fondo-2.png");
+}
+
+.contenedor-principal.elegir-user .imagen-titulo {
+    width: 25%;
+    height: auto;
+}
+
+
+.contenedor-principal.elegir-user .contenedor-general {
+    width: 100%;
+    margin: auto;
+    background-color: transparent;
+}
+
+.contenedor-principal.elegir-user .contenedor-general .contenedor-botones {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+}
+
+
+.contenedor-principal.elegir-user .contenedor-general .contenedor-botones .contenedor-form {
+    padding: 0;
+}
+
+.contenedor-principal.elegir-user .contenedor-general .contenedor-botones {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3rem;
+    gap: clamp(2rem, 10vw, 6rem);
+}
+
+.contenedor-principal.elegir-user .contenedor-general .contenedor-botones .btn-tipo-usuairo {
+    width: clamp(10rem, 10vw, 12rem);
+    aspect-ratio: 1 / 1;
+    background-color: var(--primario-500);
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(.8rem, 5vw, 1.2rem);
+    cursor: pointer;
+    transition: .2s ease;
+
+    .icon {
+        font-size: clamp(6rem, 8vw, 8rem);
+    }
+}
+
+
+.contenedor-principal.elegir-user .contenedor-general .contenedor-botones .btn-tipo-usuairo:hover {
+    background-color: var(--secundario-50);
+    border: 2px solid var(--primario-500);
+
+
+
+    .icon,
+    p {
+        color: var(--primario-500)
+    }
+}
+
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+    .contenedor-general {
+        width: 70vw;
+    }
+
+}
+
+@media (max-width: 900px) {
+    .contenedor-general {
+        width: 80vw;
+    }
+
+    .contenedor-general .contenedor-form .btn-enviar-formulario {
+        width: auto;
+        max-width: 100%;
+    }
+
+    .contenedor-principal.elegir-user .imagen-titulo {
+        width: 45%;
+        height: auto;
+    }
+
+}
+
+@media (max-width: 760px) {
+    .contenedor-general {
+        width: 100vw;
+    }
+
+    .contenedor-general .contenedor-form .btn-enviar-formulario {
+        width: auto;
+        max-width: 100%;
+    }
+
+    .contenedor-principal .imagen-titulo {
+        width: 60%;
+        height: auto;
+    }
+
+    .contenedor-general.iniciar-sesion,
+    .contenedor-general.registrarse {
+        border-radius: 0
+    }
+
+    .contenedor-principal.elegir-user .imagen-titulo {
+        width: 60%;
+        height: auto;
+    }
+
+    .contenedor-principal.elegir-user .contenedor-general .contenedor-botones .btn-tipo-usuairo {
+        width: clamp(8rem, 10vw, 10rem);
+        padding: clamp(.2rem, .6vw, .8rem);
+    }
+}
+
+@media (max-width: 480px) {
+
+    .contenedor-general .contenedor-form .contenedor-input-doble {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contenedor-principal.elegir-user .imagen-titulo {
+        width: 80%;
+        height: auto;
+    }
+
+    .contenedor-principal.elegir-user .contenedor-general .contenedor-botones .btn-tipo-usuairo {
+        padding: clamp(.2rem, .6vw, .8rem);
+        width: clamp(7rem, 8vw, 10rem);
+
+        .icon {
+            font-size: clamp(3rem, 4vw, 6rem);
+        }
+    }
+
+
+}

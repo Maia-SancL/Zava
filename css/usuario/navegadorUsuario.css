@@ -1,0 +1,77 @@
+/*===================================
+         NAVEGADOR USUARIO
+====================================*/
+
+nav.navegador-usuario {
+    display: grid;
+    max-width: 80%;
+    margin-left: auto;
+    grid-template-columns: 1fr .3fr;
+    padding: 8px 16px;
+    background-color: var(--secundario-100);
+    border-bottom-left-radius: .8rem;
+    border-bottom-right-radius: .8rem;
+}
+
+.navegador-usuario .barra-busqueda {
+    width: 100%;
+    max-width: 90%;
+}
+
+.navegador-usuario .contenedor-botones-usuario {
+    width: auto;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: .8rem;
+    align-items: center;
+}
+
+.navegador-usuario .barra-busqueda .icon {
+    color: var(--primario-500);
+}
+
+.navegador-usuario .barra-busqueda .input-busqueda::placeholder{
+    color: var(--primario-500)
+}
+
+.navegador-usuario .barra-busqueda .input-busqueda {
+    background-color: var(--secundario-50);
+    border: none;
+    color: var(--primario-500);
+}
+
+
+/*===================================
+           MEDIA NAVEGADOR USER
+====================================*/
+
+
+/* Moviles pequeños */
+@media (max-width: 480px) {}
+
+/* Tablets */
+@media (min-width: 0px) and (max-width: 1024px) {
+
+    nav.navegador-usuario {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .navegador-usuario .barra-busqueda {
+        max-width: 100%;
+    }
+
+    .navegador-usuario .menu-desplegable{
+        display: block;
+        opacity: 1;
+    }
+
+    .navegador-usuario .contenedor-botones-navegador{
+        display: flex;
+        justify-content: space-between;
+    }
+
+}

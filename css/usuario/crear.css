@@ -1,0 +1,348 @@
+.form-crear-receta {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: auto;
+}
+
+.contenedor-superior,
+.contenedor-inferior {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: .3fr .7fr;
+    gap: 1rem;
+}
+
+.contenedor-input {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+}
+
+/*===================================
+       AGREGAR IMAGENES
+====================================*/
+
+.agregar-imagenes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+
+.agregar-imagenes .contenedor-agregar-imagen {
+    width: 100%;
+    height: 100%;
+    background-color: var(--secundario-100);
+    overflow: hidden;
+    position: relative;
+}
+
+.agregar-imagenes .contenedor-agregar-imagen .input-imagene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.agregar-imagenes .contenedor-agregar-imagen .contenedor-texto-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.agregar-imagenes .contenedor-agregar-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.contenedor-preview-imagenes {
+    width: 100%;
+    height: auto;
+    max-height: 20rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: start;
+    align-items: stretch;
+    gap: .6rem;
+}
+
+.contenedor-preview-imagenes .cont-img-preview {
+    width: 100%;
+    aspect-ratio: 1 / .8;
+    overflow: hidden;
+}
+
+.contenedor-preview-imagenes .cont-img-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/*===================================
+       CONTENEDOR INFORMACION 
+             PRINCIPAL  
+====================================*/
+.contenedor-informacion-principal {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+}
+
+.contenedor-informacion-principal .contenedor-btns {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: .8rem;
+    min-width: 300px;
+
+    .btn-secundario {
+        border: 1px solid var(--primario-500);
+        background-color: transparent;
+    }
+}
+
+.contenedor-informacion-principal .contenedor-informacion {
+    display: grid;
+    grid-template-columns: .6fr .4fr;
+    margin-bottom: 1rem;
+}
+
+
+.contenedor-informacion-principal .contenedor-informacion .contenedor-titulo-descripcion {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    margin-right: 5px;
+    padding-right: 5px;
+    border-right: 2px solid var(--primario-500);
+}
+
+
+
+.contenedor-informacion .contenedor-titulo-descripcion .contenedor-input .input-texto.descripcion {
+    min-height: 210px;
+    max-height: 210px;
+    resize: none;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    overflow-y: none;
+}
+
+.contenedor-informacion .contenedor-filtros {
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+
+.contenedor-filtros .contenedor-timepo-slider .input-tiempo {
+    width: 100%;
+    height: 6px;
+    border-radius: 4px;
+    appearance: none;
+    /* Quita estilos por defecto */
+    -webkit-appearance: none;
+    background: var(--secundario-100);
+}
+
+.contenedor-filtros .contenedor-timepo-slider .input-tiempo::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 15px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: var(--primario-500);
+    cursor: pointer;
+    border: none;
+    margin-top: -2px;
+}
+
+.contenedor-filtros .contenedor-timepo-slider .input-tiempo::-moz-range-thumb {
+    width: 15px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: var(--primario-500);
+    cursor: pointer;
+    border: none;
+}
+
+.contenedor-filtros .contenedor-timepo-slider .input-tiempo::-ms-thumb {
+    width: 15px;
+    aspect-ratio: 1 / 1;
+    background: var(--primario-500);
+    cursor: pointer;
+    border: none;
+}
+
+.contenedor-filtros .contenedor-timepo-slider .input-tiempo::-moz-range-track {
+    background: var(--secundario-100);
+    height: 8px;
+    border-radius: 4px;
+}
+
+.contenedor-filtros .contenedor-timepo-slider .input-tiempo::-ms-track {
+    background: var(--secundario-100);
+    height: 8px;
+    border-radius: 4px;
+    border-color: transparent;
+    color: transparent;
+}
+
+
+
+/*===================================
+    CONTENEDOR INGREDIENTES Y PASOS
+       (CONTENEDOR INFERIOR)
+====================================*/
+
+
+.contenedor-instrucciones .btn-agregar {
+    margin: 12px auto 0;
+    text-align: center;
+    max-width: 150px;
+    border: .8px solid var(--primario-500);
+    
+}
+
+.contenedor-instrucciones .zona-instruccion {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.contenedor-instrucciones .zona-instruccion .contenedor-instruccion {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: .2rem;
+    align-items: start;
+
+}
+
+.contenedor-instrucciones .zona-instruccion .contenedor-instruccion .numero-paso {
+    width: 35px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secundario-200);
+}
+
+.contenedor-instrucciones .zona-instruccion .contenedor-instruccion .input-texto {
+    width: 100%;
+}
+
+.contenedor-instrucciones .zona-instruccion .contenedor-instruccion .btn-eliminar-ingriente {
+    cursor: pointer;
+}
+
+.contenedor-instrucciones .zona-instruccion .contenedor-instruccion .input-texto.descripcion {
+    min-height: 2rem !important;
+    overflow: hidden;
+    min-height: auto;
+    max-height: 100px;
+    resize: none;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    overflow-y: none;
+}
+
+
+/*===================================
+                MEDIA 
+====================================*/
+@media (max-width: 1024px) {
+    .contenedor-superior,
+      .contenedor-inferior {
+        grid-template-columns: none;
+        grid-template-columns: row;
+    }
+
+    .agregar-imagenes {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 90%;
+        height: auto;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+
+    .agregar-imagenes .contenedor-agregar-imagen {
+        width: 100%;
+        margin: 0 auto;
+        height: 20rem;
+    }
+
+
+    .contenedor-informacion-principal .contenedor-btns {
+        transition: transform 0.4s ease, opacity 0.3s ease;
+        position: fixed;
+        background-color: var(--secundario-100);
+        padding: 20px 5px;
+        top: 20px;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        border-radius: 0 0 clamp(.7rem, 2vw, 1rem) clamp(.7rem, 2vw, 1rem);
+    }
+
+
+    .contenedor-informacion-principal .contenedor-btns {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    /* Barra oculta */
+    .contenedor-informacion-principal .contenedor-btns.oculto {
+        transform: translateY(-100%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Barra visible */
+    .contenedor-informacion-principal .contenedor-btns.mostrar-flex {
+        transform: translateY(0);
+        opacity: 1;
+        display: flex;
+        pointer-events: auto;
+    }
+
+
+    .contenedor-informacion-principal .contenedor-informacion {
+        display: grid;
+        grid-template-columns: none;
+        grid-template-rows: repeat(2, 1fr);
+        margin-bottom: 0;
+    }
+
+    .contenedor-informacion .contenedor-titulo-descripcion .contenedor-input .input-texto.descripcion {
+        min-height: 80px;
+        max-height: 120px;
+    }
+}

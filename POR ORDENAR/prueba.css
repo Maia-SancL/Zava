@@ -1,0 +1,69 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Layout principal */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  gap: 1rem;
+}
+
+/* ASIDE (derecha, alto completo) */
+.contenedor-2 {
+  width: auto;
+  max-width: clamp(180px, 25vw, 300px);
+  background-color: #2980b9;
+  color: white;
+  padding: 15px;
+}
+
+
+/* Área que contiene header y contenido */
+.area-principal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.contenedor-1 {
+  height: 60px;
+  background-color: #e74c3c; /* rojo */
+  color: white;
+  padding: 15px;
+}
+
+/* CONTENIDO */
+.contenedor-3 {
+  flex: 1;
+  background-color: #2ecc71; /* verde */
+  color: white;
+  padding: 15px;
+}
+
+/* Responsive: pantalla <= 750px */
+@media (max-width: 750px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .contenedor-2 {
+    display: none; /* Ocultar aside */
+  }
+
+  .area-principal {
+    width: 100%;
+  }
+
+  .contenedor-1 {
+    width: 100%;
+  }
+}

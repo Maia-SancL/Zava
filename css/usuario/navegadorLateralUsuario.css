@@ -1,0 +1,120 @@
+/*===================================
+        MENU LATERAL USUARIO
+====================================*/
+
+nav.menu-lateral-usuario {
+    width: auto;
+    max-width: clamp(11rem, 30vw, 13rem);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: var(--secundario-100);
+    border-top-right-radius: 1.2rem;
+    border-bottom-right-radius: 1.2rem;
+    padding: .4rem 1rem .8rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+}
+
+.menu-lateral-usuario .contenedor-nombre-logo {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.menu-lateral-usuario .contenedor-nombre-logo .contenedor-logo {
+    width: clamp(1.8rem, 5vw, 2.8rem);
+    aspect-ratio: 1 / 1;
+}
+
+.menu-lateral-usuario .contenedor-nombre-logo .contenedor-logo img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+}
+
+.menu-lateral-usuario ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-lateral-usuario ul .sub-menu ul {
+    padding-left: 10px;
+}
+
+.menu-lateral-usuario ul a li,
+.menu-lateral-usuario ul li {
+    display: flex;
+    gap: .6rem;
+    cursor: pointer;
+}
+
+.menu-lateral-usuario ul a li {
+    position: relative;
+    padding: 5px 5px 5px 0;
+    cursor: pointer;
+    list-style: none;
+    text-align: center;
+}
+
+.menu-lateral-usuario ul a li::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0%;
+    height: 1px;
+    background-color: var(--primario-500);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+
+.menu-lateral-usuario ul a li:hover::after {
+    width: 95%;
+}
+
+.sub-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/*===================================
+     MEDIA MENU LATERAL USUARIO
+====================================*/
+
+
+/* Moviles pequeños */
+@media (max-width: 480px) {
+    nav.menu-lateral-usuario{
+        display: none;
+        opacity: 0;
+    }
+}
+
+/* Tablets */
+@media (min-width: 481px) and (max-width: 1024px) {
+
+    nav.menu-lateral-usuario {
+        align-items: center;
+        padding: .4rem .5rem .8rem;
+    }
+
+    nav.menu-lateral-usuario .contenedor-nombre-logo h6,
+    nav.menu-lateral-usuario .menu-lateral-lista a li p,
+    nav.menu-lateral-usuario .menu-lateral-lista li p {
+        display: none;
+        opacity: 0;
+    }
+
+    .menu-lateral-usuario ul .sub-menu ul {
+        padding-left: 0;
+    }
+
+}
