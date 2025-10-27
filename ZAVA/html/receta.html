@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <title>Zava</title>
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/receta.css">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+        <title>Zava</title>
+        <link rel="stylesheet" href="/css/general.css">
+        <link rel="stylesheet" href="/css/receta.css">
+    </head>
+
+<body>
+    <section class="seccion-imagenes">
+        <div class="contenedor-imagen principal">
+            <img src="/css/imagenes/COMIDA-2.jpg" alt="Imagen principal">
+        </div>
+        <div class="contenedor-imagen doble">
+            <div class="contenedor-imagen secundario borde-redondeado"> <img src="/css/imagenes/COMIDA.jpg"
+                    alt="Imagen secundaria 1"> </div>
+            <div class="contenedor-imagen secundario borde-redondeado"> <img src="/css/imagenes/COMIDA.jpg"
+                    alt="Imagen secundaria 2"> </div>
+        </div>
+    </section>
+    <section class="secition-titulo-etiquetas">
+        <h4 class="media-negrita">Galletitas con chispas de chocolate</h4>
+        <div class="contenedor-etiquetas-botones">
+            <div class="contenedor-etiquetas">
+                <div class="etiqueta borde-redondeado">
+                    <iconify-icon icon="tabler:clock-filled" class="icon color-primario icon-h6"></iconify-icon>
+                    <p class="light pequenio">45 min</p>
+                </div>
+                <div class="etiqueta borde-redondeado">
+                    <iconify-icon icon="tabler:clock-filled" class="icon color-primario icon-h6"></iconify-icon>
+                    <p class="light pequenio">45 min</p>
+                </div>
+                <div class="etiqueta borde-redondeado">
+                    <iconify-icon icon="tabler:clock-filled" class="icon color-primario icon-h6"></iconify-icon>
+                    <p class="light pequenio">45 min</p>
+                </div>
+            </div>
+            <div class="contenedor-botones">
+                <button class="btn agregar-favorito">
+                     <iconify-icon icon="material-symbols:favorite" class="icon color-primario icon-h4"></iconify-icon>
+                </button>
+
+                 <button class="btn compartir">
+                     <iconify-icon icon="ic:baseline-share" class="icon color-primario icon-h4"></iconify-icon>
+                </button>
+            </div>
+        </div>
+    </section>
+</body>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const carrusel = document.querySelector(".seccion-imagenes");
+  const slides = carrusel.querySelectorAll(".contenedor-imagen");
+  let index = 0;
+  const delay = 3000; 
+
+  function autoSlide() {
+    index = (index + 1) % slides.length; // siguiente imagen (loop)
+    carrusel.scrollTo({
+      left: carrusel.clientWidth * index,
+      behavior: "smooth"
+    });
+  }
+
+  setInterval(autoSlide, delay);
+});
+</script>
+
+
+</html>

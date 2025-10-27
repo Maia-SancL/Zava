@@ -1,0 +1,139 @@
+/* ===================================
+           IMAGENES PRINCIPALES
+====================================*/
+.seccion-imagenes {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: .5fr .3fr;
+    gap: 1rem;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.seccion-imagenes .contenedor-imagen.principal {
+    aspect-ratio: 1 / 0.8;
+    width: 100%;
+    height: auto;
+}
+
+/* Imagen secundaria contenedor (vertical layout) */
+.seccion-imagenes .contenedor-imagen.doble {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    height: auto;
+}
+
+/* Imagen secundaria individual */
+.seccion-imagenes .contenedor-imagen.secundario {
+    width: 100%;
+    aspect-ratio: 1 / 0.4;
+
+}
+
+/* Estilo común para imágenes */
+.seccion-imagenes .contenedor-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: clamp(0.5rem, 2vw, 0.8rem);
+    display: block;
+}
+
+
+/* ===================================
+           MEDIA IMAGENES
+           PRINCIPALES
+====================================*/
+
+/* --- CARRUSEL RESPONSIVE --- */
+@media (max-width: 768px) {
+    .seccion-imagenes {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1rem;
+        -webkit-overflow-scrolling: touch;
+        /*Scroll suave en iOS */
+    }
+
+    .seccion-imagenes::-webkit-scrollbar {
+        display: none;
+    }
+
+    .seccion-imagenes .contenedor-imagen,
+    .seccion-imagenes .contenedor-imagen.secundario {
+        flex: 0 0 100%;
+        /*cada imagen ocupa todo el ancho */
+        scroll-snap-align: center;
+        aspect-ratio: 1 / .9;
+    }
+
+    /* Ya no necesitamos grid en modo móvil */
+    .seccion-imagenes .contenedor-imagen.doble {
+        display: contents;
+        /*Evita estructura anidada en scroll */
+    }
+}
+
+
+
+/* ===================================
+           TITULO Y ETIQUETAS
+====================================*/
+
+.secition-titulo-etiquetas {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+}
+
+.secition-titulo-etiquetas .contenedor-etiquetas-botones {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.secition-titulo-etiquetas .contenedor-etiquetas-botones .contenedor-etiquetas {
+    width: auto;
+    max-width: 80%;
+    display: flex;
+    flex-direction: row;
+    gap: .8rem;
+}
+
+.secition-titulo-etiquetas .contenedor-etiquetas-botones .contenedor-etiquetas .etiqueta {
+    background-color: var(--secundario-100);
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+.secition-titulo-etiquetas .contenedor-etiquetas-botones .contenedor-botones {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.secition-titulo-etiquetas .contenedor-etiquetas-botones .contenedor-botones .btn {
+    padding: 0;
+}
+
+/* ===================================
+        MEDIA TITULO Y ETIQUETAS
+====================================*/
+
+@media (max-width: 768px) {
+
+    .secition-titulo-etiquetas {
+        flex-direction: column-reverse;
+    }
+
+}

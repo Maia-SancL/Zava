@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <title>Zava</title>
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="/css/mostrarProducto.css">
+
+</head>
+
+<body>
+    <div class="capa-overflow oculto" id="overflow-capa"></div>
+    <section class="producto">
+        <div class="imagen-producto">
+            <img src="../css/imagenes/COMIDA-2.jpg" alt="" class="borde-redondeado">
+        </div>
+        <div class="info-producto">
+            <div class="contenedor-oferta-favorito">
+                <p class="media-negrita texto-prodcuto texto-truncado">Arcor</p>
+                <button class="btn-agregar-favorito" title="Agregar a favorito">
+                    <iconify-icon icon="solar:heart-linear" class="icon icon-h5 color-primario"></iconify-icon>
+                </button>
+            </div>
+            <h4 class="texto-titulo media-negrita texto-truncado doble-linea">Barrita de cereal chocolate - 12g un texto muy largo para testar que no pase nada raro</h4>
+            <p class="pequenio medium texto-descuento color-blanco">-20%</p>
+            <div class="contenedor-precios">
+                <h6 class="media-negrita texto-precio texto-truncado">$900,00</h6>
+                <p class="light texto-precio-oferta tachado texto-truncado">$1.2000,00</p>
+            </div>
+
+            <div class="contenedor-informacion-especifica">
+                <p class="pequenio texto-informacion">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
+                    dicta libero commodi fugiat molestias, facilis quae tenetur eius iste reprehenderit vel veritatis
+                    vitae? Quaerat dolore ipsum, iste fuga eum eligendi.</p>
+                <p class="pequenio medium">Peso: 12g</p>
+            </div>
+
+            <div class="contenedor-btns-comprar">
+                <button class="btn btn-agregar-carrito" id="btn-agregar-carrito">
+                    <iconify-icon icon="ic:round-shopping-bag" class="icon icon-h6 color-secundario"></iconify-icon>
+                    <p class="pequenio media-negrita color-secundario">Agregar</p>
+                </button>
+                <div class="contenedor-agregar-mas oculto">
+                    <h6 class="btn-comprar-accion eliminar-uno color-blanco" id="eliminar-uno"> - </h6>
+                    <input type="tel" class="cantidad-producto" value="1">
+                    <h6 class="btn-comprar-accion agregar-uno color-blanco" id="agregar-uno"> + </h6>
+                </div>
+            </div>
+
+            <div class="contenedor-comercio">
+                <div class="contenedor-imagen-comercio">
+                    <img src="../css/imagenes/COMIDA-2.jpg" alt="">
+                </div>
+                <p class="light pequenio texto-nombre-comercio texto-truncado">Coto</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+<script src="../js/agregarProductos.js"></script>
+</html>

@@ -1,0 +1,108 @@
+.section-recetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(10rem, 30vw, 16rem), 1fr));
+    justify-content: start;
+    gap: .9rem;
+    align-items: stretch
+}
+
+.section-recetas .receta-especifica {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    cursor: pointer;
+}
+
+.section-recetas .receta-especifica .imagen-receta {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.section-recetas .receta-especifica .imagen-receta img {
+    width: 100%;
+    aspect-ratio: 1 / .6;
+    object-fit: cover;
+}
+
+.section-recetas .receta-especifica .info-receta {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 0 .2rem;
+}
+
+.section-recetas .receta-especifica .info-receta .contenedor-tiempo-porciones {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    .icon,
+    p {
+        color: var(--negro-400);
+    }
+}
+
+.receta-especifica .info-receta .contenedor-tiempo-porciones .tiempo,
+.receta-especifica .info-receta .contenedor-tiempo-porciones .porciones {
+    display: flex;
+    gap: 5px;
+}
+
+
+/* Moviles pequeños */
+@media (max-width: 480px) {
+    .section-recetas {
+        display: flex;
+        flex-direction: column;
+        gap: .6rem;
+    }
+
+    .section-recetas .receta-especifica {
+        display: flex;
+        flex-direction: row;
+        gap: .4rem;
+        cursor: pointer;
+    }
+
+    .section-recetas .receta-especifica .imagen-receta {
+        width: 50%;
+    
+    }
+
+    .section-recetas .receta-especifica .imagen-receta img{
+        aspect-ratio: 1 / .7;
+    }
+
+/* 
+    .section-recetas .receta-especifica .info-receta {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        padding: 0 .2rem;
+    } */
+
+    .section-recetas .receta-especifica .info-receta .contenedor-tiempo-porciones {
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+
+        .icon,
+        p {
+            color: var(--negro-400);
+        }
+    }
+
+    .receta-especifica .info-receta .contenedor-tiempo-porciones .tiempo,
+    .receta-especifica .info-receta .contenedor-tiempo-porciones .porciones {
+        display: flex;
+        gap: 5px;
+    }
+
+}

@@ -1,0 +1,233 @@
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+}
+/*===================================
+                HEADER
+====================================*/
+.section-header-busqueda {
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: auto;
+}
+
+.section-header-busqueda .titulo-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-header-busqueda .titulo-img img {
+    max-width: 300px;
+    height: auto;
+    object-fit: contain;
+}
+
+/*===================================
+              MEDIA HEADER
+====================================*/
+
+
+/*===================================
+       GENERAL SECTIONS
+====================================*/
+
+.section-categorias,
+.section-doble-grid-producto{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+.contenedor-header-seccion {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    max-width: 650px;
+}
+
+
+/*===================================
+        SECTION CATEGORIAS
+====================================*/
+
+.section-categorias .grid-categorias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(10rem, 20vw, 22rem), 1fr));
+    justify-content: start;
+    align-items: stretch;
+    gap: clamp(16px, 5vw, 32px);
+    height: auto;
+
+}
+
+.section-categorias .grid-categorias .categoria {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / .7;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.section-categorias .grid-categorias .categoria .capa-oscura {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(22, 22, 22, 0.414);
+    width: 100%;
+    height: 100%;
+}
+
+.section-categorias .grid-categorias .categoria img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section-categorias .grid-categorias .categoria h6 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+
+
+/*===================================
+        SECTION PRDOCUTOS
+====================================*/
+
+.section-doble-grid-producto .tarjeta-ofertas{
+    background-color: var(--primario-500);
+    min-width: 100%;
+    margin: auto;
+    padding: .5rem;
+    cursor: pointer;
+}
+
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: .35fr .65fr;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.contenedor-inferior {
+    grid-template-columns: .65fr .35fr;
+
+}
+
+.contenedor-tarjetas .tipo-producto{
+    max-width: 320px;
+    top: 15%;
+    left: 1.2rem;
+    position: absolute;
+    z-index: 10;
+}
+
+.caja-grande {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--secundario-200);
+    aspect-ratio: 1 / .8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.circulo-decoracion {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    background-color: var(--secundario-300);
+    z-index: 1;
+}
+
+
+.caja-grande .circulo-decoracion {
+    width: 100%;
+    height: 130%;
+    clip-path: ellipse(58% 55% at 58% 100%);
+}
+
+
+.grid-pequenas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.caja-pequena {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secundario-200);
+    font-weight: bold;
+    font-size: 1.2rem;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.caja-pequena .circulo-decoracion {
+    width: 80%;
+    height: 130%;
+    clip-path: ellipse(58% 55% at 58% 100%);
+}
+
+
+
+/*===================================
+       MEDIA SECTION PRODUCTOS
+====================================*/
+@media (max-width: 768px) {
+
+    .section-doble-grid-producto{
+        gap: .8rem;
+    }
+
+    .contenedor-tarjetas {
+        display: flex;
+        flex-direction: column;
+        gap: .8rem;
+    }
+
+
+    .caja-grande {
+        width: 100%;
+        aspect-ratio: 4 / 2;
+
+    }
+
+    .grid-pequenas {
+        grid-template-columns: repeat(2, 1fr);
+        gap: .8rem;
+    }
+
+    .grid-pequenas .caja-pequena {
+        aspect-ratio: 3 / 2;
+    }
+
+    .contenedor-inferior {
+        grid-template-columns: 1fr;
+    }
+
+    .caja-pequena .circulo-decoracion {
+        width: 100%;
+        height: 100%;
+    }
+}
