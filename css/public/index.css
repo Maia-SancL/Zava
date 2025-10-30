@@ -1,8 +1,4 @@
-main{
-    display: flex;
-    flex-direction: column;
-    gap: 6rem;
-}
+
 /*===================================
                 HEADER
 ====================================*/
@@ -58,10 +54,10 @@ main{
 
 .section-categorias .grid-categorias {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(10rem, 20vw, 22rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(clamp(10rem, 17vw, 20rem), 1fr));
     justify-content: start;
     align-items: stretch;
-    gap: clamp(16px, 5vw, 32px);
+    gap: 1rem;
     height: auto;
 
 }

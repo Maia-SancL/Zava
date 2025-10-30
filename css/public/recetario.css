@@ -1,3 +1,7 @@
+.contenedor-3{
+    gap: 0;
+}
+
 .section-recetas {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(clamp(10rem, 30vw, 16rem), 1fr));

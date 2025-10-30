@@ -5,10 +5,10 @@
 nav.menu-lateral-usuario {
     width: auto;
     max-width: clamp(11rem, 30vw, 13rem);
+    height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
-    height: 100vh;
     background-color: var(--secundario-100);
     border-top-right-radius: 1.2rem;
     border-bottom-right-radius: 1.2rem;
@@ -17,6 +17,8 @@ nav.menu-lateral-usuario {
     display: flex;
     flex-direction: column;
     gap: .8rem;
+
+    z-index: 100;
 }
 
 .menu-lateral-usuario .contenedor-nombre-logo {
@@ -85,21 +87,15 @@ nav.menu-lateral-usuario {
     gap: 10px;
 }
 
+
+
 /*===================================
      MEDIA MENU LATERAL USUARIO
 ====================================*/
 
 
-/* Moviles pequeños */
-@media (max-width: 480px) {
-    nav.menu-lateral-usuario{
-        display: none;
-        opacity: 0;
-    }
-}
-
 /* Tablets */
-@media (min-width: 481px) and (max-width: 1024px) {
+@media (min-width: 750px) and (max-width: 1024px) {
 
     nav.menu-lateral-usuario {
         align-items: center;
@@ -117,4 +113,10 @@ nav.menu-lateral-usuario {
         padding-left: 0;
     }
 
+}
+
+@media (max-width: 749px) {
+    nav.menu-lateral-usuario {
+        min-width: 100%;
+    }
 }

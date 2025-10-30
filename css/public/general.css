@@ -5,19 +5,19 @@
 /* TITULO PRINCIPAL */
 @font-face {
     font-family: 'Tan-Nimbus';
-    src: url('./tipografias/TAN_Nimbus/TAN-NIMBUS.otf') format('truetype');
+    src: url('/Zava/css/recursos/tipografia/TAN_Nimbus/TAN-NIMBUS.otf') format('truetype');
 }
 
 /* SUBTITULOS */
 @font-face {
     font-family: 'Quicksand';
-    src: url('./tipografias/Quicksand/Quicksand-VariableFont_wght.ttf') format('truetype');
+    src: url('/Zava/css/recursos/tipografia/Quicksand/Quicksand-VariableFont_wght.ttf') format('truetype');
 }
 
 /* CUERPO */
 @font-face {
     font-family: 'Montserrat';
-    src: url('./tipografias/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
+    src: url('/Zava/css/recursos/tipografia/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
 }
 
 
@@ -63,9 +63,10 @@
     color: var(--blanco-50);
 }
 
-.color-error{
+.color-error {
     color: var(--error);
-} 
+}
+
 :root {
     /* === Primario === */
     --fondo-50: #FDFDFD;
@@ -181,9 +182,112 @@ b {
 @media (min-width: 1281px) {}
 
 
+/* ===================================
+            LAYOUT
+====================================*/
+
+.layout {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    gap: 1rem;
+}
+
+/* ASIDE */
+.contenedor-2 {
+    width: 100%;
+    max-width: clamp(11rem, 30vw, 13rem);
+}
+
+
+/* Área que contiene header y contenido */
+.area-principal {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+/* HEADER */
+.contenedor-1 {
+    width: 100%;
+    height: auto;
+    margin-left: auto;
+}
+
+/* CONTENIDO */
+.contenedor-3 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding-right: 16px;
+}
+
+
+/* ===================================
+            MEDIA LAYOUT
+====================================*/
+
+
+
+@media (min-width: 481px) and (max-width: 1024px) {
+
+    .contenedor-2 {
+        width: 65px;
+    }
+
+}
+
+/* Responsive: pantalla <= 750px */
+@media (max-width: 750px) {
+    .layout {
+        flex-direction: column;
+    }
+
+    .contenedor-2 {
+        position: fixed;
+        min-width: 80%;
+        height: 100vh;
+
+        transform: translateX(-100%);
+        transition: transform 0.4s ease;
+        z-index: 100;
+        pointer-events: none;
+        /* Ocultar aside */
+    }
+
+    .contenedor-2.abierto {
+        transform: translateX(0);
+        pointer-events: auto;
+        opacity: 1;
+
+    }
+
+    .area-principal {
+        width: 100%;
+    }
+
+    .contenedor-3 {
+        padding: 8px;
+    }
+
+}
+
+
 /*===================================
             CLASES
 ====================================*/
+
+.overflow-capa {
+    width: 100%;
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0d0d0d8b;
+    z-index: 90;
+}
 
 .cont {
     padding-left: clamp(.2rem, 2vw, 5rem);
@@ -542,7 +646,7 @@ b {
         margin-left: 1rem;
     }
 
-    .caja-filtroresponsive .caja-filtro-contenido p:hover {
+    .caja-filtro.responsive .caja-filtro-contenido p:hover {
         font-weight: 500;
         background-color: var(--blanco-50);
     }
@@ -551,7 +655,7 @@ b {
 
 /* Desktops */
 @media (min-width: 1025px) {
-    .caja-filtro .caja-filtro-principal {
+    .caja-filtro.responsive .caja-filtro-principal {
         .icon {
             opacity: 1;
             display: block;
