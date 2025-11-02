@@ -1,28 +1,28 @@
 <link rel="stylesheet" href="/Zava/css/usuario/navegadorLateralUsuario.css">
 <div class="contenedor-2">
     <nav class="menu-lateral-usuario">
-        <div class="contenedor-nombre-logo">
+        <a href="/Zava/index.php" class="contenedor-nombre-logo">
             <div class="contenedor-logo">
-                <img src="/Zava/css/recursos/iconos/Logo 4.0.png">
+                <img src="/Zava/css/recursos/logos/Logo 4.0.png">
             </div>
             <h6 class="media-negrita color-primario">Zava</h6>
-        </div>
+        </a>
         <ul class="menu-lateral-lista">
-            <a>
+            <a href="/Zava/index.php">
                 <li>
                     <iconify-icon icon="tabler:home-filled" class="icon color-primario icon-h6"
                         title="Inicio"></iconify-icon>
                     <p class="pequenio medium color-primario">Inicio</p>
                 </li>
             </a>
-            <a>
+            <a href="/Zava/public/public/recetario.php">
                 <li>
                     <iconify-icon icon="solar:chef-hat-bold" class="icon color-primario icon-h6"
                         title="Recetas"></iconify-icon>
                     <p class="pequenio medium color-primario">Recetas</p>
                 </li>
             </a>
-            <a>
+            <a href="/Zava/public/public/productos.php">
                 <li>
                     <iconify-icon icon="solar:shop-bold" class="icon color-primario icon-h6"
                         title="Productos"></iconify-icon>

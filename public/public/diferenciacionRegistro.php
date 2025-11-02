@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <title>Zava</title>
+    <link rel="stylesheet" href="/Zava/css/public/general.css">
+    <link rel="stylesheet" href="/Zava/css/public/accesoUsuario.css">
+
+</head>
+
+<body>
+    <main class="contenedor-principal elegir-user">
+        <section class="contenedor-general registrarse">
+            <div class="imagen-titulo">
+                <img src="/Zava/css/recursos/logos/Principal 2.0.png">
+            </div>
+            <div class="contenedor-botones">
+                <form class="contenedor-form" action="registrarse.php" method="POST">
+                    <input type="hidden" name="rol" value="1">
+                    <button type="submit" class="btn-tipo-usuairo borde-redondeado">
+                        <iconify-icon icon="solar:user-bold" class="icon color-secundario icon-grande"></iconify-icon>
+                        <p class="media-negrita color-secundario">Usuario</p>
+                    </button>
+                </form>
+
+                <form class="contenedor-form" action="registrarse.php" method="POST">
+                    <input type="hidden" name="rol" value="2">
+                    <button type="submit" class="btn-tipo-usuairo borde-redondeado">
+                        <iconify-icon icon="solar:shop-2-bold" class="icon color-secundario icon-grande"></iconify-icon>
+                        <p class="media-negrita color-secundario">Comercio</p>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

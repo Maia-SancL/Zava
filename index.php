@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/usuario/componente/header.php'
 <div class="contenedor-3">
     <section class="section-header-busqueda">
         <div class="titulo-img">
-            <img src="/Zava/css/recursos/iconos/Principal 2.0.png">
+            <img src="/Zava/css/recursos/logos/Principal 2.0.png">
         </div>
         <h5 class="frase texto-centrado light color-primario">Encuentra recetas, restaurantes y productos aptos para
             celiacos.</h5>
@@ -138,6 +138,5 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/usuario/componente/header.php'
 </div>
 </main>
 </body>
-<script src="/Zava/js/desplegarMenuLateral.js"></script>
 
 </html>

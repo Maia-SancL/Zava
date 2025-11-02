@@ -133,7 +133,7 @@
     width: 100%;
     height: 100%;
 
-    background-color: var(--secundario-200);
+    background-color: var(--secundario-100);
     aspect-ratio: 1 / .8;
     display: flex;
     justify-content: center;
@@ -148,7 +148,7 @@
     bottom: 0;
     right: 0;
 
-    background-color: var(--secundario-300);
+    background-color: var(--secundario-200);
     z-index: 1;
 }
 
@@ -172,7 +172,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--secundario-200);
+    background-color: var(--secundario-100);
     font-weight: bold;
     font-size: 1.2rem;
     overflow: hidden;

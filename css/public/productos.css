@@ -1,6 +1,10 @@
+.contenedor-3{
+    gap: 0;
+}
+
 .section-productos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(12rem, 18vw, 20rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(clamp(8rem, 18vw, 20rem), 1fr));
     justify-content: start;
     gap: .9rem;
     align-items: stretch

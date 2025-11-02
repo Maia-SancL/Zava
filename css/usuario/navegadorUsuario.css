@@ -2,8 +2,11 @@
          NAVEGADOR USUARIO
 ====================================*/
 
-nav.navegador-usuario {
+nav.navegador {
     display: grid;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     grid-template-columns: 1fr .3fr;
     padding: 8px 16px;
     background-color: var(--secundario-100);
@@ -11,12 +14,21 @@ nav.navegador-usuario {
     border-bottom-right-radius: .8rem;
 }
 
-.navegador-usuario .barra-busqueda {
+.navegador.comercio{
+    display: flex;
+}
+
+
+.navegador .barra-busqueda {
     width: 100%;
     max-width: 90%;
 }
 
-.navegador-usuario .contenedor-botones-usuario {
+.navegador .contenedor-botones-navegador {
+    margin-left: auto;
+}
+
+.navegador .contenedor-botones-usuario {
     width: auto;
     margin-left: auto;
     display: flex;
@@ -25,20 +37,100 @@ nav.navegador-usuario {
     align-items: center;
 }
 
-.navegador-usuario .barra-busqueda .icon {
+
+
+.navegador .barra-busqueda .icon {
     color: var(--primario-500);
 }
 
-.navegador-usuario .barra-busqueda .input-busqueda::placeholder{
+.navegador .barra-busqueda .input-busqueda::placeholder {
     color: var(--primario-500)
 }
 
-.navegador-usuario .barra-busqueda .input-busqueda {
+.navegador .barra-busqueda .input-busqueda {
     background-color: var(--secundario-50);
     border: none;
     color: var(--primario-500);
 }
 
+.navegador .desplegable-usuario {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.navegador .desplegable-usuario .icon {
+    cursor: pointer;
+}
+
+.navegador .desplegable-usuario .contenedor-desplegable-usuario {
+
+    width: 100%;
+    min-width: 15rem;
+    height: auto;
+    padding: 1rem;
+    top: 100%;
+    right: 0;
+    position: absolute;
+    background-color: var(--secundario-50);
+    flex-direction: column;
+    gap: 1rem;
+    opacity: 0;
+    display: none;
+    z-index: 50;
+}
+
+.desplegable-usuario:hover .contenedor-desplegable-usuario{
+    opacity: 1;
+    display: flex;
+}
+
+
+.navegador .desplegable-usuario .contenedor-desplegable-usuario .contenedor-informacion-usuario {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: .5rem;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--primario-500);
+}
+
+
+.navegador .desplegable-usuario .contenedor-desplegable-usuario .contenedor-informacion-usuario p {
+    max-width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contenedor-desplegable-usuario .contenedor-informacion-usuario .contenedor-imagen {
+    width: clamp(5rem, 2vw, 8rem);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+}
+
+.contenedor-desplegable-usuario .contenedor-informacion-usuario .contenedor-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.navegador .desplegable-usuario .contenedor-desplegable-usuario .contenedor-opciones {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+}
+
+.navegador .desplegable-usuario .contenedor-desplegable-usuario .contenedor-opciones a li {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+}
 
 /*===================================
            MEDIA NAVEGADOR USER
@@ -46,25 +138,32 @@ nav.navegador-usuario {
 
 
 /* Moviles pequeños */
-@media  (max-width: 750px) {
+@media (max-width: 480px) {}
 
-    nav.navegador-usuario {
-        min-width: 100%;
+/* Tablets */
+@media (min-width: 0px) and (max-width: 760px) {
+
+    nav.navegador {
+        max-width: 100%;
         display: flex;
         flex-direction: column-reverse;
         gap: 10px;
     }
 
-    .navegador-usuario .barra-busqueda {
+    .navegador .contenedor-botones-navegador {
+        width: 100%;
+    }
+
+    .navegador .barra-busqueda {
         max-width: 100%;
     }
 
-    .navegador-usuario .menu-desplegable{
+    .navegador .menu-desplegable {
         display: block;
         opacity: 1;
     }
 
-    .navegador-usuario .contenedor-botones-navegador{
+    .navegador .contenedor-botones-navegador {
         display: flex;
         justify-content: space-between;
     }

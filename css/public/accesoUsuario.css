@@ -3,7 +3,7 @@
     height: 100%;
     background-color: var(--primario-500);
     position: relative;
-    background-image: url("../css/imagenes/Fondo.png");
+    background-image: url("/Zava/css/recursos/imagenes/Fondo.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -113,7 +113,7 @@
 /* ESTILO PARA ELEGIR USER */
 .contenedor-principal.elegir-user {
     background-color: var(--secundario-50);
-    background-image: url("../css/imagenes/Fondo-2.png");
+     background-image: url("/Zava/css/recursos/imagenes/Fondo-2.png");
 }
 
 .contenedor-principal.elegir-user .imagen-titulo {
