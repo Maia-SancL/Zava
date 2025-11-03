@@ -1,3 +1,76 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
+$mensaje = '';
+
+// Obtener el rol desde POST (viene del formulario de diferenciación)
+$rol_seleccionado = isset($_POST['rol']) ? $_POST['rol'] : 1; // Por defecto Usuario
+
+// Incluir la función para enviar correos de verificación
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/public/mails/enviarVerificacion.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'])) {
+    if (
+        !empty($_POST['nombre']) &&
+        !empty($_POST['apellido']) &&
+        !empty($_POST['nombreDeUsuario']) &&
+        !empty($_POST['correo']) &&
+        !empty($_POST['contrasenia']) &&
+        !empty($_POST['confirmarContrasenia']) &&
+        isset($_POST['rol'])
+    ) {
+        $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
+        $apellido = mysqli_real_escape_string($conexion, $_POST['apellido']);
+        $nombreDeUsuario = mysqli_real_escape_string($conexion, $_POST['nombreDeUsuario']);
+        $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
+        $contrasenia = $_POST['contrasenia'];
+        $confirmarContrasenia = $_POST['confirmarContrasenia'];
+        $rol = (int) $_POST['rol'];
+
+        if ($contrasenia !== $confirmarContrasenia) {
+            $mensaje = "Las contraseñas no coinciden. Por favor, inténtalo de nuevo.";
+        } else {
+            $contrasenia_hashed = password_hash($contrasenia, PASSWORD_DEFAULT);
+            $token_verificacion = bin2hex(random_bytes(50));
+            $token_expiracion = date('Y-m-d H:i:s', strtotime('+1 day'));
+
+            $consulta_correo = "SELECT correo FROM Usuarios WHERE correo='$correo'";
+            $resultado_correo = mysqli_query($conexion, $consulta_correo);
+
+            $consulta_nick = "SELECT nickname FROM Usuarios WHERE nickname='$nombreDeUsuario'";
+            $resultado_nick = mysqli_query($conexion, $consulta_nick);
+
+            if (mysqli_num_rows($resultado_correo) > 0) {
+                $mensaje = "El correo ya está registrado. <a href='diferenciacionRegistro.php'>Vuelve</a> y usa otro.";
+            } elseif (mysqli_num_rows($resultado_nick) > 0) {
+                $mensaje = "El nombre de usuario ya está registrado. Por favor, elige otro.";
+            } else {
+                // Prepara la consulta SQL para insertar el nuevo usuario con el token de verificación.
+                $sql = "INSERT INTO Usuarios (nombre, apellido, nickname, correo, contrasenia, id_rol, token_verificacion, token_expiracion) VALUES ('$nombre', '$apellido', '$nombreDeUsuario', '$correo', '$telefono', '$contrasenia_hashed', '$rol', '$token_verificacion', '$token_expiracion')";
+
+                // Ejecuta la consulta y, si tiene éxito, procede a enviar el correo.
+                $resultado_insert = mysqli_query($conexion, $sql);
+
+                if ($resultado_insert) {
+                    $envio_correo = enviarCorreoVerificacion($correo, $nombre, $token_verificacion);
+
+                    if ($envio_correo === true) {
+                        $reenvio_link = "mails/solicitarReenvio.php?token={$token_verificacion}";
+                        $mensaje = "Registro exitoso. Se ha enviado un correo de verificación a tu dirección. Si no lo recibes, <a href='{$reenvio_link}'>haz clic aquí para reenviarlo</a>.";
+                    } else {
+                        // Si el envío falla, se muestra el error devuelto por la función.
+                        $mensaje = $envio_correo;
+                    }
+                } else {
+                    // Si la consulta SQL para insertar al usuario falla, se muestra un error de la base de datos.
+                    $mensaje = "Error al registrar usuario: " . mysqli_error($conexion);
+                }
+            }
+        }
+    } else {
+        $mensaje = "Por favor, completa todos los campos.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -55,7 +128,8 @@
                             maxlength="255" required>
                     </div>
                 </div>
-                <a href="iniciarSesion.php" class="pequenio light color-primario vinculo-registrarse">¿Ya tienes cuenta? <b class="color-primario">Iniciar sesión</b></a>
+                <a href="iniciarSesion.php" class="pequenio light color-primario vinculo-registrarse">¿Ya tienes cuenta?
+                    <b class="color-primario">Iniciar sesión</b></a>
                 <button type="submit" class="btn btn-enviar-formulario pequenio color-secundario">Registrarse</button>
             </form>
         </section>

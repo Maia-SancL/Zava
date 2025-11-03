@@ -1,3 +1,56 @@
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/conexion.php';
+$mensaje = '';
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['correo']) && isset($_POST['contrasenia'])) {
+        $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
+        $pass = $_POST['contrasenia'];
+
+        $sql = "SELECT * FROM Usuarios WHERE correo = '$correo' AND activo = 1";
+        $result = mysqli_query($conexion, $sql);
+
+        if ($result && mysqli_num_rows($result) == 1) {
+            $usuario = mysqli_fetch_assoc($result);
+
+            // Verificar la contraseña usando password_verify
+            if (password_verify($pass, $usuario['contrasenia'])) {
+                
+                // Comprobar si la cuenta ha sido verificada
+                if ($usuario['verificado']) {
+                    $_SESSION['id'] = $usuario['id_usuario'];
+                    $_SESSION['correo'] = $usuario['correo'];
+                    $_SESSION['nickname'] = $usuario['nickname'];
+                    $_SESSION['nombre'] = $usuario['nombre'];
+                    $_SESSION['apellido'] = $usuario['apellido'];
+                    $_SESSION['id_rol'] = $usuario['id_rol'];
+                    $_SESSION['foto'] = $usuario['foto'];
+                    $_SESSION['usuario'] = $usuario;
+                    
+                    // Definir tipo de usuario basado en el rol
+                    switch($usuario['id_rol']) {
+                        case 1: $_SESSION['tipo_usuario'] = 'Usuario'; break;
+                        case 2: $_SESSION['tipo_usuario'] = 'Comercio'; break;
+                        case 3: $_SESSION['tipo_usuario'] = 'Admin'; break;
+                        default: $_SESSION['tipo_usuario'] = 'Usuario';
+                    }
+                    
+                    $mensaje = 'Uwu';
+                    exit;
+                } else {
+                    $mensaje = 'Tu cuenta aún no ha sido verificada. Por favor, revisa tu correo electrónico.';
+                }
+            } else {
+                $mensaje = 'Correo o contraseña incorrectos.';
+            }
+        } else {
+            $mensaje = 'Correo o contraseña incorrectos.';
+        }
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +70,7 @@
             <div class="imagen-titulo">
                 <img src="/Zava/css/recursos/logos/Principal 2.0.png">
             </div>
-            <form class="contenedor-form" action="inicioSesion.php" method="POST">
+            <form class="contenedor-form" action="iniciarSesion.php" method="POST">
                 <h6 class="media-negrita color-primario">Iniciar sesión</h6>
                 <div class="contenedor-inputs">
                     <div class="contenedor-input">
@@ -30,7 +83,8 @@
                         <input type="password" class="input input-contrasenia" name="contrasenia" required>
                     </div>
                 </div>
-                <a href="registrarse.php" class="pequenio light color-primario vinculo-registrarse">¿No tienes cuenta? <b class="color-primario">Registrarme</b></a>
+                <p class="pequenio media-negrita color-error"><?= $mensaje; ?></p>
+                <a href="diferenciacionRegistro.php" class="pequenio light color-primario vinculo-registrarse">¿No tienes cuenta? <b class="color-primario">Registrarme</b></a>
                 <button type="submit" class="btn btn-enviar-formulario pequenio color-secundario">Iniciar
                     sesión</button>
             </form>

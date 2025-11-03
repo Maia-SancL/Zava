@@ -1,3 +1,8 @@
+<?php
+if (!defined('BASE_URL')) {
+    define('BASE_URL', '/Zava/');
+}
+?>
 <link rel="stylesheet" href="/Zava/css/usuario/navegadorLateralUsuario.css">
 <div class="contenedor-2">
     <nav class="menu-lateral-usuario">
@@ -8,7 +13,7 @@
             <h6 class="media-negrita color-primario">Zava</h6>
         </a>
         <ul class="menu-lateral-lista">
-            <a href="/Zava/index.php">
+            <a href="<?php echo BASE_URL; ?>inicio">
                 <li>
                     <iconify-icon icon="tabler:home-filled" class="icon color-primario icon-h6"
                         title="Inicio"></iconify-icon>

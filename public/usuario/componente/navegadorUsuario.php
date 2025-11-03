@@ -1,3 +1,24 @@
+<?php
+session_start();
+
+if (isset($_SESSION['tipo_usuario']) && isset($_SESSION['id'])) {
+    if ($_SESSION['tipo_usuario'] === 'Usuario') {
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/Zava/public/conexion.php');
+        $id_usuario = $_SESSION['id'];
+        $query = "SELECT nombre, apellido, nickname, imagen FROM usuarios WHERE id_usuario = $id_usuario";
+        $resultado = mysqli_query($conexion, $query);
+
+        if ($resultado && mysqli_num_rows($resultado) > 0) {
+            $usuario = mysqli_fetch_assoc($resultado);
+            $nombre = htmlspecialchars($usuario['nombre']);
+            $nickname = htmlspecialchars($usuario['nickname']);
+            $foto = $usuario['imagen'] ? htmlspecialchars($usuario['imagen']) : 'perfil.png';
+            $rutaImg = BASE_URL . "public/img/perfiles/" . $foto;
+        }
+    }
+}
+?>
+
 <link rel="stylesheet" href="/Zava/css/usuario/navegadorUsuario.css">
 <div class=" contenedor-1">
     <nav class="navegador">
