@@ -1,6 +1,6 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/mails/gestionTokens.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/public/mails/gestionTokens.php';
 
 $resultado_verificacion = '';
 if (isset($_GET['token'])) {
@@ -22,9 +22,9 @@ if (isset($_GET['token'])) {
     <div class="container">
         <?php if ($resultado_verificacion === 'success'): ?>
             <?php
-            echo '<form id="postRedirect" action="/Zava/php/componentes/pantallaCarga.php" method="POST">
+            echo '<form id="postRedirect" action="/Zava/public/public/pantallaCarga.php" method="POST">
                     <input type="hidden" name="mensaje" value="¡Cuenta verificada! Redirigiendo al inicio de sesión...">
-                    <input type="hidden" name="destino" value="/Zava/php/general/inicioSesion.php">
+                    <input type="hidden" name="destino" value="/Zava/login">
                   </form>
                   <script>document.getElementById("postRedirect").submit();</script>';
             exit;
@@ -32,7 +32,7 @@ if (isset($_GET['token'])) {
         <?php else: ?>
             <h1>Error de Verificación</h1>
             <p><?php echo $resultado_verificacion; ?></p>
-            <a href="/Zava/php/general/inicioSesion.php" class="btn-login">Volver</a>
+            <a href="/Zava/login" class="btn-login">Volver</a>
         <?php endif; ?>
     </div>
 </body>

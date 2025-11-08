@@ -1,7 +1,86 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/usuario/componente/header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/conexion.php';
+
+$mensaje = '';
+
+// Verificar que el usuario tenga sesión iniciada
+if (!isset($_SESSION['id']) || !isset($_SESSION['tipo_usuario']) || $_SESSION['tipo_usuario'] !== 'Usuario') {
+    header('Location: /Zava/login');
+    exit;
+}
+
+// Procesar el formulario cuando se envía
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id_usuario = $_SESSION['id'];
+    $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
+    $descripcion = mysqli_real_escape_string($conexion, $_POST['descripcion']);
+    $tiempo = intval($_POST['tiempo']);
+    
+    // Obtener valores de los filtros
+    $tipo_comida = isset($_POST['tipo_comida']) ? mysqli_real_escape_string($conexion, $_POST['tipo_comida']) : 'desayuno';
+    $porciones = isset($_POST['porciones']) ? intval($_POST['porciones']) : 1;
+    $tipo_dieta = isset($_POST['tipo_dieta']) ? mysqli_real_escape_string($conexion, $_POST['tipo_dieta']) : 'omnívora';
+    
+    // Convertir ingredientes y pasos a texto (temporalmente, hasta procesarlos)
+    $ingredientes_texto = isset($_POST['ingredientes']) ? implode(', ', $_POST['ingredientes']) : '';
+    $pasos_texto = isset($_POST['instruccion']) ? implode(' | ', $_POST['instruccion']) : '';
+    
+    // Insertar la receta (usando nombres de columnas correctos)
+    $sql = "INSERT INTO Recetas (id_usuario, nombre, descripcion, ingredientes, pasos, tiempo_preparacion, porciones, tipo_comida, tipo_dieta, fecha_publicacion) 
+            VALUES ($id_usuario, '$nombre', '$descripcion', '$ingredientes_texto', '$pasos_texto', $tiempo, $porciones, '$tipo_comida', '$tipo_dieta', NOW())";
+    
+    if (mysqli_query($conexion, $sql)) {
+        $id_receta = mysqli_insert_id($conexion);
+        
+        // Procesar imágenes si se subieron
+        if (isset($_FILES['imagenes']) && $_FILES['imagenes']['error'][0] !== UPLOAD_ERR_NO_FILE) {
+            $directorio_imagenes = $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/img/recetas/';
+            if (!file_exists($directorio_imagenes)) {
+                mkdir($directorio_imagenes, 0777, true);
+            }
+            
+            $primera_imagen = true;
+            foreach ($_FILES['imagenes']['tmp_name'] as $key => $tmp_name) {
+                if ($_FILES['imagenes']['error'][$key] === UPLOAD_ERR_OK) {
+                    $nombre_archivo = uniqid() . '_' . basename($_FILES['imagenes']['name'][$key]);
+                    $ruta_destino = $directorio_imagenes . $nombre_archivo;
+                    
+                    if (move_uploaded_file($tmp_name, $ruta_destino)) {
+                        // Guardar referencia de imagen en la base de datos (tabla correcta: Receta_Imagenes)
+                        $es_principal = $primera_imagen ? 1 : 0;
+                        $sql_img = "INSERT INTO Receta_Imagenes (id_receta, ruta_imagen, es_principal) VALUES ($id_receta, '$nombre_archivo', $es_principal)";
+                        mysqli_query($conexion, $sql_img);
+                        
+                        // Actualizar imagen_principal en la tabla Recetas si es la primera
+                        if ($primera_imagen) {
+                            $sql_update = "UPDATE Recetas SET imagen_principal = '$nombre_archivo' WHERE id_receta = $id_receta";
+                            mysqli_query($conexion, $sql_update);
+                            $primera_imagen = false;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Redirigir al detalle de la receta recién creada
+        echo '<form id="postRedirect" action="/Zava/public/public/pantallaCarga.php" method="POST">
+                <input type="hidden" name="mensaje" value="¡Receta publicada exitosamente!">
+                <input type="hidden" name="destino" value="/Zava/receta?id=' . $id_receta . '">
+              </form>
+              <script>document.getElementById("postRedirect").submit();</script>';
+        exit;
+    } else {
+        $mensaje = "Error al crear la receta: " . mysqli_error($conexion);
+    }
+}
 ?>
 <link rel="stylesheet" href="/Zava/css/usuario/crear.css">
+<?php if (!empty($mensaje)): ?>
+    <div class="mensaje-error">
+        <p><?php echo $mensaje; ?></p>
+    </div>
+<?php endif; ?>
 <div class="contenedor-3">
     <form class="form-crear-receta" action="" method="POST" enctype="multipart/form-data">
         <div class="contenedor-superior">

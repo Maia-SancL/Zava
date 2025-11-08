@@ -28,12 +28,12 @@ function verificarTokenDeCuenta($conexion, $token) {
 
     // 3. Comprobar si la cuenta ya está verificada.
     if ($usuario['verificado']) {
-        return 'Esta cuenta ya ha sido verificada. Puedes <a href="inicioSesion.php">iniciar sesión</a>.';
+        return 'Esta cuenta ya ha sido verificada. Puedes <a href="/Zava/login">iniciar sesión</a>.';
     }
 
     // 4. Comprobar si el token ha expirado.
     if (strtotime($usuario['token_expiracion']) < time()) {
-        $reenvio_link = "solicitarReenvio.php?token={$token}";
+        $reenvio_link = "/Zava/reenviar-verificacion?token={$token}";
         return "El enlace de verificación ha expirado. <a href='{$reenvio_link}'>Haz clic aquí para reenviar el correo</a>.";
     }
 

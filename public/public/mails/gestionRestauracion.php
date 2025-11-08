@@ -75,7 +75,7 @@ function enviarCorreoRestauracion($correo, $nombre, $token) {
 
         $mail->isHTML(true);
         $mail->Subject = 'Restauracion de Contrasena - Zava';
-        $restauracion_link = "http://" . $_SERVER['HTTP_HOST'] . "/Zava/php/general/restaurarContrasenia.php?token={$token}";
+        $restauracion_link = "http://" . $_SERVER['HTTP_HOST'] . "/Zava/restaurar-contrasena?token={$token}";
         $mail->Body    = "Has solicitado restaurar tu contraseña. Haz clic en el siguiente enlace para continuar: <a href='{$restauracion_link}'>Restaurar Contraseña</a>. Si no solicitaste esto, ignora este mensaje.";
         $mail->AltBody = "Usa el siguiente enlace para restaurar tu contraseña: {$restauracion_link}";
 

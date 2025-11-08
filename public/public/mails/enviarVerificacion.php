@@ -1,8 +1,8 @@
 <?php
 // Incluir los archivos de PHPMailer manualmente
-require $_SERVER['DOCUMENT_ROOT'] . '/Zava/phpMailer/PHPMailer.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/Zava/phpMailer/SMTP.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/Zava/phpMailer/Exception.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/phpMailer/PHPMailer.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/phpMailer/SMTP.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/phpMailer/Exception.php';
 
 // Importar las clases de PHPMailer al espacio de nombres global
 use PHPMailer\PHPMailer\PHPMailer;
@@ -36,7 +36,7 @@ function enviarCorreoVerificacion($correo, $nombre, $token) {
         // ----- CONTENIDO DEL CORREO -----
         $mail->isHTML(true);
         $mail->Subject = 'Verifica tu cuenta en Zava';
-        $verification_link = "http://" . $_SERVER['HTTP_HOST'] . "/Zava/php/general/mails/verificar.php?token={$token}";
+        $verification_link = "http://" . $_SERVER['HTTP_HOST'] . "/Zava/verificar?token={$token}";
         $mail->Body    = "¡Gracias por registrarte! Por favor, haz clic en el siguiente enlace para verificar tu cuenta: <a href='{$verification_link}'>Verificar cuenta</a>";
         $mail->AltBody = "Gracias por registrarte! Por favor, usa el siguiente enlace para verificar tu cuenta: {$verification_link}";
 

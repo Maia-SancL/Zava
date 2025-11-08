@@ -1,9 +1,16 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Zava/php/general/conexion.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/conexion.php';
 $mensaje = '';
 
+// Validar que el usuario venga desde diferenciacionRegistro.php con un rol
+if (!isset($_POST['rol']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
+    // Si accede directamente sin POST, redirigir a diferenciación
+    header('Location: diferenciacionRegistro.php');
+    exit;
+}
+
 // Obtener el rol desde POST (viene del formulario de diferenciación)
-$rol_seleccionado = isset($_POST['rol']) ? $_POST['rol'] : 1; // Por defecto Usuario
+$rol_seleccionado = isset($_POST['rol']) ? (int)$_POST['rol'] : 1;
 
 // Incluir la función para enviar correos de verificación
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Zava/public/public/mails/enviarVerificacion.php';
@@ -45,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'])) {
                 $mensaje = "El nombre de usuario ya está registrado. Por favor, elige otro.";
             } else {
                 // Prepara la consulta SQL para insertar el nuevo usuario con el token de verificación.
-                $sql = "INSERT INTO Usuarios (nombre, apellido, nickname, correo, contrasenia, id_rol, token_verificacion, token_expiracion) VALUES ('$nombre', '$apellido', '$nombreDeUsuario', '$correo', '$telefono', '$contrasenia_hashed', '$rol', '$token_verificacion', '$token_expiracion')";
+                $sql = "INSERT INTO Usuarios (nombre, apellido, nickname, correo, telefono, contrasenia, id_rol, token_verificacion, token_expiracion) VALUES ('$nombre', '$apellido', '$nombreDeUsuario', '$correo', NULL, '$contrasenia_hashed', '$rol', '$token_verificacion', '$token_expiracion')";
 
                 // Ejecuta la consulta y, si tiene éxito, procede a enviar el correo.
                 $resultado_insert = mysqli_query($conexion, $sql);
@@ -54,8 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'])) {
                     $envio_correo = enviarCorreoVerificacion($correo, $nombre, $token_verificacion);
 
                     if ($envio_correo === true) {
-                        $reenvio_link = "mails/solicitarReenvio.php?token={$token_verificacion}";
-                        $mensaje = "Registro exitoso. Se ha enviado un correo de verificación a tu dirección. Si no lo recibes, <a href='{$reenvio_link}'>haz clic aquí para reenviarlo</a>.";
+                        // Redirigir a pantalla de mensaje de verificación
+                        echo '<form id="postRedirect" action="/Zava/public/public/pantallaCarga.php" method="POST">
+                                <input type="hidden" name="mensaje" value="¡Registro exitoso! Revisa tu correo y verifica tu cuenta">
+                                <input type="hidden" name="destino" value="/Zava/login">
+                              </form>
+                              <script>document.getElementById("postRedirect").submit();</script>';
+                        exit;
                     } else {
                         // Si el envío falla, se muestra el error devuelto por la función.
                         $mensaje = $envio_correo;
@@ -90,7 +102,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'])) {
             <div class="imagen-titulo">
                 <img src="/Zava/css/recursos/logos/Principal 2.0.png">
             </div>
-            <form class="contenedor-form" action="inicioSesion.php" method="POST">
+            <form class="contenedor-form" action="/Zava/registrarse" method="POST">
+                <input type="hidden" name="rol" value="<?php echo htmlspecialchars($rol_seleccionado); ?>">
                 <h6 class="media-negrita color-primario">Registrarse</h6>
                 <div class="contenedor-inputs">
 
@@ -101,13 +114,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'])) {
                         </div>
                         <div class="contenedor-input">
                             <p class="pequenio medium color-primario">Apellido</p>
-                            <input type="text" class="input input-apellido" name="contrasenia" maxlength="50" required>
+                            <input type="text" class="input input-apellido" name="apellido" maxlength="50" required>
                         </div>
                     </div>
 
                     <div class="contenedor-input">
                         <p class="pequenio medium color-primario">Nombre usuario</p>
-                        <input type="password" class="input input-nombreDeUsuario" name="nombreDeUsuario" maxlength="50"
+                        <input type="text" class="input input-nombreDeUsuario" name="nombreDeUsuario" maxlength="50"
                             required>
                     </div>
 

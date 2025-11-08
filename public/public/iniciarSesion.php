@@ -28,15 +28,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['foto'] = $usuario['foto'];
                     $_SESSION['usuario'] = $usuario;
                     
-                    // Definir tipo de usuario basado en el rol
+                    // Definir tipo de usuario basado en el rol y redirigir
                     switch($usuario['id_rol']) {
-                        case 1: $_SESSION['tipo_usuario'] = 'Usuario'; break;
-                        case 2: $_SESSION['tipo_usuario'] = 'Comercio'; break;
-                        case 3: $_SESSION['tipo_usuario'] = 'Admin'; break;
-                        default: $_SESSION['tipo_usuario'] = 'Usuario';
+                        case 1: 
+                            $_SESSION['tipo_usuario'] = 'Usuario';
+                            break;
+                        case 2: 
+                            $_SESSION['tipo_usuario'] = 'Comercio';
+                            break;
+                        case 3: 
+                            $_SESSION['tipo_usuario'] = 'Admin';
+                            break;
+                        default: 
+                            $_SESSION['tipo_usuario'] = 'Usuario';
+                            break;
                     }
                     
-                    $mensaje = 'Uwu';
+                    // Todos redirigen a /Zava/inicio
+                    echo '
+                    <form id="postRedirect" action="/Zava/public/public/pantallaCarga.php" method="POST">
+                        <input type="hidden" name="mensaje" value="Iniciando sesión...">
+                        <input type="hidden" name="destino" value="/Zava/inicio">
+                    </form>
+                    <script>document.getElementById("postRedirect").submit();</script>';
                     exit;
                 } else {
                     $mensaje = 'Tu cuenta aún no ha sido verificada. Por favor, revisa tu correo electrónico.';
@@ -70,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="imagen-titulo">
                 <img src="/Zava/css/recursos/logos/Principal 2.0.png">
             </div>
-            <form class="contenedor-form" action="iniciarSesion.php" method="POST">
+            <form class="contenedor-form" action="/Zava/login" method="POST">
                 <h6 class="media-negrita color-primario">Iniciar sesión</h6>
                 <div class="contenedor-inputs">
                     <div class="contenedor-input">
@@ -84,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
                 <p class="pequenio media-negrita color-error"><?= $mensaje; ?></p>
-                <a href="diferenciacionRegistro.php" class="pequenio light color-primario vinculo-registrarse">¿No tienes cuenta? <b class="color-primario">Registrarme</b></a>
+                <a href="/Zava/registro" class="pequenio light color-primario vinculo-registrarse">¿No tienes cuenta? <b class="color-primario">Registrarme</b></a>
                 <button type="submit" class="btn btn-enviar-formulario pequenio color-secundario">Iniciar
                     sesión</button>
             </form>

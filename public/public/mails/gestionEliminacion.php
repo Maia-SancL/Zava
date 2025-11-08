@@ -72,7 +72,7 @@ function enviarCorreoConfirmacionEliminacion($correo, $nombre, $token) {
 
         $mail->isHTML(true);
         $mail->Subject = 'Confirmacion para eliminar tu cuenta - Zava';
-        $link_confirmacion = "http://" . $_SERVER['HTTP_HOST'] . "/Zava/php/general/confirmarEliminacion.php?token={$token}";
+        $link_confirmacion = "http://" . $_SERVER['HTTP_HOST'] . "/Zava/confirmar-eliminacion?token={$token}";
         $mail->Body    = "Has solicitado eliminar tu cuenta. Esta accion es irreversible. Para confirmar, haz clic en el siguiente enlace: <a href='{$link_confirmacion}'>Eliminar mi cuenta definitivamente</a>. Si no solicitaste esto, ignora este mensaje.";
         $mail->AltBody = "Usa el siguiente enlace para confirmar la eliminación de tu cuenta: {$link_confirmacion}";
 

@@ -18,7 +18,7 @@
                 <img src="/Zava/css/recursos/logos/Principal 2.0.png">
             </div>
             <div class="contenedor-botones">
-                <form class="contenedor-form" action="registrarse.php" method="POST">
+                <form class="contenedor-form" action="/Zava/registrarse" method="POST">
                     <input type="hidden" name="rol" value="1">
                     <button type="submit" class="btn-tipo-usuairo borde-redondeado">
                         <iconify-icon icon="solar:user-bold" class="icon color-secundario icon-grande"></iconify-icon>
@@ -26,7 +26,7 @@
                     </button>
                 </form>
 
-                <form class="contenedor-form" action="registrarse.php" method="POST">
+                <form class="contenedor-form" action="/Zava/registrarse" method="POST">
                     <input type="hidden" name="rol" value="2">
                     <button type="submit" class="btn-tipo-usuairo borde-redondeado">
                         <iconify-icon icon="solar:shop-2-bold" class="icon color-secundario icon-grande"></iconify-icon>

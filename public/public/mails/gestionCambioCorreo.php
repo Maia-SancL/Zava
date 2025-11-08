@@ -73,7 +73,7 @@ function enviarCorreoConfirmacionCambio($correo_actual, $nombre, $token) {
 
         $mail->isHTML(true);
         $mail->Subject = 'Confirma tu cambio de correo electronico - Zava';
-        $link_confirmacion = "http://" . $_SERVER['HTTP_HOST'] . "/Zava/php/general/confirmarCambioCorreo.php?token={$token}";
+        $link_confirmacion = "http://" . $_SERVER['HTTP_HOST'] . "/Zava/confirmar-cambio-correo?token={$token}";
         $mail->Body    = "Has solicitado cambiar tu direccion de correo electronico. Para confirmar, haz clic en el siguiente enlace: <a href='{$link_confirmacion}'>Confirmar cambio</a>. Si no solicitaste esto, ignora este mensaje.";
         $mail->AltBody = "Usa el siguiente enlace para confirmar tu cambio de correo: {$link_confirmacion}";
 
